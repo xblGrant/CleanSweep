@@ -1,2 +1,2 @@
 # CleanSweep
-Spring 2018 Senior Project for Hershey Hotel
+Spring 2018 Senior Project
