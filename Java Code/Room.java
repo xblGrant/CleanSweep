@@ -27,9 +27,12 @@ public class Room {
     public ArrayList<Incident> getIncidents() {
         return incidents;
     }
+
     public int getRoomNumber() {
         return roomNumber;
     }
+    // TODO: Validate that param RN is valid and not taken by any other Room
+    public void setRoomNumber(int RN) { roomNumber = RN;}
 
 
     // INT VALUE BETWEEN 0 & 1
