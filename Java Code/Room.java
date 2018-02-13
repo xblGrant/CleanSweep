@@ -21,15 +21,17 @@ public class Room {
     public void addIncident(Incident i){
         incidents.add(i);
     }
-    public int getRoomNumber() {
-        return roomNumber;
+    public Incident getIncident(int i){
+        return incidents.get(i);
     }
     public ArrayList<Incident> getIncidents() {
         return incidents;
     }
-    public Incident getIncident(int i){
-        return incidents.get(i);
+    public int getRoomNumber() {
+        return roomNumber;
     }
+
+
     // INT VALUE BETWEEN 0 & 1
     public void setStatus(int statusCode){
         status = statusOptions[statusCode];
@@ -38,7 +40,7 @@ public class Room {
         return status;
     }
 
-    //TODO: Didn't implement because I was confused as to what this even means
+    //TODO: When employee selects "Clean" on their assignment list.
     public void updateEmployeeStatus(Employee employee, String status) {
 
     }

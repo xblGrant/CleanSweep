@@ -13,7 +13,11 @@ public class Manager extends Employee {
     }
 
     //TODO: complete method.
-    public void assignRoomToEmployee(Room room, Employee emp) {
+    public void assignRoomToEmployee(ArrayList<Room> roomArrayList, ArrayList<Employee> employeeArrayList) {
+        final int NumEmployees = employeeArrayList.size();
+        final int NumRooms = roomArrayList.size();
+
+
 
     }
 }
