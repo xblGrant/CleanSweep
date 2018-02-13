@@ -1,4 +1,5 @@
 These are links and some information about using Amazon DynamoDB for multiple platforms.
+https://aws.amazon.com/dynamodb/developer-resources/
 
 **************************************************************************************
 For use with Android:
