@@ -1,0 +1,10 @@
+
+Programming for Android and Windows 
+https://medium.com/@benoitvallon/a-mobile-desktop-and-website-app-with-the-same-code-dc84ef7677ee
+
+Installing react-native-cli and setting all environment variables
+https://shellmonger.com/2017/05/10/building-your-first-react-native-app-on-windows/
+
+Installing yarn:
+	npm install -g yarn
+	yarn global add react-native-cli
