@@ -8,7 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class Database {
-	static final String DATABASE_URL = "jdbc:ucanaccess://";
+	static final String DATABASE_URL = "jdbc:ucanaccess://cleansweep.cyvvqf59kbdk.us-east-2.rds.amazonaws.com";
     Connection connection = null;
     Statement statement = null;
     ResultSet rSet = null;
