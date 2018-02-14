@@ -8,3 +8,6 @@ https://shellmonger.com/2017/05/10/building-your-first-react-native-app-on-windo
 Installing yarn:
 	npm install -g yarn
 	yarn global add react-native-cli
+	
+Getting Set-up with React Native for Windows Applications
+https://www.microsoft.com/developerblog/2016/05/26/creating-universal-windows-apps-with-react-native/
