@@ -13,7 +13,9 @@ public class Database {
     Statement statement = null;
     ResultSet rSet = null;
 	DateFormat df = new SimpleDateFormat("MM/dd/YYYY");
+	
 	PreparedStatement searchEmployeeById = null;
+	PreparedStatement searchByRoomNumber = null;
 	
 	
 	public Database() {
@@ -29,7 +31,6 @@ public class Database {
 	
 	//Returns all employees with that associated ID
 	ResultSet searchEmployeeById(int id) {
-		
 		try {
 			searchEmployeeById = connection.prepareStatement(
 					"SELECT * FROM employee WHERE id = ?");
@@ -39,6 +40,23 @@ public class Database {
 			return rSet;
 		}
 		catch(SQLException e) {
+			//TODO: change error message to be useful to user
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	ResultSet searchByRoomnumber(int roomnum) {
+		try {
+			searchByRoomNumber = connection.prepareStatement(
+					"SELECT * FROM room WHERE roomnum = ?");
+			rSet = searchByRoomNumber.executeQuery();
+			
+			return rSet;
+		}
+		catch(SQLException e) {
+			//TODO: change error message to be useful to user
+			e.printStackTrace();
 			return null;
 		}
 	}
