@@ -9,7 +9,7 @@ public class Room {
 
     Room(int roomNumber){
         this.roomNumber = roomNumber;
-        incidents = new ArrayList<>();
+        incidents = new ArrayList<Incident>();
         status = statusOptions[0];
     }
 
