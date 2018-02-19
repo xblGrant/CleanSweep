@@ -1,6 +1,7 @@
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("Hello world");
         Employee bruce = new Employee("Bruce", "psswrd");
         System.out.println(bruce.getName());
         System.out.println(bruce.getPassword());
