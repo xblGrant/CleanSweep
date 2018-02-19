@@ -22,7 +22,7 @@ Port:		3306.
 
 Username:	d6ixSheets
 
-Password: Click Store in Vault and enter 6sixsheets
+Password: Click Store in Vault and enter 6ixsheets
 
 Click OK
 
