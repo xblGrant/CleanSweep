@@ -4,12 +4,15 @@ https://medium.com/@benoitvallon/a-mobile-desktop-and-website-app-with-the-same-
 
 Installing react-native-cli and setting all environment variables
 https://shellmonger.com/2017/05/10/building-your-first-react-native-app-on-windows/
-
-Installing yarn:
-	npm install -g yarn
-	yarn global add react-native-cli
 	
 Getting Set-up with React Native for Windows Applications
 https://www.microsoft.com/developerblog/2016/05/26/creating-universal-windows-apps-with-react-native/
 https://github.com/Microsoft/react-native-windows/tree/master/local-cli/rnpm/windows
-	yarn add rnpm-plugin-windows --dev
+
+
+Setting up React Native for windows:
+	npm install -g react-native-cli
+	npm install -g yarn
+	yarn global add react-native-cli
+	
+	react-native init myapp
