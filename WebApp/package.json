@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.198.0",
+    "create-react-app": "^1.5.2"
+  }
+}
