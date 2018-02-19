@@ -1,0 +1,31 @@
+https://aws.amazon.com/getting-started/tutorials/create-mysql-db/#step2
+
+Step 2: Download a SQL Client
+
+a. Go to 
+http://dev.mysql.com/downloads/workbench/
+to download and install MySQL Workbench.
+
+b. You will be prompted to login, sign up, or begin your download.
+You can click No thanks, just start my download for a quick download.
+
+Step 3: Connect to the MySQL Database
+
+a. Launch the MySQL Workbench application and go to 
+Database > Connect to Database (Ctrl+U) from the menu bar.
+
+b. A dialogue box appears.  Enter the following:
+
+Hostname:	cleansweep.cyvvqf59kbdk.us-east-2.rds.amazonaws.com
+
+Port:		3306.
+
+Username:	d6ixSheets
+
+Password: Click Store in Vault and enter 6sixsheets
+
+Click OK
+
+c. You are now connected to the database! On the MySQL Workbench, 
+you will see various schema objects available in the database. 
+Now you can start creating tables, insert data, and run queries.
