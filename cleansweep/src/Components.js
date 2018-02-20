@@ -26,3 +26,6 @@ class LogButton extends React.Component {
         );
     }
 }
+
+// npm install --save react-menu-bar
+// need to look into this.
