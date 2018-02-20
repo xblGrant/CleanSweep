@@ -1,7 +1,7 @@
 import React from 'react';
 
-class Login extends React.Component{
-    constructor(props){
+class Login extends React.Component {
+    constructor(props) {
         super(props);
     }
 
@@ -43,13 +43,8 @@ class Login extends React.Component{
                     </form>
                 </div>
             </div>
-<<<<<<< HEAD
+            < /div>
         );
     }
-=======
-        </div>
-    );
->>>>>>> 212d7bda4e050629caabfe64af2aa7e604298083
 }
-
 export default Login;
