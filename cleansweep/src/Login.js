@@ -21,7 +21,6 @@ class LoginButton extends React.Component {
             </div>
         );
     }
-
 }
 
 function InputField(props) {
