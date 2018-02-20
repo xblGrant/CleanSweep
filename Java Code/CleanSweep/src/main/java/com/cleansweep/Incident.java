@@ -2,9 +2,13 @@ package com.cleansweep;
 
 import java.util.ArrayList;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class Incident {
 
     // Rooms are assigned incidents, so do we need a room number value?
+	private @Id @GeneratedValue int id;
     private int room;
     private boolean resolved;
     private ArrayList<String> comment;

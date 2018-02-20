@@ -3,7 +3,7 @@ package com.cleansweep;
 import java.util.Date;
 
 public class ReservableRoom extends Room{
-
+	
     private String guest;
     private boolean roomReady;
     private Employee assignedEmployee;

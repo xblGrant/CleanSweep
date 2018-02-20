@@ -1,8 +1,10 @@
 package com.cleansweep;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 public class Employee {
 
-    private int id;
+    private @Id @GeneratedValue int id;
     private String name;
     private String password;
 

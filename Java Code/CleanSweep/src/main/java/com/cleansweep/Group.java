@@ -2,10 +2,30 @@ package com.cleansweep;
 
 import java.util.ArrayList;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class Group {
 	private ArrayList<Room> rooms;
 	private String name;
+	private @Id @GeneratedValue int id;
 	
+	public ArrayList<Room> getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(ArrayList<Room> rooms) {
+		this.rooms = rooms;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Group() {}
 	
 	public Group(String name) {
