@@ -1,16 +1,10 @@
-<<<<<<< HEAD
-import React, { Component } from 'react';
-=======
 import React, {Component} from 'react';
-import logo from './logo.svg';
->>>>>>> c83a4e467d80e59445437722eb8ebedbf7d2a5e3
 import './App.css';
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-<<<<<<< HEAD
                 <head>
                     <title>Clean Sweep</title>
                     <meta charSet="utf-8" />
@@ -45,15 +39,6 @@ class App extends Component {
 
                     </form>
                 </div>
-=======
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
->>>>>>> c83a4e467d80e59445437722eb8ebedbf7d2a5e3
             </div>
         );
     }
