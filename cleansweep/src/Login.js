@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
+import { InputField } from './Components';
 
 class LoginButton extends React.Component {
     constructor(props) {
@@ -21,24 +20,6 @@ class LoginButton extends React.Component {
             </div>
         );
     }
-}
-
-function InputField(props) {
-    InputField.defaultProps = {
-        display: "Input: ",
-        type: "text"
-    };
-
-    return (
-        <div className="row">
-            <div className="four columns">
-                <label>{props.display}</label>
-            </div>
-            <div className="eight columns">
-                <input name={props.id} id={props.id} type={props.type}/>
-            </div>
-        </div>
-    );
 }
 
 function LoginForm() {
@@ -66,11 +47,5 @@ function Login() {
         </div>
     );
 }
-
-InputField.propTypes = {
-    display: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired
-};
 
 export default Login;
