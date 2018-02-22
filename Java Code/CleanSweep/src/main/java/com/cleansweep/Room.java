@@ -1,18 +1,22 @@
 package com.cleansweep;
 
+import javax.persistence.*; // - JR
 import java.util.ArrayList;
 
+@Entity
 public class Room {
 
-    private int roomNumber;
+    private @Id int number; // Room.number - JR
+    private String name; // Such as "Lobby" - JR
+    private Long assignedEmployeeId; // - JR
     private ArrayList<Incident> incidents;
-    private String status;
-    private static String[] statusOptions = {"Dirty", "Clean"};
+    private Status status;
+    enum Status { DIRTY, CLEAN } // ftw - JR
 
     Room(int roomNumber){
         this.roomNumber = roomNumber;
         incidents = new ArrayList<Incident>();
-        status = statusOptions[0];
+        status = Status.DIRTY;
     }
 
     public boolean isReservable(){
@@ -36,13 +40,17 @@ public class Room {
     // TODO: Validate that param RN is valid and not taken by any other Room
     public void setRoomNumber(int RN) { roomNumber = RN;}
 
-
     // INT VALUE BETWEEN 0 & 1
     public void setStatus(int statusCode){
-        status = statusOptions[statusCode];
-    }
+
+        if(statusCode != 0)
+            status = Status.DIRTY;
+        else 
+            status = Status.CLEAN;
+    } // This could also be changed to boolean - JR
+    
     public String getStatus(){
-        return status;
+        return status.toString(); // - JR
     }
 
     //TODO: When employee selects "Clean" on their assignment list.
