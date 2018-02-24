@@ -1,23 +1,20 @@
-/*LOGIN.js*/
-#userPass, #userEmail {
+/*LOGIN.js & SIGNUP.js*/
+#loginForm, #signUpForm {
+    margin-top: 2%;
+}
+#userPass, #userEmail, #confirmUserPass, #signUpName {
     margin-left: 35%;
     width: 30%;
 }
 #label {
     margin-left: 35%;
 }
-#logBtn {
+#loginBtn, #signUpBtn {
     margin-left: 35%;
 }
 
 /*HEADER.js*/
-#header {
-    margin: auto;
+#ml-auto {
+    margin-right: 10%;
 }
-#labelHello. #userLink {
-    margin-left: 1%;
-}
-#headerLogin {
-    margin-left: auto;
-    margin-right: 1%;
-}
+

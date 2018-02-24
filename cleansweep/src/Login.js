@@ -44,7 +44,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-
 class Login extends React.Component{
     constructor(props) {
         super(props);
@@ -58,19 +57,21 @@ class Login extends React.Component{
 
     render() {
         return (
-            <Form>
-                <FormGroup>
-                    <Label id={"label"} for={"userEmail"}>Email</Label>
-                    <Input type={"email"} className={"userEmail"} id={"userEmail"} placeholder={"Enter email"}/>
-                </FormGroup>
-                <FormGroup>
-                    <Label id={"label"} for={"userPass"}>Password</Label>
-                    <Input type={"password"} className={"userPass"} id={"userPass"} placeholder={"Enter password"}/>
-                </FormGroup>
-                <Button color={"primary"} id={"logBtn"}>Login</Button>
-                {' '}
-                <Button id={"signUpBtn"}>Sign-Up</Button>
-            </Form>
+            <div id={"loginForm"}>
+                <Form>
+                    <FormGroup>
+                        <Label id={"label"} for={"userEmail"}>Email</Label>
+                        <Input type={"email"} className={"userEmail"} id={"userEmail"} placeholder={"Enter email"}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label id={"label"} for={"userPass"}>Password</Label>
+                        <Input type={"password"} className={"userPass"} id={"userPass"} placeholder={"Enter password"}/>
+                    </FormGroup>
+                    <Button color={"primary"} id={"loginBtn"}>Login</Button>
+                    {' '}
+                    <Button id={"signUpRedirect"}>Sign-Up</Button>
+                </Form>
+            </div>
         );
     }
 }

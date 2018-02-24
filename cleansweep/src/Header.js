@@ -15,13 +15,15 @@ class Header extends React.Component{
         // TODO: Add Logout functionality
 
         return (
-            <Form id={"header"} inline>
-                <Label id={"labelHello"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
-                <Button id={"userLink"} color={"link"} size={"sm"}>{this.state.user}</Button>
-                <div id={"headerLogin"}>
-                    <Button id={"headerBtn"} outline size={"sm"}>Login</Button>
-                </div>
-            </Form>
+            <div className={"ml-auto"}>
+                <Form id={"header"} inline>
+                    <Label id={"labelHello"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
+                    <Button id={"userLink"} color={"link"} size={"sm"}>{this.state.user}</Button>
+                    <div id={"headerLogin"}>
+                        <Button id={"headerBtn"} outline size={"sm"}>Login</Button>
+                    </div>
+                </Form>
+            </div>
         );
     }
 }

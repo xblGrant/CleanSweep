@@ -1,8 +1,5 @@
 import React from 'react';
 import {
-    Form,
-    Label,
-    Button,
     Collapse,
     Navbar,
     NavbarToggler,
@@ -14,6 +11,7 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem } from 'reactstrap';
+import Header from './Header';
 
 class NavigationBar extends React.Component {
     constructor(props) {
@@ -40,16 +38,7 @@ class NavigationBar extends React.Component {
                     <div className={"container"}>
                         <NavbarToggler onClick={this.toggle} />
                         <NavbarBrand href="/">CleanSweep</NavbarBrand>
-                        {/*<Collapse isOpen={this.state.isOpen} navbar>
-                            <div className={"ml-auto"}>
-                                <Form id={"header"} inline>
-                                    <Label id={"labelHello"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
-                                    <Button id={"userLink"} color={"link"} size={"sm"}>{this.state.user}</Button>
-                                    <Button id={"headerBtn"} outline size={"sm"}>Login</Button>
-                                </Form>
-                            </div>
-                        </Collapse>*/}
-                        <Collapse isOpen={!this.state.isOpen} navbar>
+                        <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="mr-auto" navbar>
                                     <DropDContent title={"File"} contents={["New Employee", "New Room"]} links={["#", "#"]} />
                                     <DropDContent title={"Functions"} contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms", "Inspect Room", "Check-in Guest", "Check-out Guest"]} links={["#","#","#","#","#","#"]} />
@@ -63,14 +52,7 @@ class NavigationBar extends React.Component {
                                     </NavItem>
                                 </Nav>
                         </Collapse>
-
-                        <div className={"ml-auto"}>
-                            <Form id={"header"} inline>
-                                <Label id={"labelHello"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
-                                <Button id={"userLink"} color={"link"} size={"sm"}>{this.state.user}</Button>
-                                <Button id={"headerBtn"} outline size={"sm"}>Login</Button>
-                            </Form>
-                        </div>
+                        <Header />
                     </div>
                 </Navbar>
             </div>
