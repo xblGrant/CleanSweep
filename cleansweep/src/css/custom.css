@@ -1,0 +1,23 @@
+/*LOGIN.js*/
+#userPass, #userEmail {
+    margin-left: 35%;
+    width: 30%;
+}
+#label {
+    margin-left: 35%;
+}
+#logBtn {
+    margin-left: 35%;
+}
+
+/*HEADER.js*/
+#header {
+    margin: auto;
+}
+#labelHello. #userLink {
+    margin-left: 1%;
+}
+#headerLogin {
+    margin-left: auto;
+    margin-right: 1%;
+}
