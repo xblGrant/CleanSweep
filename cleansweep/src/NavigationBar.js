@@ -1,5 +1,8 @@
 import React from 'react';
 import {
+    Form,
+    Label,
+    Button,
     Collapse,
     Navbar,
     NavbarToggler,
@@ -34,22 +37,41 @@ class NavigationBar extends React.Component {
         return (
             <div>
                 <Navbar color="faded" light expand="md">
-                    <NavbarToggler onClick={this.toggle} />
-                    <NavbarBrand href="/">CleanSweep</NavbarBrand>
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <DropDContent title={"File"} contents={["New Employee", "New Room"]} links={["#", "#"]} />
-                            <DropDContent title={"Functions"} contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms", "Inspect Room", "Check-in Guest", "Check-out Guest"]} links={["#","#","#","#","#","#"]} />
-                            <DropDContent title={"Lists"} contents={["Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]} links={["#","#","#","#","#","#"]} />
-                            <DropDContent title={"Options"} contents={["Option1", "Option2"]} links={["#", "#"]}/>
-                            <NavItem>
-                                <NavLink href="#">Help</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href="https://github.com/xblGrant/CleanSweep">Github</NavLink>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
+                    <div className={"container"}>
+                        <NavbarToggler onClick={this.toggle} />
+                        <NavbarBrand href="/">CleanSweep</NavbarBrand>
+                        {/*<Collapse isOpen={this.state.isOpen} navbar>
+                            <div className={"ml-auto"}>
+                                <Form id={"header"} inline>
+                                    <Label id={"labelHello"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
+                                    <Button id={"userLink"} color={"link"} size={"sm"}>{this.state.user}</Button>
+                                    <Button id={"headerBtn"} outline size={"sm"}>Login</Button>
+                                </Form>
+                            </div>
+                        </Collapse>*/}
+                        <Collapse isOpen={!this.state.isOpen} navbar>
+                                <Nav className="mr-auto" navbar>
+                                    <DropDContent title={"File"} contents={["New Employee", "New Room"]} links={["#", "#"]} />
+                                    <DropDContent title={"Functions"} contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms", "Inspect Room", "Check-in Guest", "Check-out Guest"]} links={["#","#","#","#","#","#"]} />
+                                    <DropDContent title={"Lists"} contents={["Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]} links={["#","#","#","#","#","#"]} />
+                                    <DropDContent title={"Options"} contents={["Option1", "Option2"]} links={["#", "#"]}/>
+                                    <NavItem>
+                                        <NavLink href="#">Help</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink href="https://github.com/xblGrant/CleanSweep">Github</NavLink>
+                                    </NavItem>
+                                </Nav>
+                        </Collapse>
+
+                        <div className={"ml-auto"}>
+                            <Form id={"header"} inline>
+                                <Label id={"labelHello"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
+                                <Button id={"userLink"} color={"link"} size={"sm"}>{this.state.user}</Button>
+                                <Button id={"headerBtn"} outline size={"sm"}>Login</Button>
+                            </Form>
+                        </div>
+                    </div>
                 </Navbar>
             </div>
         );
