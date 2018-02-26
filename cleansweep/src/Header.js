@@ -7,7 +7,7 @@ class Header extends React.Component{
 
         this.state = {
             user: "Guest"
-        }
+        };
     }
 
     render() {

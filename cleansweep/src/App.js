@@ -9,7 +9,7 @@ function App(){
     return(
         <div>
             <NavigationBar />
-            <Login />
+            <Login signUp={false}/>
         </div>
     )
 }

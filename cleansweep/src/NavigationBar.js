@@ -52,7 +52,7 @@ class NavigationBar extends React.Component {
                                     </NavItem>
                                 </Nav>
                         </Collapse>
-                        <Header />
+                        <Header attemptLogin={false}/>
                     </div>
                 </Navbar>
             </div>
