@@ -20,7 +20,7 @@ class Header extends React.Component{
                     <Label id={"labelHello"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
                     <Button id={"userLink"} color={"link"} size={"sm"}>{this.state.user}</Button>
                     <div id={"headerLogin"}>
-                        <Button id={"headerBtn"} outline size={"sm"}>Login</Button>
+                        <Button onClick={this.props.handleLoginPage} id={"headerBtn"} outline size={"sm"}>Login</Button>
                     </div>
                 </Form>
             </div>
