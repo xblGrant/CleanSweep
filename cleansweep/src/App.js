@@ -54,20 +54,20 @@ class App extends React.Component{
         const useLoginPage = this.state.loginPage;
         const useSignUpPage = this.state.signUpPage;
         const loggedIn = this.state.isLoggedIn;
-        let entryPage;
+        let displayPage;
 
         if (loggedIn){
-            entryPage = null;
+            displayPage = null;
         } else if (useLoginPage){
-            entryPage = <Login handleLogin={this.handleLogin} toSignUpPage={this.toSignUpPage}/>
+            displayPage = <Login handleLogin={this.handleLogin} toSignUpPage={this.toSignUpPage}/>
         } else if (useSignUpPage){
-            entryPage = <SignUp toLoginPage={this.toLoginPage}/>
+            displayPage = <SignUp toLoginPage={this.toLoginPage}/>
         }
 
         return(
             <div>
                 <NavigationBar handleLogout={this.handleLogout}  toLoginPage={this.toLoginPage} isLoggedIn={loggedIn}/>
-                {entryPage}
+                {displayPage}
             </div>
         )
     }
