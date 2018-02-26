@@ -14,9 +14,9 @@ function Login(props) {
                     <Label id={"label"} for={"userPass"}>Password</Label>
                     <Input type={"password"} className={"userPass"} id={"userPass"} placeholder={"Enter password"}/>
                 </FormGroup>
-                <Button color={"primary"} id={"loginBtn"}>Login</Button>
+                <Button onClick={props.handleLogin} color={"primary"} id={"loginBtn"}>Login</Button>
                 {' '}
-                <Button onClick={props.handleSignUpPage} id={"signUpRedirect"}>Sign-Up</Button>
+                <Button onClick={props.toSignUpPage} id={"signUpRedirect"}>Sign-Up</Button>
             </Form>
         </div>
     );

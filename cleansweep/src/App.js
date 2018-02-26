@@ -12,21 +12,38 @@ class App extends React.Component{
 
         this.state = {
             loginPage: true,
-            signUpPage: false
+            signUpPage: false,
+            isLoggedIn: false
         };
 
-        this.handleLoginPage = this.handleLoginPage.bind(this);
-        this.handleSignUpPage = this.handleSignUpPage.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
+        this.toLoginPage = this.toLoginPage.bind(this);
+        this.toSignUpPage = this.toSignUpPage.bind(this);
     }
 
-    handleLoginPage() {
+    handleLogin() {
+        // handle login here
+        this.setState({
+            isLoggedIn: true
+        });
+    }
+
+    handleLogout() {
+        // handle logout here
+        this.setState({
+            isLoggedIn: false
+        });
+    }
+
+    toLoginPage() {
         this.setState({
             loginPage: true,
             signUpPage: false
         });
     }
 
-    handleSignUpPage() {
+    toSignUpPage() {
         this.setState({
             loginPage: false,
             signUpPage: true
@@ -34,19 +51,22 @@ class App extends React.Component{
     }
 
     render(){
-        const loginPageStatus = this.state.loginPage;
-        const signUpPageStatus = this.state.signUpPage;
+        const useLoginPage = this.state.loginPage;
+        const useSignUpPage = this.state.signUpPage;
+        const loggedIn = this.state.isLoggedIn;
         let entryPage;
 
-        if (loginPageStatus){
-            entryPage = <Login handleSignUpPage={this.handleSignUpPage}/>
-        } else if (signUpPageStatus){
-            entryPage = <SignUp handleLoginPage={this.handleLoginPage}/>
+        if (loggedIn){
+            entryPage = null;
+        } else if (useLoginPage){
+            entryPage = <Login handleLogin={this.handleLogin} toSignUpPage={this.toSignUpPage}/>
+        } else if (useSignUpPage){
+            entryPage = <SignUp toLoginPage={this.toLoginPage}/>
         }
 
         return(
             <div>
-                <NavigationBar handleLoginPage={this.handleLoginPage}/>
+                <NavigationBar handleLogout={this.handleLogout}  toLoginPage={this.toLoginPage} isLoggedIn={loggedIn}/>
                 {entryPage}
             </div>
         )

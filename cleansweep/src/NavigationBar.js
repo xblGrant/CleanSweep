@@ -52,7 +52,7 @@ class NavigationBar extends React.Component {
                                     </NavItem>
                                 </Nav>
                         </Collapse>
-                        <Header handleLoginPage={this.props.handleLoginPage}/>
+                        <Header handleLogout={this.props.handleLogout} toLoginPage={this.props.toLoginPage} isLoggedIn={this.props.isLoggedIn}/>
                     </div>
                 </Navbar>
             </div>

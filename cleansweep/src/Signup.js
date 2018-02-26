@@ -44,7 +44,7 @@ class SignUp extends React.Component{
                     </FormGroup>
                     <Button onClick={this.handleSignUp} color={"primary"} id={"signUpBtn"}>Sign-Up</Button>
                     {' '}
-                    <Button onClick={this.props.handleLoginPage} id={"cancelBtn"}>Cancel</Button>
+                    <Button onClick={this.props.toLoginPage} id={"cancelBtn"}>Cancel</Button>
                 </Form>
             </div>
         );
