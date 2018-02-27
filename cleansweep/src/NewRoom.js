@@ -21,9 +21,9 @@ class NewRoom extends React.Component {
                 <Form>
                     <FormGroup row>
                         <Label id={"label"} for="roomNum">
-                            *Autopopulate Room Number*
+                            New Room
                         </Label>
-                        <Input type="text" id="roomNum"/>
+                        <Input type="text" id="roomNum" placeholder={"*Autopopulate Room Number*"}/>
                     </FormGroup>
                     <FormGroup check>
                         <Label id={"label"} check>
