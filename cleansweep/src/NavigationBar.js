@@ -40,7 +40,7 @@ class NavigationBar extends React.Component {
                         <NavbarBrand href="/">CleanSweep</NavbarBrand>
                         <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="mr-auto" navbar>
-                                    <DropDContent title={"File"} contents={["New Employee", "New Room"]} links={["/NewEmployee", "#"]} />
+                                    <DropDContent title={"File"} contents={["New Employee", "New Room"]} links={["/NewEmployee", "NewRoom"]} />
                                     <DropDContent title={"Functions"} contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms", "Inspect Room", "Check-in Guest", "Check-out Guest"]} links={["#","#","#","#","#","#"]} />
                                     <DropDContent title={"Lists"} contents={["Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]} links={["#","#","#","#","#","#"]} />
                                     <DropDContent title={"Options"} contents={["Option1", "Option2"]} links={["#", "#"]}/>
