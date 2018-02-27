@@ -1,9 +1,9 @@
 /*LOGIN.js & SIGNUP.js & NEWEMPLOYEE.js & NEWROOM.js*/
-#loginForm, #signUpForm, #newEmployeeForm, #newRoomForm, #checkInForm {
+#loginForm, #signUpForm, #newEmployeeForm, #newRoomForm, #inspectRoomForm, #checkInForm  {
     margin-top: 2%;
 }
 #userPass, #userEmail, #confirmUserPass, #signUpName, #employeeFName, #employeeLName,
-#employeeDOB, #employeePass, #employeeEmail, #roomNum, #custFName, #custLName{
+#employeeDOB, #employeePass, #employeeEmail, #roomNum, #custFName, #custLName, #floorSelect, #roomList, #inspectComment {
     margin-left: 35%;
     width: 30%;
 }

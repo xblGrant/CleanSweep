@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Form, FormGroup, Label, Input} from 'reactstrap';
 import NavigationBar from './NavigationBar';
 import WrappedButton from "./Components";
 
@@ -14,23 +14,33 @@ class InspectRoom extends React.Component {
 
     }
 
+    toggle() {
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen
+        });
+    }
+
     render() {
         return (
-            <div id={"newCheckInForm"}>
+            <div id={"inspectRoomForm"}>
                 <NavigationBar/>
                 <Form>
                     <FormGroup row>
-                        <Label id={"label"} for="custFName"></Label>
-                        <Input type="text" id="custFName" placeholder={"First name"}/>
+                        <Dropdown id={"label"} for="floorSelect" isOpen={true}>
+                            <DropdownToggle caret>
+                                Floor
+                            </DropdownToggle>
+                        </Dropdown>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label id={"label"} for="roomList"></Label>
+                        <Input type="text" id="roomList" placeholder={"List of rooms on floor will show up here"} />
                     </FormGroup>
                     <FormGroup row>
-                        <Label id={"label"} for="custLName"></Label>
-                        <Input type="text" id="custLName" placeholder={"Last name"}/>
+                        <Label id={"label"} for="inspectComment">Comment</Label>
+                        <Input type="text" id="inspectComment" placeholder={"Enter comment here"}/>
                     </FormGroup>
-                    <FormGroup row>
-                        <Label id={"label"} for="roomNum"></Label>
-                        <Input type="text" id="roomNum" placeholder={"Room #"} />
-                    </FormGroup>
+
                     <br/>
                     <Button onClick={this.handleCheckIn} color={"primary"} id={"submitNewEmpBtn"}>Submit</Button>
                     {' '}
