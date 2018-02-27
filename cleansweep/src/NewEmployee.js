@@ -12,13 +12,13 @@ class NewEmployee extends React.Component{
                 <FormGroup row>
                     <Label for="employeeFName">First Name</Label>
                     <Col sm={10}>
-                        <Input type="textarea" name="textarea" id="employeeFName"/>
+                        <Input type="text" name="textarea" id="employeeFName"/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Label for="employeeLName">Last Name</Label>
                     <Col sm={10}>
-                        <Input type="textarea" name="textarea" id="employeeLName"/>
+                        <Input type="text" name="textarea" id="employeeLName"/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -42,6 +42,6 @@ class NewEmployee extends React.Component{
             </Form>
         );
     }
-
 }
+
 export default NewEmployee;

@@ -6,7 +6,7 @@ import NewEmployee from './NewEmployee';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
-//ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(
     <Router>
         <div>
@@ -15,5 +15,5 @@ ReactDOM.render(
         </div>
     </Router>,
     document.getElementById('root')
-)
+);
 registerServiceWorker();
