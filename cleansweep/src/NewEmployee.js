@@ -11,7 +11,8 @@ class NewEmployee extends React.Component {
     }
 
     handleNewEmployee() {
-
+         //TODO: check for empty components
+        //TODO: submit new employee in database
     }
 
     render() {
