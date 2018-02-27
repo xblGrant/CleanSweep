@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Label, Form } from 'reactstrap';
+import WrappedButton from './Components';
 
 class Header extends React.Component{
     constructor(props){
@@ -18,7 +19,7 @@ class Header extends React.Component{
 
         let button;
         if (!isLoggedIn) {
-            button = <Button onClick={this.props.toLoginPage} id={"headerBtn"} outline size={"sm"}>Login</Button>
+            button = <WrappedButton isOutlined={true} link={"/Login"} name={"Login"}/>
         } else {
             button = <Button onClick={this.props.handleLogout} id={"headerBtn"} outline size={"sm"}>Logout</Button>
         }

@@ -1,10 +1,13 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import NavigationBar from "./NavigationBar";
+import WrappedButton from "./Components";
 
 
 function Login(props) {
     return (
         <div id={"loginForm"}>
+            <NavigationBar />
             <Form>
                 <FormGroup>
                     <Label id={"label"} for={"userEmail"}>Email</Label>
@@ -16,7 +19,7 @@ function Login(props) {
                 </FormGroup>
                 <Button onClick={props.handleLogin} color={"primary"} id={"loginBtn"}>Login</Button>
                 {' '}
-                <Button onClick={props.toSignUpPage} id={"signUpRedirect"}>Sign-Up</Button>
+                <WrappedButton id={"signUpRedirect"} link={"/SignUp"} name={"Sign-Up"}/>
             </Form>
         </div>
     );

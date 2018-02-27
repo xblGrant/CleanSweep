@@ -12,6 +12,7 @@ import {
     DropdownMenu,
     DropdownItem } from 'reactstrap';
 import Header from './Header';
+import { Link } from 'react-router-dom';
 
 class NavigationBar extends React.Component {
     constructor(props) {
@@ -81,7 +82,7 @@ function DropDItem(props) {
                 return(
                     <DropdownItem>
                         <NavItem>
-                            <NavLink href={link}>{content}</NavLink>
+                            <Link to={link}>{content}</Link>
                         </NavItem>
                     </DropdownItem>
                 )

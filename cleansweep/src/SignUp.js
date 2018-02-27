@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import NavigationBar from "./NavigationBar";
+import WrappedButton from "./Components";
 
 
 class SignUp extends React.Component{
@@ -16,6 +18,7 @@ class SignUp extends React.Component{
     render() {
         return(
             <div id={"signUpForm"}>
+                <NavigationBar />
                 <Form>
                     <div id={"signUpName"}>
                         <Form >
@@ -44,7 +47,7 @@ class SignUp extends React.Component{
                     </FormGroup>
                     <Button onClick={this.handleSignUp} color={"primary"} id={"signUpBtn"}>Sign-Up</Button>
                     {' '}
-                    <Button onClick={this.props.toLoginPage} id={"cancelBtn"}>Cancel</Button>
+                    <WrappedButton link={"/Login"} name={"Cancel"}/>
                 </Form>
             </div>
         );
