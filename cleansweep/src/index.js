@@ -22,8 +22,11 @@ ReactDOM.render(
             <Route path={"/SignUp"} component={SignUp} />
             <Route path={"/NewEmployee"} component={NewEmployee} />
             <Route path={"/NewRoom"} component={NewRoom} />
+<<<<<<< HEAD
 
             <Route path={"/InspectRoom"} component={InspectRoom} />
+=======
+>>>>>>> 2ba7dbbeaf20de299ca74a25341c988cbd18b4ea
             <Route path={"/CheckInGuest"} component={CheckInGuest} />
         </div>
     </Router>,
