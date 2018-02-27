@@ -46,8 +46,6 @@ class NavigationBar extends React.Component {
                                 <Nav className="mr-auto" navbar>
                                     <DropDContent title={"File"} contents={["New Employee", "New Room"]} links={["/NewEmployee", "NewRoom"]} />
                                     <DropDContent title={"Functions"} contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms", "Inspect Room", "Check-in Guest", "Check-out Guest"]} links={["#","#","#","InspectRoom","CheckInGuest","#"]} />
-                                    <DropDContent title={"File"} contents={["New Employee", "New Room"]} links={["/NewEmployee", "/NewRoom"]} />
-                                    <DropDContent title={"Functions"} contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms", "Inspect Room", "Check-in Guest", "Check-out Guest"]} links={["#","#","#","#","/CheckInGuest","#"]} />
                                     <DropDContent title={"Lists"} contents={["Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]} links={["#","#","#","#","#","#"]} />
                                     <DropDContent title={"Options"} contents={["Change Password", "Option2"]} links={["/ChangePassword", "#"]}/>
                                     <NavItem>
