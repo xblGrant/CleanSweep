@@ -7,11 +7,41 @@ class ChangePassword extends React.Component{
     constructor(props){
         super(props);
 
+        this.handlePasswordChange = this.handlePasswordChange.bind(this)
+
+    }
+
+    handlePasswordChange(){
+
 
     }
 
 
-
+    render(){
+        return(
+            <div id={"changePasswordForm"}>
+                <NavigationBar/>
+                <Form>
+                    <FormGroup row>
+                        <Label id={"label"} for="oldPassword">Old Password</Label>
+                        <Input type="password" id="oldPassword" placeholder={"Old Password"}/>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label id={"label"} for="newPassword">New Password</Label>
+                        <Input type="password" id="newPassword" placeholder={"New Password"}/>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label id={"label"} for="newPasswordVerification">Reenter New Password</Label>
+                        <Input type="password" id="newPasswordVerification" placeholder={"Reenter New Password"} />
+                    </FormGroup>
+                    <FormGroup row>
+                        <Button onClick={this.handlePasswordChange} color={"Primary"} id={"changePasswordSubmit"}/>
+                        <WrappedButton id={"changePasswordCancel"} link={"/"} name={"Cancel"}/>
+                    </FormGroup>
+                </Form>
+            </div>
+        );
+    }
 
 
 }

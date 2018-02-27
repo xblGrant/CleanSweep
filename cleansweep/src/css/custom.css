@@ -1,16 +1,18 @@
 /*LOGIN.js & SIGNUP.js & NEWEMPLOYEE.js & NEWROOM.js*/
-#loginForm, #signUpForm, #newEmployeeForm, #newRoomForm, #inspectRoomForm, #checkInForm  {
+#loginForm, #signUpForm, #newEmployeeForm, #newRoomForm, #inspectRoomForm, #checkInForm, #changePasswordForm  {
     margin-top: 2%;
 }
 #userPass, #userEmail, #confirmUserPass, #signUpName, #employeeFName, #employeeLName,
-#employeeDOB, #employeePass, #employeeEmail, #roomNum, #custFName, #custLName, #floorSelect, #roomList, #inspectComment {
+#employeeDOB, #employeePass, #employeeEmail, #roomNum, #custFName, #custLName, #floorSelect, #roomList, #inspectComment
+#oldPassword, #newPassword, #newPasswordVerification{
     margin-left: 35%;
     width: 30%;
 }
 #label {
     margin-left: 35%;
 }
-#loginBtn, #signUpBtn, #submitNewEmpBtn, #submitNewRoomBtn, #checkInBtn{
+#loginBtn, #signUpBtn, #submitNewEmpBtn, #submitNewRoomBtn, #checkInBtn
+#changePasswordSubmit, #changePasswordCancel{
     margin-left: 35%;
 }
 
