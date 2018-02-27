@@ -56,5 +56,6 @@ WrappedButton.defaultProps = {
 WrappedButton.propTypes = {
   isOutlined: PropTypes.bool.isRequired,
   link: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
 };

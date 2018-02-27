@@ -11,7 +11,7 @@ class NewRoom extends React.Component {
     }
 
     handleNewRoom() {
-
+        // TODO: handle addition of new room
     }
 
     render() {

@@ -19,7 +19,7 @@ class Header extends React.Component{
 
         let button;
         if (!isLoggedIn) {
-            button = <WrappedButton isOutlined={true} link={"/Login"} name={"Login"}/>
+            button = <WrappedButton id={"headerBtn"} isOutlined={true} link={"/login"} name={"Login"}/>
         } else {
             button = <Button onClick={this.props.handleLogout} id={"headerBtn"} outline size={"sm"}>Logout</Button>
         }

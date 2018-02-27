@@ -1,16 +1,28 @@
 import React from 'react';
-import {
-    Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Form, FormGroup, Label, Input,
-    ListGroup
-} from 'reactstrap';
 import NavigationBar from './NavigationBar';
 import WrappedButton from "./Components";
+import {
+    Button,
+    DropdownToggle,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    ButtonDropdown,
+    DropdownMenu,
+    DropdownItem
+} from 'reactstrap';
 
 class InspectRoom extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
+        this.state = {
+            dropdownOpen: false
+        };
+
         this.handleInspect = this.handleInspect.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     handleInspect() {
@@ -28,24 +40,29 @@ class InspectRoom extends React.Component {
             <div id={"inspectRoomForm"}>
                 <NavigationBar/>
                 <Form>
-                    <FormGroup row>
-                        <Dropdown id={"label"} for="floorSelect" isOpen={true}>
+                    <FormGroup>
+                        <ButtonDropdown id={"floorSelect"} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                             <DropdownToggle caret>
                                 Floor
                             </DropdownToggle>
-                        </Dropdown>
+                            <DropdownMenu>
+                                <DropdownItem>1</DropdownItem>
+                                <DropdownItem>2</DropdownItem>
+                                <DropdownItem>3</DropdownItem>
+                                <DropdownItem divider/>
+                                <DropdownItem>etc...</DropdownItem>
+                            </DropdownMenu>
+                        </ButtonDropdown>
                     </FormGroup>
                     <FormGroup>
-                        <Label id={"label"} for="roomList"></Label>
-                        <Input type="text" id="roomList" placeholder={"List of rooms on floor will show up here"} />
-                        /*TODO: THIS SHOULD BE A REACT-SELECTABLE-FAST THAT POPULATES*/
+                        {/*<Label id={"label"} for="roomList"></Label>*/}
+                        <Input type="textarea" id="roomList" placeholder={"List of rooms on floor will show up here"}/>
+                        {/*TODO: THIS SHOULD BE A REACT-SELECTABLE-FAST THAT POPULATES OR REACTSTRAP ListGroup*/}
                     </FormGroup>
                     <FormGroup row>
                         <Label id={"label"} for="inspectComment">Comment</Label>
-                        <Input type="text" id="inspectComment" placeholder={"Enter comment here"}/>
+                        <Input type="textarea" id="inspectComment" placeholder={"Enter comment here"}/>
                     </FormGroup>
-
-                    <br/>
                     <Button onClick={this.handleCheckIn} color={"primary"} id={"submitNewEmpBtn"}>Submit</Button>
                     {' '}
                     <WrappedButton id={"checkInCancel"} link={"/"} name={"Cancel"}/>

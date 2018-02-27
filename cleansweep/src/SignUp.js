@@ -12,7 +12,7 @@ class SignUp extends React.Component{
     }
 
     handleSignUp() {
-        // Handle sign up here
+        // TODO: handle sign up
     }
 
     render() {
@@ -47,7 +47,7 @@ class SignUp extends React.Component{
                     </FormGroup>
                     <Button onClick={this.handleSignUp} color={"primary"} id={"signUpBtn"}>Sign-Up</Button>
                     {' '}
-                    <WrappedButton link={"/Login"} name={"Cancel"}/>
+                    <WrappedButton id={"signUpCancel"} link={"/login"} name={"Cancel"}/>
                 </Form>
             </div>
         );

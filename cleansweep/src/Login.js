@@ -19,7 +19,7 @@ function Login(props) {
                 </FormGroup>
                 <Button onClick={props.handleLogin} color={"primary"} id={"loginBtn"}>Login</Button>
                 {' '}
-                <WrappedButton id={"signUpRedirect"} link={"/SignUp"} name={"Sign-Up"}/>
+                <WrappedButton id={"signUpRedirect"} link={"/signup"} name={"Sign-Up"}/>
             </Form>
         </div>
     );

@@ -8,44 +8,36 @@ class ChangePassword extends React.Component{
         super(props);
 
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
-
     }
 
     handlePasswordChange(){
 
-
     }
-
 
     render(){
         return(
-            <div id={"changePasswordForm"}>
+            <div id={"changePWForm"}>
                 <NavigationBar/>
                 <Form>
                     <FormGroup row>
                         <Label id={"label"} for="oldPassword">Old Password</Label>
-                        <Input type="password" id="oldPassword" placeholder={"Old Password"}/>
+                        <Input type="password" id="oldPW" placeholder={"Old Password"}/>
                     </FormGroup>
                     <FormGroup row>
                         <Label id={"label"} for="newPassword">New Password</Label>
-                        <Input type="password" id="newPassword" placeholder={"New Password"}/>
+                        <Input type="password" id="newPW" placeholder={"New Password"}/>
                     </FormGroup>
                     <FormGroup row>
                         <Label id={"label"} for="newPasswordVerification">Reenter New Password</Label>
-                        <Input type="password" id="newPasswordVerification" placeholder={"Reenter New Password"} />
+                        <Input type="password" id="newPWVerification" placeholder={"Reenter New Password"} />
                     </FormGroup>
-                    <FormGroup row>
-                        <Button onClick={this.handlePasswordChange} color={"Primary"} id={"changePasswordSubmit"}>
-                            Submit
-                        </Button>
-                        <WrappedButton id={"changePasswordCancel"} link={"/"} name={"Cancel"}/>
-                    </FormGroup>
+                    <Button onClick={this.handlePasswordChange} color={"Primary"} id={"changePWBtn"}>Submit</Button>
+                    {' '}
+                    <WrappedButton id={"changePWCancel"} link={"/"} name={"Cancel"}/>
                 </Form>
             </div>
         );
     }
-
-
 }
 
 export default ChangePassword;
