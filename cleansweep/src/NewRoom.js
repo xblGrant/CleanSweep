@@ -14,7 +14,7 @@ class NewRoom extends React.Component{
                         *Autopopulate Room Number*
                     </Label>
                     <Col sm={10}>
-                        <Input type="textarea" name="textarea" id="roomNum"/>
+                        <Input type="text" name="textarea" id="roomNum"/>
                     </Col>
                 </FormGroup>
                 <FormGroup check>
