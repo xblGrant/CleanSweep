@@ -5,6 +5,7 @@ import NewEmployee from './NewEmployee';
 import NewRoom from './NewRoom';
 import SignUp from './SignUp';
 import Login from './Login';
+import InspectRoom from './InspectRoom';
 import CheckInGuest from './CheckInGuest';
 import ChangePassword from './ChangePassword';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
@@ -22,6 +23,9 @@ ReactDOM.render(
             <Route path={"/SignUp"} component={SignUp} />
             <Route path={"/NewEmployee"} component={NewEmployee} />
             <Route path={"/NewRoom"} component={NewRoom} />
+
+            <Route path={"/InspectRoom"} component={InspectRoom} />
+
             <Route path={"/CheckInGuest"} component={CheckInGuest} />
             <Route path={"/ChangePassword"} component={ChangePassword} />
         </div>
