@@ -35,7 +35,9 @@ class ChangePassword extends React.Component{
                         <Input type="password" id="newPasswordVerification" placeholder={"Reenter New Password"} />
                     </FormGroup>
                     <FormGroup row>
-                        <Button onClick={this.handlePasswordChange} color={"Primary"} id={"changePasswordSubmit"}/>
+                        <Button onClick={this.handlePasswordChange} color={"Primary"} id={"changePasswordSubmit"}>
+                            Submit
+                        </Button>
                         <WrappedButton id={"changePasswordCancel"} link={"/"} name={"Cancel"}/>
                     </FormGroup>
                 </Form>
