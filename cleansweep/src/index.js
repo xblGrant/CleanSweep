@@ -21,7 +21,6 @@ ReactDOM.render(
             <Route path={"/SignUp"} component={SignUp} />
             <Route path={"/NewEmployee"} component={NewEmployee} />
             <Route path={"/NewRoom"} component={NewRoom} />
-
             <Route path={"/CheckInGuest"} component={CheckInGuest} />
         </div>
     </Router>,
