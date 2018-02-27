@@ -1,5 +1,8 @@
 import React from 'react';
-import {Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Form, FormGroup, Label, Input} from 'reactstrap';
+import {
+    Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Form, FormGroup, Label, Input,
+    ListGroup
+} from 'reactstrap';
 import NavigationBar from './NavigationBar';
 import WrappedButton from "./Components";
 
@@ -35,6 +38,7 @@ class InspectRoom extends React.Component {
                     <FormGroup>
                         <Label id={"label"} for="roomList"></Label>
                         <Input type="text" id="roomList" placeholder={"List of rooms on floor will show up here"} />
+                        /*TODO: THIS SHOULD BE A REACT-SELECTABLE-FAST THAT POPULATES*/
                     </FormGroup>
                     <FormGroup row>
                         <Label id={"label"} for="inspectComment">Comment</Label>
