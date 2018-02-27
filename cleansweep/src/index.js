@@ -5,6 +5,7 @@ import NewEmployee from './NewEmployee';
 import NewRoom from './NewRoom';
 import SignUp from './SignUp';
 import Login from './Login';
+import CheckInGuest from './CheckInGuest';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -20,6 +21,8 @@ ReactDOM.render(
             <Route path={"/SignUp"} component={SignUp} />
             <Route path={"/NewEmployee"} component={NewEmployee} />
             <Route path={"/NewRoom"} component={NewRoom} />
+
+            <Route path={"/CheckInGuest"} component={CheckInGuest} />
         </div>
     </Router>,
     document.getElementById('root')
