@@ -7,6 +7,7 @@ import SignUp from './SignUp';
 import Login from './Login';
 import InspectRoom from './InspectRoom';
 import CheckInGuest from './CheckInGuest';
+import ChangePassword from './ChangePassword';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -26,6 +27,7 @@ ReactDOM.render(
             <Route path={"/InspectRoom"} component={InspectRoom} />
 
             <Route path={"/CheckInGuest"} component={CheckInGuest} />
+            <Route path={"/ChangePassword"} component={ChangePassword} />
         </div>
     </Router>,
     document.getElementById('root')
