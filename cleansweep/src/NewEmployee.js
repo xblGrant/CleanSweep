@@ -1,47 +1,54 @@
 import React from 'react';
-import {Button, Form, FormGroup, Label, Input, FormText, Col} from 'reactstrap';
+import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import NavigationBar from './NavigationBar';
+import WrappedButton from "./Components";
 
 class NewEmployee extends React.Component {
-    constructor(props) {
+    constructor(props){
         super(props);
+
+        this.handleNewEmployee = this.handleNewEmployee.bind(this);
+    }
+
+    handleNewEmployee() {
+
     }
 
     render() {
         return (
-            <div>
+            <div id={"newEmployeeForm"}>
                 <NavigationBar/>
                 <Form>
                     <FormGroup row>
-                        <Label for="employeeFName">First Name</Label>
-                        <Col sm={10}>
-                            <Input type="text" name="textarea" id="employeeFName"/>
-                        </Col>
+                        <Label id={"label"} for="employeeFName">First Name</Label>
+                        <Input type="text" id="employeeFName" placeholder={"First name"}/>
                     </FormGroup>
                     <FormGroup row>
-                        <Label for="employeeLName">Last Name</Label>
-                        <Col sm={10}>
-                            <Input type="text" name="textarea" id="employeeLName"/>
-                        </Col>
+                        <Label id={"label"} for="employeeLName">Last Name</Label>
+                        <Input type="text" id="employeeLName" placeholder={"Last name"}/>
                     </FormGroup>
                     <FormGroup row>
-                        <Label for="exmployeeDOB">Date Of Birth</Label>
-                        <Col sm={10}>
-                            <Input type="date" name="date" id="exmployeeDOB"/>
-                        </Col>
+                        <Label id={"label"} for="employeeDOB">Date Of Birth</Label>
+                        <Input type="date" id="employeeDOB" />
                     </FormGroup>
                     <FormGroup row>
-                        <Label for="employeePass">Password</Label>
-                        <Col sm={10}>
-                            <Input type="password" name="password" id="employeePass"/>
-                        </Col>
+                        <Label id={"label"} for="employeePass">Email</Label>
+                        <Input type="email" id="employeeEmail" placeholder={"Email"}/>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label id={"label"} for="employeePass">Password</Label>
+                        <Input type="password" id="employeePass" placeholder={"Password"}/>
                     </FormGroup>
                     <FormGroup check>
-                        <Label check>
-                            <Input type="checkbox" name="checkbox" id="isManager"/>{' '}
+                        <Label id={"label"} check>
+                            <Input type="checkbox" id="isManager"/>{' '}
                             Manager
                         </Label>
                     </FormGroup>
+                    <br/>
+                    <Button onClick={this.handleNewEmployee} color={"primary"} id={"submitNewEmpBtn"}>Submit</Button>
+                    {' '}
+                    <WrappedButton id={"newEmpCancel"} link={"/"} name={"Cancel"}/>
                 </Form>
             </div>
         );
