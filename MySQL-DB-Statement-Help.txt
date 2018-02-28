@@ -1,0 +1,11 @@
+To INSERT, UPDATE, or DELETE tuples from the database through MySQL Workbench:
+
+1 - Right-click the desired table
+2 - Scroll to "Copy to Clipboard"
+3 - Select "<{Blank}> Statement" where <{Blank}> is the desired SQL Statement
+4 - Go to a blank Query window
+5 - Paste code into Query window
+6 - Change each <{attribute-name}> to the desired data
+
+7 - ????
+8 - Profit
