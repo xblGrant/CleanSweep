@@ -8,6 +8,7 @@ import Login from './Login';
 import InspectRoom from './InspectRoom';
 import CheckInGuest from './CheckInGuest';
 import ChangePassword from './ChangePassword';
+import RoomList from './RoomList';
 import Help from './Help';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
@@ -39,6 +40,8 @@ ReactDOM.render(
             {/*<Route path={"/checkoutguest"} component={CheckoutGuest} />*/}
 
             {/*List Paths*/}
+            {/*<Route path={"/allrooms"} TODO:THIS TRIES TO PASS AN ARRAY AS PROPS...
+                    render={()=><RoomList rooms={['name=1', status='available']}/>}/>*/}
             {/*<Route path={"/assignedrooms"} component={AssignedRooms} />*/}
             {/*<Route path={"/availablerooms"} component={AvailableRooms} />*/}
             {/*<Route path={"/inspections"} component={Inspections} />*/}

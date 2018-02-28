@@ -58,8 +58,8 @@ class NavigationBar extends React.Component {
                                                   contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms", "Inspect Room", "Check-in Guest", "Check-out Guest"]}
                                                   links={["/wakeupcall","/addincident","/assignrooms","/inspectroom","/checkinguest","/checkoutguest"]} />
                                     <DropDContent title={"Lists"}
-                                                  contents={["Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]}
-                                                  links={["/assignedrooms","/availablerooms","/inspections","/incidents","/wakeuplist","/departingcustomers"]} />
+                                                  contents={["All Rooms", "Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]}
+                                                  links={["/allrooms","/assignedrooms","/availablerooms","/inspections","/incidents","/wakeuplist","/departingcustomers"]} />
                                     <DropDContent title={"Options"}
                                                   contents={["Change Password", "Option2"]}
                                                   links={["/changepassword", "#"]}/>
