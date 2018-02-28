@@ -33,12 +33,22 @@ class NavigationBar extends React.Component {
         // TODO: discern if manager or employee is logged in then render appropriate NavigationBar
         // TODO: create employee NavigationBar
 
+        let headerExpanded, headerCollapsed;
+        if (this.state.isOpen){
+            headerCollapsed = <Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>;
+            headerExpanded = null;
+        } else {
+            headerCollapsed = null;
+            headerExpanded = <Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>;
+        }
+
         return (
             <div>
                 <Navbar color="faded" light expand="md">
                     <div className={"container"}>
                         <NavbarToggler onClick={this.toggle} />
                         <NavbarBrand href="/">CleanSweep</NavbarBrand>
+                        { headerCollapsed }
                         <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="mr-auto" navbar>
                                     <DropDContent title={"File"}
@@ -61,9 +71,8 @@ class NavigationBar extends React.Component {
                                     </NavItem>
                                     {/*<Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>*/}
                                 </Nav>
-
                         </Collapse>
-                        <Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>
+                        { headerExpanded }
                     </div>
                 </Navbar>
             </div>
