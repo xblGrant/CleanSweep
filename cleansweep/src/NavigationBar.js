@@ -59,9 +59,11 @@ class NavigationBar extends React.Component {
                                     <NavItem>
                                         <NavLink href="https://github.com/xblGrant/CleanSweep">Github</NavLink>
                                     </NavItem>
+                                    {/*<Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>*/}
                                 </Nav>
+
                         </Collapse>
-                        <Header handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>
+                        <Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>
                     </div>
                 </Navbar>
             </div>
