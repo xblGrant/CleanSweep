@@ -41,7 +41,7 @@ ReactDOM.render(
 
             {/*List Paths*/}
             {/*<Route path={"/allrooms"} TODO:THIS TRIES TO PASS AN ARRAY AS PROPS...
-                    render={()=><RoomList rooms={['name=1', status='available']}/>}/>*/}
+                    render={()=><RoomList rooms=[/>}/>*/}
             {/*<Route path={"/assignedrooms"} component={AssignedRooms} />*/}
             {/*<Route path={"/availablerooms"} component={AvailableRooms} />*/}
             {/*<Route path={"/inspections"} component={Inspections} />*/}
