@@ -67,7 +67,7 @@ class NavigationBar extends React.Component {
             </div>
         );
     }
-}
+} 
 
 function DropDContent(props) {
     return (
