@@ -8,6 +8,7 @@ import Login from './Login';
 import InspectRoom from './InspectRoom';
 import CheckInGuest from './CheckInGuest';
 import ChangePassword from './ChangePassword';
+import Help from './Help';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -49,7 +50,7 @@ ReactDOM.render(
             <Route path={"/changepassword"} component={ChangePassword} />
 
             {/*Help Path*/}
-            {/*<Route path={"/help"} component={Help} />*/}
+            <Route path={"/help"} component={Help} />
         </div>
     </Router>,
     document.getElementById('root')
