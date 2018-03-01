@@ -10,6 +10,7 @@ import SignUp from './SignUp';
 import NewRoom from './NewRoom';
 // import RoomList from './RoomList';
 import AddWakeUp from './WakeUpCall';
+import AssignRooms from './AssignRooms';
 import InspectRoom from './InspectRoom';
 import NewEmployee from './NewEmployee';
 import AddIncident from './AddIncident';
@@ -37,7 +38,7 @@ ReactDOM.render(
             {/*Function Paths*/}
             <Route path={"/wakeupcall"} component={AddWakeUp} />
             <Route path={"/addincident"} component={AddIncident} />
-            {/*<Route path={"/assignrooms"} component={AssignRooms} />*/}
+            <Route path={"/assignrooms"} component={AssignRooms} />
             <Route path={"/inspectroom"} component={InspectRoom} />
             <Route path={"/checkinguest"} component={CheckInGuest} />
             <Route path={"/checkoutguest"} component={CheckOutGuest} />

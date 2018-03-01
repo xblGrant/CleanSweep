@@ -7,10 +7,10 @@ class AddWakeUp extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleNewWakeUp = this.handleNewWakeUp.bind(this);
+        this.handleAssignRooms = this.handleAssignRooms.bind(this);
     }
 
-    handleNewWakeUp() {
+    handleAssignRooms() {
         //TODO: submit new wake up call
     }
 
@@ -18,9 +18,9 @@ class AddWakeUp extends React.Component {
         return (
             <div>
                 <head>
-                    <title>Add Wake-Up Call</title>
+                    <title>Assign Rooms</title>
                 </head>
-                <div id={"newWakeUpForm"}>
+                <div id={"assignRoomsForm"}>
                     <NavigationBar/>
                     <Form>
                         <FormGroup>
@@ -34,20 +34,19 @@ class AddWakeUp extends React.Component {
                             </Input>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="wakeUpRoom">Room</Label>
-                            <Input placeholder={"Auto-populate with occupied rooms on given floor"} type="textarea"
-                                   id="wakeUpRoom"/>
+                            <Label id={"label"} for="assignableRoom">Room</Label>
+                            <Input
+                                placeholder={"Auto-populate with occupied rooms on given floor/react-selectable-fast"}
+                                type="textarea" id="assignableRooms"/>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="wakeUpDate">Date</Label>
-                            <Input type="date" id="wakeUpDate" placeholder={"Email"}/>
+                            <Label id={"label"} for="assignEmployees">Employees</Label>
+                            <Input
+                                placeholder={"Auto-populate with employees/react-selectable-fast"}
+                                type="textarea" id="assignEmployees" />
                         </FormGroup>
-                        <FormGroup row>
-                            <Label id={"label"} for="wakeUpTime">Time</Label>
-                            <Input type="time" id="wakeUpTime" placeholder={"Password"}/>
-                        </FormGroup>
-                        <Button onClick={this.handleNewWakeUp} color={"primary"}
-                                id={"submitNewWakeUpBtn"}>Submit</Button>
+                        <Button onClick={this.handleAssignRooms} color={"primary"}
+                                id={"submitAssignRoomsBtn"}>Submit</Button>
                         {' '}
                         <WrappedButton id={"newWakeUpCancel"} link={"/"} name={"Cancel"}/>
                     </Form>
