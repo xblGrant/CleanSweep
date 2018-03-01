@@ -7,11 +7,11 @@ class AddWakeUp extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleAssignRooms = this.handleAssignRooms.bind(this);
+        this.handleChangeRole = this.handleChangeRole.bind(this);
     }
 
-    handleAssignRooms() {
-        //TODO: submit new wake up call
+    handleChangeRole() {
+        //TODO: handle changing of employee role
     }
 
     render() {
@@ -24,29 +24,41 @@ class AddWakeUp extends React.Component {
                     <NavigationBar/>
                     <Form>
                         <Label id={"searchLabel"}><h6>Search By:</h6></Label>
-                            <FormGroup row>
-                                <Label id={"label"} for="employeeName">Employee Name</Label>
-                                <Input
-                                    placeholder={"Employee name"}
-                                    type="text" id="employeeName"/>
-                            </FormGroup>
+                        <FormGroup row>
+                            <Label id={"label"} for="employeeName">Employee Name</Label>
+                            <Input
+                                placeholder={"Employee name"}
+                                type="text" id="employeeName"/>
+                        </FormGroup>
                         <Label id={"orLabel"}><h6>or</h6></Label>
-                            <FormGroup row>
-                                <Label id={"label"} for="employeeRoleID">Employee ID</Label>
-                                <Input
-                                    placeholder={"Employee ID"}
-                                    type="text" id="employeeRoleID"/>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Label id={"label"} for="employeeResults">Search Results</Label>
-                                <Input
-                                    placeholder={"Search Results"}
-                                    type="textarea" id="employeeResults"/>
-                            </FormGroup>
-                        <Button onClick={this.handleAssignRooms} color={"primary"}
-                                id={"submitAssignRoomsBtn"}>Submit</Button>
+                        <FormGroup row>
+                            <Label id={"label"} for="employeeRoleID">Employee ID</Label>
+                            <Input
+                                placeholder={"Employee ID"}
+                                type="text" id="employeeRoleID"/>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label id={"label"} for="employeeResults">Search Results</Label>
+                            <Input
+                                placeholder={"Search Results"}
+                                type="textarea" id="employeeResults"/>
+                        </FormGroup>
+                        <FormGroup check>
+                            <Label id={"checkbox"} check>
+                                <Input type="checkbox" id="isManager"/>{' '}
+                                Promote to Manager
+                            </Label>{' '}
+                            <br/>
+                            <Label id={"checkbox"} check>
+                                <Input type="checkbox" id="isEmployee"/>{' '}
+                                Demote to Employee
+                            </Label>
+                        </FormGroup>
+                        <br/>
+                        <Button onClick={this.handleChangeRole} color={"primary"}
+                                id={"submitChangeRoleBtn"}>Submit</Button>
                         {' '}
-                        <WrappedButton id={"newWakeUpCancel"} link={"/"} name={"Cancel"}/>
+                        <WrappedButton id={"changeRoleCancel"} link={"/"} name={"Cancel"}/>
                     </Form>
                 </div>
             </div>
