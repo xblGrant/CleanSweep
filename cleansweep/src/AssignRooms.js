@@ -11,7 +11,7 @@ class AddWakeUp extends React.Component {
     }
 
     handleAssignRooms() {
-        //TODO: submit new wake up call
+        //TODO: handle assigning rooms to employees
     }
 
     render() {
