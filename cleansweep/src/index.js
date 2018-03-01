@@ -7,9 +7,14 @@ import SignUp from './SignUp';
 import Login from './Login';
 import InspectRoom from './InspectRoom';
 import CheckInGuest from './CheckInGuest';
+import CheckOutGuest from './CheckOutGuest';
 import ChangePassword from './ChangePassword';
+import AddIncident from './AddIncident';
+import Help from './Help';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
+
+
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/custom.css';
@@ -31,11 +36,11 @@ ReactDOM.render(
 
             {/*Function Paths*/}
             {/*<Route path={"/wakeupcall"} component={WakeUpCall} />*/}
-            {/*<Route path={"/addincident"} component={AddIncidient} />*/}
+            {<Route path={"/addincident"} component={AddIncident} />}
             {/*<Route path={"/assignrooms"} component={AssignRooms} />*/}
             <Route path={"/inspectroom"} component={InspectRoom} />
             <Route path={"/checkinguest"} component={CheckInGuest} />
-            {/*<Route path={"/checkoutguest"} component={CheckoutGuest} />*/}
+            {<Route path={"/checkoutguest"} component={CheckOutGuest} />}
 
             {/*List Paths*/}
             {/*<Route path={"/assignedrooms"} component={AssignedRooms} />*/}
@@ -49,7 +54,7 @@ ReactDOM.render(
             <Route path={"/changepassword"} component={ChangePassword} />
 
             {/*Help Path*/}
-            {/*<Route path={"/help"} component={Help} />*/}
+            {<Route path={"/help"} component={Help} />}
         </div>
     </Router>,
     document.getElementById('root')
