@@ -38,11 +38,11 @@ ReactDOM.render(
 
             {/*Function Paths*/}
             {/*<Route path={"/wakeupcall"} component={WakeUpCall} />*/}
-            {<Route path={"/addincident"} component={AddIncident} />}
+            <Route path={"/addincident"} component={AddIncident} />
             {/*<Route path={"/assignrooms"} component={AssignRooms} />*/}
             <Route path={"/inspectroom"} component={InspectRoom} />
             <Route path={"/checkinguest"} component={CheckInGuest} />
-            {<Route path={"/checkoutguest"} component={CheckOutGuest} />}
+            <Route path={"/checkoutguest"} component={CheckOutGuest} />
 
             {/*List Paths*/}
             {/*<Route path={"/allrooms"} TODO:THIS TRIES TO PASS AN ARRAY AS PROPS...
@@ -58,9 +58,7 @@ ReactDOM.render(
             <Route path={"/changepassword"} component={ChangePassword} />
 
             {/*Help Path*/}
-
             {<Route path={"/help"} component={Help} />}
-
         </div>
     </Router>,
     document.getElementById('root')

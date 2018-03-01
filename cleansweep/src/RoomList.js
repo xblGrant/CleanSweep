@@ -9,14 +9,15 @@ import { SelectableGroup } from 'react-selectable-fast';
 class RoomList extends React.Component{
     constructor(props){
         super(props);
-        this.state =
-            {
-                tolerance: 10
 
-            };
+        this.state = {
+            tolerance: 10
+        };
     }
 
     render(){
+        let rooms; /*database query of all rooms*/
+
         return(
             <div id={"RoomListSelectableGroup"}>
             <NavigationBar />
@@ -31,10 +32,11 @@ class RoomList extends React.Component{
                 onSelectionFinish={this.handleSelectionFinish}
                 //ignoreList={}
             >
-                <SelectableList rooms={this.props.rooms}/>
+                <SelectableList rooms={rooms}/>
             </SelectableGroup>
             </div>
         );
     }
 }
+
 export default RoomList;

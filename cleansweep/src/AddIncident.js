@@ -37,36 +37,42 @@ class AddIncident extends React.Component {
 
     render() {
         return (
-            <div id={"incidentRoomForm"}>
-                <NavigationBar/>
-                <Form>
-                    <FormGroup>
-                        <ButtonDropdown id={"floorSelect"} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                            <DropdownToggle caret>
-                                Floor
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem>1</DropdownItem>
-                                <DropdownItem>2</DropdownItem>
-                                <DropdownItem>3</DropdownItem>
-                                <DropdownItem divider/>
-                                <DropdownItem>etc...</DropdownItem>
-                            </DropdownMenu>
-                        </ButtonDropdown>
-                    </FormGroup>
-                    <FormGroup>
-                        {/*<Label id={"label"} for="roomList"></Label>*/}
-                        <Input type="textarea" id="roomList" placeholder={"List of rooms on floor will show up here"}/>
-                        {/*TODO: THIS SHOULD BE A REACT-SELECTABLE-FAST THAT POPULATES OR REACTSTRAP ListGroup*/}
-                    </FormGroup>
-                    <FormGroup row>
-                        <Label id={"label"} for="incidentComment">Comment</Label>
-                        <Input type="textarea" id="incidentComment" placeholder={"Enter comment here"}/>
-                    </FormGroup>
-                    <Button onClick={this.handleCheckIn} color={"primary"} id={"submitNewEmpBtn"}>Submit</Button>
-                    {' '}
-                    <WrappedButton id={"checkInCancel"} link={"/"} name={"Cancel"}/>
-                </Form>
+            <div>
+                <head>
+                    <title>Incident Report</title>
+                </head>
+                <div id={"incidentRoomForm"}>
+                    <NavigationBar/>
+                    <Form>
+                        <FormGroup>
+                            <ButtonDropdown id={"floorSelect"} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                                <DropdownToggle caret>
+                                    Floor
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem>1</DropdownItem>
+                                    <DropdownItem>2</DropdownItem>
+                                    <DropdownItem>3</DropdownItem>
+                                    <DropdownItem divider/>
+                                    <DropdownItem>etc...</DropdownItem>
+                                </DropdownMenu>
+                            </ButtonDropdown>
+                        </FormGroup>
+                        <FormGroup>
+                            {/*<Label id={"label"} for="roomList"></Label>*/}
+                            <Input type="textarea" id="roomList"
+                                   placeholder={"List of rooms on floor will show up here"}/>
+                            {/*TODO: THIS SHOULD BE A REACT-SELECTABLE-FAST THAT POPULATES OR REACTSTRAP ListGroup*/}
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label id={"label"} for="incidentComment">Comment</Label>
+                            <Input type="textarea" id="incidentComment" placeholder={"Enter comment here"}/>
+                        </FormGroup>
+                        <Button onClick={this.handleIncident} color={"primary"} id={"submitIncidentBtn"}>Submit</Button>
+                        {' '}
+                        <WrappedButton id={"checkInCancel"} link={"/"} name={"Cancel"}/>
+                    </Form>
+                </div>
             </div>
         );
     }
