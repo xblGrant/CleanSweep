@@ -9,11 +9,9 @@ import InspectRoom from './InspectRoom';
 import CheckInGuest from './CheckInGuest';
 import CheckOutGuest from './CheckOutGuest';
 import ChangePassword from './ChangePassword';
-<<<<<<< HEAD
+
 import AddIncident from './AddIncident';
-=======
 import RoomList from './RoomList';
->>>>>>> db8e5d3253b1eabad5cc02cd681f4efef803874a
 import Help from './Help';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
@@ -60,11 +58,9 @@ ReactDOM.render(
             <Route path={"/changepassword"} component={ChangePassword} />
 
             {/*Help Path*/}
-<<<<<<< HEAD
+
             {<Route path={"/help"} component={Help} />}
-=======
-            <Route path={"/help"} component={Help} />
->>>>>>> db8e5d3253b1eabad5cc02cd681f4efef803874a
+
         </div>
     </Router>,
     document.getElementById('root')
