@@ -10,6 +10,7 @@ import SignUp from './SignUp';
 import NewRoom from './NewRoom';
 // import RoomList from './RoomList';
 import AddWakeUp from './WakeUpCall';
+import ChangeRole from './ChangeRole';
 import AssignRooms from './AssignRooms';
 import InspectRoom from './InspectRoom';
 import NewEmployee from './NewEmployee';
@@ -57,7 +58,8 @@ ReactDOM.render(
             <Route path={"/changepassword"} component={ChangePassword} />
 
             {/*Help Path*/}
-            {<Route path={"/help"} component={Help} />}
+            <Route path={"/help"} component={Help} />
+            <Route path={"/changerole"} component={ChangeRole} />
         </div>
     </Router>,
     document.getElementById('root')

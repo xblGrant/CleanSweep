@@ -61,8 +61,8 @@ class NavigationBar extends React.Component {
                                                   contents={["All Rooms", "Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]}
                                                   links={["/allrooms","/assignedrooms","/availablerooms","/inspections","/incidents","/wakeuplist","/departingcustomers"]} />
                                     <DropDContent title={"Options"}
-                                                  contents={["Change Password", "Option2"]}
-                                                  links={["/changepassword", "#"]}/>
+                                                  contents={["Change Password", "Change Role"]}
+                                                  links={["/changepassword", "/changerole"]}/>
                                     <NavItem>
                                         <NavLink href="/help">Help</NavLink>
                                     </NavItem>
