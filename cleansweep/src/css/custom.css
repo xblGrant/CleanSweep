@@ -11,14 +11,12 @@
     margin-left: 35%;
     width: 30%;
 }
-#label {
-    margin-left: 35%;
-}
-#checkbox {
+#label, #checkbox {
     margin-left: 35%;
 }
 #searchLabel {
-    margin-left: 25%;
+    margin-top: 1%;
+    margin-left: 30%;
 }
 #message {
     width: 200%;
