@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button, Form, FormGroup, Input} from 'reactstrap';
 import NavigationBar from './NavigationBar';
 import WrappedButton from "./Components";
 

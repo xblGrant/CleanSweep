@@ -1,12 +1,12 @@
 /*LOGIN.js & SIGNUP.js & NEWEMPLOYEE.js & NEWROOM.js & CHANGEPASSWORD*/
-#loginForm, #signUpForm, #newEmployeeForm, #newRoomForm, #checkOutForm,
+#loginForm, #signUpForm, #newEmployeeForm, #newRoomForm, #checkOutForm, #newWakeUpForm,
 #inspectRoomForm, #checkInForm, #changePWForm, #helpForm, #incidentRoomForm {
     margin-top: 2%;
 }
 #userPass, #userEmail, #confirmUserPass, #signUpName, #employeeFName, #employeeLName,
 #employeeDOB, #employeePass, #employeeEmail, #roomNum, #custFName, #custLName,
 #floorSelect, #roomList, #inspectComment, #incidentComment, #oldPW, #newPW, #newPWVerification,
-#contactName, #contactEmail, #contactMessage {
+#contactName, #contactEmail, #contactMessage, #wakeUpRoom, #wakeUpDate, #wakeUpTime {
     margin-left: 35%;
     width: 30%;
 }
@@ -18,7 +18,7 @@
     height: 20%;
 }
 #loginBtn, #signUpBtn, #submitNewEmpBtn, #submitNewRoomBtn, #checkInBtn,
-#changePWBtn, #SendBtn, #submitIncidentBtn, #checkOutBtn{
+#changePWBtn, #SendBtn, #submitIncidentBtn, #checkOutBtn, #submitNewWakeUpBtn{
     margin-left: 35%;
 }
 

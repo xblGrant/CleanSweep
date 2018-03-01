@@ -3,14 +3,10 @@ import NavigationBar from './NavigationBar';
 import WrappedButton from "./Components";
 import {
     Button,
-    DropdownToggle,
     Form,
     FormGroup,
     Label,
     Input,
-    ButtonDropdown,
-    DropdownMenu,
-    DropdownItem
 } from 'reactstrap';
 
 class InspectRoom extends React.Component {
@@ -45,18 +41,14 @@ class InspectRoom extends React.Component {
                     <NavigationBar/>
                     <Form>
                         <FormGroup>
-                            <ButtonDropdown id={"floorSelect"} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                                <DropdownToggle caret>
-                                    Floor
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem>1</DropdownItem>
-                                    <DropdownItem>2</DropdownItem>
-                                    <DropdownItem>3</DropdownItem>
-                                    <DropdownItem divider/>
-                                    <DropdownItem>etc...</DropdownItem>
-                                </DropdownMenu>
-                            </ButtonDropdown>
+                            <Label id={"label"} for="floorSelect">Floor</Label>
+                            <Input type="select" className="floorSelect" id="floorSelect" multiple>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </Input>
                         </FormGroup>
                         <FormGroup>
                             {/*<Label id={"label"} for="roomList"></Label>*/}

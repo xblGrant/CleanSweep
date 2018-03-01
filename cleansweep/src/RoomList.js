@@ -1,7 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import NavigationBar from "./NavigationBar";
-import WrappedButton from "./Components";
 import SelectableList from "./SelectableList";
 import { SelectableGroup } from 'react-selectable-fast';
 //TODO: needs to be sent a list of rooms under props

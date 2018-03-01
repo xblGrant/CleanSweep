@@ -1,27 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import registerServiceWorker from './registerServiceWorker';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+
 import App from './App';
-import NewEmployee from './NewEmployee';
-import NewRoom from './NewRoom';
-import SignUp from './SignUp';
+import Help from './Help';
 import Login from './Login';
+import SignUp from './SignUp';
+import NewRoom from './NewRoom';
+// import RoomList from './RoomList';
+import AddWakeUp from './WakeUpCall';
 import InspectRoom from './InspectRoom';
+import NewEmployee from './NewEmployee';
+import AddIncident from './AddIncident';
 import CheckInGuest from './CheckInGuest';
 import CheckOutGuest from './CheckOutGuest';
 import ChangePassword from './ChangePassword';
 
-import AddIncident from './AddIncident';
-import RoomList from './RoomList';
-import Help from './Help';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import registerServiceWorker from './registerServiceWorker';
-
-
-
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/custom.css';
 
-// ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(
     <Router>
         <div>
@@ -37,7 +35,7 @@ ReactDOM.render(
             <Route path={"/newroom"} component={NewRoom} />
 
             {/*Function Paths*/}
-            {/*<Route path={"/wakeupcall"} component={WakeUpCall} />*/}
+            <Route path={"/wakeupcall"} component={AddWakeUp} />
             <Route path={"/addincident"} component={AddIncident} />
             {/*<Route path={"/assignrooms"} component={AssignRooms} />*/}
             <Route path={"/inspectroom"} component={InspectRoom} />

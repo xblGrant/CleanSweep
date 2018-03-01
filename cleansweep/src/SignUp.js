@@ -3,7 +3,6 @@ import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import NavigationBar from "./NavigationBar";
 import WrappedButton from "./Components";
 
-
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
