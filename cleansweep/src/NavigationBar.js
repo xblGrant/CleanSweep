@@ -33,12 +33,22 @@ class NavigationBar extends React.Component {
         // TODO: discern if manager or employee is logged in then render appropriate NavigationBar
         // TODO: create employee NavigationBar
 
+        let headerExpanded, headerCollapsed;
+        if (this.state.isOpen){
+            headerCollapsed = <Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>;
+            headerExpanded = null;
+        } else {
+            headerCollapsed = null;
+            headerExpanded = <Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>;
+        }
+
         return (
             <div>
                 <Navbar color="faded" light expand="md">
                     <div className={"container"}>
                         <NavbarToggler onClick={this.toggle} />
                         <NavbarBrand href="/">CleanSweep</NavbarBrand>
+                        { headerCollapsed }
                         <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="mr-auto" navbar>
                                     <DropDContent title={"File"}
@@ -48,8 +58,8 @@ class NavigationBar extends React.Component {
                                                   contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms", "Inspect Room", "Check-in Guest", "Check-out Guest"]}
                                                   links={["/wakeupcall","/addincident","/assignrooms","/inspectroom","/checkinguest","/checkoutguest"]} />
                                     <DropDContent title={"Lists"}
-                                                  contents={["Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]}
-                                                  links={["/assignedrooms","/availablerooms","/inspections","/incidents","/wakeuplist","/departingcustomers"]} />
+                                                  contents={["All Rooms", "Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]}
+                                                  links={["/allrooms","/assignedrooms","/availablerooms","/inspections","/incidents","/wakeuplist","/departingcustomers"]} />
                                     <DropDContent title={"Options"}
                                                   contents={["Change Password", "Option2"]}
                                                   links={["/changepassword", "#"]}/>
@@ -59,15 +69,16 @@ class NavigationBar extends React.Component {
                                     <NavItem>
                                         <NavLink href="https://github.com/xblGrant/CleanSweep">Github</NavLink>
                                     </NavItem>
+                                    {/*<Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>*/}
                                 </Nav>
                         </Collapse>
-                        <Header handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>
+                        { headerExpanded }
                     </div>
                 </Navbar>
             </div>
         );
     }
-}
+} 
 
 function DropDContent(props) {
     return (

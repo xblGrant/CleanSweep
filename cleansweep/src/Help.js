@@ -3,9 +3,14 @@ import NavigationBar from "./NavigationBar";
 
 function Help() {
     return (
-        <div id={"helpForm"}>
-            <NavigationBar />
-            {/*etc...*/}
+        <div>
+            <head>
+                <title>Help</title>
+            </head>
+            <div id={"helpForm"}>
+                <NavigationBar/>
+                {/*etc...*/}
+            </div>
         </div>
     );
 }

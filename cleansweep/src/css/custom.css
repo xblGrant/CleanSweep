@@ -1,6 +1,6 @@
 /*LOGIN.js & SIGNUP.js & NEWEMPLOYEE.js & NEWROOM.js & CHANGEPASSWORD*/
 #loginForm, #signUpForm, #newEmployeeForm, #newRoomForm,
-#inspectRoomForm, #checkInForm, #changePWForm  {
+#inspectRoomForm, #checkInForm, #changePWForm, #helpForm  {
     margin-top: 2%;
 }
 #userPass, #userEmail, #confirmUserPass, #signUpName, #employeeFName, #employeeLName,
