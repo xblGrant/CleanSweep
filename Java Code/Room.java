@@ -1,56 +1,87 @@
-import java.util.ArrayList;
+package com.example.demo.models;
 
+import javax.persistence.*;
+
+@Entity
 public class Room {
 
-    private int roomNumber;
-    private ArrayList<Incident> incidents;
-    private String status;
-    private static String[] statusOptions = {"Dirty", "Clean"};
+    private @Id Integer num;
+    private String name;
+    private Status status;
 
-    Room(int roomNumber){
-        this.roomNumber = roomNumber;
-        incidents = new ArrayList<Incident>();
-        status = statusOptions[0];
+	private Long assignedEmployeeId;
+    private Long incidentId;
+
+	enum Status {
+		DIRTY("Dirty"),
+		CLEAN("Clean");
+
+		private String string;
+
+		Status(String string) {
+			this.string = string;
+		}
+
+		@Override
+		public String toString() {
+			return string;
+		}
+	}
+
+    public Room(int num, String name,
+                Long assignedEmployeeId, String status, Long incidentId) {
+        this.num = num;
+        this.name = name;
+        this.assignedEmployeeId = assignedEmployeeId;
+        if (status.equalsIgnoreCase("clean"))
+            this.status = Status.CLEAN;
+        else
+            this.status = Status.DIRTY;
+        this.incidentId = incidentId;
     }
 
-    public boolean isReservable(){
+    public Room(int num){
+		this.num = num;
+		this.status = Status.CLEAN;
+    }
+
+    public boolean isReservable() {
         return false;
     }
 
-    // NEED TO UPDATE addIncident FOR INPUT VALIDATION
-    public void addIncident(Incident i){
-        incidents.add(i);
-    }
-    public Incident getIncident(int i){
-        return incidents.get(i);
-    }
-    public ArrayList<Incident> getIncidents() {
-        return incidents;
+    public Long getAssignedEmployeeId() {
+        return assignedEmployeeId;
     }
 
-    public int getRoomNumber() {
-        return roomNumber;
-    }
-    // TODO: Validate that param RN is valid and not taken by any other Room
-    public void setRoomNumber(int RN) { roomNumber = RN;}
-
-
-    // INT VALUE BETWEEN 0 & 1
-    public void setStatus(int statusCode){
-        status = statusOptions[statusCode];
-    }
-    public String getStatus(){
-        return status;
+    public void setAssignedEmployeeId(Long assignedEmployeeId) {
+        this.assignedEmployeeId = assignedEmployeeId;
     }
 
-    //TODO: When employee selects "Clean" on their assignment list.
-    public void updateEmployeeStatus(Employee employee, String status) {
-
+    public String getStatus() {
+        return status.toString();
     }
 
-    @Override
-    public String toString(){
-        return "Room #" + roomNumber +
-                "\nStatus: " + status;
+    public void setStatus(String statusCode){
+
+        if(statusCode.equalsIgnoreCase("Dirty"))
+            status = Status.DIRTY;
+        else
+            status = Status.CLEAN;
+    }
+
+    public Long getIncidentId() {
+        return incidentId;
+    }
+
+    public void setIncidentId(Long incidentId) {
+        this.incidentId = incidentId;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public String getName() {
+        return name;
     }
 }
