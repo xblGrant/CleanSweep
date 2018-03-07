@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigationBar from "./NavigationBar";
+import NavigationBar from "./components/NavigationBar";
 import SelectableList from "./SelectableList";
 import { SelectableGroup } from 'react-selectable-fast';
 //TODO: needs to be sent a list of rooms under props

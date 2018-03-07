@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Label, Form } from 'reactstrap';
-import WrappedButton from './Components';
+import WrappedButton from './WrappedButton';
 
 class Header extends React.Component{
     constructor(props){

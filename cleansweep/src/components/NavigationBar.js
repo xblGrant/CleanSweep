@@ -13,6 +13,7 @@ import {
     DropdownItem } from 'reactstrap';
 import Header from './Header';
 import { Link } from 'react-router-dom';
+import * as routes from '../constants/routes';
 
 class NavigationBar extends React.Component {
     constructor(props) {
@@ -47,27 +48,27 @@ class NavigationBar extends React.Component {
                 <Navbar color="faded" light expand="md">
                     <div className={"container"}>
                         <NavbarToggler onClick={this.toggle} />
-                        <NavbarBrand href="/">CleanSweep</NavbarBrand>
+                        <NavbarBrand href={routes.LANDING}>CleanSweep</NavbarBrand>
                         { headerCollapsed }
                         <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="mr-auto" navbar>
                                     <DropDContent title={"File"}
                                                   contents={["New Employee", "New Room"]}
-                                                  links={["/newemployee", "newroom"]} />
+                                                  links={[routes.NEW_EMPLOYEE, routes.NEW_ROOM]} />
                                     <DropDContent title={"Functions"}
                                                   contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms", "Inspect Room", "Check-in Guest", "Check-out Guest"]}
-                                                  links={["/wakeupcall","/addincident","/assignrooms","/inspectroom","/checkinguest","/checkoutguest"]} />
+                                                  links={[routes.WAKE_UP_CALL,routes.ADD_INCIDENT,routes.ASSIGN_ROOMS,routes.INSPECT_ROOM,routes.CHECK_IN_GUEST,routes.CHECK_OUT_GUEST]} />
                                     <DropDContent title={"Lists"}
                                                   contents={["All Rooms", "Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]}
-                                                  links={["/allrooms","/assignedrooms","/availablerooms","/inspections","/incidents","/wakeuplist","/departingcustomers"]} />
+                                                  links={[routes.ALL_ROOMS,routes.ASSIGNED_ROOMS,routes.AVAILABLE_ROOMS,routes.INSPECTIONS,routes.INCIDENTS,routes.WAKE_UP_LIST,routes.DEPARTING_GUESTS]} />
                                     <DropDContent title={"Options"}
                                                   contents={["Change Password", "Change Role"]}
-                                                  links={["/changepassword", "/changerole"]}/>
+                                                  links={[routes.CHANGE_PW, routes.CHANGE_ROLE]}/>
                                     <NavItem>
-                                        <NavLink href="/help">Help</NavLink>
+                                        <NavLink href={routes.HELP}>Help</NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink href="https://github.com/xblGrant/CleanSweep">Github</NavLink>
+                                        <NavLink href={routes.GITHUB}>Github</NavLink>
                                     </NavItem>
                                     {/*<Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>*/}
                                 </Nav>

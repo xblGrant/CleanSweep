@@ -1,6 +1,6 @@
 import React from 'react';
-import NavigationBar from './NavigationBar';
-import WrappedButton from "./Components";
+import NavigationBar from '../components/NavigationBar';
+import WrappedButton from "../components/WrappedButton";
 import {
     Button,
     Form,
@@ -9,7 +9,7 @@ import {
     Input,
 } from 'reactstrap';
 
-class InspectRoom extends React.Component {
+class AddIncident extends React.Component {
     constructor(props) {
         super(props);
 
@@ -17,11 +17,11 @@ class InspectRoom extends React.Component {
             dropdownOpen: false
         };
 
-        this.handleInspect = this.handleInspect.bind(this);
+        this.handleIncident = this.handleIncident.bind(this);
         this.toggle = this.toggle.bind(this);
     }
 
-    handleInspect() {
+    handleIncident() {
 
     }
 
@@ -35,9 +35,9 @@ class InspectRoom extends React.Component {
         return (
             <div>
                 <head>
-                    <title>Inspect Room</title>
+                    <title>Incident Report</title>
                 </head>
-                <div id={"inspectRoomForm"}>
+                <div id={"incidentRoomForm"}>
                     <NavigationBar/>
                     <Form>
                         <FormGroup>
@@ -57,10 +57,10 @@ class InspectRoom extends React.Component {
                             {/*TODO: THIS SHOULD BE A REACT-SELECTABLE-FAST THAT POPULATES OR REACTSTRAP ListGroup*/}
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="inspectComment">Comment</Label>
-                            <Input type="textarea" id="inspectComment" placeholder={"Enter comment here"}/>
+                            <Label id={"label"} for="incidentComment">Comment</Label>
+                            <Input type="textarea" id="incidentComment" placeholder={"Enter comment here"}/>
                         </FormGroup>
-                        <Button onClick={this.handleCheckIn} color={"primary"} id={"submitNewEmpBtn"}>Submit</Button>
+                        <Button onClick={this.handleIncident} color={"primary"} id={"submitIncidentBtn"}>Submit</Button>
                         {' '}
                         <WrappedButton id={"checkInCancel"} link={"/"} name={"Cancel"}/>
                     </Form>
@@ -70,4 +70,4 @@ class InspectRoom extends React.Component {
     }
 }
 
-export default InspectRoom;
+export default AddIncident;
