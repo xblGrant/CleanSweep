@@ -19,8 +19,17 @@ class NewRoom extends React.Component {
 
     handleFloorSelect(e) {
         let lastRoom = null;
+        // Rooms/Reservable is a path in the database
+        // e.target.value is the associated floor the user clicks on
+        // when calling firebase.db.ref, the whole string will get all the rooms on a given floor
         let floorRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
 
+        // orderByKey orders rooms on the floor alphabetically
+        // to avoid issues with asynchronous access to the database, need to use once().then() together
+        // .once() returns a promise which .then() waits for to execute, otherwise newRoomNumber would be set to null because of how asynchronous accessing works
+        // snapshot refers to the floor, childSnapshot refers to each room on the floor
+        // calling val() is necessary to get values out of the objects, room is the item that stores the room #
+        // once the asynchronous access to the database has returned a value, the then() part of the code is called
         floorRef.orderByKey().once('value', function(snapshot) {
             snapshot.forEach( function(childSnapshot) {
                 lastRoom = childSnapshot.val().room;
