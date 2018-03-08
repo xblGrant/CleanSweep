@@ -52,7 +52,7 @@ class NewRoom extends React.Component {
                     <Form>
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type={"select"} className="floorSelect" id="floorSelect" multiple>
+                            <Input onClick={this.handleFloorSelect} type={"select"} className="floorSelect" id="floorSelect">
                                 <option value={"100"}>1</option>
                                 <option value={"200"}>2</option>
                             </Input>
