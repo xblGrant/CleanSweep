@@ -1,5 +1,4 @@
 import React from 'react';
-import Option from '../components/FloorOption';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import NavigationBar from "../components/NavigationBar";
 import WrappedButton from "../components/WrappedButton";
@@ -10,19 +9,36 @@ class NewRoom extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            newRoomNumber: null
+        };
+
         this.handleNewRoom = this.handleNewRoom.bind(this);
-        this.handleFloorSelect = this.handleFloorSelect(this);
+        this.handleFloorSelect = this.handleFloorSelect.bind(this);
     }
 
     handleFloorSelect(e) {
+        let lastRoom = null;
+        let floorRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
 
+        floorRef.orderByKey().once('value', function(snapshot) {
+            snapshot.forEach( function(childSnapshot) {
+                lastRoom = childSnapshot.val().room;
+            })
+        }).then( () => {
+            this.setState({
+                newRoomNumber: lastRoom + 1
+            })
+        });
     }
 
     handleNewRoom() {
         // TODO: handle addition of new room
-        const updates = {};
-        updates['/lobby'] = {num: 'lobbyOne'};
-        firebase.db.ref('Rooms/NonReservable').update(updates);
+
+
+        // const updates = {};
+        // updates['/lobby'] = {num: 'lobbyOne'};
+        // firebase.db.ref('Rooms/NonReservable').update(updates);
     }
 
     render() {
@@ -36,16 +52,16 @@ class NewRoom extends React.Component {
                     <Form>
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input type="select" className="floorSelect" id="floorSelect" multiple>
-                                <Option floor={"1"} onClick={this.handleFloorSelect}/>
-                                <Option floor={"2"} onClick={this.handleFloorSelect}/>
+                            <Input onClick={this.handleFloorSelect} type={"select"} className="floorSelect" id="floorSelect" multiple>
+                                <option value={"100"}>1</option>
+                                <option value={"200"}>2</option>
                             </Input>
                         </FormGroup>
-                        <FormGroup row>
+                        <FormGroup>
                             <Label id={"label"} for="roomNum">
                                 New Room
                             </Label>
-                            <Input type="text" id="roomNum" placeholder={"*Autopopulate Room Number*"}/>
+                            <Input type="text" id="roomNum" value={this.state.newRoomNumber} readOnly/>
                         </FormGroup>
                         <FormGroup check>
                             <Label id={"label"} check>
