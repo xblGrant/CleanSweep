@@ -3,6 +3,8 @@ import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import NavigationBar from "../components/NavigationBar";
 import WrappedButton from "../components/WrappedButton";
 
+import { firebase } from '../firebase/index';
+
 class NewRoom extends React.Component {
     constructor(props) {
         super(props);
@@ -12,6 +14,9 @@ class NewRoom extends React.Component {
 
     handleNewRoom() {
         // TODO: handle addition of new room
+        const updates = {};
+        updates['/lobby'] = {num: 'lobbyOne'};
+        firebase.db.ref('Rooms/NonReservable').update(updates);
     }
 
     render() {
