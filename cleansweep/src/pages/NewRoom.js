@@ -1,5 +1,6 @@
 import React from 'react';
-import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import Option from '../components/FloorOption';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import NavigationBar from "../components/NavigationBar";
 import WrappedButton from "../components/WrappedButton";
 
@@ -10,6 +11,11 @@ class NewRoom extends React.Component {
         super(props);
 
         this.handleNewRoom = this.handleNewRoom.bind(this);
+        this.handleFloorSelect = this.handleFloorSelect(this);
+    }
+
+    handleFloorSelect(e) {
+
     }
 
     handleNewRoom() {
@@ -28,6 +34,13 @@ class NewRoom extends React.Component {
                 <div id={"newRoomForm"}>
                     <NavigationBar/>
                     <Form>
+                        <FormGroup>
+                            <Label id={"label"} for="floorSelect">Floor</Label>
+                            <Input type="select" className="floorSelect" id="floorSelect" multiple>
+                                <Option floor={"1"} onClick={this.handleFloorSelect}/>
+                                <Option floor={"2"} onClick={this.handleFloorSelect}/>
+                            </Input>
+                        </FormGroup>
                         <FormGroup row>
                             <Label id={"label"} for="roomNum">
                                 New Room
@@ -49,7 +62,6 @@ class NewRoom extends React.Component {
             </div>
         );
     }
-
 }
 
 export default NewRoom;
