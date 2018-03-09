@@ -1,5 +1,4 @@
 import React from 'react';
-import NavigationBar from "../components/NavigationBar";
 import {
     Button,
     Form,
@@ -26,7 +25,6 @@ class Help extends React.Component {
                     <title>Contact Us</title>
                 </head>
                 <div id={"helpForm"}>
-                    <NavigationBar/>
                     <Form>
                         <h2 align="center">Contact Us</h2>
                         <FormGroup>

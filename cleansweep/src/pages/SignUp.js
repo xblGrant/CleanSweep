@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import NavigationBar from "../components/NavigationBar";
 import { WrappedButton } from "../components/Buttons";
 import { auth } from "../firebase/index";
 import { withRouter } from 'react-router-dom';
@@ -13,7 +12,6 @@ const SignUp = ({ history }) =>
             <title>Sign-Up</title>
         </head>
         <div id={"signUpForm"}>
-            <NavigationBar/>
             <SignUpForm history={history} />
         </div>
     </div>;

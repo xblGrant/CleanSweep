@@ -15,13 +15,13 @@ class Header extends React.Component{
         // TODO: Check currently signed in user
         // TODO: Add Logout functionality
 
-        let isLoggedIn = this.props.isLoggedIn;
+        let authorized = this.props.isAuthUser;
 
         let button;
-        if (!isLoggedIn) {
+        if (!authorized) {
             button = <WrappedButton id={"headerBtn"} isOutlined={true} link={"/login"} name={"Login"}/>
         } else {
-            button = <SignOutButton />
+            button = <SignOutButton id={"headerBtn"}/>
         }
 
         return (
@@ -37,5 +37,9 @@ class Header extends React.Component{
         );
     }
 }
+
+Header.defaultProps = {
+    isAuthUser: false
+};
 
 export default Header;

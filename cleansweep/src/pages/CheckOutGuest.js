@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
-import NavigationBar from '../components/NavigationBar';
 import { WrappedButton } from "../components/Buttons";
 
 class CheckOutGuest extends React.Component {
@@ -21,7 +20,6 @@ class CheckOutGuest extends React.Component {
                     <title>Check-Out Guest</title>
                 </head>
                 <div id={"checkOutForm"}>
-                    <NavigationBar/>
                     <Form>
                         <FormGroup row>
                             {/*<Label id={"label"} for="roomNum"></Label>*/}

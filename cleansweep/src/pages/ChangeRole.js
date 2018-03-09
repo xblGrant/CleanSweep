@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import NavigationBar from '../components/NavigationBar';
 import { WrappedButton } from "../components/Buttons";
 
 class AddWakeUp extends React.Component {
@@ -21,7 +20,6 @@ class AddWakeUp extends React.Component {
                     <title>Change Employee Role</title>
                 </head>
                 <div id={"changeRoleForm"}>
-                    <NavigationBar/>
                     <Form>
                         <Label id={"searchLabel"}><h6>Search By:</h6></Label>
                         <FormGroup row>

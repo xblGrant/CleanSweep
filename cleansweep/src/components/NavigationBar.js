@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     Collapse,
     Navbar,
@@ -15,7 +16,20 @@ import Header from './Header';
 import { Link } from 'react-router-dom';
 import * as routes from '../constants/routes';
 
-class NavigationBar extends React.Component {
+
+const NavigationBar = (props, { authUser }) =>
+    <div>
+        { authUser
+            ? <NavigationAuth />
+            : <NavigationNonAuth />
+        }
+    </div>;
+
+NavigationBar.contextTypes = {
+    authUser: PropTypes.object,
+};
+
+class NavigationAuth extends React.Component {
     constructor(props) {
         super(props);
 
@@ -36,11 +50,11 @@ class NavigationBar extends React.Component {
 
         let headerExpanded, headerCollapsed;
         if (this.state.isOpen){
-            headerCollapsed = <Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>;
+            headerCollapsed = <Header className={"ml-auto"} isAuthUser={true}/>;
             headerExpanded = null;
         } else {
             headerCollapsed = null;
-            headerExpanded = <Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>;
+            headerExpanded = <Header className={"ml-auto"} isAuthUser={true}/>;
         }
 
         return (
@@ -70,7 +84,6 @@ class NavigationBar extends React.Component {
                                     <NavItem>
                                         <NavLink href={routes.GITHUB}>Github</NavLink>
                                     </NavItem>
-                                    {/*<Header className={"ml-auto"} handleLogout={this.props.handleLogout} isLoggedIn={this.props.isLoggedIn}/>*/}
                                 </Nav>
                         </Collapse>
                         { headerExpanded }
@@ -79,7 +92,66 @@ class NavigationBar extends React.Component {
             </div>
         );
     }
-} 
+}
+
+class NavigationNonAuth extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            isOpen: false
+        };
+    }
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+    render() {
+        // TODO: discern if anyone is logged in and render appropriate NavigationBar
+        // TODO: discern if manager or employee is logged in then render appropriate NavigationBar
+        // TODO: create employee NavigationBar
+
+        let headerExpanded, headerCollapsed;
+        if (this.state.isOpen){
+            headerCollapsed = <Header className={"ml-auto"} />;
+            headerExpanded = null;
+        } else {
+            headerCollapsed = null;
+            headerExpanded = <Header className={"ml-auto"} />;
+        }
+
+        return (
+            <div>
+                <Navbar color="faded" light expand="md">
+                    <div className={"container"}>
+                        <NavbarToggler onClick={this.toggle} />
+                        <NavbarBrand href={routes.LANDING}>CleanSweep</NavbarBrand>
+                        { headerCollapsed }
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="mr-auto" navbar>
+                                <NavItem>
+                                    <NavLink href={routes.LANDING}>Log-In</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href={routes.SIGN_UP}>Sign-Up</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href={routes.HELP}>Help</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href={routes.GITHUB}>Github</NavLink>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                        { headerExpanded }
+                    </div>
+                </Navbar>
+            </div>
+        );
+    }
+}
 
 function DropDContent(props) {
     return (

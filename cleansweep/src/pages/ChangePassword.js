@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import NavigationBar from '../components/NavigationBar';
 import { WrappedButton } from "../components/Buttons";
 
 class ChangePassword extends React.Component {
@@ -21,7 +20,6 @@ class ChangePassword extends React.Component {
                     <title>Change Password</title>
                 </head>
                 <div id={"changePWForm"}>
-                    <NavigationBar/>
                     <Form>
                         <FormGroup row>
                             <Label id={"label"} for="oldPassword">Old Password</Label>

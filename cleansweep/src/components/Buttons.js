@@ -2,11 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import {auth} from "../firebase";
+import { auth } from '../firebase';
+import * as routes from '../constants/routes';
 
-export function SignOutButton() {
+export function SignOutButton(props) {
     return (
-        <Button isOutlined={true} onClick={auth.doSignOut}>Log-Out</Button>
+        <Button id={props.id} outline size={"sm"} onClick={auth.doSignOut}>
+            <Link style={{
+                textDecoration: 'none',
+                color: 'black'
+            }} to={routes.LANDING}>Log-Out</Link>
+        </Button>
     )
 }
 

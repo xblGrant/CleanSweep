@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import NavigationBar from '../components/NavigationBar';
 import { WrappedButton } from "../components/Buttons";
 
 class NewEmployee extends React.Component {
@@ -22,7 +21,6 @@ class NewEmployee extends React.Component {
                     <title>New Employee</title>
                 </head>
                 <div id={"newEmployeeForm"}>
-                    <NavigationBar/>
                     <Form>
                         <FormGroup row>
                             <Label id={"label"} for="employeeFName">First Name</Label>

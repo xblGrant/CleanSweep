@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import NavigationBar from '../components/NavigationBar';
 import { WrappedButton } from "../components/Buttons";
 
 class AddWakeUp extends React.Component {
@@ -21,7 +20,6 @@ class AddWakeUp extends React.Component {
                     <title>Add Wake-Up Call</title>
                 </head>
                 <div id={"newWakeUpForm"}>
-                    <NavigationBar/>
                     <Form>
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>

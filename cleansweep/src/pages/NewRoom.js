@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import NavigationBar from "../components/NavigationBar";
 import { WrappedButton } from "../components/Buttons";
 
 import { firebase } from '../firebase/index';
@@ -72,7 +71,6 @@ class NewRoom extends React.Component {
                     <title>New Room</title>
                 </head>
                 <div id={"newRoomForm"}>
-                    <NavigationBar/>
                     <Form>
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>

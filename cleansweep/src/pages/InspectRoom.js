@@ -1,5 +1,4 @@
 import React from 'react';
-import NavigationBar from '../components/NavigationBar';
 import { WrappedButton } from "../components/Buttons";
 import {
     Button,
@@ -38,7 +37,6 @@ class InspectRoom extends React.Component {
                     <title>Inspect Room</title>
                 </head>
                 <div id={"inspectRoomForm"}>
-                    <NavigationBar/>
                     <Form>
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>

@@ -38,7 +38,6 @@ class AddIncident extends React.Component {
                     <title>Incident Report</title>
                 </head>
                 <div id={"incidentRoomForm"}>
-                    <NavigationBar/>
                     <Form>
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>
