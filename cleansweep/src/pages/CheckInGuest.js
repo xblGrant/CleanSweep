@@ -2,8 +2,7 @@ import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
 import NavigationBar from '../components/NavigationBar';
 import WrappedButton from "../components/WrappedButton";
-import { ListItemGenerator } from '../components/ListItemGenerator';
-import { firebase } from '../firebase/index'
+import AvailableRoomGenerator from '../components/AvailableRoomGenerator';
 
 class CheckInGuest extends React.Component {
     constructor(props) {
@@ -11,8 +10,6 @@ class CheckInGuest extends React.Component {
 
         this.handleCheckIn = this.handleCheckIn.bind(this);
     }
-
-    //TODO: autopopulate room# list for only rooms with guest: "none"
 
     handleCheckIn() {
         //TODO: make sure First name, Last name is valid
@@ -38,7 +35,7 @@ class CheckInGuest extends React.Component {
                             <Input type="text" id="custLName" placeholder={"Last name"}/>
                         </FormGroup>
                         <FormGroup row>
-                            <ListItemGenerator id="CheckInGuestListItemGenerator"/>
+                            <AvailableRoomGenerator id="listItemGenerator"/>
                         </FormGroup>
                         <Button onClick={this.handleCheckIn} color={"primary"} id={"checkInBtn"}>Check-In</Button>
                         {' '}

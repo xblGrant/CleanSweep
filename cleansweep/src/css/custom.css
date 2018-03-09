@@ -8,7 +8,7 @@
 #floorSelect, #roomList, #inspectComment, #incidentComment, #oldPW, #newPW, #newPWVerification,
 #contactName, #contactEmail, #contactMessage, #wakeUpRoom, #wakeUpDate, #wakeUpTime,
 #assignableRooms, #assignEmployees, #employeeName, #employeeRoleID, #employeeResults,
-#CheckInGuestListItemGenerator{
+#listItemGenerator{
     margin-left: 35%;
     width: 30%;
 }
