@@ -17,6 +17,21 @@ class NewRoom extends React.Component {
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
     }
 
+    componentDidMount() {
+        let lastRoom = null;
+        let floorRef = firebase.db.ref("/Rooms/Reservable/100");
+
+        floorRef.orderByKey().once('value', function(snapshot) {
+            snapshot.forEach( function(childSnapshot) {
+                lastRoom = childSnapshot.val().room;
+            })
+        }).then( () => {
+            this.setState({
+                newRoomNumber: lastRoom + 1
+            })
+        });
+    }
+
     handleFloorSelect(e) {
         let lastRoom = null;
         // Rooms/Reservable is a path in the database
