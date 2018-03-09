@@ -2,8 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {auth} from "../firebase";
 
-export default function WrappedButton(props) {
+export function SignOutButton() {
+    return (
+        <Button isOutlined={true} onClick={auth.doSignOut}>Log-Out</Button>
+    )
+}
+
+export function WrappedButton(props) {
     if (props.isOutlined){
         return (
             <Button id={props.id} outline size={"sm"}>

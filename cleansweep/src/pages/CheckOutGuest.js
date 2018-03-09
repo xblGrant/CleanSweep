@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
 import NavigationBar from '../components/NavigationBar';
-import WrappedButton from "../components/WrappedButton";
+import { WrappedButton } from "../components/Buttons";
 
 class CheckOutGuest extends React.Component {
     constructor(props) {

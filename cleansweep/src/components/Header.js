@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Label, Form } from 'reactstrap';
-import WrappedButton from './WrappedButton';
+import { WrappedButton, SignOutButton } from './Buttons';
 
 class Header extends React.Component{
     constructor(props){
@@ -21,7 +21,7 @@ class Header extends React.Component{
         if (!isLoggedIn) {
             button = <WrappedButton id={"headerBtn"} isOutlined={true} link={"/login"} name={"Login"}/>
         } else {
-            button = <Button onClick={this.props.handleLogout} id={"headerBtn"} outline size={"sm"}>Logout</Button>
+            button = <SignOutButton />
         }
 
         return (

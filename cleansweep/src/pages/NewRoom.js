@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import NavigationBar from "../components/NavigationBar";
-import WrappedButton from "../components/WrappedButton";
+import { WrappedButton } from "../components/Buttons";
 
 import { firebase } from '../firebase/index';
 

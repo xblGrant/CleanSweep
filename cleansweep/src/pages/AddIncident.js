@@ -1,6 +1,6 @@
 import React from 'react';
 import NavigationBar from '../components/NavigationBar';
-import WrappedButton from "../components/WrappedButton";
+import { WrappedButton } from "../components/Buttons";
 import {
     Button,
     Form,

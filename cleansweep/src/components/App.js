@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Help from '../pages/Help';
 import Login from '../pages/Login';
-import SignUp from '../pages/SignUp';
+import { SignUp } from '../pages/SignUp';
 import NewRoom from '../pages/NewRoom';
 import AddWakeUp from '../pages/WakeUpCall';
 import ChangeRole from '../pages/ChangeRole';

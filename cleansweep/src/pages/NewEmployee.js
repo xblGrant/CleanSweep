@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import NavigationBar from '../components/NavigationBar';
-import WrappedButton from "../components/WrappedButton";
+import { WrappedButton } from "../components/Buttons";
 
 class NewEmployee extends React.Component {
     constructor(props) {
