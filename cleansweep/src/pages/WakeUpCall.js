@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
+import UnavailableRoomGenerator from '../components/UnavailableRoomGenerator';
 
 class AddWakeUp extends React.Component {
     constructor(props) {
@@ -33,8 +34,7 @@ class AddWakeUp extends React.Component {
                         </FormGroup>
                         <FormGroup row>
                             <Label id={"label"} for="wakeUpRoom">Room</Label>
-                            <Input placeholder={"Auto-populate with occupied rooms on given floor"} type="textarea"
-                                   id="wakeUpRoom"/>
+                            <UnavailableRoomGenerator id="listItemGenerator"/>
                         </FormGroup>
                         <FormGroup row>
                             <Label id={"label"} for="wakeUpDate">Date</Label>
