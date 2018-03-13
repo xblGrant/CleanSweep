@@ -1,12 +1,47 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
+import {CreateFloorOptions, CreateRoomOptions} from "../components/Generators";
+import {firebase} from "../firebase";
 
 class AddWakeUp extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            rooms: []
+        };
+
+        this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleAssignRooms = this.handleAssignRooms.bind(this);
+    }
+
+    componentDidMount() {
+        let roomList = [];
+        let roomRef = firebase.db.ref("/Rooms/Reservable/100");
+        roomRef.orderByKey().once('value', function(allRooms) {
+            allRooms.forEach( function(room) {
+                roomList.push(room.key);
+            })
+        }).then( () =>
+            this.setState({
+                rooms: roomList
+            })
+        )
+    }
+
+    handleFloorSelect(e) {
+        let roomList = [];
+        let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
+        roomRef.orderByKey().once('value', function(allRooms) {
+            allRooms.forEach( function(room) {
+                roomList.push(room.key);
+            })
+        }).then( () =>
+            this.setState({
+                rooms: roomList
+            })
+        )
     }
 
     handleAssignRooms() {
@@ -23,19 +58,15 @@ class AddWakeUp extends React.Component {
                     <Form>
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input type="select" className="floorSelect" id="floorSelect" multiple>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            <Input onClick={this.handleFloorSelect} type="select" className="floorSelect" id="floorSelect">
+                                <CreateFloorOptions />
                             </Input>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="assignableRoom">Room</Label>
-                            <Input
-                                placeholder={"Auto-populate with occupied rooms on given floor/react-selectable-fast"}
-                                type="textarea" id="assignableRooms"/>
+                            <Label id={"label"} for="assignableRoom">Rooms</Label>
+                            <Input id={"roomOptions"} type="select" multiple>
+                                <CreateRoomOptions rooms={this.state.rooms}/>
+                            </Input>
                         </FormGroup>
                         <FormGroup row>
                             <Label id={"label"} for="assignEmployees">Employees</Label>

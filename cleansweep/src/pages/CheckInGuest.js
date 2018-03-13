@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
-import AvailableRoomGenerator from '../components/AvailableRoomGenerator';
+import { AvailableRooms } from '../components/Generators';
 
 class CheckInGuest extends React.Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class CheckInGuest extends React.Component {
                             <Input type="text" id="custLName" placeholder={"Last name"}/>
                         </FormGroup>
                         <FormGroup row>
-                            <AvailableRoomGenerator id="listItemGenerator"/>
+                            <AvailableRooms id="listItemGenerator"/>
                         </FormGroup>
                         <Button onClick={this.handleCheckIn} color={"primary"} id={"checkInBtn"}>Check-In</Button>
                         {' '}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { WrappedButton } from "../components/Buttons";
+import { CreateFloorOptions, CreateRoomOptions } from "../components/Generators";
 import {
     Button,
     Form,
@@ -7,27 +8,50 @@ import {
     Label,
     Input,
 } from 'reactstrap';
+import {firebase} from "../firebase";
 
 class InspectRoom extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            dropdownOpen: false
+            rooms: [],
         };
 
         this.handleInspect = this.handleInspect.bind(this);
-        this.toggle = this.toggle.bind(this);
+        this.handleFloorSelect = this.handleFloorSelect.bind(this);
+    }
+
+    componentDidMount() {
+        let roomList = [];
+        let roomRef = firebase.db.ref("/Rooms/Reservable/100");
+        roomRef.orderByKey().once('value', function(allRooms) {
+            allRooms.forEach( function(room) {
+                roomList.push(room.key);
+            })
+        }).then( () =>
+            this.setState({
+                rooms: roomList
+            })
+        )
+    }
+
+    handleFloorSelect(e) {
+        let roomList = [];
+        let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
+        roomRef.orderByKey().once('value', function(allRooms) {
+            allRooms.forEach( function(room) {
+                roomList.push(room.key);
+            })
+        }).then( () =>
+            this.setState({
+                rooms: roomList
+            })
+        )
     }
 
     handleInspect() {
 
-    }
-
-    toggle() {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
     }
 
     render() {
@@ -40,19 +64,15 @@ class InspectRoom extends React.Component {
                     <Form>
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input type="select" className="floorSelect" id="floorSelect" multiple>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            <Input onClick={this.handleFloorSelect} type="select" className="floorSelect" id="floorSelect">
+                                <CreateFloorOptions />
                             </Input>
                         </FormGroup>
                         <FormGroup>
-                            {/*<Label id={"label"} for="roomList"></Label>*/}
-                            <Input type="textarea" id="roomList"
-                                   placeholder={"List of rooms on floor will show up here"}/>
-                            {/*TODO: THIS SHOULD BE A REACT-SELECTABLE-FAST THAT POPULATES OR REACTSTRAP ListGroup*/}
+                            <Label id={"label"} for="assignableRoom">Rooms</Label>
+                            <Input id={"roomOptions"} type="select" multiple>
+                                <CreateRoomOptions rooms={this.state.rooms}/>
+                            </Input>
                         </FormGroup>
                         <FormGroup row>
                             <Label id={"label"} for="inspectComment">Comment</Label>

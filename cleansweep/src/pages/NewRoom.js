@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
+import { CreateFloorOptions } from "../components/Generators";
 
 import { firebase } from '../firebase/index';
 
@@ -12,23 +13,27 @@ class NewRoom extends React.Component {
             newRoomNumber: null
         };
 
+        this.onChange = this.onChange.bind(this);
         this.handleNewRoom = this.handleNewRoom.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
     }
 
     componentDidMount() {
         let lastRoom = null;
-        let floorRef = firebase.db.ref("/Rooms/Reservable/100");
-
-        floorRef.orderByKey().once('value', function(snapshot) {
-            snapshot.forEach( function(childSnapshot) {
-                lastRoom = childSnapshot.val().room;
+        let roomRef = firebase.db.ref("/Rooms/Reservable/100");
+        roomRef.orderByKey().limitToLast(1).once('value', function(allRooms) {
+            allRooms.forEach( function(room) {
+                lastRoom = room.key;
             })
         }).then( () => {
             this.setState({
-                newRoomNumber: lastRoom + 1
+                newRoomNumber: parseInt(lastRoom) + 1
             })
         });
+    }
+
+    onChange() {
+        // create new floor display 301 if new floor is 3rd lvl
     }
 
     handleFloorSelect(e) {
@@ -46,18 +51,17 @@ class NewRoom extends React.Component {
         // once the asynchronous access to the database has returned a value, the then() part of the code is called
         floorRef.orderByKey().once('value', function(snapshot) {
             snapshot.forEach( function(childSnapshot) {
-                lastRoom = childSnapshot.val().room;
+                lastRoom = childSnapshot.key;
             })
         }).then( () => {
             this.setState({
-                newRoomNumber: lastRoom + 1
+                newRoomNumber: parseInt(lastRoom) + 1
             })
         });
     }
 
     handleNewRoom() {
         // TODO: handle addition of new room
-
 
         // const updates = {};
         // updates['/lobby'] = {num: 'lobbyOne'};
@@ -75,8 +79,7 @@ class NewRoom extends React.Component {
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>
                             <Input onClick={this.handleFloorSelect} type={"select"} className="floorSelect" id="floorSelect">
-                                <option value={"100"}>1</option>
-                                <option value={"200"}>2</option>
+                                <CreateFloorOptions />
                             </Input>
                         </FormGroup>
                         <FormGroup>
@@ -87,7 +90,12 @@ class NewRoom extends React.Component {
                         </FormGroup>
                         <FormGroup check>
                             <Label id={"label"} check>
-                                <Input type="checkbox" id="isReservable"/>{' '}
+                                <Input type={"checkbox"} onChange={this.onChange} id={"newFloor"}/>{' '}
+                                New Floor
+                            </Label>
+                            <br/>
+                            <Label id={"label"} check>
+                                <Input type={"checkbox"} id={"isReservable"}/>{' '}
                                 Reservable
                             </Label>
                         </FormGroup>
