@@ -1,0 +1,33 @@
+LOGIN
+	pop-up for "User has been registered successfully"
+	Make a registered user get a tuple in the database under employees
+	//Remove date field?
+	//Allow for two types of users, managers and employees? Don't believe this is currently implemented
+
+NEW ROOM
+	When New Floor is selected, change the floor number to be the next floor key
+	
+ADD WAKE-UP CALL
+	When adding a wake up call to a room that already has one, populate the current wake up call time and change the box to say edit.
+
+ASSIGN ROOMS
+	Auto-populate Employees (Description is in hint text)
+
+INSPECT ROOM
+	Populate based off of current state (possibly include an additional drop-down menu that filters rooms by state?)
+
+CHECK OUT GUEST
+	Include a drop down of currently occupied rooms
+
+LISTS
+	all dat shit
+
+OPTIONS
+	Change password functionality
+	Change role
+
+
+
+
+
+	
