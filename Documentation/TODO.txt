@@ -3,6 +3,7 @@ LOGIN
 	Make a registered user get a tuple in the database under employees
 	//Remove date field?
 	//Allow for two types of users, managers and employees? Don't believe this is currently implemented
+		//On page load, possibly use the email to match to an employee and check for the isManager boolean to change their level of control (options)
 
 NEW ROOM
 	When New Floor is selected, change the floor number to be the next floor key
