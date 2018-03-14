@@ -1,0 +1,36 @@
+/*LOGIN.js & SIGNUP.js & NEWEMPLOYEE.js & NEWROOM.js & CHANGEPASSWORD*/
+#loginForm, #signUpForm, #newEmployeeForm, #newRoomForm, #checkOutForm, #newWakeUpForm, #changeRoleForm,
+#inspectRoomForm, #checkInForm, #changePWForm, #helpForm, #incidentRoomForm, #assignRoomsForm {
+    margin-top: 2%;
+}
+#userPass, #userEmail, #confirmUserPass, #signUpName, #employeeFName, #employeeLName,
+#employeeDOB, #employeePass, #employeeEmail, #roomNum, #custFName, #custLName, #orLabel,
+#floorSelect, #roomList, #inspectComment, #incidentComment, #oldPW, #newPW, #newPWVerification,
+#contactName, #contactEmail, #contactMessage, #wakeUpRoom, #wakeUpDate, #wakeUpTime,
+#assignableRooms, #assignEmployees, #employeeName, #employeeRoleID, #employeeResults,
+#listItemGenerator, #firstName, #lastName, #roomOptions{
+    margin-left: 35%;
+    width: 30%;
+}
+#label, #checkbox {
+    margin-left: 35%;
+}
+#searchLabel {
+    margin-top: 1%;
+    margin-left: 30%;
+}
+#message {
+    width: 200%;
+    height: 20%;
+}
+#loginBtn, #signUpBtn, #submitNewEmpBtn, #submitNewRoomBtn, #checkInBtn, #submitAssignRoomsBtn,
+#changePWBtn, #SendBtn, #submitIncidentBtn, #checkOutBtn, #submitNewWakeUpBtn, #submitChangeRoleBtn{
+    margin-left: 35%;
+}
+
+/*HEADER.js*/
+#ml-auto {
+    margin-right: 10%;
+}
+
+
