@@ -1,2 +1,0 @@
-A "client" user with password "cleansweep" has been created
-for the "dbCleanSweep" MySQL Database.

@@ -1,9 +1,0 @@
-npm install awsmobile-cli
-yarn add --dev react-build-dist
-(add to package.json under scripts
-    "build:dist": "react-build-dist")
-yarn build (this creates build folder in project)
-awsmobile configure
-(asks for access key) JAMESSSS
-(continues but I stopped at asking for access key)
-
