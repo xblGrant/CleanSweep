@@ -5,6 +5,8 @@ import { CreateFloorOptions } from "../components/Generators";
 
 import { firebase } from '../firebase/index';
 
+const radix = 10;
+
 class NewRoom extends React.Component {
     constructor(props) {
         super(props);
@@ -27,7 +29,7 @@ class NewRoom extends React.Component {
             })
         }).then( () => {
             this.setState({
-                newRoomNumber: parseInt(lastRoom) + 1
+                newRoomNumber: parseInt(lastRoom, radix) + 1
             })
         });
     }
@@ -55,7 +57,7 @@ class NewRoom extends React.Component {
             })
         }).then( () => {
             this.setState({
-                newRoomNumber: parseInt(lastRoom) + 1
+                newRoomNumber: parseInt(lastRoom, radix) + 1
             })
         });
     }

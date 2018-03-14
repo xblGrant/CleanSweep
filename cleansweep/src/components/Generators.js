@@ -2,6 +2,7 @@ import React from 'react';
 import {FormGroup, Label, Input} from 'reactstrap';
 import {firebase} from "../firebase/index";
 
+const radix = 10;
 
 function CreateRoomOptions(props){
     return (
@@ -45,7 +46,7 @@ class CreateFloorOptions extends React.Component {
             floors.map(
                 (floorNum) => {
                     return (
-                        <option value={floorNum}>{parseInt(floorNum) / 100}</option>
+                        <option value={floorNum}>{parseInt(floorNum, radix) / 100}</option>
                     )
                 }
             )
