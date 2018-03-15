@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
 import { auth } from "../firebase/index";
@@ -15,6 +16,21 @@ const SignUp = ({ history }) =>
             <SignUpForm history={history} />
         </div>
     </div>;
+
+const byPropKey = (propertyName, value) => () => ({
+    [propertyName]: value,
+});
+
+const INITIAL_STATE = {
+    username: '',
+    name: '', // TODO: Remove name for first name and last name fields
+    // firstName: '',
+    // lastName: '',
+    email: '',
+    passwordOne: '',
+    passwordTwo: '',
+    error: null,
+};
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -99,28 +115,16 @@ class SignUpForm extends React.Component {
                            placeholder={"Confirm password"}/>
                 </FormGroup>
                 <Button disabled={isInvalid} type={"submit"} color={"primary"} id={"signUpBtn"}>Sign-Up</Button>
-                {' '}
-                <WrappedButton id={"signUpCancel"} link={"/"} name={"Cancel"}/>
                 { error && <p>{error.message}</p>}
             </Form>
         )
     }
 }
 
-const byPropKey = (propertyName, value) => () => ({
-    [propertyName]: value,
-});
-
-const INITIAL_STATE = {
-    username: '',
-    name: '', // TODO: Remove name for first name and last name fields
-    // firstName: '',
-    // lastName: '',
-    email: '',
-    passwordOne: '',
-    passwordTwo: '',
-    error: null,
-};
+const SignUpLink = () =>
+    <p id={"signUpLink"}>
+        <Link to={"/signup"}>Sign Up</Link>
+    </p>;
 
 export default withRouter(SignUp);
-export { SignUp };
+export { SignUp, SignUpLink };

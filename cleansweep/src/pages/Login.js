@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { WrappedButton } from "../components/Buttons";
 import { PasswordForgetLink } from "./PasswordForget";
+import { SignUpLink } from "./SignUp";
 import {auth} from "../firebase/index";
 
 import * as routes from '../constants/routes';
@@ -13,6 +13,7 @@ const Login = ({ history }) =>
         </head>
         <div id={"loginForm"}>
             <LoginForm history={history} />
+            <SignUpLink />
             <PasswordForgetLink />
         </div>
     </div>;
@@ -73,9 +74,7 @@ class LoginForm extends React.Component {
                            onChange={e => this.setState(byPropKey('password', e.target.value))}
                            type={"password"} className={"userPass"} id={"userPass"} placeholder={"Enter password"}/>
                 </FormGroup>
-                <Button disabled={isInvalid} color={"primary"} id={"loginBtn"}>Login</Button>
-                {' '}
-                <WrappedButton id={"signUpRedirect"} link={"/signup"} name={"Sign-Up"}/>
+                <Button type={"submit"} disabled={isInvalid} color={"primary"} id={"loginBtn"}>Login</Button>
                 { error && <p>{error.message}</p> }
             </Form>
         );

@@ -1,46 +1,79 @@
 import React from 'react';
-import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import { WrappedButton } from "../components/Buttons";
+import {Button, Form, FormGroup, Input} from 'reactstrap';
 
-class ChangePassword extends React.Component {
+import {auth} from '../firebase/index';
+
+const byPropKey = (propName, value) => () => ({
+    [propName]: value,
+});
+
+const INITIAL_STATE = {
+    passwordOld: '',
+    passwordOne: '',
+    passwordTwo: '',
+    error: null,
+};
+
+class PasswordChange extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handlePasswordChange = this.handlePasswordChange.bind(this)
+        this.state = {...INITIAL_STATE};
     }
 
-    handlePasswordChange() {
+    onSubmit = (e) => {
+        const {passwordOne} = this.state;
 
+        auth.doPasswordUpdate(passwordOne)
+            .then(() => {
+                this.setState(() => ({...INITIAL_STATE}));
+            })
+            .catch(error => {
+                this.setState(byPropKey('error', error));
+            });
+
+        e.preventDefault();
     }
 
     render() {
+        const {
+            passwordOne,
+            passwordTwo,
+            error,
+        } = this.state;
+
+        const isInvalid =
+            passwordOne !== passwordTwo ||
+            passwordOne === '';
+
         return (
-            <div>
-                <head>
-                    <title>Change Password</title>
-                </head>
-                <div id={"changePWForm"}>
-                    <Form>
-                        <FormGroup row>
-                            <Label id={"label"} for="oldPassword">Old Password</Label>
-                            <Input type="password" id="oldPW" placeholder={"Old Password"}/>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label id={"label"} for="newPassword">New Password</Label>
-                            <Input type="password" id="newPW" placeholder={"New Password"}/>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label id={"label"} for="newPasswordVerification">Reenter New Password</Label>
-                            <Input type="password" id="newPWVerification" placeholder={"Reenter New Password"}/>
-                        </FormGroup>
-                        <Button onClick={this.handlePasswordChange} color={"Primary"} id={"changePWBtn"}>Submit</Button>
-                        {' '}
-                        <WrappedButton id={"changePWCancel"} link={"/"} name={"Cancel"}/>
-                    </Form>
-                </div>
-            </div>
-        );
+            <Form id={"pwChangeForm"} onSubmit={this.onSubmit}>
+                <FormGroup>
+                    <Input id={"pwChange"}
+                           value={passwordOne}
+                           onChange={e => this.setState(byPropKey('passwordOne', e.target.value))}
+                           type={"password"}
+                           placeholder={"New Password"}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Input id={"pwChange"}
+                           value={passwordTwo}
+                           onChange={e => this.setState(byPropKey('passwordTwo', e.target.value))}
+                           type={"password"}
+                           placeholder={"Confirm New Password"}
+                    />
+                </FormGroup>
+                <Button id={"changePwBtn"}
+                        disabled={isInvalid}
+                        color={"primary"}
+                        type={"submit"}>
+                    Reset Password
+                </Button>
+                {error && <p>{error.message}</p>}
+            </Form>
+        )
     }
 }
 
-export default ChangePassword;
+export default PasswordChange;
