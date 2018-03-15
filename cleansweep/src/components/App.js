@@ -13,7 +13,8 @@ import NewEmployee from '../pages/NewEmployee';
 import AddIncident from '../pages/AddIncident';
 import CheckInGuest from '../pages/CheckInGuest';
 import CheckOutGuest from '../pages/CheckOutGuest';
-import ChangePassword from '../pages/ChangePassword';
+import ChangePassword from '../pages/PasswordChange';
+import PasswordForgetPage from '../pages/PasswordForget';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/custom.css';
@@ -31,6 +32,7 @@ function App() {
 
                 {/*Access Paths*/}
                 <Route path={routes.LOGIN} component={Login}/>
+                <Route path={routes.PW_FORGET} component={PasswordForgetPage} />
                 <Route path={routes.SIGN_UP} component={SignUp}/>
 
                 {/*File Paths*/}

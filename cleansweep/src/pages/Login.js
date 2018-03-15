@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
+import { PasswordForgetLink } from "./PasswordForget";
 import {auth} from "../firebase/index";
 
 import * as routes from '../constants/routes';
@@ -12,6 +13,7 @@ const Login = ({ history }) =>
         </head>
         <div id={"loginForm"}>
             <LoginForm history={history} />
+            <PasswordForgetLink />
         </div>
     </div>;
 

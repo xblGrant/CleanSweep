@@ -1,6 +1,6 @@
 export const LANDING = '/';
 export const HOME = '/allrooms';
-export const PW_FORGET = '/forgetpw';
+export const PW_FORGET = '/pwforget';
 export const LOGIN = '/login';
 export const SIGN_UP = '/signup';
 export const NEW_EMPLOYEE = '/newemployee';
