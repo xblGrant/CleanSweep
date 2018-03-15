@@ -1,19 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { WrappedButton } from "../components/Buttons";
-import { auth } from "../firebase/index";
-import { withRouter } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {auth, firebase} from "../firebase/index";
+import {withRouter} from 'react-router-dom';
 
 import * as routes from '../constants/routes';
 
-const SignUp = ({ history }) =>
+const SignUp = ({history}) =>
     <div>
         <head>
             <title>Sign-Up</title>
         </head>
         <div id={"signUpForm"}>
-            <SignUpForm history={history} />
+            <SignUpForm history={history}/>
         </div>
     </div>;
 
@@ -22,10 +21,8 @@ const byPropKey = (propertyName, value) => () => ({
 });
 
 const INITIAL_STATE = {
-    username: '',
-    name: '', // TODO: Remove name for first name and last name fields
-    // firstName: '',
-    // lastName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     passwordOne: '',
     passwordTwo: '',
@@ -42,6 +39,8 @@ class SignUpForm extends React.Component {
 
     handleSignUp(e) {
         const {
+            firstName,
+            lastName,
             email,
             passwordOne,
         } = this.state;
@@ -51,9 +50,16 @@ class SignUpForm extends React.Component {
         } = this.props;
 
         auth.doCreateUserWithEmailAndPassword(email, passwordOne)
-            .then(authUser => {
+            .then(() => {
+                let employeeRef = firebase.db.ref("/Employee/");
+                employeeRef.child(firebase.auth.currentUser.uid)
+                    .set({
+                        username: firstName + " " + lastName,
+                        email: email
+                    });
+
                 this.setState(() => ({...INITIAL_STATE}));
-                history.push(routes.LANDING); //TODO: push to proper page for after signup/login
+                history.push(routes.ASSIGNED_ROOMS); //TODO: push to proper page for after signup/login
             })
             .catch(error => {
                 this.setState(byPropKey('error', error));
@@ -65,7 +71,8 @@ class SignUpForm extends React.Component {
     render() {
 
         const {
-            name,
+            firstName,
+            lastName,
             email,
             passwordOne,
             passwordTwo,
@@ -76,25 +83,24 @@ class SignUpForm extends React.Component {
             this.state.passwordOne !== this.state.passwordTwo ||
             this.state.passwordOne === '' ||
             this.state.email === '' ||
-            this.state.name === '';
-        // this.state.firstName === '' ||
-        // this.state.lastName === '';
+            this.state.firstName === '' ||
+            this.state.lastName === '';
 
         return (
             <Form onSubmit={this.handleSignUp}>
                 <FormGroup>
                     <Label id={"label"} for={"firstName"}>First Name</Label>
-                    <Input value={name}
-                           onChange={e => this.setState(byPropKey('name', e.target.value))}
+                    <Input value={firstName}
+                           onChange={e => this.setState(byPropKey('firstName', e.target.value))}
                            className={"firstName"} id={"firstName"} placeholder={"First Name"}/>
                 </FormGroup>
                 {' '}
-                {/*<FormGroup>*/}
-                {/*<Label id={"label"} for={"lastName"}>Last Name</Label>*/}
-                {/*<Input value={this.state.lastName}*/}
-                {/*onChange={e => this.setState({ lastName: e.target.value })}*/}
-                {/*className={"lastName"} id={"lastName"} placeholder={"Last Name"}/>*/}
-                {/*</FormGroup>*/}
+                <FormGroup>
+                    <Label id={"label"} for={"lastName"}>Last Name</Label>
+                    <Input value={lastName}
+                           onChange={e => this.setState(byPropKey('lastName', e.target.value))}
+                           className={"lastName"} id={"lastName"} placeholder={"Last Name"}/>
+                </FormGroup>
                 <FormGroup>
                     <Label id={"label"} for={"userEmail"}>Email</Label>
                     <Input value={email}
@@ -115,7 +121,7 @@ class SignUpForm extends React.Component {
                            placeholder={"Confirm password"}/>
                 </FormGroup>
                 <Button disabled={isInvalid} type={"submit"} color={"primary"} id={"signUpBtn"}>Sign-Up</Button>
-                { error && <p>{error.message}</p>}
+                {error && <p>{error.message}</p>}
             </Form>
         )
     }
@@ -127,4 +133,4 @@ const SignUpLink = () =>
     </p>;
 
 export default withRouter(SignUp);
-export { SignUp, SignUpLink };
+export {SignUp, SignUpLink};

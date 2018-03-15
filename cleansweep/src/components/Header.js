@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Label, Form } from 'reactstrap';
 import { WrappedButton, SignOutButton } from './Buttons';
+import { firebase } from "../firebase/index";
 
 class Header extends React.Component{
     constructor(props){
@@ -9,6 +10,21 @@ class Header extends React.Component{
         this.state = {
             user: "Guest"
         };
+    }
+
+    componentDidMount() {
+        let currentUser = firebase.auth.currentUser;
+        if (currentUser !== null) {
+            let username = null;
+            let userRef = firebase.db.ref("/Employee/" + currentUser.uid);
+            userRef.once('value', function(currentUser) {
+                username = currentUser.val().username;
+            }).then(() => {
+                this.setState({
+                    user: username
+                })
+            })
+        }
     }
 
     render() {
