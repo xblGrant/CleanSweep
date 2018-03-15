@@ -9,7 +9,7 @@
 #floorSelect, #roomList, #inspectComment, #incidentComment, #oldPW, #newPW, #newPWVerification,
 #contactName, #contactEmail, #contactMessage, #wakeUpRoom, #wakeUpDate, #wakeUpTime,
 #assignableRooms, #assignEmployees, #employeeName, #employeeRoleID, #employeeResults,
-#listItemGenerator, #firstName, #lastName, #roomOptions, #emailAddress, #pwChange {
+#listItemGenerator, #userName, #roomOptions, #emailAddress, #pwChange {
     margin-left: 35%;
     width: 30%;
 }

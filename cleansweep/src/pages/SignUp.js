@@ -21,8 +21,7 @@ const byPropKey = (propertyName, value) => () => ({
 });
 
 const INITIAL_STATE = {
-    firstName: '',
-    lastName: '',
+    userName: '',
     email: '',
     passwordOne: '',
     passwordTwo: '',
@@ -39,8 +38,7 @@ class SignUpForm extends React.Component {
 
     handleSignUp(e) {
         const {
-            firstName,
-            lastName,
+            userName,
             email,
             passwordOne,
         } = this.state;
@@ -54,8 +52,9 @@ class SignUpForm extends React.Component {
                 let employeeRef = firebase.db.ref("/Employee/");
                 employeeRef.child(firebase.auth.currentUser.uid)
                     .set({
-                        username: firstName + " " + lastName,
-                        email: email
+                        username: userName,
+                        email: email,
+                        isAdmin: false
                     });
 
                 this.setState(() => ({...INITIAL_STATE}));
@@ -71,8 +70,7 @@ class SignUpForm extends React.Component {
     render() {
 
         const {
-            firstName,
-            lastName,
+            userName,
             email,
             passwordOne,
             passwordTwo,
@@ -83,23 +81,15 @@ class SignUpForm extends React.Component {
             this.state.passwordOne !== this.state.passwordTwo ||
             this.state.passwordOne === '' ||
             this.state.email === '' ||
-            this.state.firstName === '' ||
-            this.state.lastName === '';
+            this.state.userName === '';
 
         return (
             <Form onSubmit={this.handleSignUp}>
                 <FormGroup>
-                    <Label id={"label"} for={"firstName"}>First Name</Label>
-                    <Input value={firstName}
-                           onChange={e => this.setState(byPropKey('firstName', e.target.value))}
-                           className={"firstName"} id={"firstName"} placeholder={"First Name"}/>
-                </FormGroup>
-                {' '}
-                <FormGroup>
-                    <Label id={"label"} for={"lastName"}>Last Name</Label>
-                    <Input value={lastName}
-                           onChange={e => this.setState(byPropKey('lastName', e.target.value))}
-                           className={"lastName"} id={"lastName"} placeholder={"Last Name"}/>
+                    <Label id={"label"} for={"userName"}>Full Name</Label>
+                    <Input value={userName}
+                           onChange={e => this.setState(byPropKey('userName', e.target.value))}
+                           className={"userName"} id={"userName"} placeholder={"Full Name"}/>
                 </FormGroup>
                 <FormGroup>
                     <Label id={"label"} for={"userEmail"}>Email</Label>
