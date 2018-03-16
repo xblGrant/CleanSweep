@@ -62,6 +62,8 @@ class LoginForm extends React.Component {
 
         return (
             <Form onSubmit={this.handleLogin}>
+                { error && <p  type={"error"} className={"error"} id={"error"}>
+                {"Your Email/Password is incorrect. Please retry or click Forgot Password"}</p> }
                 <FormGroup>
                     <Label id={"label"} for={"userEmail"}>Email</Label>
                     <Input value={email}
@@ -75,7 +77,7 @@ class LoginForm extends React.Component {
                            type={"password"} className={"userPass"} id={"userPass"} placeholder={"Enter password"}/>
                 </FormGroup>
                 <Button type={"submit"} disabled={isInvalid} color={"primary"} id={"loginBtn"}>Login</Button>
-                { error && <p>{error.message}</p> }
+
             </Form>
         );
     }
