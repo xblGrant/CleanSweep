@@ -28,6 +28,15 @@
     width: 200%;
     height: 20%;
 }
+#error {
+    color: #D8000C;
+    background-color: #FFBABA;
+    border: 1px solid;
+    margin: 10px 27%;
+    padding: 15px 10px 15px 50px;
+    background-position: 10px center;
+    border-radius:.5em;
+}
 #loginBtn, #signUpBtn, #submitNewEmpBtn, #submitNewRoomBtn, #checkInBtn, #submitAssignRoomsBtn,
 #changePWBtn, #SendBtn, #submitIncidentBtn, #checkOutBtn, #submitNewWakeUpBtn, #submitChangeRoleBtn,
 #pwForgetBtn, h4 {
