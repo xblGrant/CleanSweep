@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { WrappedButton } from "../components/Buttons";
+import { Form, FormGroup, Label, Input } from 'reactstrap';
 import { CreateRoomOptions, CreateFloorOptions } from '../components/Generators';
 import {firebase} from "../firebase";
 
@@ -12,7 +11,6 @@ class AllRooms extends React.Component {
             rooms: []
         };
 
-        // this.handleNewWakeUp = this.handleNewWakeUp.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
     }
 
@@ -21,7 +19,7 @@ class AllRooms extends React.Component {
         let roomRef = firebase.db.ref("/Rooms/Reservable/");
         roomRef.orderByKey().once('value', function(allRooms) {
             allRooms.forEach( function(room) {
-                if (room.val().isReservable === true)
+                if (room.val().isReservable === "true")
                     roomList.push(room.key);
             })
         }).then( () =>
@@ -36,7 +34,7 @@ class AllRooms extends React.Component {
         let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
         roomRef.orderByKey().once('value', function(allRooms) {
             allRooms.forEach( function(room) {
-                if (room.val().isReservable === true)
+                if (room.val().isReservable === "true")
                     roomList.push(room.key);
             })
         }).then( () =>
