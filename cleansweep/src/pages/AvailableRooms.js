@@ -1,5 +1,6 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { WrappedButton } from "../components/Buttons";
 import { CreateRoomOptions, CreateFloorOptions } from '../components/Generators';
 import {firebase} from "../firebase";
 
@@ -10,6 +11,8 @@ class AllRooms extends React.Component {
         this.state = {
             rooms: []
         };
+
+        // this.handleNewWakeUp = this.handleNewWakeUp.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
     }
 
@@ -18,17 +21,8 @@ class AllRooms extends React.Component {
         let roomRef = firebase.db.ref("/Rooms/Reservable/");
         roomRef.orderByKey().once('value', function(allRooms) {
             allRooms.forEach( function(room) {
-                roomList.push(room.key);
-            })
-        }).then( () =>
-            this.setState({
-                rooms: roomList
-            })
-        )
-        let NRRoomRef = firebase.db.ref("/Rooms/NonReservable/");
-        NRRoomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                roomList.push(room.key);
+                if (room.val().isReservable === true)
+                    roomList.push(room.key);
             })
         }).then( () =>
             this.setState({
@@ -42,23 +36,15 @@ class AllRooms extends React.Component {
         let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
         roomRef.orderByKey().once('value', function(allRooms) {
             allRooms.forEach( function(room) {
-                roomList.push(room.key);
+                if (room.val().isReservable === true)
+                    roomList.push(room.key);
             })
         }).then( () =>
             this.setState({
                 rooms: roomList
             })
         )
-        let NRRoomRef = firebase.db.ref("/Rooms/NonReservable/" + e.target.value);
-        NRRoomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                roomList.push(room.key);
-            })
-        }).then( () =>
-            this.setState({
-                rooms: roomList
-            })
-        )
+
     }
 
 
@@ -66,9 +52,9 @@ class AllRooms extends React.Component {
         return (
             <div>
                 <head>
-                    <title>All Rooms</title>
+                    <title>Available Rooms</title>
                 </head>
-                <div id={"loadRooms"}>
+                <div id={"loadAvailableRooms"}>
                     <Form>
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>
