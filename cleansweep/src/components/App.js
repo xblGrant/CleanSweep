@@ -15,6 +15,7 @@ import CheckInGuest from '../pages/CheckInGuest';
 import CheckOutGuest from '../pages/CheckOutGuest';
 import ChangePassword from '../pages/PasswordChange';
 import PasswordForgetPage from '../pages/PasswordForget';
+import AllRooms from '../pages/AllRooms';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/custom.css';
@@ -48,7 +49,7 @@ function App() {
                 <Route path={routes.CHECK_OUT_GUEST} component={CheckOutGuest}/>
 
                 {/*List Paths*/}
-                {/*<Route path={routes.ALL_ROOMS} component={}/>*/}
+                <Route path={routes.ALL_ROOMS} component={AllRooms}/>
                 {/*<Route path={routes.ASSIGNED_ROOMS} component={AssignedRooms} />*/}
                 {/*<Route path={routes.AVAILABLE_ROOMS} component={AvailableRooms} />*/}
                 {/*<Route path={routes.INSPECTIONS} component={Inspections} />*/}
