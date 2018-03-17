@@ -3,7 +3,10 @@ import { Form, FormGroup, Label, Input } from 'reactstrap';
 import {CreateFloorOptions, CreateRoomOptions} from "../components/Generators";
 import {firebase} from "../firebase";
 
-class AssignedRooms extends React.Component {
+// TODO: add inspect status to firebase, update status
+// As of now, it loads cleaned rooms and the person who cleaned it, assumed not to be inspected if clean
+
+class InspectList extends React.Component {
     constructor(props) {
         super(props);
 
@@ -19,8 +22,8 @@ class AssignedRooms extends React.Component {
         let roomRef = firebase.db.ref("/Rooms/Reservable/");
         roomRef.orderByKey().once('value', function(allRooms) {
             allRooms.forEach( function(room) {
-                if (room.val().status === "Dirty")
-                    roomList.push(room.key + ", Cleaner - " + room.val().assignedEmployee);
+                if (room.val().status === "Clean")
+                    roomList.push(room.key + ", Cleaned by - " + room.val().assignedEmployee);
             })
         }).then( () =>
             this.setState({
@@ -34,8 +37,8 @@ class AssignedRooms extends React.Component {
         let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
         roomRef.orderByKey().once('value', function(allRooms) {
             allRooms.forEach( function(room) {
-                if (room.val().status === "Dirty")
-                    roomList.push(room.key + ", Cleaner - " + room.val().assignedEmployee);
+                if (room.val().status === "Clean")
+                    roomList.push(room.key + ", Cleaned by - " + room.val().assignedEmployee);
             })
         }).then( () =>
             this.setState({
@@ -48,9 +51,9 @@ class AssignedRooms extends React.Component {
         return (
             <div>
                 <head>
-                    <title>Assigned Rooms</title>
+                    <title>Inspect List</title>
                 </head>
-                <div id={"loadAssignedRooms"}>
+                <div id={"loadInspectList"}>
                     <Form>
                         <FormGroup>
                             <Label id={"label"} for="floorSelect">Floor</Label>
@@ -71,4 +74,4 @@ class AssignedRooms extends React.Component {
     }
 }
 
-export default AssignedRooms;
+export default InspectList;
