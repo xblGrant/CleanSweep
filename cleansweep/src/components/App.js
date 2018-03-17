@@ -16,6 +16,7 @@ import CheckOutGuest from '../pages/CheckOutGuest';
 import ChangePassword from '../pages/PasswordChange';
 import PasswordForgetPage from '../pages/PasswordForget';
 import AllRooms from '../pages/AllRooms';
+import AssignedRooms from '../pages/AssignedRooms';
 import AvailableRooms from '../pages/AvailableRooms';
 import WakeUpList from '../pages/WakeUpList';
 
@@ -52,7 +53,7 @@ function App() {
 
                 {/*List Paths*/}
                 <Route path={routes.ALL_ROOMS} component={AllRooms}/>
-                {/*<Route path={routes.ASSIGNED_ROOMS} component={AssignedRooms} />*/}
+                <Route path={routes.ASSIGNED_ROOMS} component={AssignedRooms} />
                 <Route path={routes.AVAILABLE_ROOMS} component={AvailableRooms} />
                 {/*<Route path={routes.INSPECTIONS} component={Inspections} />*/}
                 {/*<Route path={routes.INCIDENTS} component={Incidents} />*/}
