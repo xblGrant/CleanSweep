@@ -19,6 +19,7 @@ import AllRooms from '../pages/AllRooms';
 import AssignedRooms from '../pages/AssignedRooms';
 import AvailableRooms from '../pages/AvailableRooms';
 import Inspections from '../pages/InspectList';
+import Incidents from '../pages/IncidentList';
 import WakeUpList from '../pages/WakeUpList';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -57,7 +58,7 @@ function App() {
                 <Route path={routes.ASSIGNED_ROOMS} component={AssignedRooms} />
                 <Route path={routes.AVAILABLE_ROOMS} component={AvailableRooms} />
                 <Route path={routes.INSPECTIONS} component={Inspections} />
-                {/*<Route path={routes.INCIDENTS} component={Incidents} />*/}
+                <Route path={routes.INCIDENTS} component={Incidents} />
                 <Route path={routes.WAKE_UP_LIST} component={WakeUpList} />
                 {/*<Route path={routes.DEPARTING_GUESTS} component={DepartingCustomers} />*/}
 
