@@ -3,7 +3,7 @@ import { createSelectable } from 'react-selectable-fast';
 
 const Label = ({ incident, assignedEmp }) => (
     <div className={"album-label"}>
-        Assigned Employee: <span>{`${assignedEmp}`}</span>
+        Employee: <span>{`${assignedEmp}`}</span>
         <br/>
         Incident: <span>{`${incident}`}</span>
     </div>
