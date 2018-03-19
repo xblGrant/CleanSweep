@@ -12,52 +12,46 @@ class AllRooms extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let roomList = [];
 
         let roomRef = firebase.db.ref("/Rooms/Reservable/");
         roomRef.orderByKey().once('value', function (floors) {
             floors.forEach(function (allRooms) {
                 allRooms.forEach(function (room) {
-
-                    let username = null;
-                    let userRef = firebase.db.ref("/Employee/" + room.val().assignedEmployee);
-                    userRef.once('value', function (currentUser) {
-                        if (currentUser.val() !== null) {
-                            username = currentUser.val().username;
-                            roomList.push(
-                                [room.key,
-                                    room.val().status,
-                                    room.val().incident,
-                                    username]
-                            );
-                        }
+                    let assigned = (room.val().assignedEmployee !== 'none');
+                        roomList.push(
+                            [room.key,
+                                room.val().status,
+                                room.val().incident,
+                                room.val().guest,
+                                assigned
+                            ]
+                        );
                     })
                 })
+        }).then(() => {
+            this.setState({
+                rooms: roomList
             })
-        })
-            .then(() => {
-                this.setState({
-                    rooms: roomList
-                })
-                // roomRef = firebase.db.ref("/Rooms/NonReservable/");
-                // roomRef.orderByKey().once('value', function (floors) {
-                //     floors.forEach(function (allRooms) {
-                //         allRooms.forEach(function (room) {
-                //             roomList.push(
-                //                 [room.key,
-                //                     room.val().status,
-                //                     room.val().incident,
-                //                     room.val().assignedEmployee]
-                //             );
-                //         })
-                //     })
-                // }).then(() =>
-                //     this.setState({
-                //         rooms: roomList
-                //     })
-                // )
-            });
+            // roomRef = firebase.db.ref("/Rooms/NonReservable/");
+            // roomRef.orderByKey().once('value', function (floors) {
+            //     floors.forEach(function (allRooms) {
+            //         allRooms.forEach(function (room) {
+            //             roomList.push(
+            //                 [room.key,
+            //                     room.val().status,
+            //                     room.val().incident,
+            //                     room.val().assignedEmployee]
+            //             );
+            //         })
+            //     })
+            // }).then(() =>
+            //     this.setState({
+            //         rooms: roomList
+            //     })
+            // )
+        });
     }
 
     render() {
@@ -69,6 +63,7 @@ class AllRooms extends React.Component {
                 <div id={"loadRooms"}>
                     <Form>
                         <Label id={"select_label"}>All Rooms</Label>
+                        {console.log(this.state.rooms)}
                         <GroupSelect items={this.state.rooms}/>
                     </Form>
                 </div>

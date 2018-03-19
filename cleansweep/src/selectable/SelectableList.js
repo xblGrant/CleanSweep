@@ -11,9 +11,10 @@ class SelectableList extends React.Component {
         const ROOM = 0;
         const STATUS = 1;
         const INCIDENT = 2;
-        const EMP = 3;
+        const GUEST = 3;
+        const ASSIGNED = 4;
 
-        return(
+        return (
             <div>
                 <div className={"albums"}>
                     {items.map((item, i) => (
@@ -21,8 +22,9 @@ class SelectableList extends React.Component {
                             key={`${item[ROOM]}${i}`}
                             roomNum={item[ROOM]}
                             status={item[STATUS]}
+                            assigned={item[ASSIGNED]}
                             incident={item[INCIDENT]}
-                            emp={item[EMP]}
+                            guest={item[GUEST]}
                         />
                     ))}
                 </div>
