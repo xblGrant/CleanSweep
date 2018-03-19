@@ -1,7 +1,8 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
-import { CreateRoomOptions, CreateFloorOptions } from '../components/Generators';
-import {firebase} from "../firebase";
+import {Form, Label} from 'reactstrap';
+import GroupSelect from '../selectable/GroupSelect';
+import {firebase} from '../firebase';
+import RoomObject from '../selectable/RoomObject';
 
 class AllRooms extends React.Component {
     constructor(props) {
@@ -9,56 +10,46 @@ class AllRooms extends React.Component {
 
         this.state = {
             rooms: []
-        };
-        this.handleFloorSelect = this.handleFloorSelect.bind(this);
+        }
     }
 
     componentDidMount() {
         let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/");
-        roomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                roomList.push(room.key);
-            })
-        }).then( () =>
-            this.setState({
-                rooms: roomList
-            })
-        )
-        let NRRoomRef = firebase.db.ref("/Rooms/NonReservable/");
-        NRRoomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                roomList.push(room.key);
-            })
-        }).then( () =>
-            this.setState({
-                rooms: roomList
-            })
-        )
-    }
 
-    handleFloorSelect(e) {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
-        roomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                roomList.push(room.key);
+        let roomRef = firebase.db.ref("/Rooms/Reservable/");
+        roomRef.orderByKey().once('value', function (floors) {
+            floors.forEach(function (allRooms) {
+                allRooms.forEach(function (room) {
+                    roomList.push(<RoomObject
+                        room={room.key}
+                        status={room.val().status}
+                        incident={room.val().incident}
+                        emp={room.val().assignedEmployee}
+                    />);
+                })
             })
-        }).then( () =>
+        }).then( () => {
+
             this.setState({
                 rooms: roomList
-            })
-        )
-        let NRRoomRef = firebase.db.ref("/Rooms/NonReservable/" + e.target.value);
-        NRRoomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                roomList.push(room.key);
-            })
-        }).then( () =>
-            this.setState({
-                rooms: roomList
-            })
-        )
+                }
+            // roomRef = firebase.db.ref("/Rooms/NonReservable/");
+            // roomRef.orderByKey().once('value', function (floors) {
+            //     floors.forEach(function (allRooms) {
+            //         allRooms.forEach(function (room) {
+            //             roomList.push(<RoomObject
+            //                 room={room.key}
+            //                 status={room.val().status}
+            //                 incident={room.val().incident}
+            //                 emp={room.val().assignedEmployee}
+            //             />);
+            //         })
+            //     })
+            // }).then(() =>
+            //     this.setState({
+            //         rooms: roomList
+            //     })
+            )});
     }
 
 
@@ -70,18 +61,8 @@ class AllRooms extends React.Component {
                 </head>
                 <div id={"loadRooms"}>
                     <Form>
-                        <FormGroup>
-                            <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="floorSelect" id="floorSelect">
-                                <CreateFloorOptions />
-                            </Input>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label id={"label"} for="floorSelect">Rooms</Label>
-                            <Input id={"roomOptions"} type="select" multiple>
-                                <CreateRoomOptions rooms={this.state.rooms}/>
-                            </Input>
-                        </FormGroup>
+                        <Label id={"select_label"}>All Rooms</Label>
+                        <GroupSelect items={this.state.rooms}/>
                     </Form>
                 </div>
             </div>
