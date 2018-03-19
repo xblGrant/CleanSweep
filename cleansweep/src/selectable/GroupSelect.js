@@ -27,6 +27,7 @@ class GroupSelect extends React.Component {
                     tolerance={tolerance}
                     globalMouse={isGlobal}
                     allowClickWithoutSelected={true}
+                    disabled={true}
                     ignoreList={['.not-selectable', '.item:nth-child(10)', '.item:nth-child(27)']}
                 >
                     <SelectableList items={this.props.items} />

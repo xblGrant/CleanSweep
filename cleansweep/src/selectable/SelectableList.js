@@ -1,5 +1,7 @@
 import React from 'react';
 import SelectableAlbum from './SelectableAlbum';
+import {NavItem, NavLink} from 'reactstrap';
+import * as routes from '../constants/routes';
 
 class SelectableList extends React.Component {
     shouldComponentUpdate(nextProps) {
@@ -18,14 +20,18 @@ class SelectableList extends React.Component {
             <div>
                 <div className={"albums"}>
                     {items.map((item, i) => (
-                        <SelectableAlbum
-                            key={`${item[ROOM]}${i}`}
-                            roomNum={item[ROOM]}
-                            status={item[STATUS]}
-                            assigned={item[ASSIGNED]}
-                            incident={item[INCIDENT]}
-                            guest={item[GUEST]}
-                        />
+                        <NavItem>
+                            <NavLink href={routes.HELP}>
+                                <SelectableAlbum
+                                    key={`${item[ROOM]}${i}`}
+                                    roomNum={item[ROOM]}
+                                    status={item[STATUS]}
+                                    assigned={item[ASSIGNED]}
+                                    incident={item[INCIDENT]}
+                                    guest={item[GUEST]}
+                                />
+                            </NavLink>
+                        </NavItem>
                     ))}
                 </div>
             </div>
