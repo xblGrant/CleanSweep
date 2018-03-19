@@ -85,6 +85,7 @@ class SignUpForm extends React.Component {
 
         return (
             <Form onSubmit={this.handleSignUp}>
+                {error && <p type={"error"} className={"error"} id={"error"}>{error.message}</p>}
                 <FormGroup>
                     <Label id={"label"} for={"userName"}>Full Name</Label>
                     <Input value={userName}
@@ -111,7 +112,6 @@ class SignUpForm extends React.Component {
                            placeholder={"Confirm password"}/>
                 </FormGroup>
                 <Button disabled={isInvalid} type={"submit"} color={"primary"} id={"signUpBtn"}>Sign-Up</Button>
-                {error && <p>{error.message}</p>}
             </Form>
         )
     }

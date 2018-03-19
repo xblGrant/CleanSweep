@@ -48,6 +48,7 @@ class PasswordChange extends React.Component {
 
         return (
             <Form id={"pwChangeForm"} onSubmit={this.onSubmit}>
+                {error && <p type={"error"} className={"error"} id={"error"}>{error.message}</p>}
                 <FormGroup>
                     <Input id={"pwChange"}
                            value={passwordOne}
@@ -70,7 +71,6 @@ class PasswordChange extends React.Component {
                         type={"submit"}>
                     Reset Password
                 </Button>
-                {error && <p>{error.message}</p>}
             </Form>
         )
     }
