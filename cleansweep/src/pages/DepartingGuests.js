@@ -28,7 +28,6 @@ class DepartingGuests extends React.Component {
             mm = '0'+mm
         }
         today = mm + '/' + dd + '/' + yyyy;
-        document.write(today);
         roomRef.orderByKey().once('value', function(allRooms) {
             allRooms.forEach( function(room) {
                 if (room.val().departureDate === today)
