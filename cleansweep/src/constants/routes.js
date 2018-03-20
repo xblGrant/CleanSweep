@@ -22,3 +22,8 @@ export const CHANGE_PW = '/changepassword';
 export const HELP = '/help';
 export const CHANGE_ROLE = '/changerole';
 export const GITHUB = 'https://github.com/xblGrant/CleanSweep';
+
+//this is for URL parameters. linking to /room/101 will allow
+//us to use 101 as a url parameter. ex: Link to /room/
+export const ROUTER_ROOM = '/room/:roomid';
+export const ROOM = '/room/';

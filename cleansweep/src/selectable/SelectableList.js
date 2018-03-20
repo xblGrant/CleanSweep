@@ -1,13 +1,19 @@
 import React from 'react';
 import SelectableAlbum from './SelectableAlbum';
-import {NavItem, NavLink} from 'reactstrap';
+import { NavItem, NavLink } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import * as routes from '../constants/routes';
+
 
 class SelectableList extends React.Component {
     shouldComponentUpdate(nextProps) {
         return nextProps.items !== this.props.items;
     }
 
+
+    //Link to section
+    //  --look at routes.ROOM and how we pass the room Number
+    //  --as the route
     render() {
         let items = this.props.items;
         const ROOM = 0;
@@ -20,8 +26,7 @@ class SelectableList extends React.Component {
             <div>
                 <div className={"albums"}>
                     {items.map((item, i) => (
-                        <NavItem>
-                            <NavLink href={routes.HELP}>
+                        <Link to={routes.ROOM + item[ROOM]}>
                                 <SelectableAlbum
                                     key={`${item[ROOM]}${i}`}
                                     roomNum={item[ROOM]}
@@ -30,8 +35,7 @@ class SelectableList extends React.Component {
                                     incident={item[INCIDENT]}
                                     guest={item[GUEST]}
                                 />
-                            </NavLink>
-                        </NavItem>
+                        </Link>
                     ))}
                 </div>
             </div>

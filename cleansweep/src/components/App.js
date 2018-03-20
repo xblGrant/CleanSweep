@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-
 import Help from '../pages/Help';
 import Login from '../pages/Login';
 import {SignUp} from '../pages/SignUp';
 import NewRoom from '../pages/NewRoom';
+import Room from '../pages/Room';
 import AddWakeUp from '../pages/WakeUpCall';
 import ChangeRole from '../pages/ChangeRole';
 import AssignRooms from '../pages/AssignRooms';
@@ -36,6 +36,9 @@ function App() {
                 <NavigationBar />
                 {/*Landing Path*/}
                 <Route exact path={routes.LANDING} component={Login}/>
+
+                {/*Generic Room Path*/}
+                <Route path={routes.ROUTER_ROOM} component={Room}/>
 
                 {/*Access Paths*/}
                 <Route path={routes.LOGIN} component={Login}/>
