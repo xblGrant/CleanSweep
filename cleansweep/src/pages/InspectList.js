@@ -1,10 +1,7 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
-import {CreateFloorOptions, CreateRoomOptions} from "../components/Generators";
-import {firebase} from "../firebase";
-
-// TODO: add inspect status to firebase, update status
-// As of now, it loads cleaned rooms and the person who cleaned it, assumed not to be inspected if clean
+import {Form, Label} from 'reactstrap';
+import GroupSelect from '../selectable/GroupSelect';
+import {firebase} from '../firebase';
 
 class InspectList extends React.Component {
     constructor(props) {
@@ -12,61 +9,64 @@ class InspectList extends React.Component {
 
         this.state = {
             rooms: []
-        };
-
-        this.handleFloorSelect = this.handleFloorSelect.bind(this);
+        }
     }
 
     componentDidMount() {
         let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/");
-        roomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                if (room.val().status === "Clean")
-                    roomList.push(room.key + ", Cleaned by - " + room.val().assignedEmployee);
-            })
-        }).then( () =>
-            this.setState({
-                rooms: roomList
-            })
-        )
-    }
 
-    handleFloorSelect(e) {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
-        roomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                if (room.val().status === "Clean")
-                    roomList.push(room.key + ", Cleaned by - " + room.val().assignedEmployee);
-            })
-        }).then( () =>
+        let roomRef = firebase.db.ref("/Rooms/Reservable/");
+        roomRef.orderByKey().once('value', function (floors) {
+            floors.forEach(function (allRooms) {
+                allRooms.forEach(function (room) {
+                    // TODO: need to confirm how we determine a room needs to be inspected  (guest = none? & isReservable = false?)
+                    if (room.val().incident === false && room.val().status === 'Clean') {
+                        let assigned = (room.val().assignedEmployee !== 'none');
+                        roomList.push(
+                            [room.key,
+                                room.val().status,
+                                room.val().incident,
+                                room.val().guest,
+                                assigned
+                            ]
+                        );
+                    }})})
+        }).then(() => {
+            // roomRef = firebase.db.ref("/Rooms/NonReservable/");
+            // roomRef.orderByKey().once('value', function (floors) {
+            //     floors.forEach(function (allRooms) {
+            //         allRooms.forEach(function (room) {
+            //             if (room.val().incident === 'false' && room.val().status === 'Clean') {
+            //                 let assigned = (room.val().assignedEmployee !== 'none');
+            //                 roomList.push(
+            //                     [room.key,
+            //                         room.val().status,
+            //                         room.val().incident,
+            //                         room.val().guest.
+            //                         assigned
+            //                     ]
+            //                 );
+            //             }})})
+            // }).then(() =>
             this.setState({
                 rooms: roomList
-            })
-        )
+            });
+            // )
+        });
     }
 
     render() {
         return (
             <div>
                 <head>
-                    <title>Inspect List</title>
+                    <title>Inspections</title>
                 </head>
-                <div id={"loadInspectList"}>
+                <div id={"loadRooms"}>
                     <Form>
-                        <FormGroup>
-                            <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="floorSelect" id="floorSelect">
-                                <CreateFloorOptions />
-                            </Input>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label id={"label"} for="assignableRoom">Rooms</Label>
-                            <Input id={"roomOptions"} type="select" multiple>
-                                <CreateRoomOptions rooms={this.state.rooms}/>
-                            </Input>
-                        </FormGroup>
+                        <div className={"container text-center"}>
+                            <Label className={"header"} id={"select_label"}>Rooms needing Inspection</Label>
+                        </div>
+                        <GroupSelect items={this.state.rooms}/>
                     </Form>
                 </div>
             </div>

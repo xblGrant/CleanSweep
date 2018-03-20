@@ -1,6 +1,5 @@
 import React from 'react';
 import SelectableAlbum from './SelectableAlbum';
-import { NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import * as routes from '../constants/routes';
 

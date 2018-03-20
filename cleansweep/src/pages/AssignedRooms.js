@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
-import {CreateFloorOptions, CreateRoomOptions} from "../components/Generators";
-import {firebase} from "../firebase";
+import {Form, Label} from 'reactstrap';
+import GroupSelect from '../selectable/GroupSelect';
+import {firebase} from '../firebase';
 
 class AssignedRooms extends React.Component {
     constructor(props) {
@@ -9,39 +9,52 @@ class AssignedRooms extends React.Component {
 
         this.state = {
             rooms: []
-        };
-
-        this.handleFloorSelect = this.handleFloorSelect.bind(this);
+        }
     }
 
     componentDidMount() {
         let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/");
-        roomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                if (room.val().status === "Dirty")
-                    roomList.push(room.key + ", Cleaner - " + room.val().assignedEmployee);
-            })
-        }).then( () =>
-            this.setState({
-                rooms: roomList
-            })
-        )
-    }
+        let user = null;
+        let currentUser = firebase.auth.currentUser;
+        if (currentUser !== null){
+            user = currentUser.uid;
+        }
 
-    handleFloorSelect(e) {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
-        roomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                if (room.val().status === "Dirty")
-                    roomList.push(room.key + ", Cleaner - " + room.val().assignedEmployee);
-            })
-        }).then( () =>
-            this.setState({
-                rooms: roomList
-            })
-        )
+        let roomRef = firebase.db.ref("/Rooms/Reservable/");
+        roomRef.orderByKey().once('value', function (floors) {
+            floors.forEach(function (allRooms) {
+                allRooms.forEach(function (room) {
+                    if (user === room.val().assignedEmployee) {
+                        roomList.push(
+                            [room.key,
+                                room.val().status,
+                                room.val().incident,
+                                room.val().guest,
+                                true
+                            ]
+                        );
+                    }})})
+        }).then(() => {
+            // roomRef = firebase.db.ref("/Rooms/NonReservable/");
+            // roomRef.orderByKey().once('value', function (floors) {
+            //     floors.forEach(function (allRooms) {
+            //         allRooms.forEach(function (room) {
+            //             if (user === room.val().assignedEmployee) {
+            //                 roomList.push(
+            //                     [room.key,
+            //                         room.val().status,
+            //                         room.val().incident,
+            //                         room.val().guest,
+            //                         true
+            //                     ]
+            //                 );
+            //             }})})
+            // }).then(() =>
+                this.setState({
+                    rooms: roomList
+                });
+            // )
+        });
     }
 
     render() {
@@ -50,20 +63,12 @@ class AssignedRooms extends React.Component {
                 <head>
                     <title>Assigned Rooms</title>
                 </head>
-                <div id={"loadAssignedRooms"}>
+                <div id={"loadRooms"}>
                     <Form>
-                        <FormGroup>
-                            <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="floorSelect" id="floorSelect">
-                                <CreateFloorOptions />
-                            </Input>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label id={"label"} for="assignableRoom">Rooms</Label>
-                            <Input id={"roomOptions"} type="select" multiple>
-                                <CreateRoomOptions rooms={this.state.rooms}/>
-                            </Input>
-                        </FormGroup>
+                        <div className={"container text-center"}>
+                            <Label className={"header"} id={"select_label"}>Assigned Rooms</Label>
+                        </div>
+                        <GroupSelect items={this.state.rooms}/>
                     </Form>
                 </div>
             </div>

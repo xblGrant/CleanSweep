@@ -25,31 +25,29 @@ class AllRooms extends React.Component {
                                 room.val().status,
                                 room.val().incident,
                                 room.val().guest,
-                                assigned
-                            ]
+                                assigned ]
                         );
                     })
                 })
         }).then(() => {
-            this.setState({
-                rooms: roomList
-            })
             // roomRef = firebase.db.ref("/Rooms/NonReservable/");
             // roomRef.orderByKey().once('value', function (floors) {
             //     floors.forEach(function (allRooms) {
             //         allRooms.forEach(function (room) {
+            //           let assigned = (room.val().assignedEmployee !== 'none');
             //             roomList.push(
             //                 [room.key,
             //                     room.val().status,
             //                     room.val().incident,
-            //                     room.val().assignedEmployee]
+            //                     room.val().assignedEmployee,
+            //                     assigned ]
             //             );
             //         })
             //     })
             // }).then(() =>
-            //     this.setState({
-            //         rooms: roomList
-            //     })
+                this.setState({
+                    rooms: roomList
+                })
             // )
         });
     }
@@ -65,7 +63,6 @@ class AllRooms extends React.Component {
                         <div className={"container text-center"}>
                         <Label className={"header"} id={"select_label"}>All Rooms</Label>
                         </div>
-                        {console.log(this.state.rooms)}
                         <GroupSelect items={this.state.rooms}/>
                     </Form>
                 </div>

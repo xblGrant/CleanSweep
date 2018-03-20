@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
-import {CreateFloorOptions, CreateRoomOptions} from "../components/Generators";
-import {firebase} from "../firebase";
+import {Form, Label} from 'reactstrap';
+import GroupSelect from '../selectable/GroupSelect';
+import {firebase} from '../firebase';
 
 class DepartingGuests extends React.Component {
     constructor(props) {
@@ -10,83 +10,73 @@ class DepartingGuests extends React.Component {
         this.state = {
             rooms: []
         };
-
-        this.handleFloorSelect = this.handleFloorSelect.bind(this);
     }
 
     componentDidMount() {
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1;
+        let yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = mm + '/' + dd + '/' + yyyy;
+
         let roomList = [];
         let roomRef = firebase.db.ref("/Rooms/Reservable/");
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1;
-        var yyyy = today.getFullYear();
-        if(dd<10) {
-            dd = '0'+dd
-        }
-        if(mm<10) {
-            mm = '0'+mm
-        }
-        today = mm + '/' + dd + '/' + yyyy;
-        roomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                if (room.val().departureDate === today)
-                    roomList.push(room.key + " - " + room.val().guest);
-            })
-        }).then( () =>
-            this.setState({
-                rooms: roomList
-            })
-        )
-    }
-
-    handleFloorSelect(e) {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
-
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1;
-        var yyyy = today.getFullYear();
-        if(dd<10) {
-            dd = '0'+dd
-        }
-        if(mm<10) {
-            mm = '0'+mm
-        }
-        today = mm + '/' + dd + '/' + yyyy;
-        roomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
-                if (room.val().departureDate === today)
-                    roomList.push(room.key + " - " + room.val().guest);
-            })
-        }).then( () =>
-            this.setState({
-                rooms: roomList
-            })
-        )
+        roomRef.orderByKey().once('value', function (floors) {
+            floors.forEach(function (allRooms) {
+                allRooms.forEach(function (room) {
+                    if (room.val().departureDate === today) {
+                        let assigned = (room.val().assignedEmployee !== 'none');
+                        roomList.push(
+                            [room.key,
+                                room.val().status,
+                                room.val().incident,
+                                room.val().guest,
+                                assigned]
+                        );
+                    }})})
+        }).then(() => {
+            // roomRef = firebase.db.ref("/Rooms/NonReservable/");
+            // roomRef.orderByKey().once('value', function (floors) {
+            //     floors.forEach(function (allRooms) {
+            //         allRooms.forEach(function (room) {
+            //             if (room.val().departureDate === today) {
+            //                 let assigned = (room.val().assignedEmployee !== 'none');
+            //                 roomList.push(
+            //                     [room.key,
+            //                         room.val().status,
+            //                         room.val().incident,
+            //                         room.val().guest,
+            //                         assigned]
+            //                 );
+            //             }})})
+            // }).then(() =>
+                this.setState({
+                    rooms: roomList
+                })
+            // )
+        });
     }
 
     render() {
         return (
             <div>
                 <head>
-                    <title>Departing Guest</title>
+                    <title>Departing Guests</title>
                 </head>
-                <div id={"loadInspectList"}>
+                <div id={"loadRooms"}>
                     <Form>
-                        <FormGroup>
-                            <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="floorSelect" id="floorSelect">
-                                <CreateFloorOptions />
-                            </Input>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label id={"label"} for="assignableRoom">Rooms</Label>
-                            <Input id={"roomOptions"} type="select" multiple>
-                                <CreateRoomOptions rooms={this.state.rooms}/>
-                            </Input>
-                        </FormGroup>
+                        <div className={"container text-center"}>
+                            <Label className={"header"} id={"select_label"}>Rooms with Departing Guests</Label>
+                        </div>
+                        <GroupSelect items={this.state.rooms}/>
                     </Form>
                 </div>
             </div>
