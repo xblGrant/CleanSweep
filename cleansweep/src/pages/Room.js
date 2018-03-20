@@ -9,18 +9,9 @@ class Room extends React.Component {
         super(props);
 
         this.state = {
-            roomID: null,
-            assignedEmployee : null,
-            departureDate : null,
-            guest : null,
-            incident : null,
-            isReservable : null,
-            status : null,
-            wakeupCall : null
+            roomID: null
         }
     }
-
-
 
     //when component is passed through react router
     //and the route has a ":" in it,
@@ -28,44 +19,10 @@ class Room extends React.Component {
     //I call the parameter by this.props.match.params.roomid
     //roomid is the explicit name of the identifier after the
     //route in App.js.
-
-    //TODO: GRANT TEST EACH POSSIBLE ROOM ID WITH GIVEN
-    // this.props.match.params.roomid
-    //reservableRooms, nonreservableRooms, General
-    //if not in any of those lists, display error
     componentDidMount() {
-        let floorRef = firebase.db.ref("/Rooms/Reservable");
-        floorRef.orderByKey().once('value', function(allFloors) {
-            allFloors.forEach( function(floor) {
-                floor.forEach( function(room) {
-                    if (room.val().key !== null){
-                        resRoom.push(
-                            {
-                                roomNum:room.val().key,
-                                assignedEmployee:room.val().assignedEmployee,
-                                departureDate:room.val().departureDate,
-                                guest:room.val().guest,
-                                incident:room.val().incident,
-                                isReservable:room.val().isReservable,
-                                wakeupCall:room.val().wakeupCall
-                            }
-                        )
-                    }
-                })
-            })
-        }).then( () => {
-            this.setState({
-                reservableRooms: resRoom
-            })
+        this.setState({
+            roomID: this.props.match.params.roomid
         });
-
-        let floorRef = firebase.db.ref("/Rooms/NonReservable");
-        floorRef.orderByKey().once('value'), funciton(allFloors) {
-            allFLoors.forEach
-        }
-
-
-
 
     }
 
@@ -74,7 +31,7 @@ class Room extends React.Component {
     render() {
         return (
             <div id='roomPage'>
-                <error>{this.state.roomID}</error>
+                <p>{this.state.roomID}</p>
             </div>
         );
     }

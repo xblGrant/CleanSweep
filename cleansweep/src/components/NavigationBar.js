@@ -59,10 +59,10 @@ class NavigationAuth extends React.Component {
 
         return (
             <div>
-                <Navbar color="faded" light expand="md">
+                <Navbar className={"color1"} color="faded" light expand="md">
                     <div className={"container"}>
                         <NavbarToggler onClick={this.toggle} />
-                        <NavbarBrand href={routes.ASSIGNED_ROOMS}>CleanSweep</NavbarBrand>
+                        <NavbarBrand className={"brand"} href={routes.HOME}>CleanSweep</NavbarBrand>
                         { headerCollapsed }
                         <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="mr-auto" navbar>

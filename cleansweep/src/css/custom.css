@@ -1,4 +1,6 @@
 /*LOGIN.js & SIGNUP.js & NEWEMPLOYEE.js & NEWROOM.js & CHANGEPASSWORD*/
+@import url('https://fonts.googleapis.com/css?family=Dosis:400,700');
+
 #loginForm, #signUpForm, #newEmployeeForm, #newRoomForm, #checkOutForm, #newWakeUpForm, #changeRoleForm,
 #inspectRoomForm, #checkInForm, #changePWForm, #helpForm, #incidentRoomForm, #assignRoomsForm, #pwForgetForm,
 #pwChangeForm {
@@ -51,9 +53,40 @@
     margin-left: 35%;
 }
 
+.brand{
+    font-family: 'Dosis', sans-serif;
+    font-weight: 700;
+    font-stretch: expanded;
+}
 /*HEADER.js*/
 #ml-auto {
     margin-right: 10%;
 }
 
+#headerBtn{
+    margin: auto auto;
+}
+#userLink{
+    margin: auto auto;
+}
+#select_label{
+    text-align: center;
+    margin: auto;
+}
 
+.color1{
+    background-color: #73ACC4;
+    color: #2B303A;
+}
+
+.color2{
+
+}
+
+.color3{
+
+}
+
+.color4{
+
+}
