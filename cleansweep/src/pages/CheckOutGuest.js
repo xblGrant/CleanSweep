@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
+import * as routes from "../constants/routes";
 
 class CheckOutGuest extends React.Component {
     constructor(props) {
@@ -23,11 +24,11 @@ class CheckOutGuest extends React.Component {
                     <Form>
                         <FormGroup row>
                             {/*<Label id={"label"} for="roomNum"></Label>*/}
-                            <Input type="text" id="roomNum" placeholder={"Room #"}/>
+                            <Input type="text" className={"margin-left-35 width-30"} id={"roomNum"} placeholder={"Room #"}/>
                         </FormGroup>
-                        <Button onClick={this.handleCheckOut} color={"primary"} id={"checkOutBtn"}>Check-Out</Button>
+                        <Button onClick={this.handleCheckOut} color={"primary"} className={"margin-left-35"}>Check-Out</Button>
                         {' '}
-                        <WrappedButton id={"checkOutCancel"} link={"/"} name={"Cancel"}/>
+                        <WrappedButton link={routes.HOME} name={"Cancel"}/>
                     </Form>
                 </div>
             </div>

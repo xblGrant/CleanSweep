@@ -124,7 +124,7 @@ class NavigationNonAuth extends React.Component {
 
         return (
             <div>
-                <Navbar color="faded" light expand="md">
+                <Navbar className={"color1"} color="faded" light expand="md">
                     <div className={"container"}>
                         <NavbarToggler onClick={this.toggle} />
                         <NavbarBrand href={routes.LANDING}>CleanSweep</NavbarBrand>

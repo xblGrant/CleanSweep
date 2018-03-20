@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
+import * as routes from "../constants/routes";
 
 class AddWakeUp extends React.Component {
     constructor(props) {
@@ -19,44 +20,44 @@ class AddWakeUp extends React.Component {
                 <head>
                     <title>Change Employee Role</title>
                 </head>
-                <div id={"changeRoleForm"}>
+                <div className={"margin-top-02"}>
                     <Form>
-                        <Label id={"searchLabel"}><h6>Search By:</h6></Label>
+                        <Label className={"margin-left-35"}><h6>Search By</h6></Label>
                         <FormGroup row>
-                            <Label id={"label"} for="employeeName">Employee Name</Label>
+                            <Label className={"margin-left-35"} for="employeeName">Employee Name</Label>
                             <Input
                                 placeholder={"Employee name"}
                                 type="text" id="employeeName"/>
                         </FormGroup>
-                        <Label id={"orLabel"}><h6>or</h6></Label>
+                        <Label className={"margin-left-35 width-30"}><h6>or</h6></Label>
                         <FormGroup row>
-                            <Label id={"label"} for="employeeRoleID">Employee ID</Label>
+                            <Label className={"margin-left-35"} for="employeeRoleID">Employee ID</Label>
                             <Input
                                 placeholder={"Employee ID"}
                                 type="text" id="employeeRoleID"/>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="employeeResults">Search Results</Label>
+                            <Label className={"margin-left-35"} for="employeeResults">Search Results</Label>
                             <Input
                                 placeholder={"Search Results"}
                                 type="textarea" id="employeeResults"/>
                         </FormGroup>
                         <FormGroup check>
-                            <Label id={"checkbox"} check>
+                            <Label className={"margin-left-35"} check>
                                 <Input type="checkbox" id="isManager"/>{' '}
                                 Promote to Manager
                             </Label>{' '}
                             <br/>
-                            <Label id={"checkbox"} check>
+                            <Label className={"margin-left-35"} check>
                                 <Input type="checkbox" id="isEmployee"/>{' '}
                                 Demote to Employee
                             </Label>
                         </FormGroup>
                         <br/>
                         <Button onClick={this.handleChangeRole} color={"primary"}
-                                id={"submitChangeRoleBtn"}>Submit</Button>
+                                className={"margin-left-35"}>Submit</Button>
                         {' '}
-                        <WrappedButton id={"changeRoleCancel"} link={"/"} name={"Cancel"}/>
+                        <WrappedButton  link={routes.HOME} name={"Cancel"}/>
                     </Form>
                 </div>
             </div>

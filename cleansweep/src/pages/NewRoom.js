@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
 import { CreateFloorOptions } from "../components/Generators";
+import * as routes from "../constants/routes";
 
 import { firebase } from '../firebase/index';
 
@@ -79,32 +80,32 @@ class NewRoom extends React.Component {
                 <div id={"newRoomForm"}>
                     <Form>
                         <FormGroup>
-                            <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type={"select"} className="floorSelect" id="floorSelect">
+                            <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
+                            <Input onClick={this.handleFloorSelect} type={"select"} className="margin-left-35 width-30">
                                 <CreateFloorOptions />
                             </Input>
                         </FormGroup>
                         <FormGroup>
-                            <Label id={"label"} for="roomNum">
+                            <Label className={"margin-left-35"} for="roomNum">
                                 New Room
                             </Label>
-                            <Input type="text" id="roomNum" value={this.state.newRoomNumber} readOnly/>
+                            <Input type="text" className={"margin-left-35 width-30"}id="roomNum" value={this.state.newRoomNumber} readOnly/>
                         </FormGroup>
                         <FormGroup check>
-                            <Label id={"label"} check>
+                            <Label className={"margin-left-35"} check>
                                 <Input type={"checkbox"} onChange={this.onChange} id={"newFloor"}/>{' '}
                                 New Floor
                             </Label>
                             <br/>
-                            <Label id={"label"} check>
+                            <Label className={"margin-left-35"} check>
                                 <Input type={"checkbox"} id={"isReservable"}/>{' '}
                                 Reservable
                             </Label>
                         </FormGroup>
                         <br/>
-                        <Button onClick={this.handleNewRoom} color={"primary"} id={"submitNewRoomBtn"}>Submit</Button>
+                        <Button onClick={this.handleNewRoom} color={"primary"} className={"margin-left-35"}>Submit</Button>
                         {' '}
-                        <WrappedButton id={"newRoomCancel"} link={"/"} name={"Cancel"}/>
+                        <WrappedButton className={"margin-left-35"} link={routes.HOME} name={"Cancel"}/>
                     </Form>
                 </div>
             </div>

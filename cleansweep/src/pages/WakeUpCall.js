@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
 import { CreateRoomOptions, CreateFloorOptions } from '../components/Generators';
 import {firebase} from "../firebase";
+import * as routes from "../constants/routes";
 
 class AddWakeUp extends React.Component {
     constructor(props) {
@@ -56,32 +57,32 @@ class AddWakeUp extends React.Component {
                 <head>
                     <title>Add Wake-Up Call</title>
                 </head>
-                <div id={"newWakeUpForm"}>
+                <div>
                     <Form>
                         <FormGroup>
-                            <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="floorSelect" id="floorSelect">
+                            <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
+                            <Input onClick={this.handleFloorSelect} type="select" className="margin-left-35 width-30" id="floorSelect">
                                 <CreateFloorOptions />
                             </Input>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="floorSelect">Rooms</Label>
-                            <Input id={"roomOptions"} type="select" multiple>
+                            <Label className={"margin-left-35"} for="floorSelect">Rooms</Label>
+                            <Input className={"margin-left-35 width-30"} id={"roomOptions"} type="select" multiple>
                                 <CreateRoomOptions rooms={this.state.rooms}/>
                             </Input>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="wakeUpDate">Date</Label>
-                            <Input type="date" id="wakeUpDate" placeholder={"Email"}/>
+                            <Label className={"margin-left-35"} for="wakeUpDate">Date</Label>
+                            <Input className={"margin-left-35 width-30"} type="date" id="wakeUpDate" placeholder={"Email"}/>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="wakeUpTime">Time</Label>
-                            <Input type="time" id="wakeUpTime" placeholder={"Password"}/>
+                            <Label className={"margin-left-35"} for="wakeUpTime">Time</Label>
+                            <Input className={"margin-left-35 width-30"} type="time" id="wakeUpTime" placeholder={"Password"}/>
                         </FormGroup>
                         <Button onClick={this.handleNewWakeUp} color={"primary"}
-                                id={"submitNewWakeUpBtn"}>Submit</Button>
+                                className={"margin-left-35"}>Submit</Button>
                         {' '}
-                        <WrappedButton id={"newWakeUpCancel"} link={"/"} name={"Cancel"}/>
+                        <WrappedButton link={routes.HOME} name={"Cancel"}/>
                     </Form>
                 </div>
             </div>

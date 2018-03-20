@@ -60,10 +60,10 @@ class AvailableRooms extends React.Component {
                 <head>
                     <title>Available Rooms</title>
                 </head>
-                <div id={"loadRooms"}>
+                <div>
                     <Form>
                         <div className={"container text-center"}>
-                            <Label className={"header"} id={"select_label"}>Available Rooms</Label>
+                            <Label className={"header center"}>Available Rooms</Label>
                         </div>
                         <GroupSelect items={this.state.rooms}/>
                     </Form>

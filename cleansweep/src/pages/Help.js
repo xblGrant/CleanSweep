@@ -28,20 +28,20 @@ class Help extends React.Component {
                     <Form>
                         <h2 align="center">Contact Us</h2>
                         <FormGroup>
-                            <Label id={"label"}>Name: (required) </Label>
-                            <Input placeholder={"Please enter your name"} type="text" id="contactName" required/>
+                            <Label className={"margin-left-35"}>Name: (required) </Label>
+                            <Input placeholder={"Please enter your name"} type="text" className={"margin-left-35 width-30"} id="contactName" required/>
                         </FormGroup>
                         <FormGroup>
-                            <Label id={"label"}>Email: (required)</Label>
-                            <Input placeholder={"Please enter your email address"} type="email" id="contactEmail"
+                            <Label className={"margin-left-35"}>Email: (required)</Label>
+                            <Input placeholder={"Please enter your email address"} type="email" className={"margin-left-35 width-30"} id="contactEmail"
                                    required/>
                         </FormGroup>
                         <FormGroup>
-                            <Label id={"label"}>Message: (required)</Label>
-                            <Input placeholder={"Include all the details you can"} id="contactMessage" required
+                            <Label className={"margin-left-35"}>Message: (required)</Label>
+                            <Input placeholder={"Include all the details you can"} className={"margin-left-35 width-30"} id="contactMessage" required
                                    type="textarea"/>
                         </FormGroup>
-                        <Button onClick={this.handleHelp} color={"primary"} id={"SendBtn"}>Send Email</Button>
+                        <Button onClick={this.handleHelp} color={"primary"} className={"margin-left-35"}>Send Email</Button>
                     </Form>
                 </div>
             </div>

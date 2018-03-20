@@ -22,8 +22,7 @@ class SelectableList extends React.Component {
         const ASSIGNED = 4;
 
         return (
-            <div>
-                <div className={"albums"}>
+                <div className={"container"}>
                     {items.map((item, i) => (
                         <Link to={routes.ROOM + item[ROOM]}>
                                 <SelectableAlbum
@@ -37,7 +36,6 @@ class SelectableList extends React.Component {
                         </Link>
                     ))}
                 </div>
-            </div>
         )
     }
 }

@@ -86,8 +86,8 @@ class AvailableRooms extends React.Component {
     render() {
         return (
             <FormGroup id={this.props.id}>
-                <Label id={"label"} for="floorSelect">Rooms</Label>
-                <Input type="select" /*onClick={this.props.onClick}*/ multiple>
+                <Label className={"margin-left-35"} for="floorSelect">Rooms</Label>
+                <Input className={"margin-left-35"} type="select" /*onClick={this.props.onClick}*/ multiple>
                     <CreateRoomOptions rooms={this.state.rooms}/>
                 </Input>
             </FormGroup>

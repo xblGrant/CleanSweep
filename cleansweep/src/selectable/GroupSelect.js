@@ -17,7 +17,7 @@ class GroupSelect extends React.Component {
         const { tolerance, isGlobal } = this.state;
 
         return (
-            <div id={"selectable"}>
+            <div className={"container"}>
                 <SelectableGroup
                     ref={ref => window.selectableGroup = ref}
                     className="main"

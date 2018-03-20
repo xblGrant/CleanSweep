@@ -60,26 +60,26 @@ class AddIncident extends React.Component {
                 <head>
                     <title>Incident Report</title>
                 </head>
-                <div id={"incidentRoomForm"}>
+                <div className={"margin-top-02"}>
                     <Form>
                         <FormGroup>
-                            <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="floorSelect" id="floorSelect">
+                            <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
+                            <Input onClick={this.handleFloorSelect} type="select" className="margin-left-35 width-30" id="floorSelect">
                                 <CreateFloorOptions/>
                             </Input>
                         </FormGroup>
                         <FormGroup>
-                            <Input id={"roomOptions"} type="select" multiple>
+                            <Input className={"margin-left-35 width-30"} type="select" multiple>
                                 <CreateRoomOptions rooms={this.state.rooms}/>
                             </Input>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="incidentComment">Comment</Label>
-                            <Input type="textarea" id="incidentComment" placeholder={"Enter comment here"}/>
+                            <Label className={"margin-left-35"} for="incidentComment">Comment</Label>
+                            <Input type="textarea" className={"margin-left-35 width-30"} id="incidentComment" placeholder={"Enter comment here"}/>
                         </FormGroup>
-                        <Button onClick={this.handleIncident} color={"primary"} id={"submitIncidentBtn"}>Submit</Button>
+                        <Button onClick={this.handleIncident} className={"margin-left-35"} color={"primary"}>Submit</Button>
                         {' '}
-                        <WrappedButton id={"checkInCancel"} link={"/"} name={"Cancel"}/>
+                        <WrappedButton link={"/"} name={"Cancel"}/>
                     </Form>
                 </div>
             </div>

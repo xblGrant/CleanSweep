@@ -60,10 +60,10 @@ class IncidentList extends React.Component {
                 <head>
                     <title>Incidents</title>
                 </head>
-                <div id={"loadRooms"}>
+                <div>
                     <Form>
                         <div className={"container text-center"}>
-                            <Label className={"header"} id={"select_label"}>Rooms with Incidents</Label>
+                            <Label className={"header"}>Rooms with Incidents</Label>
                         </div>
                         <GroupSelect items={this.state.rooms}/>
                     </Form>

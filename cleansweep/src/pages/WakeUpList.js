@@ -61,10 +61,10 @@ class WakeUpList extends React.Component {
                 <head>
                     <title>Wake-Up Calls</title>
                 </head>
-                <div id={"loadRooms"}>
+                <div >
                     <Form>
                         <div className={"container text-center"}>
-                            <Label className={"header"} id={"select_label"}>Wake-Up Calls by Room</Label>
+                            <Label className={"header"}>Wake-Up Calls by Room</Label>
                         </div>
                         <GroupSelect items={this.state.rooms}/>
                     </Form>

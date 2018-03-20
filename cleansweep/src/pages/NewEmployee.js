@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
+import * as routes from "../constants/routes";
 
 class NewEmployee extends React.Component {
     constructor(props) {
@@ -23,36 +24,36 @@ class NewEmployee extends React.Component {
                 <div id={"newEmployeeForm"}>
                     <Form>
                         <FormGroup row>
-                            <Label id={"label"} for="employeeFName">First Name</Label>
-                            <Input type="text" id="employeeFName" placeholder={"First name"}/>
+                            <Label className={"margin-left-35"} for="employeeFName">First Name</Label>
+                            <Input type="text" className={"margin-left-35 width-30"} id="employeeFName" placeholder={"First name"}/>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="employeeLName">Last Name</Label>
-                            <Input type="text" id="employeeLName" placeholder={"Last name"}/>
+                            <Label className={"margin-left-35"} for="employeeLName">Last Name</Label>
+                            <Input type="text" className={"margin-left-35 width-30"} id="employeeLName" placeholder={"Last name"}/>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="employeeDOB">Date Of Birth</Label>
-                            <Input type="date" id="employeeDOB"/>
+                            <Label className={"margin-left-35"} for="employeeDOB">Date Of Birth</Label>
+                            <Input type="date" className={"margin-left-35 width-30"} id="employeeDOB"/>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="employeePass">Email</Label>
-                            <Input type="email" id="employeeEmail" placeholder={"Email"}/>
+                            <Label className={"margin-left-35"} for="employeePass">Email</Label>
+                            <Input type="email" className={"margin-left-35 width-30"} id="employeeEmail" placeholder={"Email"}/>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="employeePass">Password</Label>
-                            <Input type="password" id="employeePass" placeholder={"Password"}/>
+                            <Label className={"margin-left-35"} for="employeePass">Password</Label>
+                            <Input type="password" className={"margin-left-35 width-30"} id="employeePass" placeholder={"Password"}/>
                         </FormGroup>
                         <FormGroup check>
-                            <Label id={"label"} check>
+                            <Label className={"margin-left-35"} check>
                                 <Input type="checkbox" id="isManager"/>{' '}
                                 Manager
                             </Label>
                         </FormGroup>
                         <br/>
                         <Button onClick={this.handleNewEmployee} color={"primary"}
-                                id={"submitNewEmpBtn"}>Submit</Button>
+                                className={"margin-left-35"}>Submit</Button>
                         {' '}
-                        <WrappedButton id={"newEmpCancel"} link={"/"} name={"Cancel"}/>
+                        <WrappedButton className={"margin-left-35"} link={routes.HOME} name={"Cancel"}/>
                     </Form>
                 </div>
             </div>

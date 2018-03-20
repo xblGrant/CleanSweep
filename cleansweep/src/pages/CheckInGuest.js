@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
 import { AvailableRooms } from '../components/Generators';
+import * as routes from "../constants/routes";
 
 class CheckInGuest extends React.Component {
     constructor(props) {
@@ -22,22 +23,22 @@ class CheckInGuest extends React.Component {
                 <head>
                     <title>Check-In Guest</title>
                 </head>
-                <div id={"checkInForm"}>
+                <div>
                     <Form>
                         <FormGroup row>
                             {/*<Label id={"label"} for="custFName"></Label>*/}
-                            <Input type="text" id="custFName" placeholder={"First name"}/>
+                            <Input type="text" className={"margin-left-35 width-30"} id={"custFName"} placeholder={"First name"}/>
                         </FormGroup>
                         <FormGroup row>
                             {/*<Label id={"label"} for="custLName"></Label>*/}
-                            <Input type="text" id="custLName" placeholder={"Last name"}/>
+                            <Input type="text" className={"margin-left-35 width-30"} id={"custLName"} placeholder={"Last name"}/>
                         </FormGroup>
                         <FormGroup row>
-                            <AvailableRooms id="listItemGenerator"/>
+                            <AvailableRooms className={"margin-left-35 width-30"} id="listItemGenerator"/>
                         </FormGroup>
-                        <Button onClick={this.handleCheckIn} color={"primary"} id={"checkInBtn"}>Check-In</Button>
+                        <Button onClick={this.handleCheckIn} className={"margin-left-35"} color={"primary"}>Check-In</Button>
                         {' '}
-                        <WrappedButton id={"checkInCancel"} link={"/"} name={"Cancel"}/>
+                        <WrappedButton link={routes.HOME} name={"Cancel"}/>
                     </Form>
                 </div>
             </div>

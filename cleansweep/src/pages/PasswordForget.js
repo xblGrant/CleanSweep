@@ -71,7 +71,7 @@ class PasswordForgetForm extends React.Component {
 }
 
 const PasswordForgetLink = () =>
-    <p id={"pwForgetLink"}>
+    <p className={"margin-left-35"}>
         <Link to={"/pwforget"}>Forgot Password?</Link>
     </p>;
 

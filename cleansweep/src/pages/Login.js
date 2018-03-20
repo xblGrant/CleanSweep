@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
        auth.doSignInWithEmailAndPassword(email, password)
            .then(() => {
                this.setState(() => ({...INITIAL_STATE}));
-               history.push(routes.ASSIGNED_ROOMS);  //TODO: redirect to a better page than the same page
+               history.push(routes.HOME);  //TODO: redirect to a better page than the same page
            })
            .catch(error => {
                this.setState(byPropKey('error', error));
@@ -65,18 +65,18 @@ class LoginForm extends React.Component {
                 { error && <p  type={"error"} className={"error"} id={"error"}>
                 {"Your Email/Password is incorrect. Please retry or click Forgot Password"}</p> }
                 <FormGroup>
-                    <Label id={"label"} for={"userEmail"}>Email</Label>
+                    <Label className={"margin-left-35"} for={"userEmail"}>Email</Label>
                     <Input value={email}
                            onChange={e => this.setState(byPropKey('email', e.target.value))}
-                           type={"email"} className={"userEmail"} id={"userEmail"} placeholder={"Enter email"}/>
+                           type={"email"} className={"userEmail margin-left-35 width-30"} id={"userEmail"} placeholder={"Enter email"}/>
                 </FormGroup>
                 <FormGroup>
-                    <Label id={"label"} for={"userPass"}>Password</Label>
+                    <Label className={"margin-left-35"} for={"userPass"}>Password</Label>
                     <Input value={password}
                            onChange={e => this.setState(byPropKey('password', e.target.value))}
-                           type={"password"} className={"userPass"} id={"userPass"} placeholder={"Enter password"}/>
+                           type={"password"} className={"userPass margin-left-35 width-30"} id={"userPass"} placeholder={"Enter password"}/>
                 </FormGroup>
-                <Button type={"submit"} disabled={isInvalid} color={"primary"} id={"loginBtn"}>Login</Button>
+                <Button type={"submit"} disabled={isInvalid} color={"primary"} className={"margin-left-35"}>Login</Button>
 
             </Form>
         );

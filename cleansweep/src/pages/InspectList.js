@@ -61,10 +61,10 @@ class InspectList extends React.Component {
                 <head>
                     <title>Inspections</title>
                 </head>
-                <div id={"loadRooms"}>
+                <div>
                     <Form>
                         <div className={"container text-center"}>
-                            <Label className={"header"} id={"select_label"}>Rooms needing Inspection</Label>
+                            <Label className={"header"}>Rooms needing Inspection</Label>
                         </div>
                         <GroupSelect items={this.state.rooms}/>
                     </Form>

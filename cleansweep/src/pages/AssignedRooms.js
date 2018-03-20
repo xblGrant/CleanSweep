@@ -66,7 +66,7 @@ class AssignedRooms extends React.Component {
                 <div id={"loadRooms"}>
                     <Form>
                         <div className={"container text-center"}>
-                            <Label className={"header"} id={"select_label"}>Assigned Rooms</Label>
+                            <Label className={"header"} className={"center"}>Assigned Rooms</Label>
                         </div>
                         <GroupSelect items={this.state.rooms}/>
                     </Form>

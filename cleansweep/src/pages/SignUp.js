@@ -85,40 +85,40 @@ class SignUpForm extends React.Component {
 
         return (
             <Form onSubmit={this.handleSignUp}>
-                {error && <p type={"error"} className={"error"} id={"error"}>{error.message}</p>}
+                {error && <p type={"error"} className={"error"}>{error.message}</p>}
                 <FormGroup>
-                    <Label id={"label"} for={"userName"}>Full Name</Label>
+                    <Label className={"margin-left-35"} for={"userName"}>Full Name</Label>
                     <Input value={userName}
                            onChange={e => this.setState(byPropKey('userName', e.target.value))}
-                           className={"userName"} id={"userName"} placeholder={"Full Name"}/>
+                           className={"margin-left-35 width-30"} id={"userName"} placeholder={"Full Name"}/>
                 </FormGroup>
                 <FormGroup>
-                    <Label id={"label"} for={"userEmail"}>Email</Label>
+                    <Label className={"margin-left-35"} for={"userEmail"}>Email</Label>
                     <Input value={email}
                            onChange={e => this.setState(byPropKey('email', e.target.value))}
-                           type={"email"} className={"userEmail"} id={"userEmail"} placeholder={"Enter email"}/>
+                           type={"email"} className={"margin-left-35 width-30"} id={"userEmail"} placeholder={"Enter email"}/>
                 </FormGroup>
                 <FormGroup>
-                    <Label id={"label"} for={"userPass"}>Password</Label>
+                    <Label className={"margin-left-35"} for={"userPass"}>Password</Label>
                     <Input value={passwordOne}
                            onChange={e => this.setState(byPropKey('passwordOne', e.target.value))}
-                           type={"password"} className={"userPass"} id={"userPass"} placeholder={"Enter password"}/>
+                           type={"password"} className={"margin-left-35 width-30"} id={"userPass"} placeholder={"Enter password"}/>
                 </FormGroup>
                 <FormGroup>
-                    <Label id={"label"} for={"confirmUserPass"}>Confirm Password</Label>
+                    <Label className={"margin-left-35"} for={"confirmUserPass"}>Confirm Password</Label>
                     <Input value={passwordTwo}
                            onChange={e => this.setState(byPropKey('passwordTwo', e.target.value))}
-                           type={"password"} className={"confirmUserPass"} id={"confirmUserPass"}
+                           type={"password"} className={"margin-left-35 width-30"} id={"confirmUserPass"}
                            placeholder={"Confirm password"}/>
                 </FormGroup>
-                <Button disabled={isInvalid} type={"submit"} color={"primary"} id={"signUpBtn"}>Sign-Up</Button>
+                <Button disabled={isInvalid} type={"submit"} color={"primary"} className={"margin-left-35"}>Sign-Up</Button>
             </Form>
         )
     }
 }
 
 const SignUpLink = () =>
-    <p id={"signUpLink"}>
+    <p className={"margin-left-35"}>
         <Link to={"/signup"}>Sign Up</Link>
     </p>;
 

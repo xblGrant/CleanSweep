@@ -9,6 +9,7 @@ import {
     Input,
 } from 'reactstrap';
 import {firebase} from "../firebase";
+import * as routes from "../constants/routes";
 
 class InspectRoom extends React.Component {
     constructor(props) {
@@ -60,27 +61,27 @@ class InspectRoom extends React.Component {
                 <head>
                     <title>Inspect Room</title>
                 </head>
-                <div id={"inspectRoomForm"}>
+                <div className={"margin-top-02"}>
                     <Form>
                         <FormGroup>
-                            <Label id={"label"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="floorSelect" id="floorSelect">
+                            <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
+                            <Input onClick={this.handleFloorSelect} type="select" className="margin-left-35 width-30" id="floorSelect">
                                 <CreateFloorOptions />
                             </Input>
                         </FormGroup>
                         <FormGroup>
-                            <Label id={"label"} for="assignableRoom">Rooms</Label>
-                            <Input id={"roomOptions"} type="select" multiple>
+                            <Label className={"margin-left-35"} for="assignableRoom">Rooms</Label>
+                            <Input className={"margin-left-35 width-30"} type="select" multiple>
                                 <CreateRoomOptions rooms={this.state.rooms}/>
                             </Input>
                         </FormGroup>
                         <FormGroup row>
-                            <Label id={"label"} for="inspectComment">Comment</Label>
-                            <Input type="textarea" id="inspectComment" placeholder={"Enter comment here"}/>
+                            <Label className={"margin-left-35"} for="inspectComment">Comment</Label>
+                            <Input type="textarea" className={"margin-left-35 width-30"} placeholder={"Enter comment here"}/>
                         </FormGroup>
-                        <Button onClick={this.handleCheckIn} color={"primary"} id={"submitNewEmpBtn"}>Submit</Button>
+                        <Button onClick={this.handleCheckIn} color={"primary"} className={"margin-left-35"}>Submit</Button>
                         {' '}
-                        <WrappedButton id={"checkInCancel"} link={"/"} name={"Cancel"}/>
+                        <WrappedButton link={routes.HOME} name={"Cancel"}/>
                     </Form>
                 </div>
             </div>

@@ -30,7 +30,7 @@ class Room extends React.Component {
     //TODO: cont... regarding roomID (don't change roomID. it is correct)
     render() {
         return (
-            <div id='roomPage'>
+            <div className={"container"}>
                 <p>{this.state.roomID}</p>
             </div>
         );

@@ -71,10 +71,10 @@ class DepartingGuests extends React.Component {
                 <head>
                     <title>Departing Guests</title>
                 </head>
-                <div id={"loadRooms"}>
+                <div>
                     <Form>
                         <div className={"container text-center"}>
-                            <Label className={"header"} id={"select_label"}>Rooms with Departing Guests</Label>
+                            <Label className={"header"}>Rooms with Departing Guests</Label>
                         </div>
                         <GroupSelect items={this.state.rooms}/>
                     </Form>

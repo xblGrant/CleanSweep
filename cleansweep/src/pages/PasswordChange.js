@@ -47,10 +47,11 @@ class PasswordChange extends React.Component {
             passwordOne === '';
 
         return (
-            <Form id={"pwChangeForm"} onSubmit={this.onSubmit}>
-                {error && <p type={"error"} className={"error"} id={"error"}>{error.message}</p>}
+            <Form className={"margin-top-02"} onSubmit={this.onSubmit}>
+                {error && <p type={"error"} className={"error"}>{error.message}</p>}
                 <FormGroup>
-                    <Input id={"pwChange"}
+                    <Input className={"margin-left-35 width-30"}
+                           id={"pwChange"}
                            value={passwordOne}
                            onChange={e => this.setState(byPropKey('passwordOne', e.target.value))}
                            type={"password"}
@@ -58,14 +59,16 @@ class PasswordChange extends React.Component {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Input id={"pwChange"}
+                    <Input className={"margin-left-35 width-30"}
+                           id={"pwChange"}
                            value={passwordTwo}
                            onChange={e => this.setState(byPropKey('passwordTwo', e.target.value))}
                            type={"password"}
                            placeholder={"Confirm New Password"}
                     />
                 </FormGroup>
-                <Button id={"changePwBtn"}
+                <Button className={"margin-left-35"}
+                        id={"changePwBtn"}
                         disabled={isInvalid}
                         color={"primary"}
                         type={"submit"}>
