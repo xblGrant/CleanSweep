@@ -12,14 +12,14 @@ class AvailableRooms extends React.Component {
         }
     }
 
-    componentDidMount() {
+    getAvailableRooms() {
         let roomList = [];
 
         let roomRef = firebase.db.ref("/Rooms/Reservable/");
         roomRef.orderByKey().once('value', function (floors) {
             floors.forEach(function (allRooms) {
                 allRooms.forEach(function (room) {
-                    if (room.val().isReservable === 'true') {
+                    if (room.val().isReservable === true) {
                         let assigned = (room.val().assignedEmployee !== 'none');
                         roomList.push(
                             [room.key,
@@ -37,6 +37,10 @@ class AvailableRooms extends React.Component {
                 rooms: roomList
             });
         });
+    }
+
+    componentDidMount() {
+        this.getAvailableRooms();
     }
 
     render() {

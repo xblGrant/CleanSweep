@@ -12,7 +12,7 @@ class AllRooms extends React.Component {
         }
     }
 
-    componentDidMount() {
+    getAllRooms() {
         let roomList = [];
 
         let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -50,6 +50,10 @@ class AllRooms extends React.Component {
                 })
             )
         });
+    }
+
+    componentDidMount() {
+       this.getAllRooms();
     }
 
     render() {

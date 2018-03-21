@@ -12,7 +12,7 @@ class AssignedRooms extends React.Component {
         }
     }
 
-    componentDidMount() {
+    getAssignedRoom() {
         let roomList = [];
         let user = null;
         let currentUser = firebase.auth.currentUser;
@@ -58,6 +58,10 @@ class AssignedRooms extends React.Component {
                     rooms: roomList
                 }));
         });
+    }
+
+    componentDidMount() {
+        this.getAssignedRoom();
     }
 
     render() {

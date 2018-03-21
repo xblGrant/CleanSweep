@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { WrappedButton } from "../components/Buttons";
 import * as routes from "../constants/routes";
 
 class NewEmployee extends React.Component {
