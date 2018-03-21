@@ -22,54 +22,54 @@ class NewEmployee extends React.Component {
                 </head>
                 <div id={"newEmployeeForm"}>
                     <Form>
-                        <FormGroup row>
-                            <div classname={"row"}>
-                                <div className={"col-sm-10 center"}>
+                        <div classname={"row"}>
+                            <FormGroup row>
+                                <div className={"col-sm-4 center"}>
                                 <Label for="employeeFName">First Name</Label>
                                 <Input type="text" className={"col-sm-12"} id="employeeFName" placeholder={"First name"}/>
                                 </div>
-                            </div>
-                        </FormGroup>
-                        <FormGroup row>
-                            <div classname={"row"}>
-                                 <div className={"col-sm-10 center"}>
+                            </FormGroup>
+                        </div>
+                        <div classname={"row"}>
+                            <FormGroup row>
+                                 <div className={"col-sm-4 center"}>
                                 <Label for="employeeLName">Last Name</Label>
                                 <Input type="text" className={"col-sm-12"} id="employeeLName" placeholder={"Last name"}/>
                                 </div>
-                            </div>
-                        </FormGroup>
-                        <FormGroup row>
-                            <div classname={"row"}>
-                                <div className={"col-sm-10 center"}>
+                            </FormGroup>
+                        </div>
+                        <div classname={"row"}>
+                            <FormGroup row>
+                                <div className={"col-sm-4 center"}>
                                 <Label for="employeeDOB">Date Of Birth</Label>
                                 <Input type="date" className={"col-sm-12"} id="employeeDOB"/>
                                 </div>
-                            </div>
-                        </FormGroup>
-                        <FormGroup row>
-                            <div classname={"row"}>
-                                <div className={"col-sm-10 center"}>
+                            </FormGroup>
+                        </div>
+                        <div classname={"row"}>
+                            <FormGroup row>
+                                <div className={"col-sm-4 center"}>
                                 <Label for="employeePass">Email</Label>
                                 <Input type="email" className={"col-sm-12"} id="employeeEmail" placeholder={"Email"}/>
                                 </div>
-                            </div>
-                        </FormGroup>
-                        <FormGroup row>
-                            <div classname={"row"}>
-                                <div className={"col-sm-10 center"}>
+                            </FormGroup>
+                        </div>
+                        <div classname={"row"}>
+                            <FormGroup row>
+                                <div className={"col-sm-4 center"}>
                                 <Label for="employeePass">Password</Label>
                                 <Input type="password" className={"col-sm-12"} id="employeePass" placeholder={"Password"}/>
-                                </div>
                             </div>
                         </FormGroup>
-                        <FormGroup check>
-                            <div className={"col-sm-4 center"}>
+                        </div>
+                        <div className={"col-sm-4 center"}>
+                            <FormGroup check>
                             <Label className={"col-sm-4"} check>
                                 <Input type="checkbox" id="isManager"/>{' '}
                                 Manager
                             </Label>
-                            </div>
-                        </FormGroup>
+                            </FormGroup>
+                        </div>
                         <br/>
                         <div classname={"row"}>
                             <div className={"col-sm-4 center"}>
