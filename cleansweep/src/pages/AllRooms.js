@@ -12,7 +12,7 @@ class AllRooms extends React.Component {
         }
     }
 
-    componentDidMount() {
+    getAllRooms() {
         let roomList = [];
 
         let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -20,36 +20,40 @@ class AllRooms extends React.Component {
             floors.forEach(function (allRooms) {
                 allRooms.forEach(function (room) {
                     let assigned = (room.val().assignedEmployee !== 'none');
+                    roomList.push(
+                        [room.key,
+                            room.val().status,
+                            room.val().incident,
+                            room.val().guest,
+                            assigned]
+                    );
+                })
+            })
+        }).then(() => {
+            roomRef = firebase.db.ref("/Rooms/NonReservable/");
+            roomRef.orderByKey().once('value', function (floors) {
+                floors.forEach(function (allRooms) {
+                    allRooms.forEach(function (room) {
+                        let assigned = (room.val().assignedEmployee !== 'none');
                         roomList.push(
                             [room.key,
                                 room.val().status,
                                 room.val().incident,
-                                room.val().guest,
-                                assigned ]
+                                "n/a",
+                                assigned]
                         );
                     })
                 })
-        }).then(() => {
-            // roomRef = firebase.db.ref("/Rooms/NonReservable/");
-            // roomRef.orderByKey().once('value', function (floors) {
-            //     floors.forEach(function (allRooms) {
-            //         allRooms.forEach(function (room) {
-            //           let assigned = (room.val().assignedEmployee !== 'none');
-            //             roomList.push(
-            //                 [room.key,
-            //                     room.val().status,
-            //                     room.val().incident,
-            //                     room.val().assignedEmployee,
-            //                     assigned ]
-            //             );
-            //         })
-            //     })
-            // }).then(() =>
+            }).then(() =>
                 this.setState({
                     rooms: roomList
                 })
-            // )
+            )
         });
+    }
+
+    componentDidMount() {
+       this.getAllRooms();
     }
 
     render() {
@@ -60,10 +64,12 @@ class AllRooms extends React.Component {
                 </head>
                 <div id={"loadRooms"}>
                     <Form>
-                        <div className={"container text-center"}>
-                        <Label className={"header"} className={"center"}>All Rooms</Label>
+                        <div className={"center"}>
+                            <div className={"container text-center"}>
+                                <Label className={"center"}>All Rooms</Label>
+                            </div>
+                            <GroupSelect items={this.state.rooms}/>
                         </div>
-                        <GroupSelect items={this.state.rooms}/>
                     </Form>
                 </div>
             </div>
