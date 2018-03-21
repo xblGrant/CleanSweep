@@ -12,11 +12,11 @@ class AssignedRooms extends React.Component {
         }
     }
 
-    getAssignedRoom() {
+    componentDidMount() {
         let roomList = [];
         let user = null;
         let currentUser = firebase.auth.currentUser;
-        if (currentUser !== null) {
+        if (currentUser !== null){
             user = currentUser.uid;
         }
 
@@ -33,35 +33,28 @@ class AssignedRooms extends React.Component {
                                 true
                             ]
                         );
-                    }
-                })
-            })
+                    }})})
         }).then(() => {
-            roomRef = firebase.db.ref("/Rooms/NonReservable/");
-            roomRef.orderByKey().once('value', function (floors) {
-                floors.forEach(function (allRooms) {
-                    allRooms.forEach(function (room) {
-                        if (user === room.val().assignedEmployee) {
-                            roomList.push(
-                                [room.key,
-                                    room.val().status,
-                                    room.val().incident,
-                                    "n/a",
-                                    true
-                                ]
-                            );
-                        }
-                    })
-                })
-            }).then(() =>
+            // roomRef = firebase.db.ref("/Rooms/NonReservable/");
+            // roomRef.orderByKey().once('value', function (floors) {
+            //     floors.forEach(function (allRooms) {
+            //         allRooms.forEach(function (room) {
+            //             if (user === room.val().assignedEmployee) {
+            //                 roomList.push(
+            //                     [room.key,
+            //                         room.val().status,
+            //                         room.val().incident,
+            //                         room.val().guest,
+            //                         true
+            //                     ]
+            //                 );
+            //             }})})
+            // }).then(() =>
                 this.setState({
                     rooms: roomList
-                }));
+                });
+            // )
         });
-    }
-
-    componentDidMount() {
-        this.getAssignedRoom();
     }
 
     render() {
@@ -73,7 +66,7 @@ class AssignedRooms extends React.Component {
                 <div id={"loadRooms"}>
                     <Form>
                         <div className={"container text-center"}>
-                            <Label className={"center"}>Assigned Rooms</Label>
+                            <Label className={"header"} className={"center"}>Assigned Rooms</Label>
                         </div>
                         <GroupSelect items={this.state.rooms}/>
                     </Form>

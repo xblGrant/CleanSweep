@@ -16,69 +16,52 @@ class NewEmployee extends React.Component {
 
     render() {
         return (
-            <div classname={"container"}>
+            <div className={"container"}>
                 <head>
                     <title>New Employee</title>
                 </head>
-                <div id={"newEmployeeForm"}>
-                    <Form>
-                        <div classname={"row"}>
+                <div className={"row"}>
+                    <div className={"col-sm-4"}>
+                    </div>
+
+                    <div className={"col-sm-4"} id={"newEmployeeForm"}>
+                        <Form>
                             <FormGroup row>
-                                <div className={"col-sm-4 center"}>
                                 <Label for="employeeFName">First Name</Label>
-                                <Input type="text" className={"col-sm-12"} id="employeeFName" placeholder={"First name"}/>
-                                </div>
+                                <Input type="text" id="employeeFName" placeholder={"First name"}/>
                             </FormGroup>
-                        </div>
-                        <div classname={"row"}>
                             <FormGroup row>
-                                 <div className={"col-sm-4 center"}>
                                 <Label for="employeeLName">Last Name</Label>
-                                <Input type="text" className={"col-sm-12"} id="employeeLName" placeholder={"Last name"}/>
-                                </div>
+                                <Input type="text" id="employeeLName" placeholder={"Last name"}/>
                             </FormGroup>
-                        </div>
-                        <div classname={"row"}>
                             <FormGroup row>
-                                <div className={"col-sm-4 center"}>
                                 <Label for="employeeDOB">Date Of Birth</Label>
-                                <Input type="date" className={"col-sm-12"} id="employeeDOB"/>
-                                </div>
+                                <Input type="date" id="employeeDOB"/>
                             </FormGroup>
-                        </div>
-                        <div classname={"row"}>
                             <FormGroup row>
-                                <div className={"col-sm-4 center"}>
                                 <Label for="employeePass">Email</Label>
-                                <Input type="email" className={"col-sm-12"} id="employeeEmail" placeholder={"Email"}/>
-                                </div>
+                                <Input type="email" id="employeeEmail" placeholder={"Email"}/>
                             </FormGroup>
-                        </div>
-                        <div classname={"row"}>
                             <FormGroup row>
-                                <div className={"col-sm-4 center"}>
                                 <Label for="employeePass">Password</Label>
-                                <Input type="password" className={"col-sm-12"} id="employeePass" placeholder={"Password"}/>
-                            </div>
-                        </FormGroup>
-                        </div>
-                        <div className={"col-sm-4 center"}>
-                            <FormGroup check>
-                            <Label className={"col-sm-4"} check>
-                                <Input type="checkbox" id="isManager"/>{' '}
-                                Manager
-                            </Label>
+                                <Input type="password" id="employeePass" placeholder={"Password"}/>
                             </FormGroup>
-                        </div>
-                        <br/>
-                        <div classname={"row"}>
-                            <div className={"col-sm-4 center"}>
-                                <Button className={"col-sm-4"} onClick={this.handleNewEmployee} color={"primary"}>Submit</Button>
-                                {' '}
-                                <Button className={"col-sm-4"} link={routes.HOME}>Cancel</Button>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="isManager"/>{' '}
+                                    Manager
+                                </Label>
+                            </FormGroup>
+                            <br/>
+                            <div className={"row"}>
+                                <Button className={"col"} onClick={this.handleNewEmployee} color={"primary"}>Submit</Button>
+                                <Button className={"col"} link={routes.HOME}>Cancel</Button>
                             </div>
-                        </div>
-                </Form>
+                        </Form>
+                    </div>
+
+                    <div className={"col-sm-4"}>
+                    </div>
                 </div>
             </div>
         );

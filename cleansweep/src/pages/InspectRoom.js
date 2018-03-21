@@ -23,67 +23,32 @@ class InspectRoom extends React.Component {
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
     }
 
-    getAllRooms() {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/NonReservable/");
-        roomRef.orderByKey().once('value', function (floors) {
-            floors.forEach(function (allRooms) {
-                allRooms.forEach(function (room) {
-                    if (!room.val().incident && room.val().status === 'Clean')
-                        roomList.push(room.key);
-                })
-            })
-        }).then(() => {
-            roomRef = firebase.db.ref("/Rooms/Reservable/");
-            roomRef.orderByKey().once('value', function (floors) {
-                floors.forEach(function (allRooms) {
-                    allRooms.forEach(function (room) {
-                        if (!room.val().incident && room.val().status === 'Clean'
-                            && room.val().guest === 'none' && !room.val().isReservable)
-                            roomList.push(room.key);
-                    })
-                })
-            }).then(() =>
-                this.setState({
-                    rooms: roomList
-                })
-            )
-        });
-    }
-
-    getRoomsByFloor(floor) {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
-        roomRef.orderByKey().once('value', function (allRooms) {
-            allRooms.forEach(function (room) {
-                if (!room.val().incident && room.val().status === 'Clean')
-                    roomList.push(room.key);
-            })
-        }).then(() => {
-            roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
-            roomRef.orderByKey().once('value', function (allRooms) {
-                allRooms.forEach(function (room) {
-                    if (!room.val().incident && room.val().status === 'Clean'
-                        && room.val().guest === 'none' && !room.val().isReservable)
-                        roomList.push(room.key);
-                })
-            }).then(() => {
-                this.setState({
-                    rooms: roomList
-                })
-            })
-        })
-    }
-
     componentDidMount() {
-        this.getAllRooms();
+        let roomList = [];
+        let roomRef = firebase.db.ref("/Rooms/Reservable/100");
+        roomRef.orderByKey().once('value', function(allRooms) {
+            allRooms.forEach( function(room) {
+                roomList.push(room.key);
+            })
+        }).then( () =>
+            this.setState({
+                rooms: roomList
+            })
+        )
     }
 
     handleFloorSelect(e) {
-        if (e.target.value === '000')
-            this.getAllRooms();
-        else
-            this.getRoomsByFloor(e.target.value);
+        let roomList = [];
+        let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
+        roomRef.orderByKey().once('value', function(allRooms) {
+            allRooms.forEach( function(room) {
+                roomList.push(room.key);
+            })
+        }).then( () =>
+            this.setState({
+                rooms: roomList
+            })
+        )
     }
 
     handleInspect() {

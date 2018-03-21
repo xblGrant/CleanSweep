@@ -12,7 +12,7 @@ class DepartingGuests extends React.Component {
         };
     }
 
-    getDepartingGuests() {
+    componentDidMount() {
         let today = new Date();
         let dd = today.getDate();
         let mm = today.getMonth() + 1;
@@ -41,18 +41,28 @@ class DepartingGuests extends React.Component {
                                 room.val().guest,
                                 assigned]
                         );
-                    }
-                })
-            })
+                    }})})
         }).then(() => {
-            this.setState({
-                rooms: roomList
-            })
+            // roomRef = firebase.db.ref("/Rooms/NonReservable/");
+            // roomRef.orderByKey().once('value', function (floors) {
+            //     floors.forEach(function (allRooms) {
+            //         allRooms.forEach(function (room) {
+            //             if (room.val().departureDate === today) {
+            //                 let assigned = (room.val().assignedEmployee !== 'none');
+            //                 roomList.push(
+            //                     [room.key,
+            //                         room.val().status,
+            //                         room.val().incident,
+            //                         room.val().guest,
+            //                         assigned]
+            //                 );
+            //             }})})
+            // }).then(() =>
+                this.setState({
+                    rooms: roomList
+                })
+            // )
         });
-    }
-
-    componentDidMount() {
-        this.getDepartingGuests();
     }
 
     render() {
