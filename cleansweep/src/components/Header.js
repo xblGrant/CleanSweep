@@ -44,7 +44,7 @@ class Header extends React.Component{
             <div className={"ml-auto"}>
                 <Form id={"header"} inline>
                     <Label for={"userLink"} size={"sm"}>Hello,</Label>{' '}
-                    <Button id={"userLink"} className={"color1 center"} id={"userLink"} color={"link"} size={"sm"}>{this.state.user}</Button>
+                    <Button id={"userLink"} className={"color1 center"} color={"link"} size={"sm"}>{this.state.user}</Button>
                     <div>
                         {button}
                     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { WrappedButton } from "../components/Buttons";
+import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {WrappedButton} from "../components/Buttons";
 import {CreateFloorOptions, CreateRoomOptions} from "../components/Generators";
 import {firebase} from "../firebase";
 import * as routes from "../constants/routes";
@@ -20,11 +20,11 @@ class AssignRooms extends React.Component {
     componentDidMount() {
         let roomList = [];
         let roomRef = firebase.db.ref("/Rooms/Reservable/100");
-        roomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
+        roomRef.orderByKey().once('value', function (allRooms) {
+            allRooms.forEach(function (room) {
                 roomList.push(room.key);
             })
-        }).then( () =>
+        }).then(() =>
             this.setState({
                 rooms: roomList
             })
@@ -34,11 +34,11 @@ class AssignRooms extends React.Component {
     handleFloorSelect(e) {
         let roomList = [];
         let roomRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
-        roomRef.orderByKey().once('value', function(allRooms) {
-            allRooms.forEach( function(room) {
+        roomRef.orderByKey().once('value', function (allRooms) {
+            allRooms.forEach(function (room) {
                 roomList.push(room.key);
             })
-        }).then( () =>
+        }).then(() =>
             this.setState({
                 rooms: roomList
             })
@@ -59,8 +59,8 @@ class AssignRooms extends React.Component {
                     <Form>
                         <FormGroup>
                             <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="floorSelect" className="margin-left-35 width-30">
-                                <CreateFloorOptions />
+                            <Input onClick={this.handleFloorSelect} type="select" className="margin-left-35 width-30">
+                                <CreateFloorOptions/>
                             </Input>
                         </FormGroup>
                         <FormGroup row>
@@ -74,7 +74,7 @@ class AssignRooms extends React.Component {
                             <Input
                                 className={"margin-left-35 width-30"}
                                 placeholder={"Auto-populate with employees/react-selectable-fast"}
-                                type="textarea" id="assignEmployees" />
+                                type="textarea" id="assignEmployees"/>
                         </FormGroup>
                         <Button onClick={this.handleAssignRooms} color={"primary"}
                                 className={"margin-left-35"}>Submit</Button>

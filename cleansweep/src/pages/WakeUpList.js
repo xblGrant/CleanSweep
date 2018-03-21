@@ -30,28 +30,13 @@ class WakeUpList extends React.Component {
                                 assigned
                             ]
                         );
-                    }})})
+                    }
+                })
+            })
         }).then(() => {
-            // roomRef = firebase.db.ref("/Rooms/NonReservable/");
-            // roomRef.orderByKey().once('value', function (floors) {
-            //     floors.forEach(function (allRooms) {
-            //         allRooms.forEach(function (room) {
-            //             if (room.val().wakeupCall !== 'none') {
-            //                 let assigned = (room.val().assignedEmployee !== 'none');
-            //                 roomList.push(
-            //                     [room.key,
-            //                         room.val().status,
-            //                         room.val().incident,
-            //                         room.val().guest,
-            //                         assigned
-            //                     ]
-            //                 );
-            //             }})})
-            // }).then(() =>
             this.setState({
                 rooms: roomList
             });
-            // )
         });
     }
 
@@ -61,7 +46,7 @@ class WakeUpList extends React.Component {
                 <head>
                     <title>Wake-Up Calls</title>
                 </head>
-                <div >
+                <div>
                     <Form>
                         <div className={"container text-center"}>
                             <Label className={"header"}>Wake-Up Calls by Room</Label>

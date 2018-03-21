@@ -11,7 +11,7 @@ export function SignOutButton(props) {
             <Link style={{
                 textDecoration: 'none',
                 color: 'black'
-            }} to={routes.LANDING}>Log-Out</Link>
+            }} to={routes.LOGIN}>Log-Out</Link>
         </Button>
     )
 }
