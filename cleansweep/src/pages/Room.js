@@ -59,7 +59,7 @@ class Room extends React.Component {
         });
 
         //search nonreservable to find matching room if updates.validRoom is false
-        if (updates.validRoom === false) {
+        if (updates.validRoom === "false") {
             console.log("goes into nonreservable");
             let NonReservableRef = firebase.db.ref("/Rooms/NonReservable/");
             NonReservableRef.orderByKey().once('value', function (floor) {
@@ -81,7 +81,7 @@ class Room extends React.Component {
         }
 
         //if updates.hasIncidents
-        if (updates.hasIncidents === true) {
+        if (updates.hasIncidents === "true") {
             let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
             IncidentsRef.orderByKey().startAt("2").once('value', function (room) {
                 room.forEach(function (incident) {
