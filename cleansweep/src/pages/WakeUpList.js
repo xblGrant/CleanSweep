@@ -12,10 +12,8 @@ class WakeUpList extends React.Component {
         }
     }
 
-    // TODO: instead of links for rooms, keep rooms selectable and display wake up time for room when selected
-    componentDidMount() {
+    getWakeUpCalls() {
         let roomList = [];
-
         let roomRef = firebase.db.ref("/Rooms/Reservable/");
         roomRef.orderByKey().once('value', function (floors) {
             floors.forEach(function (allRooms) {
@@ -38,6 +36,11 @@ class WakeUpList extends React.Component {
                 rooms: roomList
             });
         });
+    }
+
+    // TODO: instead of links for rooms, keep rooms selectable and display wake up time for room when selected
+    componentDidMount() {
+        this.getWakeUpCalls();
     }
 
     render() {

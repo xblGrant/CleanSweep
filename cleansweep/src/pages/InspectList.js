@@ -12,9 +12,8 @@ class InspectList extends React.Component {
         }
     }
 
-    componentDidMount() {
+    getInspectRooms() {
         let roomList = [];
-
         let roomRef = firebase.db.ref("/Rooms/Reservable/");
         roomRef.orderByKey().once('value', function (floors) {
             floors.forEach(function (allRooms) {
@@ -38,6 +37,10 @@ class InspectList extends React.Component {
                 rooms: roomList
             });
         });
+    }
+
+    componentDidMount() {
+        this.getInspectRooms();
     }
 
     render() {

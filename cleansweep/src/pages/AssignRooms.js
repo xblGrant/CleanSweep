@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import {WrappedButton} from "../components/Buttons";
-import {CreateFloorOptions, CreateRoomOptions} from "../components/Generators";
+import {CreateFloorOptions} from "../components/Generators";
 import {firebase} from "../firebase";
 import * as routes from "../constants/routes";
 import GroupSelect from "../selectable/GroupSelect";
