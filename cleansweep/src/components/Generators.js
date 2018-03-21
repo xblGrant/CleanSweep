@@ -4,7 +4,7 @@ import {firebase} from "../firebase/index";
 
 const radix = 10;
 
-function CreateRoomOptions(props){
+function CreateRoomOptions(props) {
     return (
         props.rooms.map(
             (roomNum) => {
@@ -28,11 +28,11 @@ class CreateFloorOptions extends React.Component {
     componentDidMount() {
         let floorList = [0];
         let floorRef = firebase.db.ref("/Rooms/Reservable");
-        floorRef.orderByKey().once('value', function(allFloors) {
-            allFloors.forEach( function(floor) {
+        floorRef.orderByKey().once('value', function (allFloors) {
+            allFloors.forEach(function (floor) {
                 floorList.push(floor.key);
             })
-        }).then( () => {
+        }).then(() => {
             this.setState({
                 floors: floorList
             })
@@ -46,11 +46,11 @@ class CreateFloorOptions extends React.Component {
             floors.map(
                 (floorNum) => {
                     return (
-                        <option value={floorNum}>{parseInt(floorNum, radix) / 100}</option>
+                        (floorNum !== 0) ?
+                            <option value={floorNum}>{parseInt(floorNum, radix) / 100}</option> :
+                            <option value={'000'}>All</option>
                     )
-                }
-            )
-        )
+                }))
     }
 }
 
@@ -69,14 +69,14 @@ class AvailableRooms extends React.Component {
         let roomList = [];
         let ref = firebase.db.ref("/Rooms/Reservable");
 
-        ref.orderByKey().once('value', function(allFloors) {
-            allFloors.forEach( function(floors) {
-                floors.forEach( function(rooms) {
+        ref.orderByKey().once('value', function (allFloors) {
+            allFloors.forEach(function (floors) {
+                floors.forEach(function (rooms) {
                     if (rooms.val().guest === "none")
                         roomList.push(rooms.val().room);
                 })
             })
-        }).then( () => {
+        }).then(() => {
             this.setState({
                 rooms: roomList
             });
@@ -109,14 +109,14 @@ class UnavailableRooms extends React.Component {
         let roomList = [];
         let ref = firebase.db.ref("/Rooms/Reservable");
 
-        ref.orderByKey().once('value', function(allFloors) {
-            allFloors.forEach( function(floors) {
-                floors.forEach( function(rooms) {
+        ref.orderByKey().once('value', function (allFloors) {
+            allFloors.forEach(function (floors) {
+                floors.forEach(function (rooms) {
                     if (rooms.val().guest !== "none")
                         roomList.push(rooms.val().room);
                 })
             })
-        }).then( () => {
+        }).then(() => {
             this.setState({
                 rooms: roomList
             });
