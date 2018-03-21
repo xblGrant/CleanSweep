@@ -26,7 +26,7 @@ class CreateFloorOptions extends React.Component {
     }
 
     componentDidMount() {
-        let floorList = [];
+        let floorList = [0];
         let floorRef = firebase.db.ref("/Rooms/Reservable");
         floorRef.orderByKey().once('value', function(allFloors) {
             allFloors.forEach( function(floor) {

@@ -252,12 +252,11 @@ a:hover {
         font-size: 0.9rem; } }
 
 /* Demo specifics */
-
 .main {
     padding: 0 10px;
     border: 1px solid darkcyan;
     overflow: hidden;
-    height: 80vh;
+    height: auto;
     overflow: scroll;
     position: relative;
 }

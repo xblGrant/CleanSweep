@@ -18,7 +18,10 @@ const Album = ({ selectableRef, selected, selecting, roomNum, status, assigned, 
   >
       <h2>{roomNum}</h2>
       <small>{status}</small>
-      <Label assigned={assigned} incident={incident} guest={guest}/>
+      { (incident !== null && guest !== null) ?
+          <Label assigned={assigned} incident={incident} guest={guest}/> :
+          null
+      }
   </div>
 );
 

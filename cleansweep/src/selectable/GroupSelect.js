@@ -27,14 +27,18 @@ class GroupSelect extends React.Component {
                     tolerance={tolerance}
                     globalMouse={isGlobal}
                     allowClickWithoutSelected={true}
-                    disabled={true}
+                    disabled={this.props.isDisabled}
                     ignoreList={['.not-selectable', '.item:nth-child(10)', '.item:nth-child(27)']}
                 >
-                    <SelectableList items={this.props.items} />
+                    <SelectableList items={this.props.items} isDisabled={this.props.isDisabled} />
                 </SelectableGroup>
             </div>
         )
     }
 }
+
+GroupSelect.defaultProps = {
+    isDisabled: true
+};
 
 export default GroupSelect;
