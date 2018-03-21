@@ -24,37 +24,50 @@ class NewEmployee extends React.Component {
                 <div id={"newEmployeeForm"}>
                     <Form>
                         <FormGroup row>
-                            <Label className={"margin-left-35"} for="employeeFName">First Name</Label>
-                            <Input type="text" className={"margin-left-35 width-30"} id="employeeFName" placeholder={"First name"}/>
+                            <div className={"col-sm-4 center"}>
+                            <Label className={"col-sm-4"} for="employeeFName">First Name</Label>
+                            <Input type="text" className={"col-sm-10 center"} id="employeeFName" placeholder={"First name"}/>
+                            </div>
                         </FormGroup>
                         <FormGroup row>
-                            <Label className={"margin-left-35"} for="employeeLName">Last Name</Label>
-                            <Input type="text" className={"margin-left-35 width-30"} id="employeeLName" placeholder={"Last name"}/>
+                            <div className={"col-sm-4 center"}>
+                            <Label className={"col-sm-4"} for="employeeLName">Last Name</Label>
+                            <Input type="text" className={"col-sm-10 center"} id="employeeLName" placeholder={"Last name"}/>
+                            </div>
                         </FormGroup>
                         <FormGroup row>
-                            <Label className={"margin-left-35"} for="employeeDOB">Date Of Birth</Label>
-                            <Input type="date" className={"margin-left-35 width-30"} id="employeeDOB"/>
+                            <div className={"col-sm-4 center"}>
+                            <Label className={"col-sm-4"} for="employeeDOB">Date Of Birth</Label>
+                            <Input type="date" className={"col-sm-10 center"} id="employeeDOB"/>
+                            </div>
                         </FormGroup>
                         <FormGroup row>
-                            <Label className={"margin-left-35"} for="employeePass">Email</Label>
-                            <Input type="email" className={"margin-left-35 width-30"} id="employeeEmail" placeholder={"Email"}/>
+                            <div className={"col-sm-4 center"}>
+                            <Label className={"col-sm-4"} for="employeePass">Email</Label>
+                            <Input type="email" className={"col-sm-10 center"} id="employeeEmail" placeholder={"Email"}/>
+                            </div>
                         </FormGroup>
                         <FormGroup row>
-                            <Label className={"margin-left-35"} for="employeePass">Password</Label>
-                            <Input type="password" className={"margin-left-35 width-30"} id="employeePass" placeholder={"Password"}/>
+                            <div className={"col-sm-4 center"}>
+                            <Label className={"col-sm-4"} for="employeePass">Password</Label>
+                            <Input type="password" className={"col-sm-10 center"} id="employeePass" placeholder={"Password"}/>
+                            </div>
                         </FormGroup>
                         <FormGroup check>
-                            <Label className={"margin-left-35"} check>
+                            <div className={"col-sm-4 center"}>
+                            <Label className={"col-sm-4"} check>
                                 <Input type="checkbox" id="isManager"/>{' '}
                                 Manager
                             </Label>
+                            </div>
                         </FormGroup>
                         <br/>
-                        <Button onClick={this.handleNewEmployee} color={"primary"}
-                                className={"margin-left-35"}>Submit</Button>
-                        {' '}
-                        <WrappedButton className={"margin-left-35"} link={routes.HOME} name={"Cancel"}/>
-                    </Form>
+                        <div className={"col-sm-4 center"}>
+                            <Button className={"col-sm-4"} onClick={this.handleNewEmployee} color={"primary"}>Submit</Button>
+                            {' '}
+                            <Button className={"col-sm-4"} link={routes.HOME}>Cancel</Button>
+                        </div>
+                </Form>
                 </div>
             </div>
         );
