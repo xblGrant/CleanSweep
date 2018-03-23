@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import * as routes from "../constants/routes";
+import {Helmet} from "react-helmet";
 
 class NewEmployee extends React.Component {
     constructor(props) {
@@ -17,9 +18,9 @@ class NewEmployee extends React.Component {
     render() {
         return (
             <div classname={"container"}>
-                <head>
+                <Helmet>
                     <title>New Employee</title>
-                </head>
+                </Helmet>
                 <div id={"newEmployeeForm"}>
                     <Form>
                         <div classname={"row"}>

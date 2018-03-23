@@ -9,6 +9,7 @@ import {
     Input,
 } from 'reactstrap';
 import {firebase} from "../firebase";
+import {Helmet} from "react-helmet";
 
 class AddIncident extends React.Component {
     constructor(props) {
@@ -87,9 +88,9 @@ class AddIncident extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>Incident Report</title>
-                </head>
+                </Helmet>
                 <div className={"margin-top-02"}>
                     <Form>
                         <FormGroup>

@@ -5,6 +5,7 @@ import {CreateFloorOptions} from "../components/Generators";
 import {firebase} from "../firebase";
 import * as routes from "../constants/routes";
 import GroupSelect from "../selectable/GroupSelect";
+import {Helmet} from "react-helmet";
 
 class AssignRooms extends React.Component {
     constructor(props) {
@@ -139,9 +140,9 @@ class AssignRooms extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>Assign Rooms</title>
-                </head>
+                </Helmet>
                 <div className={"margin-top-02"}>
                     <Form>
                         <FormGroup>

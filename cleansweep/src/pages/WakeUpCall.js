@@ -4,6 +4,7 @@ import {WrappedButton} from "../components/Buttons";
 import {CreateRoomOptions, CreateFloorOptions} from '../components/Generators';
 import {firebase} from "../firebase";
 import * as routes from "../constants/routes";
+import {Helmet} from "react-helmet";
 
 class AddWakeUp extends React.Component {
     constructor(props) {
@@ -67,9 +68,9 @@ class AddWakeUp extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>Add Wake-Up Call</title>
-                </head>
+                </Helmet>
                 <div>
                     <Form>
                         <FormGroup>

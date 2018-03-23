@@ -2,6 +2,7 @@ import React from 'react';
 import {Form, Label} from 'reactstrap';
 import GroupSelect from '../selectable/GroupSelect';
 import {firebase} from '../firebase';
+import {Helmet} from "react-helmet";
 
 class AssignedRooms extends React.Component {
     constructor(props) {
@@ -67,9 +68,9 @@ class AssignedRooms extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>Assigned Rooms</title>
-                </head>
+                </Helmet>
                 <div id={"loadRooms"}>
                     <Form>
                         <div className={"container text-center"}>

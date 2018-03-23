@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
 import * as routes from "../constants/routes";
+import {Helmet} from "react-helmet";
 
 class AddWakeUp extends React.Component {
     constructor(props) {
@@ -17,9 +18,9 @@ class AddWakeUp extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>Change Employee Role</title>
-                </head>
+                </Helmet>
                 <div className={"margin-top-02"}>
                     <Form>
                         <Label className={"margin-left-35"}><h6>Search By</h6></Label>

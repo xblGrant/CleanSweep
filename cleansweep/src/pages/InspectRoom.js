@@ -10,6 +10,7 @@ import {
 } from 'reactstrap';
 import {firebase} from "../firebase";
 import * as routes from "../constants/routes";
+import {Helmet} from "react-helmet";
 
 class InspectRoom extends React.Component {
     constructor(props) {
@@ -93,9 +94,9 @@ class InspectRoom extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>Inspect Room</title>
-                </head>
+                </Helmet>
                 <div className={"margin-top-02"}>
                     <Form>
                         <FormGroup>

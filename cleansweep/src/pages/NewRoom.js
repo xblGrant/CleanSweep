@@ -3,6 +3,7 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
 import { CreateFloorOptions } from "../components/Generators";
 import * as routes from "../constants/routes";
+import {Helmet} from "react-helmet";
 
 import { firebase } from '../firebase/index';
 
@@ -74,9 +75,9 @@ class NewRoom extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>New Room</title>
-                </head>
+                </Helmet>
                 <div id={"newRoomForm"}>
                     <Form>
                         <FormGroup>

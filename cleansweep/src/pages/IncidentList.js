@@ -2,6 +2,7 @@ import React from 'react';
 import {Form, Label} from 'reactstrap';
 import GroupSelect from '../selectable/GroupSelect';
 import {firebase} from '../firebase';
+import {Helmet} from "react-helmet";
 
 class IncidentList extends React.Component {
     constructor(props) {
@@ -63,9 +64,9 @@ class IncidentList extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>Incidents</title>
-                </head>
+                </Helmet>
                 <div>
                     <Form>
                         <div className={"container text-center"}>

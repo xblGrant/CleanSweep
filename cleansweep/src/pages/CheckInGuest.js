@@ -3,6 +3,7 @@ import {Button, Form, FormGroup, Input} from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
 import { AvailableRooms } from '../components/Generators';
 import * as routes from "../constants/routes";
+import {Helmet} from "react-helmet";
 
 class CheckInGuest extends React.Component {
     constructor(props) {
@@ -20,9 +21,9 @@ class CheckInGuest extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>Check-In Guest</title>
-                </head>
+                </Helmet>
                 <div>
                     <Form>
                         <FormGroup row>

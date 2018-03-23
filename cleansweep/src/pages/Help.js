@@ -6,6 +6,7 @@ import {
     Label,
     Input,
 } from 'reactstrap';
+import {Helmet} from "react-helmet";
 
 class Help extends React.Component {
     constructor(props) {
@@ -21,9 +22,9 @@ class Help extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>Contact Us</title>
-                </head>
+                </Helmet>
                 <div id={"helpForm"}>
                     <Form>
                         <h2 align="center">Contact Us</h2>

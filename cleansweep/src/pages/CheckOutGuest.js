@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
 import { WrappedButton } from "../components/Buttons";
 import * as routes from "../constants/routes";
+import {Helmet} from "react-helmet";
 
 class CheckOutGuest extends React.Component {
     constructor(props) {
@@ -17,9 +18,9 @@ class CheckOutGuest extends React.Component {
     render() {
         return (
             <div>
-                <head>
+                <Helmet>
                     <title>Check-Out Guest</title>
-                </head>
+                </Helmet>
                 <div id={"checkOutForm"}>
                     <Form>
                         <FormGroup row>

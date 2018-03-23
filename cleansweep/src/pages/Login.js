@@ -3,14 +3,15 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { PasswordForgetLink } from "./PasswordForget";
 import { SignUpLink } from "./SignUp";
 import {auth} from "../firebase/index";
+import {Helmet} from "react-helmet";
 
 import * as routes from '../constants/routes';
 
 const Login = ({ history }) =>
     <div>
-        <head>
+        <Helmet>
             <title>Login</title>
-        </head>
+        </Helmet>
         <div id={"loginForm"}>
             <LoginForm history={history} />
             <SignUpLink />
