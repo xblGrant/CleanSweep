@@ -106,7 +106,7 @@ class NewRoom extends React.Component {
                         <br/>
                         <Button onClick={this.handleNewRoom} color={"primary"} className={"margin-left-35"}>Submit</Button>
                         {' '}
-                        <WrappedButton className={"margin-left-35"} link={routes.HOME} name={"Cancel"}/>
+                        <WrappedButton className={"margin-left-35"} link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
                     </Form>
                 </div>
             </div>

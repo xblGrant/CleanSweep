@@ -39,7 +39,7 @@ class CheckInGuest extends React.Component {
                         </FormGroup>
                         <Button onClick={this.handleCheckIn} className={"margin-left-35"} color={"primary"}>Check-In</Button>
                         {' '}
-                        <WrappedButton link={routes.HOME} name={"Cancel"}/>
+                        <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
                     </Form>
                 </div>
             </div>

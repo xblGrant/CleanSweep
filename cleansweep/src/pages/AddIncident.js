@@ -113,7 +113,7 @@ class AddIncident extends React.Component {
                         <Button onClick={this.handleIncident} className={"margin-left-35"}
                                 color={"primary"}>Submit</Button>
                         {' '}
-                        <WrappedButton link={"/"} name={"Cancel"}/>
+                        <WrappedButton link={"/"} name={"Cancel"} id={"wrappedButton"}/>
                     </Form>
                 </div>
             </div>

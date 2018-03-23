@@ -117,7 +117,7 @@ class InspectRoom extends React.Component {
                         </FormGroup>
                         <Button onClick={this.handleCheckIn} color={"primary"} className={"margin-left-35"}>Submit</Button>
                         {' '}
-                        <WrappedButton link={routes.HOME} name={"Cancel"}/>
+                        <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
                     </Form>
                 </div>
             </div>

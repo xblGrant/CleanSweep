@@ -29,7 +29,7 @@ class CheckOutGuest extends React.Component {
                         </FormGroup>
                         <Button onClick={this.handleCheckOut} color={"primary"} className={"margin-left-35"}>Check-Out</Button>
                         {' '}
-                        <WrappedButton link={routes.HOME} name={"Cancel"}/>
+                        <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
                     </Form>
                 </div>
             </div>

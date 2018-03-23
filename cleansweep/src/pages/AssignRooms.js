@@ -173,7 +173,7 @@ class AssignRooms extends React.Component {
                         <Button onClick={this.clearAssignRooms} color={"secondary"}>
                             Clear Assignments</Button>
                         {' '}
-                        <WrappedButton link={routes.HOME} name={"Cancel"}/>
+                        <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
                     </Form>
                 </div>
             </div>

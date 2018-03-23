@@ -41,7 +41,7 @@ class LoginForm extends React.Component {
        auth.doSignInWithEmailAndPassword(email, password)
            .then(() => {
                this.setState(() => ({...INITIAL_STATE}));
-               history.push(routes.HOME);  //TODO: redirect to a better page than the same page
+               history.push(routes.ASSIGNED_ROOMS);  //TODO: redirect to a better page than the same page
            })
            .catch(error => {
                this.setState(byPropKey('error', error));
