@@ -18,6 +18,7 @@ class AssignRooms extends React.Component {
 
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleAssignRooms = this.handleAssignRooms.bind(this);
+        this.writeUserData = this.writeUserData.bind(this);
     }
 
     getAllRooms() {
@@ -130,8 +131,16 @@ class AssignRooms extends React.Component {
             this.getRoomsByFloor(e.target.value);
     }
 
+    writeUserData(roomNum, assignedEmployee) {
+        var updates = {}
+        updates['/Rooms/Reservable/200/' + roomNum + '/' + 'assignedEmployee'] = assignedEmployee;
+
+        firebase.db.ref().update(updates);
+    }
+
     handleAssignRooms() {
-        //TODO: handle assigning rooms to employees
+        //TODO: pass in proper parameters
+        this.writeUserData(202, "Yo");
     }
     clearAssignRooms() {
         //TODO: unassign employees from all rooms
