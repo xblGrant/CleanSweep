@@ -1,11 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import {auth, firebase} from "../firebase/index";
+import * as api from '../firebase/api';
 import {withRouter} from 'react-router-dom';
 import {Helmet} from "react-helmet";
-
-import * as routes from '../constants/routes';
 
 const SignUp = ({history}) =>
     <div>
@@ -48,22 +46,7 @@ class SignUpForm extends React.Component {
             history,
         } = this.props;
 
-        auth.doCreateUserWithEmailAndPassword(email, passwordOne)
-            .then(() => {
-                let employeeRef = firebase.db.ref("/Employee/");
-                employeeRef.child(firebase.auth.currentUser.uid)
-                    .set({
-                        username: userName,
-                        email: email,
-                        isAdmin: false
-                    });
-
-                this.setState(() => ({...INITIAL_STATE}));
-                history.push(routes.ASSIGNED_ROOMS); //TODO: push to proper page for after signup/login
-            })
-            .catch(error => {
-                this.setState(byPropKey('error', error));
-            });
+        api.signUp(this, email, passwordOne, userName, history);
 
         e.preventDefault();
     }

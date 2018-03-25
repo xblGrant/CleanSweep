@@ -1,5 +1,5 @@
 import * as auth from './auth';
-import * as db from './db';
+import * as db from './api';
 import * as firebase from './firebase';
 
 export {

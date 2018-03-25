@@ -8,7 +8,7 @@ import {
     Label,
     Input,
 } from 'reactstrap';
-import {firebase} from "../firebase";
+import * as api from '../firebase/api';
 import * as routes from "../constants/routes";
 import {Helmet} from "react-helmet";
 
@@ -24,71 +24,19 @@ class InspectRoom extends React.Component {
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
     }
 
-    getAllRooms() {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/NonReservable/");
-        roomRef.orderByKey().once('value', function (floors) {
-            floors.forEach(function (allRooms) {
-                allRooms.forEach(function (room) {
-                    if (!room.val().incident && room.val().status === 'Clean')
-                        roomList.push(room.key);
-                })
-            })
-        }).then(() => {
-            roomRef = firebase.db.ref("/Rooms/Reservable/");
-            roomRef.orderByKey().once('value', function (floors) {
-                floors.forEach(function (allRooms) {
-                    allRooms.forEach(function (room) {
-                        if (!room.val().incident && room.val().status === 'Clean'
-                            && room.val().guest === 'none' && !room.val().isReservable)
-                            roomList.push(room.key);
-                    })
-                })
-            }).then(() =>
-                this.setState({
-                    rooms: roomList
-                })
-            )
-        });
-    }
-
-    getRoomsByFloor(floor) {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
-        roomRef.orderByKey().once('value', function (allRooms) {
-            allRooms.forEach(function (room) {
-                if (!room.val().incident && room.val().status === 'Clean')
-                    roomList.push(room.key);
-            })
-        }).then(() => {
-            roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
-            roomRef.orderByKey().once('value', function (allRooms) {
-                allRooms.forEach(function (room) {
-                    if (!room.val().incident && room.val().status === 'Clean'
-                        && room.val().guest === 'none' && !room.val().isReservable)
-                        roomList.push(room.key);
-                })
-            }).then(() => {
-                this.setState({
-                    rooms: roomList
-                })
-            })
-        })
-    }
-
     componentDidMount() {
-        this.getAllRooms();
+        api.getListofAllRoomsNeedInspected(this);
     }
 
     handleFloorSelect(e) {
         if (e.target.value === '000')
-            this.getAllRooms();
+            api.getListofAllRoomsNeedInspected(this);
         else
-            this.getRoomsByFloor(e.target.value);
+            api.getListofAllRoomsNeedInspectedByFloor(this, e.target.value);
     }
 
     handleInspect() {
-
+        // TODO: implement
     }
 
     render() {
@@ -115,7 +63,7 @@ class InspectRoom extends React.Component {
                             <Label className={"margin-left-35"} for="inspectComment">Comment</Label>
                             <Input type="textarea" className={"margin-left-35 width-30"} placeholder={"Enter comment here"}/>
                         </FormGroup>
-                        <Button onClick={this.handleCheckIn} color={"primary"} className={"margin-left-35"}>Submit</Button>
+                        <Button onClick={this.handleInspect} color={"primary"} className={"margin-left-35"}>Submit</Button>
                         {' '}
                         <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
                     </Form>

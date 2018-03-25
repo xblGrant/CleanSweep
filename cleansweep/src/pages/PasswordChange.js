@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
-
-import {auth} from '../firebase/index';
+import * as api from '../firebase/api';
 
 const byPropKey = (propName, value) => () => ({
     [propName]: value,
@@ -21,17 +20,9 @@ class PasswordChange extends React.Component {
         this.state = {...INITIAL_STATE};
     }
 
-    onSubmit = (e) => {
+    onSubmit(e){
         const {passwordOne} = this.state;
-
-        auth.doPasswordUpdate(passwordOne)
-            .then(() => {
-                this.setState(() => ({...INITIAL_STATE}));
-            })
-            .catch(error => {
-                this.setState(byPropKey('error', error));
-            });
-
+        api.passwordUpdate(this, passwordOne);
         e.preventDefault();
     }
 

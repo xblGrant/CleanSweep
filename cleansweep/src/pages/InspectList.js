@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Label} from 'reactstrap';
 import GroupSelect from '../selectable/GroupSelect';
-import {firebase} from '../firebase';
+import * as api from '../firebase/api';
 import {Helmet} from "react-helmet";
 
 class InspectList extends React.Component {
@@ -13,35 +13,8 @@ class InspectList extends React.Component {
         }
     }
 
-    getInspectRooms() {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/");
-        roomRef.orderByKey().once('value', function (floors) {
-            floors.forEach(function (allRooms) {
-                allRooms.forEach(function (room) {
-                    // TODO: need to confirm how we determine a room needs to be inspected  (guest = none? & isReservable = false?)
-                    if (room.val().incident === false && room.val().status === 'Clean') {
-                        let assigned = (room.val().assignedEmployee !== 'none');
-                        roomList.push(
-                            [room.key,
-                                room.val().status,
-                                room.val().incident,
-                                room.val().guest,
-                                assigned
-                            ]
-                        );
-                    }
-                })
-            })
-        }).then(() => {
-            this.setState({
-                rooms: roomList
-            });
-        });
-    }
-
     componentDidMount() {
-        this.getInspectRooms();
+        api.getInspectRooms(this);
     }
 
     render() {

@@ -2,10 +2,8 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { PasswordForgetLink } from "./PasswordForget";
 import { SignUpLink } from "./SignUp";
-import {auth} from "../firebase/index";
+import * as api from '../firebase/api';
 import {Helmet} from "react-helmet";
-
-import * as routes from '../constants/routes';
 
 const Login = ({ history }) =>
     <div>
@@ -38,14 +36,7 @@ class LoginForm extends React.Component {
            history,
        } = this.props;
 
-       auth.doSignInWithEmailAndPassword(email, password)
-           .then(() => {
-               this.setState(() => ({...INITIAL_STATE}));
-               history.push(routes.ASSIGNED_ROOMS);  //TODO: redirect to a better page than the same page
-           })
-           .catch(error => {
-               this.setState(byPropKey('error', error));
-           });
+       api.login(this, email, password, history);
 
         e.preventDefault();
     }

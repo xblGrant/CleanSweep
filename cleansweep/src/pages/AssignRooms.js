@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import {WrappedButton} from "../components/Buttons";
 import {CreateFloorOptions} from "../components/Generators";
-import {firebase} from "../firebase";
+import * as api from '../firebase/api';
 import * as routes from "../constants/routes";
 import GroupSelect from "../selectable/GroupSelect";
 import {Helmet} from "react-helmet";
@@ -18,147 +18,27 @@ class AssignRooms extends React.Component {
 
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleAssignRooms = this.handleAssignRooms.bind(this);
-        this.clearAssignRooms = this.clearAssignRooms.bind(this);
-    }
-
-    getAllRooms() {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/NonReservable/");
-        roomRef.orderByKey().once('value', function (floors) {
-            floors.forEach(function (allRooms) {
-                allRooms.forEach(function (room) {
-                    if (room.val().assignedEmployee === 'none') {
-                        roomList.push(
-                            [room.key,
-                                room.val().status,
-                                room.val().incident,
-                                "n/a",
-                                false]
-                        );
-                    }
-                })
-            })
-        }).then(() => {
-            roomRef = firebase.db.ref("/Rooms/Reservable/");
-            roomRef.orderByKey().once('value', function (floors) {
-                floors.forEach(function (allRooms) {
-                    allRooms.forEach(function (room) {
-                        if (room.val().assignedEmployee === 'none') {
-                            roomList.push(
-                                [room.key,
-                                    room.val().status,
-                                    room.val().incident,
-                                    "n/a",
-                                    false]
-                            );
-                        }
-                    })
-                })
-            }).then(() =>
-                this.setState({
-                    rooms: roomList
-                })
-            )
-        });
-    }
-
-    getAllEmployees() {
-        let employeeList = [];
-        let empRef = firebase.db.ref("/Employee");
-        empRef.orderByKey().once('value', function (allEmployees) {
-            allEmployees.forEach(function (employee) {
-                employeeList.push(
-                    [employee.val().username,
-                        employee.val().email,
-                        null,
-                        null
-                    ]
-                );
-            })
-        }).then(() =>
-            this.setState({
-                employees: employeeList
-            })
-        );
-    }
-
-    getRoomsByFloor(floor) {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
-        roomRef.orderByKey().once('value', function (allRooms) {
-            allRooms.forEach(function (room) {
-                if (room.val().assignedEmployee === 'none') {
-                    roomList.push(
-                        [room.key,
-                            room.val().status,
-                            room.val().incident,
-                            "n/a",
-                            false]
-                    );
-                }
-            })
-        }).then(() => {
-            roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
-            roomRef.orderByKey().once('value', function (allRooms) {
-                allRooms.forEach(function (room) {
-                    if (room.val().assignedEmployee === 'none') {
-                        roomList.push(
-                            [room.key,
-                                room.val().status,
-                                room.val().incident,
-                                "n/a",
-                                false]
-                        );
-                    }
-                })
-            }).then(() =>
-                this.setState({
-                    rooms: roomList
-                })
-            )
-        })
+        this.clearAssignments = this.clearAssignments.bind(this);
     }
 
     componentDidMount() {
-        this.getAllRooms();
-        this.getAllEmployees();
+        api.getAllUnassignedSelectableRooms(this);
+        api.getAllEmployees(this);
     }
 
     handleFloorSelect(e) {
         if (e.target.value === '000')
-            this.getAllRooms();
+            api.getAllUnassignedSelectableRooms(this);
         else
-            this.getRoomsByFloor(e.target.value);
+            api.getAllUnassignedSelectableRoomsByFloor(this, e.target.value);
     }
-
 
     handleAssignRooms() {
-        //TODO: pass in proper parameters, such as room path and selected employee
-        var roomPath, employee;
-        var updates = {};
-        roomPath = 'Rooms/Reservable/100/101/';
-        employee = "Yoyo";
-        updates[roomPath + 'assignedEmployee'] = employee;
-        firebase.db.ref().update(updates);
-        //calling getAllRooms gets the system to update the list
-        this.getAllRooms();
+        api.assignRooms(this);
     }
-    clearAssignRooms() {
-        var roomPath;
-        var updates = {};
-        let roomRef = firebase.db.ref("/Rooms/Reservable/")
-        roomRef.orderByKey().once('value', function (floors) {
-            floors.forEach(function (allRooms) {
-                allRooms.forEach(function (room) {
-                    roomPath = 'Rooms/' + floors.key.toString() + '/' + allRooms.key.toString() + '/' + room.key.toString() + '/';
-                    updates = {};
-                    updates[roomPath + 'assignedEmployee'] = "none";
-                    firebase.db.ref().update(updates);
-                })
-            })
-        })
-        //calling getAllRooms gets the system to update the list
-        this.getAllRooms();
+
+    clearAssignments() {
+        api.clearRoomAssignments(this);
     }
 
     render() {
@@ -194,7 +74,7 @@ class AssignRooms extends React.Component {
                         <Button onClick={this.handleAssignRooms} color={"primary"}
                                 className={"margin-left-35"}>Assign</Button>
                         {' '}
-                        <Button onClick={this.clearAssignRooms} color={"secondary"}>
+                        <Button onClick={this.clearAssignments} color={"secondary"}>
                             Clear Assignments</Button>
                         {' '}
                         <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>

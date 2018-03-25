@@ -1,8 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
-
-import {auth} from '../firebase/index';
+import * as api from '../firebase/api';
 
 const PasswordForgetPage = () =>
     <div>
@@ -28,15 +27,7 @@ class PasswordForgetForm extends React.Component {
 
     onSubmit = (e) => {
         const {email} = this.state;
-
-        auth.doPasswordReset(email)
-            .then(() => {
-                this.setState(() => ({...INITIAL_STATE}));
-            })
-            .catch(error => {
-                this.setState(byPropKey('error', error));
-            });
-
+        api.passwordReset(this, email);
         e.preventDefault();
     };
 

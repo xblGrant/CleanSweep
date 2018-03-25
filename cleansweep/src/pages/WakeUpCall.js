@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import {WrappedButton} from "../components/Buttons";
 import {CreateRoomOptions, CreateFloorOptions} from '../components/Generators';
-import {firebase} from "../firebase";
+import * as api from '../firebase/api';
 import * as routes from "../constants/routes";
 import {Helmet} from "react-helmet";
 
@@ -18,47 +18,15 @@ class AddWakeUp extends React.Component {
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
     }
 
-    getAllReservableRooms() {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/");
-        roomRef.orderByKey().once('value', function (floors) {
-            floors.forEach(function (allRooms) {
-                allRooms.forEach(function (room) {
-                    if (room.val().guest !== 'none')
-                        roomList.push(room.key);
-                })
-            })
-        }).then(() =>
-            this.setState({
-                rooms: roomList
-            })
-        )
-    }
-
-    getReservableRoomsByFloor(floor) {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
-        roomRef.orderByKey().once('value', function (allRooms) {
-            allRooms.forEach(function (room) {
-                if (room.val().guest !== 'none')
-                    roomList.push(room.key);
-            })
-        }).then(() =>
-            this.setState({
-                rooms: roomList
-            })
-        )
-    }
-
     componentDidMount() {
-        this.getAllReservableRooms();
+        api.getListofAllReservableRooms(this);
     }
 
     handleFloorSelect(e) {
         if (e.target.value === '000')
-            this.getAllReservableRooms();
+            api.getListofAllReservableRooms(this);
         else
-            this.getReservableRoomsByFloor(e.target.value);
+            api.getListofAllReservableRoomsByFloor(this, e.target.value);
     }
 
     handleNewWakeUp() {

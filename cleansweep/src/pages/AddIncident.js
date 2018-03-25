@@ -8,7 +8,7 @@ import {
     Label,
     Input,
 } from 'reactstrap';
-import {firebase} from "../firebase";
+import * as api from '../firebase/api';
 import {Helmet} from "react-helmet";
 
 class AddIncident extends React.Component {
@@ -21,86 +21,37 @@ class AddIncident extends React.Component {
 
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleIncident = this.handleIncident.bind(this);
-        this.updateIncident = this.handleIncident.bind(this);
-    }
-
-    getAllRooms() {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/NonReservable/");
-        roomRef.orderByKey().once('value', function (floors) {
-            floors.forEach(function (allRooms) {
-                allRooms.forEach(function (room) {
-                    roomList.push(room.key);
-                })
-            })
-        }).then(() => {
-            roomRef = firebase.db.ref("/Rooms/Reservable/");
-            roomRef.orderByKey().once('value', function (floors) {
-                floors.forEach(function (allRooms) {
-                    allRooms.forEach(function (room) {
-                        roomList.push(room.key);
-                    })
-                })
-            }).then(() =>
-                this.setState({
-                    rooms: roomList
-                })
-            )
-        });
-    }
-
-    getRoomsByFloor(floor) {
-        let roomList = [];
-        let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
-        roomRef.orderByKey().once('value', function (allRooms) {
-            allRooms.forEach(function (room) {
-                roomList.push(room.key);
-            })
-        }).then(() => {
-            roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
-            roomRef.orderByKey().once('value', function (allRooms) {
-                allRooms.forEach(function (room) {
-                    roomList.push(room.key);
-                })
-            }).then(() => {
-                this.setState({
-                    rooms: roomList
-                })
-            })
-        })
+        this.handleIncident = this.handleIncident.bind(this);
     }
 
 
     componentDidMount() {
-        this.getAllRooms();
+        api.getListofAllRooms(this);
     }
 
     handleFloorSelect(e) {
         if (e.target.value === '000')
-            this.getAllRooms();
+            api.getListofAllRooms(this);
         else
-            this.getRoomsByFloor(e.target.value);
+            api.getListofAllRoomsByFloor(this, e.target.value);
     }
-
-
 
     handleIncident() {
         //TODO: set these using this.state
-        var path, room, commentInput;
-        path = 'Rooms/Reservable/100/';
-        room = '101';
-        commentInput = "stain on rug";
-
-        //This will update the incident field in the actual room
-        var updates = {};
-        updates[path + room +  '/' + 'incident'] = true;
-        firebase.db.ref().update(updates);
-
-        //this will create an instance of the incident in the Incidents part of the db
-        firebase.db.ref('Incidents/' + room).set({
-            comment: commentInput
-        });
-
+        // let path, room, commentInput;
+        // path = 'Rooms/Reservable/100/';
+        // room = '101';
+        // commentInput = "stain on rug";
+        //
+        // //This will update the incident field in the actual room
+        // let updates = {};
+        // updates[path + room +  '/' + 'incident'] = true;
+        // firebase.db.ref().update(updates);
+        //
+        // //this will create an instance of the incident in the Incidents part of the db
+        // firebase.db.ref('Incidents/' + room).set({
+        //     comment: commentInput
+        // });
     }
 
     render() {
