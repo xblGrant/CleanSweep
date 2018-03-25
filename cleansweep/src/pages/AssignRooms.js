@@ -140,6 +140,8 @@ class AssignRooms extends React.Component {
         employee = "Yoyo";
         updates[roomPath + 'assignedEmployee'] = employee;
         firebase.db.ref().update(updates);
+        //calling getAllRooms gets the system to update the list
+        this.getAllRooms();
     }
     clearAssignRooms() {
         var roomPath;
@@ -155,6 +157,8 @@ class AssignRooms extends React.Component {
                 })
             })
         })
+        //calling getAllRooms gets the system to update the list
+        this.getAllRooms();
     }
 
     render() {
