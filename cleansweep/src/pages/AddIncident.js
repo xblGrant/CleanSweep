@@ -21,6 +21,7 @@ class AddIncident extends React.Component {
 
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleIncident = this.handleIncident.bind(this);
+        this.updateIncident = this.handleIncident.bind(this);
     }
 
     getAllRooms() {
@@ -81,7 +82,24 @@ class AddIncident extends React.Component {
             this.getRoomsByFloor(e.target.value);
     }
 
+
+
     handleIncident() {
+        //TODO: set these using this.state
+        var path, room, commentInput;
+        path = 'Rooms/Reservable/100/';
+        room = '101';
+        commentInput = "stain on rug";
+
+        //This will update the incident field in the actual room
+        var updates = {};
+        updates[path + room +  '/' + 'incident'] = true;
+        firebase.db.ref().update(updates);
+
+        //this will create an instance of the incident in the Incidents part of the db
+        firebase.db.ref('Incidents/' + room).set({
+            comment: commentInput
+        });
 
     }
 

@@ -16,6 +16,8 @@ class CheckInGuest extends React.Component {
         //TODO: make sure First name, Last name is valid
         //TODO: if guests (on firebase) does not have current guest,
         //TODO:    then add to firebase.
+
+
     }
 
     render() {
