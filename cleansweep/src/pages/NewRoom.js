@@ -71,7 +71,7 @@ class NewRoom extends React.Component {
         this.handleReservableRoom(this.state.floorNum, this.state.newRoomNumber);
         // }
         // else{
-        //     this.handleNonReservableRoom(num)
+        //     this.handleNonReservableRoom(this.state.floorNum, this.state.newRoomNumber);
         // }
 
         // const updates = {};
