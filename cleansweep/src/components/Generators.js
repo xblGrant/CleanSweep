@@ -52,6 +52,7 @@ class CreateFloorOptions extends React.Component {
                     )
                 }))
     }
+    // TODO:  Return the floorNum for other components to use
 }
 
 
