@@ -18,7 +18,8 @@ class AssignRooms extends React.Component {
 
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleAssignRooms = this.handleAssignRooms.bind(this);
-        this.writeUserData = this.writeUserData.bind(this);
+        this.updateRoom = this.updateRoom.bind(this);
+        this.clearAssignRooms = this.clearAssignRooms.bind(this);
     }
 
     getAllRooms() {
@@ -131,19 +132,29 @@ class AssignRooms extends React.Component {
             this.getRoomsByFloor(e.target.value);
     }
 
-    writeUserData(roomNum, assignedEmployee) {
-        var updates = {}
-        updates['/Rooms/Reservable/200/' + roomNum + '/' + 'assignedEmployee'] = assignedEmployee;
-
+    updateRoom(roomPath, assignedEmployee) {
+        var updates = {};
+        updates[roomPath + 'assignedEmployee'] = assignedEmployee;
         firebase.db.ref().update(updates);
     }
 
     handleAssignRooms() {
-        //TODO: pass in proper parameters
-        this.writeUserData(202, "Yo");
+        //TODO: pass in proper parameters, such as selected employee
+        this.updateRoom('Rooms/Reservable/100/101/', "Yo");
     }
     clearAssignRooms() {
-        //TODO: unassign employees from all rooms
+        //TODO: conceptually same as handle, find error in part commented out below
+        var roomPath;
+        let roomRef = firebase.db.ref("/Rooms/Reservable/")
+        roomRef.orderByKey().once('value', function (floors) {
+            floors.forEach(function (allRooms) {
+                allRooms.forEach(function (room) {
+                    roomPath = 'Rooms/' + floors.key.toString() + '/' + allRooms.key.toString() + '/' + room.key.toString() + '/';
+                    // this.updateRoom(roomPath, "none");
+                    console.log(roomPath);
+                })
+            })
+        })
     }
 
     render() {
