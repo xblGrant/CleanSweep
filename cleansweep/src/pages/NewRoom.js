@@ -20,6 +20,8 @@ class NewRoom extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.handleNewRoom = this.handleNewRoom.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
+        this.handleReservableRoom = this.handleReservableRoom.bind(this);
+        this.handleNonReservableRoom = this.handleNonReservableRoom.bind(this);
     }
 
     componentDidMount() {
@@ -65,11 +67,37 @@ class NewRoom extends React.Component {
     }
 
     handleNewRoom() {
-        // TODO: handle addition of new room
+        // TODO: handle isReservable and pass in generated room value
+        // if (isReservable){
+        this.handleReservableRoom(105);
+        // }
+        // else{
+        //     this.handleNonReservableRoom(num)
+        // }
 
         // const updates = {};
         // updates['/lobby'] = {num: 'lobbyOne'};
         // firebase.db.ref('Rooms/NonReservable').update(updates);
+    }
+
+    handleReservableRoom(num){
+        //TODO: handle proper floor here
+        firebase.db.ref('Rooms/Reservable/100/' + num).set({
+            assignedEmployee: "none",
+            guest: "none",
+            incident: false,
+            isReservable: true,
+            status: "Clean",
+            wakeupCall: "none"
+        });
+    }
+
+    handleNonReservableRoom(num){
+        firebase.db.ref('Rooms/NonReservable/100/' + num).set({
+            assignedEmployee: "none",
+            incident: false,
+            status: "Clean"
+        });
     }
 
     render() {
