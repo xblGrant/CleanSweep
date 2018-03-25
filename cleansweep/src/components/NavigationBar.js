@@ -70,11 +70,17 @@ class NavigationAuth extends React.Component {
                                                   contents={["New Employee", "New Room"]}
                                                   links={[routes.NEW_EMPLOYEE, routes.NEW_ROOM]} />
                                     <DropDContent title={"Functions"}
-                                                  contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms", "Inspect Room", "Check-in Guest", "Check-out Guest"]}
-                                                  links={[routes.WAKE_UP_CALL,routes.ADD_INCIDENT,routes.ASSIGN_ROOMS,routes.INSPECT_ROOM,routes.CHECK_IN_GUEST,routes.CHECK_OUT_GUEST]} />
+                                                  contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms",
+                                                      "Inspect Room", "Check-in Guest", "Check-out Guest"]}
+                                                  links={[routes.WAKE_UP_CALL, routes.ADD_INCIDENT, routes.ASSIGN_ROOMS,
+                                                      routes.INSPECT_ROOM, routes.CHECK_IN_GUEST,
+                                                      routes.CHECK_OUT_GUEST]} />
                                     <DropDContent title={"Lists"}
-                                                  contents={["All Rooms", "Assigned Rooms", "Available Rooms", "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]}
-                                                  links={[routes.ALL_ROOMS,routes.ASSIGNED_ROOMS,routes.AVAILABLE_ROOMS,routes.INSPECTIONS,routes.INCIDENTS,routes.WAKE_UP_LIST,routes.DEPARTING_GUESTS]} />
+                                                  contents={["All Rooms", "Assigned Rooms", "Available Rooms",
+                                                      "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]}
+                                                  links={[routes.ALL_ROOMS, routes.ASSIGNED_ROOMS,
+                                                      routes.AVAILABLE_ROOMS, routes.INSPECTIONS, routes.INCIDENTS,
+                                                      routes.WAKE_UP_LIST, routes.DEPARTING_GUESTS]} />
                                     <DropDContent title={"Options"}
                                                   contents={["Change Password", "Change Role"]}
                                                   links={[routes.CHANGE_PW, routes.CHANGE_ROLE]}/>
@@ -152,10 +158,10 @@ function DropDContent(props) {
         <UncontrolledDropdown nav inNavbar>
             <DropdownToggle nav>
                 {props.title}
-                <DropdownMenu >
-                    <DropDItem  contents={props.contents} links={props.links}/>
-                </DropdownMenu>
             </DropdownToggle>
+                <DropdownMenu>
+                    <DropDItem contents={props.contents} links={props.links}/>
+                </DropdownMenu>
         </UncontrolledDropdown>
     );
 }
@@ -168,7 +174,7 @@ function DropDItem(props) {
                 return(
                     <DropdownItem>
                         <NavItem>
-                            <Link to={link}>{content}</Link>
+                            <Link key={index} to={link}>{content}</Link>
                         </NavItem>
                     </DropdownItem>
                 )

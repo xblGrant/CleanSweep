@@ -17,13 +17,13 @@ class NewEmployee extends React.Component {
 
     render() {
         return (
-            <div classname={"container"}>
+            <div className={"container"}>
                 <Helmet>
                     <title>New Employee</title>
                 </Helmet>
                 <div id={"newEmployeeForm"}>
                     <Form>
-                        <div classname={"row"}>
+                        <div className={"row"}>
                             <FormGroup row>
                                 <div className={"col-sm-4 center"}>
                                 <Label for="employeeFName">First Name</Label>
@@ -31,7 +31,7 @@ class NewEmployee extends React.Component {
                                 </div>
                             </FormGroup>
                         </div>
-                        <div classname={"row"}>
+                        <div className={"row"}>
                             <FormGroup row>
                                  <div className={"col-sm-4 center"}>
                                 <Label for="employeeLName">Last Name</Label>
@@ -39,7 +39,7 @@ class NewEmployee extends React.Component {
                                 </div>
                             </FormGroup>
                         </div>
-                        <div classname={"row"}>
+                        <div className={"row"}>
                             <FormGroup row>
                                 <div className={"col-sm-4 center"}>
                                 <Label for="employeeDOB">Date Of Birth</Label>
@@ -47,7 +47,7 @@ class NewEmployee extends React.Component {
                                 </div>
                             </FormGroup>
                         </div>
-                        <div classname={"row"}>
+                        <div className={"row"}>
                             <FormGroup row>
                                 <div className={"col-sm-4 center"}>
                                 <Label for="employeePass">Email</Label>
@@ -55,7 +55,7 @@ class NewEmployee extends React.Component {
                                 </div>
                             </FormGroup>
                         </div>
-                        <div classname={"row"}>
+                        <div className={"row"}>
                             <FormGroup row>
                                 <div className={"col-sm-4 center"}>
                                 <Label for="employeePass">Password</Label>
@@ -72,7 +72,7 @@ class NewEmployee extends React.Component {
                             </FormGroup>
                         </div>
                         <br/>
-                        <div classname={"row"}>
+                        <div className={"row"}>
                             <div className={"col-sm-4 center"}>
                                 <Button className={"col-sm-4"} onClick={this.handleNewEmployee} color={"primary"}>Submit</Button>
                                 {' '}

@@ -38,23 +38,22 @@ class NewRoom extends React.Component {
         });
     }
 
-    onChange() {
+    onChange(event) {
         // create new floor display 301 if new floor is 3rd lvl
     }
 
     handleFloorSelect(e) {
         let lastRoom = null;
-        // Rooms/Reservable is a path in the database
-        // e.target.value is the associated floor the user clicks on
-        // when calling firebase.db.ref, the whole string will get all the rooms on a given floor
+        /* Rooms/Reservable is a path in the database e.target.value is the associated floor the user clicks on
+        when calling firebase.db.ref, the whole string will get all the rooms on a given floor */
         let floorRef = firebase.db.ref("/Rooms/Reservable/" + e.target.value);
 
-        // orderByKey orders rooms on the floor alphabetically
-        // to avoid issues with asynchronous access to the database, need to use once().then() together
-        // .once() returns a promise which .then() waits for to execute, otherwise newRoomNumber would be set to null because of how asynchronous accessing works
-        // snapshot refers to the floor, childSnapshot refers to each room on the floor
-        // calling val() is necessary to get values out of the objects, room is the item that stores the room #
-        // once the asynchronous access to the database has returned a value, the then() part of the code is called
+        /* orderByKey orders rooms on the floor alphabetically to avoid issues with asynchronous access to the
+        database, need to use once().then() together .once() returns a promise which .then() waits for to execute,
+        otherwise newRoomNumber would be set to null because of how asynchronous accessing works snapshot refers to
+        the floor, childSnapshot refers to each room on the floor calling val() is necessary to get values out of
+        the objects, room is the item that stores the room # once the asynchronous access to the database has
+        returned a value, the then() part of the code is called */
         floorRef.orderByKey().once('value', function(snapshot) {
             snapshot.forEach( function(childSnapshot) {
                 lastRoom = childSnapshot.key;
@@ -69,7 +68,7 @@ class NewRoom extends React.Component {
     handleNewRoom() {
         // TODO: handle isReservable and pass in generated room value
         // if (isReservable){
-        this.handleReservableRoom(105);
+        this.handleReservableRoom(this.state.floorNum, this.state.newRoomNumber);
         // }
         // else{
         //     this.handleNonReservableRoom(num)
@@ -80,9 +79,9 @@ class NewRoom extends React.Component {
         // firebase.db.ref('Rooms/NonReservable').update(updates);
     }
 
-    handleReservableRoom(num){
+    handleReservableRoom(floor, num){
         //TODO: handle proper floor here
-        firebase.db.ref('Rooms/Reservable/100/' + num).set({
+        firebase.db.ref('Rooms/Reservable/' + floor + '/' + num).set({
             assignedEmployee: "none",
             guest: "none",
             incident: false,
@@ -92,8 +91,8 @@ class NewRoom extends React.Component {
         });
     }
 
-    handleNonReservableRoom(num){
-        firebase.db.ref('Rooms/NonReservable/100/' + num).set({
+    handleNonReservableRoom(floor, num){
+        firebase.db.ref('Rooms/NonReservable/' + floor + '/' + num).set({
             assignedEmployee: "none",
             incident: false,
             status: "Clean"
@@ -118,7 +117,7 @@ class NewRoom extends React.Component {
                             <Label className={"margin-left-35"} for="roomNum">
                                 New Room
                             </Label>
-                            <Input type="text" className={"margin-left-35 width-30"}id="roomNum" value={this.state.newRoomNumber} readOnly/>
+                            <Input type="text" className={"margin-left-35 width-30"} id="roomNum" value={this.state.newRoomNumber} readOnly/>
                         </FormGroup>
                         <FormGroup check>
                             <Label className={"margin-left-35"} check>
