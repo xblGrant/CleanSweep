@@ -25,5 +25,7 @@ export const GITHUB = 'https://github.com/xblGrant/CleanSweep';
 
 //this is for URL parameters. linking to /room/101 will allow
 //us to use 101 as a url parameter. ex: Link to /room/
-export const ROUTER_ROOM = '/room/:roomid';
-export const ROOM = '/room/';
+export const ROUTER_RESERVABLE_ROOM = '/reservable/room/:roomid';
+export const RESERVABLE_ROOM = '/reservable/room/';
+export const ROUTER_NON_RESERVABLE_ROOM = '/nonreservable/room/:roomid';
+export const NON_RESERVABLE_ROOM = '/nonreservable/room/';

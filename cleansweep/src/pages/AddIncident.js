@@ -1,5 +1,4 @@
 import React from 'react';
-import {WrappedButton} from "../components/Buttons";
 import {CreateFloorOptions, CreateRoomOptions} from "../components/Generators";
 import {
     Button,
@@ -10,7 +9,6 @@ import {
 } from 'reactstrap';
 import * as api from '../firebase/api';
 import {Helmet} from "react-helmet";
-import * as routes from "../constants/routes";
 
 class AddIncident extends React.Component {
     constructor(props) {

@@ -8,21 +8,7 @@ const STATUS = 1;
 const INCIDENT = 2;
 const GUEST = 3;
 const ASSIGNED = 4;
-
-const LinkToRooms = ({items}) => (
-    items.map((item, i) => (
-        <Link to={routes.ROOM + item[ROOM]}>
-            <SelectableAlbum
-                key={`${item[ROOM]}${i}`}
-                roomNum={item[ROOM]}
-                status={item[STATUS]}
-                assigned={item[ASSIGNED]}
-                incident={item[INCIDENT]}
-                guest={item[GUEST]}
-            />
-        </Link>
-    ))
-);
+const IS_RESERVABLE = 5;
 
 const SelectableRooms = ({items}) => (
     items.map((item, i) => (
@@ -36,6 +22,45 @@ const SelectableRooms = ({items}) => (
         />
     ))
 );
+
+const LinkToRooms = ({items}) => (
+    items.map((item, i) => (
+            item[IS_RESERVABLE] ? <ReservableLink item={item} id={i}/> :
+                <NonReservableLink item={item} id={i}/>
+    ))
+);
+
+function ReservableLink(props) {
+    return (
+        <Link to={routes.RESERVABLE_ROOM + props.item[ROOM]}>
+            <SelectableAlbum
+                key={`${props.item[ROOM]}${props.id}`}
+                roomNum={props.item[ROOM]}
+                status={props.item[STATUS]}
+                assigned={props.item[ASSIGNED]}
+                incident={props.item[INCIDENT]}
+                guest={props.item[GUEST]}
+            />
+        </Link>
+    )
+}
+
+function NonReservableLink(props) {
+    return (
+        <Link to={routes.NON_RESERVABLE_ROOM + props.item[ROOM]}>
+            <SelectableAlbum
+                key={`${props.item[ROOM]}${props.id}`}
+                roomNum={props.item[ROOM]}
+                status={props.item[STATUS]}
+                assigned={props.item[ASSIGNED]}
+                incident={props.item[INCIDENT]}
+                guest={props.item[GUEST]}
+            />
+        </Link>
+    )
+}
+
+
 
 
 class SelectableList extends React.Component {

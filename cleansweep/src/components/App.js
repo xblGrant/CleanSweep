@@ -4,7 +4,8 @@ import Help from '../pages/Help';
 import Login from '../pages/Login';
 import {SignUp} from '../pages/SignUp';
 import NewRoom from '../pages/NewRoom';
-import Room from '../pages/Room';
+import ReservableRoom from '../pages/ReservableRoom';
+import NonReservableRoom from '../pages/NonReservableRoom';
 import AddWakeUp from '../pages/WakeUpCall';
 import ChangeRole from '../pages/ChangeRole';
 import AssignRooms from '../pages/AssignRooms';
@@ -38,7 +39,8 @@ function App() {
                 <Route exact path={routes.LANDING} component={Login}/>
 
                 {/*Generic Room Path*/}
-                <Route path={routes.ROUTER_ROOM} component={Room}/>
+                <Route path={routes.ROUTER_RESERVABLE_ROOM} component={ReservableRoom}/>
+                <Route path={routes.ROUTER_NON_RESERVABLE_ROOM} component={NonReservableRoom}/>
 
                 {/*Access Paths*/}
                 <Route path={routes.LOGIN} component={Login}/>

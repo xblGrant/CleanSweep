@@ -1,7 +1,7 @@
 import React from 'react';
 import * as api from '../firebase/api';
 
-class Room extends React.Component {
+class ReservableRoom extends React.Component {
     constructor(props) {
         super(props);
 
@@ -27,7 +27,7 @@ class Room extends React.Component {
     //roomid is the explicit name of the identifier after the
     //route in App.js.
     componentWillMount() {
-        api.getRoomInformation(this, this.props.match.params.roomid);
+        api.getReservableRoomInformation(this, this.props.match.params.roomid);
     }
 
     componentDidMount() {
@@ -47,4 +47,4 @@ class Room extends React.Component {
     }
 }
 
-export default Room;
+export default ReservableRoom;
