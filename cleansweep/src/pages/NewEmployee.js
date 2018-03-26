@@ -23,19 +23,19 @@ class NewEmployee extends React.Component {
                 </Helmet>
                 <div id={"newEmployeeForm"}>
                     <Form>
-                        <div className={"row"}>
+                       <div className={"row"}>
                             <FormGroup row>
                                 <div className={"col-sm-4 center"}>
                                 <Label for="employeeFName">First Name</Label>
-                                <Input type="text" className={"col-sm-12"} id="employeeFName" placeholder={"First name"}/>
+                                <Input type="text" className={"col-sm-4"} id="employeeFName" placeholder={"First name"}/>
                                 </div>
                             </FormGroup>
-                        </div>
+                       </div>
                         <div className={"row"}>
                             <FormGroup row>
                                  <div className={"col-sm-4 center"}>
                                 <Label for="employeeLName">Last Name</Label>
-                                <Input type="text" className={"col-sm-12"} id="employeeLName" placeholder={"Last name"}/>
+                                <Input type="text" className={"col-sm-4"} id="employeeLName" placeholder={"Last name"}/>
                                 </div>
                             </FormGroup>
                         </div>
@@ -43,7 +43,7 @@ class NewEmployee extends React.Component {
                             <FormGroup row>
                                 <div className={"col-sm-4 center"}>
                                 <Label for="employeeDOB">Date Of Birth</Label>
-                                <Input type="date" className={"col-sm-12"} id="employeeDOB"/>
+                                <Input type="date" className={"col-sm-4"} id="employeeDOB"/>
                                 </div>
                             </FormGroup>
                         </div>
@@ -51,7 +51,7 @@ class NewEmployee extends React.Component {
                             <FormGroup row>
                                 <div className={"col-sm-4 center"}>
                                 <Label for="employeePass">Email</Label>
-                                <Input type="email" className={"col-sm-12"} id="employeeEmail" placeholder={"Email"}/>
+                                <Input type="email" className={"col-sm-4"} id="employeeEmail" placeholder={"Email"}/>
                                 </div>
                             </FormGroup>
                         </div>
@@ -59,7 +59,7 @@ class NewEmployee extends React.Component {
                             <FormGroup row>
                                 <div className={"col-sm-4 center"}>
                                 <Label for="employeePass">Password</Label>
-                                <Input type="password" className={"col-sm-12"} id="employeePass" placeholder={"Password"}/>
+                                <Input type="password" className={"col-sm-4"} id="employeePass" placeholder={"Password"}/>
                             </div>
                         </FormGroup>
                         </div>

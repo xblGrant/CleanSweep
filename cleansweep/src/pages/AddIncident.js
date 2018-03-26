@@ -10,6 +10,7 @@ import {
 } from 'reactstrap';
 import * as api from '../firebase/api';
 import {Helmet} from "react-helmet";
+import * as routes from "../constants/routes";
 
 class AddIncident extends React.Component {
     constructor(props) {
@@ -56,33 +57,40 @@ class AddIncident extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={"container"}>
                 <Helmet>
                     <title>Incident Report</title>
                 </Helmet>
                 <div className={"margin-top-02"}>
                     <Form>
                         <FormGroup>
-                            <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
+                            <Label className={"col-sm-4 center"} for="floorSelect">Floor</Label>
                             <Input onClick={this.handleFloorSelect} type="select"
-                                   className="margin-left-35 width-30" id="floorSelect">
+                                   className={"col-sm-4 center"} id="floorSelect">
                                 <CreateFloorOptions/>
                             </Input>
                         </FormGroup>
+
                         <FormGroup>
-                            <Input className={"margin-left-35 width-30"} type="select" multiple>
+                            <Input className={"col-sm-4 center"} type="select" multiple>
                                 <CreateRoomOptions rooms={this.state.rooms}/>
                             </Input>
                         </FormGroup>
-                        <FormGroup row>
-                            <Label className={"margin-left-35"} for="incidentComment">Comment</Label>
-                            <Input type="textarea" className={"margin-left-35 width-30"} id="incidentComment"
+
+                        <FormGroup>
+                            <Label className={"col-sm-4 center"} for="incidentComment">Comment</Label>
+                            <Input type="textarea" className={"col-sm-4 center"} id="incidentComment"
                                    placeholder={"Enter comment here"}/>
                         </FormGroup>
-                        <Button onClick={this.handleIncident} className={"margin-left-35"}
-                                color={"primary"}>Submit</Button>
-                        {' '}
-                        <WrappedButton link={"/"} name={"Cancel"} id={"wrappedButton"}/>
+
+                        <div className={"row"}>
+                            <div className={"col-sm-4 center"}>
+                                <Button onClick={this.handleIncident} className={"col-sm-4"}
+                                        color={"primary"}>Submit</Button>
+                                {' '}
+                                <Button link={"/"} className={"col-sm-4"} id={"Button"}>Cancel</Button>
+                            </div>
+                        </div>
                     </Form>
                 </div>
             </div>
