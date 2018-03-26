@@ -45,15 +45,26 @@ class CreateFloorOptions extends React.Component {
         return (
             floors.map(
                 (floorNum) => {
-                    return (
-                        (floorNum !== 0) ?
-                            <option value={floorNum}>{parseInt(floorNum, radix) / 100}</option> :
-                            <option value={'000'}>All</option>
-                    )
+                    if (this.props.displayAll){
+                        return (
+                            (floorNum !== 0) ?
+                                <option value={floorNum}>{parseInt(floorNum, radix) / 100}</option> :
+                                <option value={'000'}>All</option>
+                        )
+                    } else {
+                        return (
+                            (floorNum !== 0) ?
+                                <option value={floorNum}>{parseInt(floorNum, radix) / 100}</option> :
+                                null
+                        )
+                    }
                 }))
     }
     // TODO:  Return the floorNum for other components to use
 }
+CreateFloorOptions.defaultProps = {
+    displayAll: true
+};
 
 
 // This displays all rooms equal to guests = "none" -> means rooms are open to be reserved

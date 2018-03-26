@@ -78,7 +78,7 @@ class NewRoom extends React.Component {
                         <FormGroup>
                             <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
                             <Input onClick={this.handleFloorSelect} type={"select"} className="margin-left-35 width-30">
-                                <CreateFloorOptions />
+                                <CreateFloorOptions displayAll={false} />
                             </Input>
                         </FormGroup>
                         <FormGroup>
