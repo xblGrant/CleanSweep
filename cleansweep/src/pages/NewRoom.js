@@ -22,7 +22,7 @@ class NewRoom extends React.Component {
     }
 
     componentDidMount() {
-        api.newRoom(this);
+        api.generateNewRoomNumber(this);
     }
 
     onChange(event) {

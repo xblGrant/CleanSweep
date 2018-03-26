@@ -673,7 +673,7 @@ export const getNonReservableRoomInformation = (current, roomID) => {
 };
 
 // new room
-export const newRoom = (current) => {
+export const generateNewRoomNumber = (current) => {
     const radix = 10;
     let lastRoom = null;
     let roomRef = firebase.db.ref("/Rooms/Reservable/100");
