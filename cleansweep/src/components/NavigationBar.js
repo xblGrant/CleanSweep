@@ -172,9 +172,9 @@ function DropDItem(props) {
             (content,  index) => {
                 let link = props.links[index];
                 return(
-                    <DropdownItem>
+                    <DropdownItem key={index}>
                         <NavItem>
-                            <Link key={index} to={link}>{content}</Link>
+                            <Link to={link}>{content}</Link>
                         </NavItem>
                     </DropdownItem>
                 )

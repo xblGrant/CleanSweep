@@ -20,6 +20,7 @@ export const login = (current, email, password, history) => {
             current.setState(byPropKey('error', error));
         });
 };
+
 export const passwordUpdate = (current, password) => {
     const INITIAL_STATE = {
         passwordOld: '',
@@ -36,6 +37,7 @@ export const passwordUpdate = (current, password) => {
             this.setState(byPropKey('error', error));
         });
 };
+
 export const passwordReset = (current, email) => {
     const INITIAL_STATE = {
         email: '',
@@ -50,6 +52,7 @@ export const passwordReset = (current, email) => {
             this.setState(byPropKey('error', error));
         });
 };
+
 export const signUp = (current, email, password, userName, history) => {
     const INITIAL_STATE = {
         userName: '',
@@ -97,6 +100,7 @@ export const getAllEmployees = (current) => {
         })
     );
 };
+
 export const getAllRooms = (current) => {
     let roomList = [];
     let isReservable = true;
@@ -140,6 +144,7 @@ export const getAllRooms = (current) => {
         )
     });
 };
+
 export const getAssignedRooms = (current) => {
     let roomList = [];
     let isReservable = true;
@@ -189,6 +194,7 @@ export const getAssignedRooms = (current) => {
             }));
     });
 };
+
 export const getAvailableRooms = (current) => {
     let roomList = [];
     let isReservable = true;
@@ -216,6 +222,7 @@ export const getAvailableRooms = (current) => {
         });
     });
 };
+
 export const getInspectRooms = (current) => {
     let roomList = [];
     let isReservable = true;
@@ -244,6 +251,7 @@ export const getInspectRooms = (current) => {
         });
     });
 };
+
 export const getRoomsWithIncidents = (current) => {
     let roomList = [];
     let isReservable = true;
@@ -290,6 +298,7 @@ export const getRoomsWithIncidents = (current) => {
             }));
     });
 };
+
 export const getRoomsWithWakeUpCalls = (current) => {
     let roomList = [];
     let isReservable = true;
@@ -317,6 +326,7 @@ export const getRoomsWithWakeUpCalls = (current) => {
         });
     });
 };
+
 export const getRoomsWithDepartingGuests = (current) => {
     let today = new Date();
     let dd = today.getDate();
@@ -355,6 +365,7 @@ export const getRoomsWithDepartingGuests = (current) => {
         })
     });
 };
+
 export const getAllUnassignedSelectableRooms = (current) => {
     let roomList = [];
     let isReservable = true;
@@ -400,6 +411,7 @@ export const getAllUnassignedSelectableRooms = (current) => {
         )
     });
 };
+
 export const getAllUnassignedSelectableRoomsByFloor = (current, floor) => {
     let roomList = [];
     let isReservable = true;
@@ -441,6 +453,7 @@ export const getAllUnassignedSelectableRoomsByFloor = (current, floor) => {
         )
     })
 };
+
 export const clearRoomAssignments = (current) => {
     let roomPath;
     let updates = {};
@@ -494,6 +507,7 @@ export const getListofAllRooms = (current) => {
         )
     });
 };
+
 export const getListofAllRoomsByFloor = (current, floor) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
@@ -514,6 +528,7 @@ export const getListofAllRoomsByFloor = (current, floor) => {
         })
     })
 };
+
 export const getListofAllReservableRooms = (current) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -530,6 +545,7 @@ export const getListofAllReservableRooms = (current) => {
         })
     )
 };
+
 export const getListofAllReservableRoomsByFloor = (current, floor) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
@@ -544,6 +560,7 @@ export const getListofAllReservableRoomsByFloor = (current, floor) => {
         })
     )
 };
+
 export const getListofAllRoomsNeedInspected = (current) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/NonReservable/");
@@ -571,6 +588,7 @@ export const getListofAllRoomsNeedInspected = (current) => {
         )
     });
 };
+
 export const getListofAllRoomsNeedInspectedByFloor = (current, floor) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
@@ -636,6 +654,7 @@ export const getReservableRoomInformation = (current, roomID) => {
         }
     });
 };
+
 export const getNonReservableRoomInformation = (current, roomID) => {
     let updates = {};
     let incidentsList = [];
@@ -687,6 +706,7 @@ export const generateNewRoomNumber = (current) => {
         })
     });
 };
+
 export const newRoomFloorSelect = (current, floor) => {
     const radix = 10;
     let lastRoom = null;
