@@ -288,10 +288,6 @@ a:hover {
     padding: 10px;
     overflow: hidden;
 }
-.item:nth-child(10),
-.item:nth-child(27) {
-    background: silver;
-}
 .item h2 {
     font-size: 20px;
     margin-top: 0;

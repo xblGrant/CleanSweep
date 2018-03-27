@@ -42,7 +42,7 @@ class AssignRooms extends React.Component {
 
     render() {
         return (
-            <div class="container">
+            <div className="container">
                 <Helmet>
                     <title>Assign Rooms</title>
                 </Helmet>

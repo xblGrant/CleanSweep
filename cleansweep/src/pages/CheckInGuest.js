@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
 import {CreateRoomOptions} from "../components/Generators";
-import { AvailableRooms } from '../components/Generators';
 import * as api from '../firebase/api';
 import * as routes from "../constants/routes";
 import {Helmet} from "react-helmet";
@@ -46,7 +45,9 @@ class CheckInGuest extends React.Component {
         info.floorNum = Math.round(info.roomNum / 100) * 100;
         info.roomPath = 'Rooms/Reservable/' + info.floorNum + '/' + info.roomNum;
 
-        this.state = info;
+        this.setState({
+            info
+        });
     }
     handleCheckIn() {
         //TODO: check if guest is not already checked-in

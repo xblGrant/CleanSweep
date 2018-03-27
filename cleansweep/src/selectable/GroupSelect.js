@@ -28,7 +28,6 @@ class GroupSelect extends React.Component {
                     globalMouse={isGlobal}
                     allowClickWithoutSelected={true}
                     disabled={this.props.isDisabled}
-                    ignoreList={['.not-selectable', '.item:nth-child(10)', '.item:nth-child(27)']}
                 >
                     <SelectableList items={this.props.items} isDisabled={this.props.isDisabled} />
                 </SelectableGroup>
