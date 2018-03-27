@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import {WrappedButton} from "../components/Buttons";
-import {CreateFloorOptions} from "../components/Generators";
+import {CreateFloorOptions, NumberOfRooms} from "../components/Generators";
 import * as routes from "../constants/routes";
 import * as api from '../firebase/api';
 import {Helmet} from "react-helmet";
@@ -11,26 +11,51 @@ class NewRoom extends React.Component {
         super(props);
 
         this.state = {
-            newRoomNumber: null
+            newRoomNumber: null,
+            numNewRooms: '1',
+            newFloor: '',
+            newFloorRoomNum: null,
+            createNewFloor: false,
         };
 
-        this.onChange = this.onChange.bind(this);
         this.handleNewRoom = this.handleNewRoom.bind(this);
+        this.handleNumRooms = this.handleNumRooms.bind(this);
+        this.handleNewFloor = this.handleNewFloor.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleReservableRoom = this.handleReservableRoom.bind(this);
         this.handleNonReservableRoom = this.handleNonReservableRoom.bind(this);
     }
 
+    static RADIX = 10;
+    static NUM_ROOMS = 10;
+
     componentDidMount() {
         api.generateNewRoomNumber(this);
+        api.getNewFloor(this);
     }
 
-    onChange(event) {
-        // create new floor display 301 if new floor is 3rd lvl
+    handleNumRooms(e) {
+        let numNewRooms = e.target.value;
+        this.setState({
+            numNewRooms: numNewRooms
+        })
     }
 
     handleFloorSelect(e) {
         api.newRoomFloorSelect(this, e.target.value);
+    }
+
+    handleNewFloor() {
+        this.setState({
+            createNewFloor: !this.state.createNewFloor
+        });
+
+        let {createNewFloor} = this.state;
+        if (createNewFloor) {
+            api.getNewFloor(this);
+        } else {
+            api.generateNewRoomNumber(this);
+        }
     }
 
     handleNewRoom() {
@@ -68,6 +93,81 @@ class NewRoom extends React.Component {
     }
 
     render() {
+
+        let {
+            newRoomNumber,
+            numNewRooms,
+            createNewFloor,
+            newFloorRoomNum,
+            newFloor
+        } = this.state;
+
+        let displayValue, endRoom;
+
+        let formDisplay;
+        if (!createNewFloor) {
+            if (numNewRooms === '1') {
+                displayValue = newRoomNumber;
+            } else {
+                endRoom = parseInt(newRoomNumber, NewRoom.RADIX) + parseInt(numNewRooms, NewRoom.RADIX) - 1;
+                displayValue = newRoomNumber.toString() + " - " + endRoom.toString();
+            }
+
+            formDisplay =
+                <div className={'oldFloors'}>
+                    <FormGroup>
+                        <Label className={"margin-left-35"}>Floor</Label>
+                        <Input onClick={this.handleFloorSelect} type={"select"} className={"margin-left-35 width-30"}>
+                            <CreateFloorOptions displayAll={false}/>
+                        </Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label className={"margin-left-35"} for={"numberRooms"}># New Rooms</Label>
+                        <Input onClick={this.handleNumRooms} type={"select"} className={"margin-left-35 width-30"}>
+                            <NumberOfRooms total={NewRoom.NUM_ROOMS}/>
+                        </Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label className={"margin-left-35"} for={"roomNum"}>
+                            New Rooms
+                        </Label>
+                        <Input type={"text"} className={"margin-left-35 width-30"} id={"roomNum"}
+                               value={displayValue} readOnly/>
+                    </FormGroup>
+                </div>
+
+        } else {
+            if (numNewRooms === '1') {
+                displayValue = newFloorRoomNum;
+            } else {
+                endRoom = parseInt(newFloorRoomNum, NewRoom.RADIX) + parseInt(numNewRooms, NewRoom.RADIX) - 1;
+                displayValue = newFloorRoomNum.toString() + " - " + endRoom.toString();
+            }
+
+            formDisplay =
+                <div className={'newFloor'}>
+                    <FormGroup>
+                        <Label className={"margin-left-35"}>Floor</Label>
+                        <Input type={"select"} className={"margin-left-35 width-30"}>
+                            <option value={newFloor}>{newFloor / 100}</option>
+                        </Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label className={"margin-left-35"} for={"numberRooms"}># New Rooms</Label>
+                        <Input onClick={this.handleNumRooms} type={"select"} className={"margin-left-35 width-30"}>
+                            <NumberOfRooms total={NewRoom.NUM_ROOMS}/>
+                        </Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label className={"margin-left-35"} for={"roomNum"}>
+                            New Rooms
+                        </Label>
+                        <Input type={"text"} className={"margin-left-35 width-30"} id={"roomNum"}
+                               value={displayValue} readOnly/>
+                    </FormGroup>
+                </div>
+        }
+
         return (
             <div>
                 <Helmet>
@@ -75,28 +175,10 @@ class NewRoom extends React.Component {
                 </Helmet>
                 <div id={"newRoomForm"}>
                     <Form>
-                        <FormGroup>
-                            <Label className={"margin-left-35"}>Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type={"select"} className={"margin-left-35 width-30"}>
-                                <CreateFloorOptions displayAll={false}/>
-                            </Input>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label className={"margin-left-35"} for={"numberRooms"}>Number of New Rooms</Label>
-                            <Input type={"select"} className={"margin-left-35 width-30"}>
-                                <numberOfRooms total={50} />
-                            </Input>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label className={"margin-left-35"} for={"roomNum"}>
-                                New Room
-                            </Label>
-                            <Input type={"text"} className={"margin-left-35 width-30"} id={"roomNum"}
-                                   value={this.state.newRoomNumber} readOnly/>
-                        </FormGroup>
+                        {formDisplay}
                         <FormGroup check>
                             <Label className={"margin-left-35"} check>
-                                <Input type={"checkbox"} onChange={this.onChange} id={"newFloor"}/>{' '}
+                                <Input onChange={this.handleNewFloor} type={"checkbox"} id={"newFloor"}/>{' '}
                                 New Floor
                             </Label>
                             <br/>
@@ -116,14 +198,6 @@ class NewRoom extends React.Component {
             </div>
         );
     }
-}
-
-function numberOfRooms(props){
-    let returnField = <option value={1}>{1}</option>;
-    for (let current = 2; current <= props.total; current++) {
-        returnField += <option value={current}>{current}</option>
-    }
-    return (returnField);
 }
 
 export default NewRoom;

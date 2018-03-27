@@ -2,6 +2,7 @@
 
 import {auth, firebase} from "./index";
 import * as routes from "../constants/routes";
+import NewRoom from "../pages/NewRoom";
 
 // authentication
 export const login = (that, email, password, history) => {
@@ -756,6 +757,24 @@ export const newRoomFloorSelect = (that, floor) => {
     }).then(() => {
         that.setState({
             newRoomNumber: parseInt(lastRoom, radix) + 1
+        })
+    });
+};
+export const getNewFloor = (that) => {
+    let lastFloor;
+    let floorRef = firebase.db.ref("/Rooms/Reservable");
+    floorRef.orderByKey().once('value', function (allFloors) {
+        allFloors.forEach(function (floor) {
+            lastFloor = floor.key;
+        })
+    }).then(() => {
+        let radix = 10;
+        let newFloor = parseInt(lastFloor, radix) + 100;
+        let newRoom = newFloor  + 1;
+
+        that.setState({
+            newFloor: newFloor,
+            newFloorRoomNum: newRoom
         })
     });
 };

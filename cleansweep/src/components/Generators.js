@@ -3,6 +3,22 @@ import * as api from '../firebase/api';
 
 const radix = 10;
 
+function NumberOfRooms(props){
+    let returnField = [];
+    for (let current = 1; current <= props.total; current++) {
+        returnField[current] = <option value={current}>{current}</option>
+    }
+    return (
+        returnField.map(
+            (option) => {
+                return(
+                    option
+                )
+            }
+        )
+    );
+}
+
 function CreateRoomOptions(props) {
     return (
         props.rooms.map(
@@ -58,4 +74,5 @@ CreateFloorOptions.defaultProps = {
 export {
     CreateFloorOptions,
     CreateRoomOptions,
+    NumberOfRooms
 };

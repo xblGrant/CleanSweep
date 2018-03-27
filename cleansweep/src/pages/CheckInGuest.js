@@ -50,6 +50,7 @@ class CheckInGuest extends React.Component {
         this.state = info;
     }
     handleCheckIn() {
+        //TODO: check if guest is not already checked-in
         //TODO: make sure first and last name fields aren't empty
         //TODO: make sure roomPath and roomNum aren't empty
         //TODO: invalidate check-in button unless all fields are selected/entered. (see login page for example)
