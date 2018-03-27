@@ -38,34 +38,38 @@ class PasswordChange extends React.Component {
             passwordOne === '';
 
         return (
-            <Form className={"margin-top-02"} onSubmit={this.onSubmit}>
-                {error && <p type={"error"} className={"error"}>{error.message}</p>}
-                <FormGroup>
-                    <Input className={"margin-left-35 width-30"}
-                           id={"pwChange"}
-                           value={passwordOne}
-                           onChange={e => this.setState(byPropKey('passwordOne', e.target.value))}
-                           type={"password"}
-                           placeholder={"New Password"}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Input className={"margin-left-35 width-30"}
-                           id={"pwChange"}
-                           value={passwordTwo}
-                           onChange={e => this.setState(byPropKey('passwordTwo', e.target.value))}
-                           type={"password"}
-                           placeholder={"Confirm New Password"}
-                    />
-                </FormGroup>
-                <Button className={"margin-left-35"}
-                        id={"changePwBtn"}
-                        disabled={isInvalid}
-                        color={"primary"}
-                        type={"submit"}>
-                    Reset Password
-                </Button>
-            </Form>
+            <div className={"container"}>
+                <h3 className={"center"}> Password Change</h3>
+                <br/>
+                <Form onSubmit={this.onSubmit}>
+                    {error && <p type={"error"} className={"error"}>{error.message}</p>}
+                    <FormGroup>
+                        <Input  className={"col-sm-6 center"}
+                                id={"pwChange"}
+                                value={passwordOne}
+                                onChange={e => this.setState(byPropKey('passwordOne', e.target.value))}
+                                type={"password"}
+                                placeholder={"New Password"}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Input  className={"col-sm-6 center"}
+                                id={"pwChange"}
+                                value={passwordTwo}
+                                onChange={e => this.setState(byPropKey('passwordTwo', e.target.value))}
+                                type={"password"}
+                                placeholder={"Confirm New Password"}/>
+                    </FormGroup>
+                    <div className={"center"}>
+                        <Button className={"col-sm-4 center"}
+                                id={"changePwBtn"}
+                                disabled={isInvalid}
+                                color={"primary"}
+                                type={"submit"}>
+                            Reset Password
+                        </Button>
+                    </div>
+                </Form>
+            </div>
         )
     }
 }

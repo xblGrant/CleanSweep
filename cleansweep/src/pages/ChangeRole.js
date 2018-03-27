@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import { WrappedButton } from "../components/Buttons";
 import * as routes from "../constants/routes";
 import {Helmet} from "react-helmet";
 
@@ -17,50 +16,59 @@ class AddWakeUp extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={"container"}>
                 <Helmet>
                     <title>Change Employee Role</title>
                 </Helmet>
-                <div className={"margin-top-02"}>
-                    <Form>
-                        <Label className={"margin-left-35"}><h6>Search By</h6></Label>
-                        <FormGroup row>
-                            <Label className={"margin-left-35"} for="employeeName">Employee Name</Label>
-                            <Input
-                                placeholder={"Employee name"}
-                                type="text" id="employeeName"/>
-                        </FormGroup>
-                        <Label className={"margin-left-35 width-30"}><h6>or</h6></Label>
-                        <FormGroup row>
-                            <Label className={"margin-left-35"} for="employeeRoleID">Employee ID</Label>
-                            <Input
-                                placeholder={"Employee ID"}
-                                type="text" id="employeeRoleID"/>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label className={"margin-left-35"} for="employeeResults">Search Results</Label>
-                            <Input
-                                placeholder={"Search Results"}
-                                type="textarea" id="employeeResults"/>
-                        </FormGroup>
-                        <FormGroup check>
-                            <Label className={"margin-left-35"} check>
-                                <Input type="checkbox" id="isManager"/>{' '}
+                <Form>
+                    <h6 className={"text-center"}>Search By</h6>
+                    <div className={"row"}>
+                        <div className={"col-sm-6"}>
+                            <FormGroup>
+                                <div className={"col-sm-11 center"}>
+                                    <Label for="employeeName">Employee Name</Label>
+                                    <Input placeholder={"Employee name"} type="text" id="employeeName"/>
+                                </div>
+                            </FormGroup>
+                        </div>
+                        <div className={"col-sm-6"}>
+                            <FormGroup>
+                                <div className={"col-sm-11 center"}>
+                                    <Label for="employeeRoleID">Employee ID</Label>
+                                    <Input placeholder={"Employee ID"} type="text" id="employeeRoleID"/>
+                                </div>
+                            </FormGroup>
+                            <FormGroup>
+                                <div className={"col-sm-11 center"}>
+                                    <Label for="employeeResults">Search Results</Label>
+                                    <Input placeholder={"Search Results"} type="textarea" id="employeeResults"/>
+                                </div>
+                            </FormGroup>
+
+                        </div>
+                    </div>
+                    <hr/>
+                    <FormGroup check>
+                        <div className={"center"}>
+                            <Label check>
+                                <Input type="checkbox" id="isManager"/>
                                 Promote to Manager
-                            </Label>{' '}
+                            </Label>
                             <br/>
-                            <Label className={"margin-left-35"} check>
-                                <Input type="checkbox" id="isEmployee"/>{' '}
+                            <Label check>
+                                <Input type="checkbox" id="isEmployee"/>
                                 Demote to Employee
                             </Label>
-                        </FormGroup>
-                        <br/>
-                        <Button onClick={this.handleChangeRole} color={"primary"}
-                                className={"margin-left-35"}>Submit</Button>
-                        {' '}
-                        <WrappedButton  link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
-                    </Form>
-                </div>
+                        </div>
+                    </FormGroup>
+                    <br/>
+                    <div className={"row"}>
+                        <div className={"col-sm-6 center"}>
+                            <Button className={"col-sm-5 center"} onClick={this.handleChangeRole} color={"primary"}>Submit</Button>
+                            <Button className={"col-sm-5 center"} href={routes.HOME}> Cancel </Button>
+                        </div>
+                    </div>
+                </Form>
             </div>
         );
     }
