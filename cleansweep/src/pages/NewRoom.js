@@ -85,10 +85,6 @@ class NewRoom extends React.Component {
         } else {
             this.handleNonReservableRoom()
         }
-
-        // const updates = {};
-        // updates['/lobby'] = {num: 'lobbyOne'};
-        // firebase.db.ref('Rooms/NonReservable').update(updates);
     }
 
     handleReservableRoom() {

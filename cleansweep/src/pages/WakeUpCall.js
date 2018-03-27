@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import {WrappedButton} from "../components/Buttons";
 import {CreateRoomOptions, CreateFloorOptions} from '../components/Generators';
 import * as api from '../firebase/api';
 import * as routes from "../constants/routes";

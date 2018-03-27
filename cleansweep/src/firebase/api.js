@@ -739,7 +739,6 @@ export const generateNewRoomNumber = (that) => {
 export const newRoomFloorSelect = (that, floor) => {
     const radix = 10;
     let lastRoom = null;
-    let floorNum = null;
     /* Rooms/Reservable is a path in the database e.target.value is the associated floor the user clicks on
     when calling firebase.db.ref, the whole string will get all the rooms on a given floor */
     let floorRef = firebase.db.ref("/Rooms/Reservable/" + floor);
