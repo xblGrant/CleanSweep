@@ -134,7 +134,12 @@ class NewRoom extends React.Component {
             roomName
         } = this.state;
 
-        let displayValue, endRoom, newRoomLabel, isDisabled = false, noNewRoom = false;
+        let displayValue,
+            endRoom,
+            newRoomLabel,
+            isDisabled = false,
+            noNewRoom = false,
+            error = false;
 
         let floorDisplay;
         if (!createNewFloor) {
@@ -201,8 +206,10 @@ class NewRoom extends React.Component {
 
         } else {
 
-            if (newRoomNumber % 100 === 0)
+            if (newRoomNumber % 100 === 0) {
                 noNewRoom = true;
+                error = true;
+            }
 
             numberOfRooms = <NumberOfRooms total={1}/>;
             displayValue = newRoomNumber;
@@ -256,6 +263,8 @@ class NewRoom extends React.Component {
                         <WrappedButton className={"margin-left-35"} link={routes.HOME} name={"Cancel"}
                                        id={"wrappedButton"}/>
                     </Form>
+                    {error && <p typeof={"error"} className={"error center"} id={"error"}>
+                        {"No more rooms can be added to this floor."}</p>}
                 </div>
             </div>
         );
