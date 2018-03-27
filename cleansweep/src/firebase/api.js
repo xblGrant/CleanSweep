@@ -752,7 +752,6 @@ export const newRoomFloorSelect = (that, floor) => {
     floorRef.orderByKey().once('value', function (floors) {
         floors.forEach(function (room) {
             lastRoom = room.key;
-            floorNum = floors.key;
         })
     }).then(() => {
         that.setState({
