@@ -33,7 +33,7 @@ class NewRoom extends React.Component {
     }
 
     static RADIX = 10;
-    static NUM_ROOMS = 10;
+    static NUM_ROOMS = 99;
 
     componentDidMount() {
         api.generateNewRoomNumber(this);
@@ -134,7 +134,7 @@ class NewRoom extends React.Component {
             roomName
         } = this.state;
 
-        let displayValue, endRoom, newRoomLabel, isDisabled = false;
+        let displayValue, endRoom, newRoomLabel, isDisabled = false, noNewRoom = false;
 
         let floorDisplay;
         if (!createNewFloor) {
@@ -188,12 +188,26 @@ class NewRoom extends React.Component {
 
         let numberOfRooms;
         if (isReservable){
-            numberOfRooms = <NumberOfRooms total={NewRoom.NUM_ROOMS}/>;
+
+            let totalRooms;
+            if (createNewFloor)
+                totalRooms = NewRoom.NUM_ROOMS;
+            else
+                totalRooms = NewRoom.NUM_ROOMS - (newRoomNumber % 100) + 1;
+
+            // TODO: add an warning when all possible rooms have been added to a floor (#99)
+
+            numberOfRooms = <NumberOfRooms total={totalRooms}/>;
+
         } else {
+
+            if (newRoomNumber % 100 === 0)
+                noNewRoom = true;
+
             numberOfRooms = <NumberOfRooms total={1}/>;
             displayValue = newRoomNumber;
 
-            if (roomName === '')
+            if (roomName === '' || noNewRoom)
                 isDisabled = true;
         }
 
