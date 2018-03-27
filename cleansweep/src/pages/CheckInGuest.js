@@ -16,7 +16,7 @@ class CheckInGuest extends React.Component {
             firstName: '',
             lastName: '',
             roomNum: '',
-            roomPath: 'Rooms/Reservable/',
+            roomPath: '',
         };
 
         this.handleCheckIn = this.handleCheckIn.bind(this);
@@ -50,9 +50,9 @@ class CheckInGuest extends React.Component {
         this.state = info;
     }
     handleCheckIn() {
-        //TODO: Pass in proper parameters
-        //TODO: make sure First name, Last name is valid
-        //TODO: if guests (on firebase) does not have current guest,
+        //TODO: make sure first and last name fields aren't empty
+        //TODO: make sure roomPath and roomNum aren't empty
+        //TODO: invalidate check-in button unless all fields are selected/entered. (see login page for example)
 
         let firstName = this.state.firstName;
         let lastName = this.state.lastName;
