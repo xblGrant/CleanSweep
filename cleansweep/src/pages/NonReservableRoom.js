@@ -40,7 +40,7 @@ class NonReservableRoom extends React.Component {
         return (
             <div className={"container"}>
                 <p>{this.state.roomID}</p>
-                <p>{this.state.guest}</p>
+                <p>{this.state.floorNum}</p>
                 <p>{this.state.incidents}</p>
             </div>
         );

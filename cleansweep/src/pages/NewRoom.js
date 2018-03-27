@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import { WrappedButton } from "../components/Buttons";
-import { CreateFloorOptions } from "../components/Generators";
+import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {WrappedButton} from "../components/Buttons";
+import {CreateFloorOptions} from "../components/Generators";
 import * as routes from "../constants/routes";
 import * as api from '../firebase/api';
 import {Helmet} from "react-helmet";
@@ -47,7 +47,7 @@ class NewRoom extends React.Component {
         // firebase.db.ref('Rooms/NonReservable').update(updates);
     }
 
-    handleReservableRoom(floor, num){
+    handleReservableRoom(floor, num) {
         //TODO: handle proper floor here
         // firebase.db.ref('Rooms/Reservable/' + floor + '/' + num).set({
         //     assignedEmployee: "none",
@@ -59,7 +59,7 @@ class NewRoom extends React.Component {
         // });
     }
 
-    handleNonReservableRoom(floor, num){
+    handleNonReservableRoom(floor, num) {
         // firebase.db.ref('Rooms/NonReservable/' + floor + '/' + num).set({
         //     assignedEmployee: "none",
         //     incident: false,
@@ -76,16 +76,23 @@ class NewRoom extends React.Component {
                 <div id={"newRoomForm"}>
                     <Form>
                         <FormGroup>
-                            <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type={"select"} className="margin-left-35 width-30">
-                                <CreateFloorOptions displayAll={false} />
+                            <Label className={"margin-left-35"}>Floor</Label>
+                            <Input onClick={this.handleFloorSelect} type={"select"} className={"margin-left-35 width-30"}>
+                                <CreateFloorOptions displayAll={false}/>
                             </Input>
                         </FormGroup>
                         <FormGroup>
-                            <Label className={"margin-left-35"} for="roomNum">
+                            <Label className={"margin-left-35"} for={"numberRooms"}>Number of New Rooms</Label>
+                            <Input type={"select"} className={"margin-left-35 width-30"}>
+                                <numberOfRooms total={50} />
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label className={"margin-left-35"} for={"roomNum"}>
                                 New Room
                             </Label>
-                            <Input type="text" className={"margin-left-35 width-30"} id="roomNum" value={this.state.newRoomNumber} readOnly/>
+                            <Input type={"text"} className={"margin-left-35 width-30"} id={"roomNum"}
+                                   value={this.state.newRoomNumber} readOnly/>
                         </FormGroup>
                         <FormGroup check>
                             <Label className={"margin-left-35"} check>
@@ -99,14 +106,24 @@ class NewRoom extends React.Component {
                             </Label>
                         </FormGroup>
                         <br/>
-                        <Button onClick={this.handleNewRoom} color={"primary"} className={"margin-left-35"}>Submit</Button>
+                        <Button onClick={this.handleNewRoom} color={"primary"}
+                                className={"margin-left-35"}>Submit</Button>
                         {' '}
-                        <WrappedButton className={"margin-left-35"} link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
+                        <WrappedButton className={"margin-left-35"} link={routes.HOME} name={"Cancel"}
+                                       id={"wrappedButton"}/>
                     </Form>
                 </div>
             </div>
         );
     }
+}
+
+function numberOfRooms(props){
+    let returnField = <option value={1}>{1}</option>;
+    for (let current = 2; current <= props.total; current++) {
+        returnField += <option value={current}>{current}</option>
+    }
+    return (returnField);
 }
 
 export default NewRoom;

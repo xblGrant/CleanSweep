@@ -4,7 +4,7 @@ import {auth, firebase} from "./index";
 import * as routes from "../constants/routes";
 
 // authentication
-export const login = (current, email, password, history) => {
+export const login = (that, email, password, history) => {
     const INITIAL_STATE = {
         email: '',
         password: '',
@@ -13,15 +13,14 @@ export const login = (current, email, password, history) => {
 
     auth.doSignInWithEmailAndPassword(email, password)
         .then(() => {
-            current.setState(() => ({...INITIAL_STATE}));
+            that.setState(() => ({...INITIAL_STATE}));
             history.push(routes.ASSIGNED_ROOMS);  //TODO: redirect to a better page than the same page
         })
         .catch(error => {
-            current.setState(byPropKey('error', error));
+            that.setState(byPropKey('error', error));
         });
 };
-
-export const passwordUpdate = (current, password) => {
+export const passwordUpdate = (that, password) => {
     const INITIAL_STATE = {
         passwordOld: '',
         passwordOne: '',
@@ -37,8 +36,7 @@ export const passwordUpdate = (current, password) => {
             this.setState(byPropKey('error', error));
         });
 };
-
-export const passwordReset = (current, email) => {
+export const passwordReset = (that, email) => {
     const INITIAL_STATE = {
         email: '',
         error: null,
@@ -52,8 +50,7 @@ export const passwordReset = (current, email) => {
             this.setState(byPropKey('error', error));
         });
 };
-
-export const signUp = (current, email, password, userName, history) => {
+export const signUp = (that, email, password, userName, history) => {
     const INITIAL_STATE = {
         userName: '',
         email: '',
@@ -65,23 +62,23 @@ export const signUp = (current, email, password, userName, history) => {
     auth.doCreateUserWithEmailAndPassword(email, password)
         .then(() => {
             let employeeRef = firebase.db.ref("/Employee/");
-            employeeRef.child(firebase.auth.currentUser.uid)
+            employeeRef.child(firebase.auth.thatUser.uid)
                 .set({
                     username: userName,
                     email: email,
                     isAdmin: false
                 });
 
-            current.setState(() => ({...INITIAL_STATE}));
+            that.setState(() => ({...INITIAL_STATE}));
             history.push(routes.ASSIGNED_ROOMS); //TODO: push to proper page for after signup/login
         })
         .catch(error => {
-            current.setState(byPropKey('error', error));
+            that.setState(byPropKey('error', error));
         });
 };
 
 // functions used with react-selectable-fast element
-export const getAllEmployees = (current) => {
+export const getAllEmployees = (that) => {
     let employeeList = [];
     let empRef = firebase.db.ref("/Employee");
     empRef.orderByKey().once('value', function (allEmployees) {
@@ -95,13 +92,12 @@ export const getAllEmployees = (current) => {
             );
         })
     }).then(() =>
-        current.setState({
+        that.setState({
             employees: employeeList
         })
     );
 };
-
-export const getAllRooms = (current) => {
+export const getAllRooms = (that) => {
     let roomList = [];
     let isReservable = true;
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -138,20 +134,19 @@ export const getAllRooms = (current) => {
                 })
             })
         }).then(() =>
-            current.setState({
+            that.setState({
                 rooms: roomList
             })
         )
     });
 };
-
-export const getAssignedRooms = (current) => {
+export const getAssignedRooms = (that) => {
     let roomList = [];
     let isReservable = true;
     let user = null;
-    let currentUser = firebase.auth.currentUser;
-    if (currentUser !== null) {
-        user = currentUser.uid;
+    let thatUser = firebase.auth.thatUser;
+    if (thatUser !== null) {
+        user = thatUser.uid;
     }
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
     roomRef.orderByKey().once('value', function (floors) {
@@ -189,13 +184,12 @@ export const getAssignedRooms = (current) => {
                 })
             })
         }).then(() =>
-            current.setState({
+            that.setState({
                 rooms: roomList
             }));
     });
 };
-
-export const getAvailableRooms = (current) => {
+export const getAvailableRooms = (that) => {
     let roomList = [];
     let isReservable = true;
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -217,13 +211,12 @@ export const getAvailableRooms = (current) => {
             })
         })
     }).then(() => {
-        current.setState({
+        that.setState({
             rooms: roomList
         });
     });
 };
-
-export const getInspectRooms = (current) => {
+export const getInspectRooms = (that) => {
     let roomList = [];
     let isReservable = true;
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -246,13 +239,12 @@ export const getInspectRooms = (current) => {
             })
         })
     }).then(() => {
-        current.setState({
+        that.setState({
             rooms: roomList
         });
     });
 };
-
-export const getRoomsWithIncidents = (current) => {
+export const getRoomsWithIncidents = (that) => {
     let roomList = [];
     let isReservable = true;
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -293,13 +285,12 @@ export const getRoomsWithIncidents = (current) => {
                 })
             })
         }).then(() =>
-            current.setState({
+            that.setState({
                 rooms: roomList
             }));
     });
 };
-
-export const getRoomsWithWakeUpCalls = (current) => {
+export const getRoomsWithWakeUpCalls = (that) => {
     let roomList = [];
     let isReservable = true;
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -321,13 +312,12 @@ export const getRoomsWithWakeUpCalls = (current) => {
             })
         })
     }).then(() => {
-        current.setState({
+        that.setState({
             rooms: roomList
         });
     });
 };
-
-export const getRoomsWithDepartingGuests = (current) => {
+export const getRoomsWithDepartingGuests = (that) => {
     let today = new Date();
     let dd = today.getDate();
     let mm = today.getMonth() + 1;
@@ -360,13 +350,12 @@ export const getRoomsWithDepartingGuests = (current) => {
             })
         })
     }).then(() => {
-        current.setState({
+        that.setState({
             rooms: roomList
         })
     });
 };
-
-export const getAllUnassignedSelectableRooms = (current) => {
+export const getAllUnassignedSelectableRooms = (that) => {
     let roomList = [];
     let isReservable = true;
     let roomRef = firebase.db.ref("/Rooms/NonReservable/");
@@ -405,14 +394,13 @@ export const getAllUnassignedSelectableRooms = (current) => {
                 })
             })
         }).then(() =>
-            current.setState({
+            that.setState({
                 rooms: roomList
             })
         )
     });
 };
-
-export const getAllUnassignedSelectableRoomsByFloor = (current, floor) => {
+export const getAllUnassignedSelectableRoomsByFloor = (that, floor) => {
     let roomList = [];
     let isReservable = true;
     let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
@@ -447,14 +435,13 @@ export const getAllUnassignedSelectableRoomsByFloor = (current, floor) => {
                 }
             })
         }).then(() =>
-            current.setState({
+            that.setState({
                 rooms: roomList
             })
         )
     })
 };
-
-export const clearRoomAssignments = (current) => {
+export const clearRoomAssignments = (that) => {
     let roomPath;
     let updates = {};
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -476,14 +463,14 @@ export const clearRoomAssignments = (current) => {
             })
         }).then(() => {
                 firebase.db.ref().update(updates);
-                getAllUnassignedSelectableRooms(current);
+                getAllUnassignedSelectableRooms(that);
             }
         );
     })
 };
 
 // functions to get list of just room keys
-export const getListofAllRooms = (current) => {
+export const getListofAllRooms = (that) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/NonReservable/");
     roomRef.orderByKey().once('value', function (floors) {
@@ -501,14 +488,13 @@ export const getListofAllRooms = (current) => {
                 })
             })
         }).then(() =>
-            current.setState({
+            that.setState({
                 rooms: roomList
             })
         )
     });
 };
-
-export const getListofAllRoomsByFloor = (current, floor) => {
+export const getListofAllRoomsByFloor = (that, floor) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
     roomRef.orderByKey().once('value', function (allRooms) {
@@ -522,14 +508,13 @@ export const getListofAllRoomsByFloor = (current, floor) => {
                 roomList.push(room.key);
             })
         }).then(() => {
-            current.setState({
+            that.setState({
                 rooms: roomList
             })
         })
     })
 };
-
-export const getListofAllReservableRooms = (current) => {
+export const getListofAllReservableRooms = (that) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
     roomRef.orderByKey().once('value', function (floors) {
@@ -540,13 +525,12 @@ export const getListofAllReservableRooms = (current) => {
             })
         })
     }).then(() =>
-        current.setState({
+        that.setState({
             rooms: roomList
         })
     )
 };
-
-export const getListofAllReservableRoomsByFloor = (current, floor) => {
+export const getListofAllReservableRoomsByFloor = (that, floor) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
     roomRef.orderByKey().once('value', function (allRooms) {
@@ -555,13 +539,12 @@ export const getListofAllReservableRoomsByFloor = (current, floor) => {
                 roomList.push(room.key);
         })
     }).then(() =>
-        current.setState({
+        that.setState({
             rooms: roomList
         })
     )
 };
-
-export const getListofAllRoomsNeedInspected = (current) => {
+export const getListofAllRoomsNeedInspected = (that) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/NonReservable/");
     roomRef.orderByKey().once('value', function (floors) {
@@ -582,14 +565,13 @@ export const getListofAllRoomsNeedInspected = (current) => {
                 })
             })
         }).then(() =>
-            current.setState({
+            that.setState({
                 rooms: roomList
             })
         )
     });
 };
-
-export const getListofAllRoomsNeedInspectedByFloor = (current, floor) => {
+export const getListofAllRoomsNeedInspectedByFloor = (that, floor) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
     roomRef.orderByKey().once('value', function (allRooms) {
@@ -606,15 +588,64 @@ export const getListofAllRoomsNeedInspectedByFloor = (current, floor) => {
                     roomList.push(room.key);
             })
         }).then(() => {
-            current.setState({
+            that.setState({
                 rooms: roomList
             })
         })
     })
 };
+export const getListofAllAvailableRooms = (that) => {
+    let roomList = [];
+    let ref = firebase.db.ref("/Rooms/Reservable");
+
+    ref.orderByKey().once('value', function (allFloors) {
+        allFloors.forEach(function (floors) {
+            floors.forEach(function (rooms) {
+                if (rooms.val().guest === "none")
+                    roomList.push(rooms.key);
+            })
+        })
+    }).then(() => {
+        that.setState({
+            rooms: roomList
+        });
+    });
+};
+export const getListofAllUnavailableRooms = (that) => {
+    let roomList = [];
+    let ref = firebase.db.ref("/Rooms/Reservable");
+
+    ref.orderByKey().once('value', function (allFloors) {
+        allFloors.forEach(function (floors) {
+            floors.forEach(function (rooms) {
+                if (rooms.val().guest !== "none")
+                    roomList.push(rooms.val().room);
+            })
+        })
+    }).then(() => {
+        that.setState({
+            rooms: roomList
+        });
+    });
+};
+
+// generators
+export const getFloorOptions = (that) => {
+    let floorList = [0];
+    let floorRef = firebase.db.ref("/Rooms/Reservable");
+    floorRef.orderByKey().once('value', function (allFloors) {
+        allFloors.forEach(function (floor) {
+            floorList.push(floor.key);
+        })
+    }).then(() => {
+        that.setState({
+            floors: floorList
+        })
+    });
+};
 
 // room information
-export const getReservableRoomInformation = (current, roomID) => {
+export const getReservableRoomInformation = (that, roomID) => {
     let updates = {};
     let incidentsList = [];
     let hasIncident = false;
@@ -640,7 +671,7 @@ export const getReservableRoomInformation = (current, roomID) => {
             })
         })
     }).then(() => {
-        current.setState(updates);
+        that.setState(updates);
 
         if (hasIncident) {
             let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
@@ -649,13 +680,12 @@ export const getReservableRoomInformation = (current, roomID) => {
                     incidentsList.push(incident.val());
                 })
             }).then(() => {
-                current.setState({incidents: incidentsList});
+                that.setState({incidents: incidentsList});
             });
         }
     });
 };
-
-export const getNonReservableRoomInformation = (current, roomID) => {
+export const getNonReservableRoomInformation = (that, roomID) => {
     let updates = {};
     let incidentsList = [];
     let hasIncident = false;
@@ -676,7 +706,7 @@ export const getNonReservableRoomInformation = (current, roomID) => {
             })
         })
     }).then(() => {
-        current.setState(updates);
+        that.setState(updates);
 
         if (hasIncident) {
             let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
@@ -685,14 +715,14 @@ export const getNonReservableRoomInformation = (current, roomID) => {
                     incidentsList.push(incident.val());
                 })
             }).then(() => {
-                current.setState({incidents: incidentsList});
+                that.setState({incidents: incidentsList});
             });
         }
     });
 };
 
 // new room
-export const generateNewRoomNumber = (current) => {
+export const generateNewRoomNumber = (that) => {
     const radix = 10;
     let lastRoom = null;
     let roomRef = firebase.db.ref("/Rooms/Reservable/100");
@@ -701,13 +731,12 @@ export const generateNewRoomNumber = (current) => {
             lastRoom = room.key;
         })
     }).then(() => {
-        current.setState({
+        that.setState({
             newRoomNumber: parseInt(lastRoom, radix) + 1
         })
     });
 };
-
-export const newRoomFloorSelect = (current, floor) => {
+export const newRoomFloorSelect = (that, floor) => {
     const radix = 10;
     let lastRoom = null;
     /* Rooms/Reservable is a path in the database e.target.value is the associated floor the user clicks on
@@ -725,14 +754,14 @@ export const newRoomFloorSelect = (current, floor) => {
             lastRoom = room.key;
         })
     }).then(() => {
-        current.setState({
+        that.setState({
             newRoomNumber: parseInt(lastRoom, radix) + 1
         })
     });
 };
 
 // assign rooms
-export const assignRooms = (current) => {
+export const assignRooms = (that) => {
     //TODO: pass in proper parameters, such as room path and selected employee
     // let roomPath, employee;
     // let updates = {};
@@ -742,35 +771,35 @@ export const assignRooms = (current) => {
     // firebase.db.ref().update(updates);
 
     //calling getAllRooms gets the system to update the list
-    getAllUnassignedSelectableRooms(current);
+    getAllUnassignedSelectableRooms(that);
 };
 
 // check in
-export const checkInGuest = (current, firstName, lastName, roomPath, roomNum) => {
-    let updates = {};
-    updates[roomPath + 'guest'] = firstName + " " + lastName;
-    firebase.db.ref().update(updates);
-
-    const radix = 10;
-
-    //Adds Guest to guest DB
-    //TODO: properly generate the next number for guest, coming up undefined right now
-    let lastGuest = null;
-    let roomRef = firebase.db.ref("/Guests/");
-    roomRef.orderByKey().limitToLast(1).once('value', function (allRooms) {
-        allRooms.forEach(function (room) {
-            lastGuest = room.key;
-        })
-    }).then(() => {
-        current.setState({
-            newGuestNumber: parseInt(lastGuest, radix) + 1
-        })
-    });
-    firebase.db.ref('Guests/' + this.newGuestNumber).set({
-        firstName: firstName,
-        lastName: lastName,
-        room: roomNum
-    })
+export const checkInGuest = (that, firstName, lastName, roomPath, roomNum) => {
+    // let updates = {};
+    // updates[roomPath + 'guest'] = firstName + " " + lastName;
+    // firebase.db.ref().update(updates);
+    //
+    // const radix = 10;
+    //
+    // //Adds Guest to guest DB
+    // //TODO: properly generate the next number for guest, coming up undefined right now
+    // let lastGuest = null;
+    // let roomRef = firebase.db.ref("/Guests/");
+    // roomRef.orderByKey().limitToLast(1).once('value', function (allRooms) {
+    //     allRooms.forEach(function (room) {
+    //         lastGuest = room.key;
+    //     })
+    // }).then(() => {
+    //     that.setState({
+    //         newGuestNumber: parseInt(lastGuest, radix) + 1
+    //     })
+    // });
+    // firebase.db.ref('Guests/' + this.newGuestNumber).set({
+    //     firstName: firstName,
+    //     lastName: lastName,
+    //     room: roomNum
+    // })
 };
 
 // misc
