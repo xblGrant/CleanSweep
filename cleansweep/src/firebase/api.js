@@ -2,7 +2,6 @@
 
 import {auth, firebase} from "./index";
 import * as routes from "../constants/routes";
-import NewRoom from "../pages/NewRoom";
 
 // authentication
 export const login = (that, email, password, history) => {

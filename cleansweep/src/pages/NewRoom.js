@@ -12,15 +12,16 @@ class NewRoom extends React.Component {
 
         this.state = {
             newRoomNumber: null,
-            numNewRooms: '1',
+            numNewRooms: 1,
             newFloor: '',
-            newFloorRoomNum: null,
+            newFloorRoomNum: '',
             createNewFloor: false,
         };
 
         this.handleNewRoom = this.handleNewRoom.bind(this);
         this.handleNumRooms = this.handleNumRooms.bind(this);
         this.handleNewFloor = this.handleNewFloor.bind(this);
+        this.handleRoomName = this.handleRoomName.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleReservableRoom = this.handleReservableRoom.bind(this);
         this.handleNonReservableRoom = this.handleNonReservableRoom.bind(this);
@@ -35,7 +36,7 @@ class NewRoom extends React.Component {
     }
 
     handleNumRooms(e) {
-        let numNewRooms = e.target.value;
+        let numNewRooms = parseInt(e.target.value, NewRoom.RADIX);
         this.setState({
             numNewRooms: numNewRooms
         })
@@ -56,6 +57,10 @@ class NewRoom extends React.Component {
         } else {
             api.generateNewRoomNumber(this);
         }
+    }
+
+    handleRoomName(e) {
+        console.log(e.target.value);
     }
 
     handleNewRoom() {
@@ -102,15 +107,17 @@ class NewRoom extends React.Component {
             newFloor
         } = this.state;
 
-        let displayValue, endRoom;
+        let displayValue, endRoom, newRoomLabel;
 
         let formDisplay;
         if (!createNewFloor) {
-            if (numNewRooms === '1') {
+            if (numNewRooms === 1) {
                 displayValue = newRoomNumber;
+                newRoomLabel = 'New Room';
             } else {
-                endRoom = parseInt(newRoomNumber, NewRoom.RADIX) + parseInt(numNewRooms, NewRoom.RADIX) - 1;
+                endRoom = parseInt(newRoomNumber, NewRoom.RADIX) + numNewRooms - 1;
                 displayValue = newRoomNumber.toString() + " - " + endRoom.toString();
+                newRoomLabel = 'New Rooms';
             }
 
             formDisplay =
@@ -124,11 +131,13 @@ class NewRoom extends React.Component {
                 </div>
 
         } else {
-            if (numNewRooms === '1') {
+            if (numNewRooms === 1) {
                 displayValue = newFloorRoomNum;
+                newRoomLabel = 'New Room';
             } else {
-                endRoom = parseInt(newFloorRoomNum, NewRoom.RADIX) + parseInt(numNewRooms, NewRoom.RADIX) - 1;
+                endRoom = parseInt(newFloorRoomNum, NewRoom.RADIX) + numNewRooms - 1;
                 displayValue = newFloorRoomNum.toString() + " - " + endRoom.toString();
+                newRoomLabel = 'New Rooms';
             }
 
             formDisplay =
@@ -140,6 +149,14 @@ class NewRoom extends React.Component {
                         </Input>
                     </FormGroup>
                 </div>
+        }
+
+        let roomName;
+        if (numNewRooms === 1){
+            roomName =  <Input onChange={this.handleRoomName} type={"text"} className={"margin-left-35 width-30"} id={"roomName"}/>
+        } else {
+            roomName = <Input type={"text"} className={"margin-left-35 width-30"} id={"roomName"}
+                              value={''} readOnly/>
         }
 
         return (
@@ -158,10 +175,16 @@ class NewRoom extends React.Component {
                         </FormGroup>
                         <FormGroup>
                             <Label className={"margin-left-35"} for={"roomNum"}>
-                                New Rooms
+                                {newRoomLabel}
                             </Label>
                             <Input type={"text"} className={"margin-left-35 width-30"} id={"roomNum"}
                                    value={displayValue} readOnly/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label className={"margin-left-35"} for={"roomName"}>
+                                Room Name (*Optional)
+                            </Label>
+                            {roomName}
                         </FormGroup>
                         <FormGroup check>
                             <Label className={"margin-left-35"} check>

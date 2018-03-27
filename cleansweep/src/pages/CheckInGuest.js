@@ -2,7 +2,6 @@ import React from 'react';
 import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
 import {CreateRoomOptions} from "../components/Generators";
 import { WrappedButton } from "../components/Buttons";
-import { AvailableRooms } from '../components/Generators';
 import * as api from '../firebase/api';
 import * as routes from "../constants/routes";
 import {Helmet} from "react-helmet";
@@ -17,6 +16,7 @@ class CheckInGuest extends React.Component {
             lastName: '',
             roomNum: '',
             roomPath: '',
+            floorNum: ''
         };
 
         this.handleCheckIn = this.handleCheckIn.bind(this);
@@ -29,25 +29,29 @@ class CheckInGuest extends React.Component {
         api.getListofAllAvailableRooms(this);
     }
 
-    handleFirstName() {
-        let firstName = document.getElementById('custFName').value.toString();
+    handleFirstName(e) {
+        let firstName = e.target.value;
         this.setState({
             firstName: firstName
         })
     }
-    handleLastName() {
-        let lastName = document.getElementById('custLName').value.toString();
+    handleLastName(e) {
+        let lastName = e.target.value;
         this.setState({
             lastName: lastName
         })
     }
     handleRoomSelect(e) {
-        let info = {};
-        info.roomNum = e.target.value;
-        info.floorNum = Math.round(info.roomNum / 100) * 100;
-        info.roomPath = 'Rooms/Reservable/' + info.floorNum + '/' + info.roomNum;
+        let roomNum = e.target.value;
+        let floorNum = Math.round(roomNum / 100) * 100;
+        let roomPath = 'Rooms/Reservable/' + floorNum + '/' + roomNum;
 
-        this.state = info;
+        this.setState({
+            roomNum: roomNum,
+            floorNum: floorNum,
+            roomPath: roomPath
+        });
+        console.log(this.state);
     }
     handleCheckIn() {
         //TODO: check if guest is not already checked-in
