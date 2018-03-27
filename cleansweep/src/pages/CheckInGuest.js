@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
 import {CreateRoomOptions} from "../components/Generators";
-import { WrappedButton } from "../components/Buttons";
+import { AvailableRooms } from '../components/Generators';
 import * as api from '../firebase/api';
 import * as routes from "../constants/routes";
 import {Helmet} from "react-helmet";
@@ -16,7 +16,6 @@ class CheckInGuest extends React.Component {
             lastName: '',
             roomNum: '',
             roomPath: '',
-            floorNum: ''
         };
 
         this.handleCheckIn = this.handleCheckIn.bind(this);
@@ -29,29 +28,25 @@ class CheckInGuest extends React.Component {
         api.getListofAllAvailableRooms(this);
     }
 
-    handleFirstName(e) {
-        let firstName = e.target.value;
+    handleFirstName() {
+        let firstName = document.getElementById('custFName').value.toString();
         this.setState({
             firstName: firstName
         })
     }
-    handleLastName(e) {
-        let lastName = e.target.value;
+    handleLastName() {
+        let lastName = document.getElementById('custLName').value.toString();
         this.setState({
             lastName: lastName
         })
     }
     handleRoomSelect(e) {
-        let roomNum = e.target.value;
-        let floorNum = Math.round(roomNum / 100) * 100;
-        let roomPath = 'Rooms/Reservable/' + floorNum + '/' + roomNum;
+        let info = {};
+        info.roomNum = e.target.value;
+        info.floorNum = Math.round(info.roomNum / 100) * 100;
+        info.roomPath = 'Rooms/Reservable/' + info.floorNum + '/' + info.roomNum;
 
-        this.setState({
-            roomNum: roomNum,
-            floorNum: floorNum,
-            roomPath: roomPath
-        });
-        console.log(this.state);
+        this.state = info;
     }
     handleCheckIn() {
         //TODO: check if guest is not already checked-in
@@ -69,31 +64,41 @@ class CheckInGuest extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={"container"}>
                 <Helmet>
                     <title>Check-In Guest</title>
                 </Helmet>
-                <div>
-                    <Form>
-                        <FormGroup row>
+                <br/>
+                <Form>
+                    <FormGroup row>
+                        <div className={"col-sm-4 center"}>
                             {/*<Label id={"label"} for="custFName"></Label>*/}
-                            <Input onChange={this.handleFirstName} type="text" className={"margin-left-35 width-30"} id={"custFName"} placeholder={"First name"}/>
-                        </FormGroup>
-                        <FormGroup row>
-                            {/*<Label id={"label"} for="custLName"></Label>*/}
-                            <Input onChange={this.handleLastName} type="text" className={"margin-left-35 width-30"} id={"custLName"} placeholder={"Last name"}/>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label className={"margin-left-35"} for="floorSelect">Rooms</Label>
-                                <Input onClick={this.handleRoomSelect} id={'roomOptions'} className={"margin-left-35 width-30"} type="select" multiple>
-                                    <CreateRoomOptions rooms={this.state.rooms}/>
-                                </Input>
-                        </FormGroup>
-                        <Button onClick={this.handleCheckIn} className={"margin-left-35"} color={"primary"}>Check-In</Button>
-                        {' '}
-                        <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
-                    </Form>
-                </div>
+                            <Input onChange={this.handleFirstName} type="text" id={"custFName"} placeholder={"First name"}/>
+                        </div>
+                    </FormGroup>
+                    <FormGroup row>
+                        <div className={"col-sm-4 center"}>
+                        {/*<Label id={"label"} for="custLName"></Label>*/}
+                        <Input onChange={this.handleLastName} type="text" id={"custLName"} placeholder={"Last name"}/>
+                        </div>
+                    </FormGroup>
+                    <FormGroup row>
+                        <div className={"col-sm-4 center"}>
+                        <Label for="floorSelect">Rooms</Label>
+                            <Input onClick={this.handleRoomSelect} id={'roomOptions'} type="select" multiple>
+                                <CreateRoomOptions rooms={this.state.rooms}/>
+                            </Input>
+                        </div>
+                    </FormGroup>
+
+                    <br/>
+                    <div className={"row"}>
+                        <div className={"col-sm-5 center"}>
+                            <Button className={"col-sm-4"} onClick={this.handleCheckIn} color={"primary"}>Check-In</Button>
+                            <Button className={"col-sm-4"} href={routes.HOME} name={"Cancel"}> Cancel </Button>
+                        </div>
+                    </div>
+                </Form>
             </div>
         );
     }

@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import {WrappedButton} from "../components/Buttons";
 import {CreateFloorOptions} from "../components/Generators";
 import * as api from '../firebase/api';
 import * as routes from "../constants/routes";
@@ -43,43 +42,40 @@ class AssignRooms extends React.Component {
 
     render() {
         return (
-            <div>
+            <div class="container">
                 <Helmet>
                     <title>Assign Rooms</title>
                 </Helmet>
-                <div className={"margin-top-02"}>
                     <Form>
                         <FormGroup>
-                            <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="margin-left-35 width-30">
-                                <CreateFloorOptions/>
-                            </Input>
+                            <div className={"col-sm-4 center"}>
+                                <Label for="floorSelect">Floor</Label>
+                                <Input onClick={this.handleFloorSelect} type="select">
+                                    <CreateFloorOptions/>
+                                </Input>
+                            </div>
                         </FormGroup>
                         <FormGroup row>
-                            <div className={"center"}>
-                                <div className={"container text-center"}>
-                                    <Label className={"center"}>Rooms</Label>
-                                </div>
+                            <div className={"col-sm-10 center"}>
+                                <Label className={"center"}>Rooms</Label>
                                 <GroupSelect items={this.state.rooms} isDisabled={false}/>
                             </div>
                         </FormGroup>
                         <FormGroup row>
-                            <div className={"center"}>
-                                <div className={"container text-center"}>
-                                    <Label className={"center"}>Employees</Label>
-                                </div>
+                            <div className={"col-sm-10 center"}>
+                                <Label className={"center"}>Employees</Label>
                                 <GroupSelect items={this.state.employees} isDisabled={false}/>
                             </div>
                         </FormGroup>
-                        <Button onClick={this.handleAssignRooms} color={"primary"}
-                                className={"margin-left-35"}>Assign</Button>
-                        {' '}
-                        <Button onClick={this.clearAssignments} color={"secondary"}>
-                            Clear Assignments</Button>
-                        {' '}
-                        <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
+                        <br/>
+                        <div className={"row"}>
+                             <div className={"col-sm-10 center"}>
+                                <Button className={"col-sm-3"} onClick={this.handleAssignRooms} color={"primary"}>Assign</Button>
+                                <Button className={"col-sm-3"} onClick={this.clearAssignments} color={"secondary"}>Clear Assignments</Button>
+                                <Button className={"col-sm-3"} href={routes.HOME} name={"Cancel"}> Cancel </Button>
+                             </div>
+                        </div>
                     </Form>
-                </div>
             </div>
         );
     }

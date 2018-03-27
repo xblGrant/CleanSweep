@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
-import { WrappedButton } from "../components/Buttons";
 import * as routes from "../constants/routes";
 import {Helmet} from "react-helmet";
 
@@ -17,21 +16,26 @@ class CheckOutGuest extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={"container"}>
                 <Helmet>
                     <title>Check-Out Guest</title>
                 </Helmet>
-                <div id={"checkOutForm"}>
-                    <Form>
-                        <FormGroup row>
+                <Form>
+                    <FormGroup row>
+                        <div className={"col-sm-4 center"}>
                             {/*<Label id={"label"} for="roomNum"></Label>*/}
-                            <Input type="text" className={"margin-left-35 width-30"} id={"roomNum"} placeholder={"Room #"}/>
-                        </FormGroup>
-                        <Button onClick={this.handleCheckOut} color={"primary"} className={"margin-left-35"}>Check-Out</Button>
-                        {' '}
-                        <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
-                    </Form>
-                </div>
+                            <Input type="text" id={"roomNum"} placeholder={"Room #"}/>
+                        </div>
+                    </FormGroup>
+
+                    <br/>
+                    <div className={"row"}>
+                        <div className={"col-sm-5 center"}>
+                            <Button className={"col-sm-4"}onClick={this.handleCheckOut} color={"primary"}>Check-Out</Button>
+                            <Button className={"col-sm-4"} href={routes.HOME}> Cancel </Button>
+                        </div>
+                    </div>
+                </Form>
             </div>
         );
     }

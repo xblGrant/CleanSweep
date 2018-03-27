@@ -9,6 +9,7 @@ import {
 } from 'reactstrap';
 import * as api from '../firebase/api';
 import {Helmet} from "react-helmet";
+import * as routes from "../constants/routes";
 
 class AddIncident extends React.Component {
     constructor(props) {
@@ -59,38 +60,41 @@ class AddIncident extends React.Component {
                 <Helmet>
                     <title>Incident Report</title>
                 </Helmet>
-                <div className={"margin-top-02"}>
                     <Form>
                         <FormGroup>
-                            <Label className={"col-sm-4 center"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select"
-                                   className={"col-sm-4 center"} id="floorSelect">
-                                <CreateFloorOptions/>
-                            </Input>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Input className={"col-sm-4 center"} type="select" multiple>
-                                <CreateRoomOptions rooms={this.state.rooms}/>
-                            </Input>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label className={"col-sm-4 center"} for="incidentComment">Comment</Label>
-                            <Input type="textarea" className={"col-sm-4 center"} id="incidentComment"
-                                   placeholder={"Enter comment here"}/>
-                        </FormGroup>
-
-                        <div className={"row"}>
                             <div className={"col-sm-4 center"}>
+                                <Label for="floorSelect">Floor</Label>
+                                <Input onClick={this.handleFloorSelect} type="select" id="floorSelect">
+                                    <CreateFloorOptions/>
+                                </Input>
+                            </div>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <div className={"col-sm-4 center"}>
+                                <Input type="select" multiple>
+                                    <CreateRoomOptions rooms={this.state.rooms}/>
+                                </Input>
+                            </div>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <div className={"col-sm-4 center"}>
+                                <Label for="incidentComment">Comment</Label>
+                                <Input type="textarea" className={"center"} id="incidentComment"
+                                       placeholder={"Enter comment here"}/>
+                            </div>
+                        </FormGroup>
+
+                        <br/>
+                        <div className={"row"}>
+                            <div className={"col-sm-5 center"}>
                                 <Button onClick={this.handleIncident} className={"col-sm-4"}
-                                        color={"primary"}>Submit</Button>
-                                {' '}
-                                <Button link={"/"} className={"col-sm-4"} id={"Button"}>Cancel</Button>
+                                        color={"primary"}>Add Incident</Button>
+                                <Button href={routes.HOME} className={"col-sm-4"}>Cancel</Button>
                             </div>
                         </div>
                     </Form>
-                </div>
             </div>
         );
     }

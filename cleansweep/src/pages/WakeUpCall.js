@@ -70,9 +70,9 @@ class AddWakeUp extends React.Component {
                         </FormGroup>
                         <br/>
                         <div className={"row"}>
-                            <div className={"col-sm-6 center"}>
-                                <Button className={"col-sm-4"} onClick={this.handleNewWakeUp} color={"primary"}>Submit</Button>
-                                <Button className={"col-sm-4"} link={routes.HOME} name={"Cancel"}>Cancel</Button>
+                            <div className={"col-sm-5 center"}>
+                                <Button className={"col-sm-4"} onClick={this.handleNewWakeUp} color={"primary"}>Add Call</Button>
+                                <Button className={"col-sm-4"} href={routes.HOME} name={"Cancel"}>Cancel</Button>
                             </div>
                         </div>
                     </Form>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { WrappedButton } from "../components/Buttons";
 import { CreateFloorOptions, CreateRoomOptions } from "../components/Generators";
 import {
     Button,
@@ -41,33 +40,42 @@ class InspectRoom extends React.Component {
 
     render() {
         return (
-            <div>
+            <div class="container">
                 <Helmet>
                     <title>Inspect Room</title>
                 </Helmet>
-                <div className={"margin-top-02"}>
-                    <Form>
-                        <FormGroup>
-                            <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="margin-left-35 width-30" id="floorSelect">
+                <Form>
+                    <FormGroup row>
+                        <div className={"col-sm-4 center"}>
+                            <Label for="floorSelect">Floor</Label>
+                            <Input onClick={this.handleFloorSelect} type="select" id="floorSelect">
                                 <CreateFloorOptions />
                             </Input>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label className={"margin-left-35"} for="assignableRoom">Rooms</Label>
-                            <Input className={"margin-left-35 width-30"} type="select" multiple>
+                        </div>
+                    </FormGroup>
+                    <FormGroup row>
+                        <div className={"col-sm-4 center"}>
+                            <Label for="assignableRoom">Rooms</Label>
+                            <Input type="select" multiple>
                                 <CreateRoomOptions rooms={this.state.rooms}/>
                             </Input>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label className={"margin-left-35"} for="inspectComment">Comment</Label>
-                            <Input type="textarea" className={"margin-left-35 width-30"} placeholder={"Enter comment here"}/>
-                        </FormGroup>
-                        <Button onClick={this.handleInspect} color={"primary"} className={"margin-left-35"}>Submit</Button>
-                        {' '}
-                        <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
-                    </Form>
-                </div>
+                        </div>
+                    </FormGroup>
+                    <FormGroup row>
+                        <div className={"col-sm-4 center"}>
+                            <Label for="inspectComment">Comment</Label>
+                            <Input type="textarea" placeholder={"Enter comment here"}/>
+                        </div>
+                    </FormGroup>
+
+                    <br/>
+                    <div className={"row"}>
+                        <div className={"col-sm-5 center"}>
+                            <Button className={"col-sm-4"}onClick={this.handleInspect} color={"primary"}>Submit</Button>
+                            <Button className={"col-sm-4"} href={routes.HOME}> Cancel </Button>
+                        </div>
+                    </div>
+                </Form>
             </div>
         );
     }
