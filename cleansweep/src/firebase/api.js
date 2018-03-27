@@ -63,7 +63,7 @@ export const signUp = (that, email, password, userName, history) => {
     auth.doCreateUserWithEmailAndPassword(email, password)
         .then(() => {
             let employeeRef = firebase.db.ref("/Employee/");
-            employeeRef.child(firebase.auth.thatUser.uid)
+            employeeRef.child(firebase.auth.currentUser.uid)
                 .set({
                     username: userName,
                     email: email,
@@ -145,9 +145,9 @@ export const getAssignedRooms = (that) => {
     let roomList = [];
     let isReservable = true;
     let user = null;
-    let thatUser = firebase.auth.thatUser;
-    if (thatUser !== null) {
-        user = thatUser.uid;
+    let currentUser = firebase.auth.currentUser;
+    if (currentUser !== null) {
+        user = currentUser.uid;
     }
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
     roomRef.orderByKey().once('value', function (floors) {
