@@ -11,17 +11,22 @@ class NewRoom extends React.Component {
         super(props);
 
         this.state = {
+            roomName: '',
+            isReservable: true,
+
             newRoomNumber: null,
             numNewRooms: 1,
+
+            createNewFloor: false,
             newFloor: '',
             newFloorRoomNum: '',
-            createNewFloor: false,
         };
 
-        this.handleNewRoom = this.handleNewRoom.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleNumRooms = this.handleNumRooms.bind(this);
         this.handleNewFloor = this.handleNewFloor.bind(this);
         this.handleRoomName = this.handleRoomName.bind(this);
+        this.handleReservable = this.handleReservable.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleReservableRoom = this.handleReservableRoom.bind(this);
         this.handleNonReservableRoom = this.handleNonReservableRoom.bind(this);
@@ -38,7 +43,7 @@ class NewRoom extends React.Component {
     handleNumRooms(e) {
         let numNewRooms = parseInt(e.target.value, NewRoom.RADIX);
         this.setState({
-            numNewRooms: numNewRooms
+            numNewRooms: numNewRooms,
         })
     }
 
@@ -60,41 +65,65 @@ class NewRoom extends React.Component {
     }
 
     handleRoomName(e) {
-        console.log(e.target.value);
+        let roomName = e.target.value;
+        this.setState({
+            roomName: roomName
+        });
     }
 
-    handleNewRoom() {
+    handleReservable() {
+        this.setState({
+            isReservable: !this.state.isReservable
+        })
+    }
+
+    handleSubmit() {
         // TODO: handle isReservable and pass in generated room value
-        // if (isReservable){
-        // this.handleReservableRoom(this.state.floorNum, this.state.newRoomNumber);
-        // }
-        // else{
-        //     this.handleNonReservableRoom(this.state.floorNum, this.state.newRoomNumber);
-        // }
+        let isReservable = this.state.isReservable;
+        if (isReservable) {
+            this.handleReservableRoom()
+        } else {
+            this.handleNonReservableRoom()
+        }
 
         // const updates = {};
         // updates['/lobby'] = {num: 'lobbyOne'};
         // firebase.db.ref('Rooms/NonReservable').update(updates);
     }
 
-    handleReservableRoom(floor, num) {
+    handleReservableRoom() {
         //TODO: handle proper floor here
-        // firebase.db.ref('Rooms/Reservable/' + floor + '/' + num).set({
-        //     assignedEmployee: "none",
-        //     guest: "none",
-        //     incident: false,
-        //     isReservable: true,
-        //     status: "Clean",
-        //     wakeupCall: "none"
-        // });
+        let roomNum, floor, info = this.state;
+        let roomName = document.getElementById('roomName').value;
+
+        if (info.createNewFloor){
+            roomNum = info.newFloorRoomNum;
+            floor = info.newFloor;
+        } else {
+            roomNum = info.newRoomNumber;
+            floor = document.getElementById('floorDisplay').value;
+        }
+
+        if (roomName !== ''){
+            api.createNewReservableRoom(floor, roomName);
+        } else {
+            for (let i = 0; i < info.numNewRooms; i++) {
+                api.createNewReservableRoom(floor, roomNum + i);
+            }
+        }
     }
 
-    handleNonReservableRoom(floor, num) {
-        // firebase.db.ref('Rooms/NonReservable/' + floor + '/' + num).set({
-        //     assignedEmployee: "none",
-        //     incident: false,
-        //     status: "Clean"
-        // });
+    handleNonReservableRoom() {
+        let room, floor, info = this.state;
+
+        if (info.createNewFloor){
+            floor = info.newFloor;
+        } else {
+            floor = document.getElementById('floorDisplay').value;
+        }
+
+        room = document.getElementById('roomName').value;
+        api.createNewNonReservableRoom(floor, room);
     }
 
     render() {
@@ -104,12 +133,14 @@ class NewRoom extends React.Component {
             numNewRooms,
             createNewFloor,
             newFloorRoomNum,
-            newFloor
+            newFloor,
+            isReservable,
+            roomName
         } = this.state;
 
-        let displayValue, endRoom, newRoomLabel;
+        let displayValue, endRoom, newRoomLabel, isDisabled = false;
 
-        let formDisplay;
+        let floorDisplay;
         if (!createNewFloor) {
             if (numNewRooms === 1) {
                 displayValue = newRoomNumber;
@@ -120,11 +151,11 @@ class NewRoom extends React.Component {
                 newRoomLabel = 'New Rooms';
             }
 
-            formDisplay =
+            floorDisplay =
                 <div className={'oldFloors'}>
                     <FormGroup>
                         <Label className={"margin-left-35"}>Floor</Label>
-                        <Input onClick={this.handleFloorSelect} type={"select"} className={"margin-left-35 width-30"}>
+                        <Input onClick={this.handleFloorSelect} id={'floorDisplay'} type={"select"} className={"margin-left-35 width-30"}>
                             <CreateFloorOptions displayAll={false}/>
                         </Input>
                     </FormGroup>
@@ -140,23 +171,34 @@ class NewRoom extends React.Component {
                 newRoomLabel = 'New Rooms';
             }
 
-            formDisplay =
+            floorDisplay =
                 <div className={'newFloor'}>
                     <FormGroup>
                         <Label className={"margin-left-35"}>Floor</Label>
-                        <Input type={"select"} className={"margin-left-35 width-30"}>
+                        <Input id={'floorDisplay'} type={"select"} className={"margin-left-35 width-30"}>
                             <option value={newFloor}>{newFloor / 100}</option>
                         </Input>
                     </FormGroup>
                 </div>
         }
 
-        let roomName;
+        let roomNameDisplay;
         if (numNewRooms === 1){
-            roomName =  <Input onChange={this.handleRoomName} type={"text"} className={"margin-left-35 width-30"} id={"roomName"}/>
+            roomNameDisplay =  <Input onChange={this.handleRoomName} value={roomName} type={"text"} className={"margin-left-35 width-30"} id={"roomName"}/>
         } else {
-            roomName = <Input type={"text"} className={"margin-left-35 width-30"} id={"roomName"}
+            roomNameDisplay = <Input type={"text"} className={"margin-left-35 width-30"} id={"roomName"}
                               value={''} readOnly/>
+        }
+
+        let numberOfRooms;
+        if (isReservable){
+            numberOfRooms = <NumberOfRooms total={NewRoom.NUM_ROOMS}/>;
+        } else {
+            numberOfRooms = <NumberOfRooms total={1}/>;
+            displayValue = newRoomNumber;
+
+            if (roomName === '')
+                isDisabled = true;
         }
 
         return (
@@ -166,11 +208,11 @@ class NewRoom extends React.Component {
                 </Helmet>
                 <div id={"newRoomForm"}>
                     <Form>
-                        {formDisplay}
+                        {floorDisplay}
                         <FormGroup>
                             <Label className={"margin-left-35"} for={"numberRooms"}># New Rooms</Label>
                             <Input onClick={this.handleNumRooms} type={"select"} className={"margin-left-35 width-30"}>
-                                <NumberOfRooms total={NewRoom.NUM_ROOMS}/>
+                                {numberOfRooms}
                             </Input>
                         </FormGroup>
                         <FormGroup>
@@ -184,7 +226,7 @@ class NewRoom extends React.Component {
                             <Label className={"margin-left-35"} for={"roomName"}>
                                 Room Name (*Optional)
                             </Label>
-                            {roomName}
+                            {roomNameDisplay}
                         </FormGroup>
                         <FormGroup check>
                             <Label className={"margin-left-35"} check>
@@ -193,12 +235,12 @@ class NewRoom extends React.Component {
                             </Label>
                             <br/>
                             <Label className={"margin-left-35"} check>
-                                <Input type={"checkbox"} id={"isReservable"}/>{' '}
-                                Reservable
+                                <Input onChange={this.handleReservable} type={"checkbox"} id={"isNonReservable"}/>{' '}
+                                Non-Reservable
                             </Label>
                         </FormGroup>
                         <br/>
-                        <Button onClick={this.handleNewRoom} color={"primary"}
+                        <Button disabled={isDisabled} onClick={this.handleSubmit} color={"primary"}
                                 className={"margin-left-35"}>Submit</Button>
                         {' '}
                         <WrappedButton className={"margin-left-35"} link={routes.HOME} name={"Cancel"}

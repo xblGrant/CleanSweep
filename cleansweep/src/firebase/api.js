@@ -100,7 +100,7 @@ export const getAllEmployees = (that) => {
 export const getAllRooms = (that) => {
     let roomList = [];
     let isReservable = true;
-    let roomRef = firebase.db.ref("/Rooms/Reservable/");
+    let roomRef = firebase.db.ref("/Rooms/NonReservable/");
     roomRef.orderByKey().once('value', function (floors) {
         floors.forEach(function (allRooms) {
             allRooms.forEach(function (room) {
@@ -109,15 +109,15 @@ export const getAllRooms = (that) => {
                     [room.key,
                         room.val().status,
                         room.val().incident,
-                        room.val().guest,
+                        "n/a",
                         assigned,
-                        isReservable
+                        !isReservable
                     ]
                 );
             })
         })
     }).then(() => {
-        roomRef = firebase.db.ref("/Rooms/NonReservable/");
+        roomRef = firebase.db.ref("/Rooms/Reservable/");
         roomRef.orderByKey().once('value', function (floors) {
             floors.forEach(function (allRooms) {
                 allRooms.forEach(function (room) {
@@ -126,9 +126,9 @@ export const getAllRooms = (that) => {
                         [room.key,
                             room.val().status,
                             room.val().incident,
-                            "n/a",
+                            room.val().guest,
                             assigned,
-                            !isReservable
+                            isReservable
                         ]
                     );
                 })
@@ -739,6 +739,7 @@ export const generateNewRoomNumber = (that) => {
 export const newRoomFloorSelect = (that, floor) => {
     const radix = 10;
     let lastRoom = null;
+    let floorNum = null;
     /* Rooms/Reservable is a path in the database e.target.value is the associated floor the user clicks on
     when calling firebase.db.ref, the whole string will get all the rooms on a given floor */
     let floorRef = firebase.db.ref("/Rooms/Reservable/" + floor);
@@ -752,6 +753,7 @@ export const newRoomFloorSelect = (that, floor) => {
     floorRef.orderByKey().once('value', function (floors) {
         floors.forEach(function (room) {
             lastRoom = room.key;
+            floorNum = floors.key;
         })
     }).then(() => {
         that.setState({
@@ -776,6 +778,24 @@ export const getNewFloor = (that) => {
             newFloorRoomNum: newRoom
         })
     });
+};
+export const createNewReservableRoom = (floor, room) => {
+    firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).set({
+        assignedEmployee: "none",
+        departureDate: "",
+        guest: "none",
+        incident: false,
+        isReservable: true,
+        status: "Clean",
+        wakeupCall: "none"
+    })
+};
+export const createNewNonReservableRoom = (floor, room) => {
+    firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).set({
+        assignedEmployee: "none",
+        incident: false,
+        status: "Clean",
+    })
 };
 
 // assign rooms
