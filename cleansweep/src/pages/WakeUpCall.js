@@ -35,39 +35,47 @@ class AddWakeUp extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={"container"}>
                 <Helmet>
                     <title>Add Wake-Up Call</title>
                 </Helmet>
                 <div>
                     <Form>
-                        <FormGroup>
-                            <Label className={"margin-left-35"} for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" className="margin-left-35 width-30"
-                                   id="floorSelect">
+                        <FormGroup row>
+                            <div className={"col-sm-4 center"}>
+                                <Label for="floorSelect">Floor</Label>
+                                <Input onClick={this.handleFloorSelect} type="select" id="floorSelect">
                                 <CreateFloorOptions/>
-                            </Input>
+                                </Input>
+                            </div>
                         </FormGroup>
                         <FormGroup row>
-                            <Label className={"margin-left-35"} for="floorSelect">Rooms</Label>
-                            <Input className={"margin-left-35 width-30"} id={"roomOptions"} type="select" multiple>
-                                <CreateRoomOptions rooms={this.state.rooms}/>
-                            </Input>
+                            <div className={"col-sm-4 center"}>
+                                <Label for="floorSelect">Rooms</Label>
+                                <Input id={"roomOptions"} type="select" multiple>
+                                    <CreateRoomOptions rooms={this.state.rooms}/>
+                                </Input>
+                            </div>
                         </FormGroup>
                         <FormGroup row>
-                            <Label className={"margin-left-35"} for="wakeUpDate">Date</Label>
-                            <Input className={"margin-left-35 width-30"} type="date" id="wakeUpDate"
-                                   placeholder={"Email"}/>
+                            <div className={"col-sm-4 center"}>
+                                <Label for="wakeUpDate">Date</Label>
+                                <Input type="date" id="wakeUpDate" placeholder={"Email"}/>
+                            </div>
                         </FormGroup>
                         <FormGroup row>
-                            <Label className={"margin-left-35"} for="wakeUpTime">Time</Label>
-                            <Input className={"margin-left-35 width-30"} type="time" id="wakeUpTime"
-                                   placeholder={"Password"}/>
+                            <div className={"col-sm-4 center"}>
+                                <Label for="wakeUpTime">Time</Label>
+                                <Input type="time" id="wakeUpTime" placeholder={"Password"}/>
+                            </div>
                         </FormGroup>
-                        <Button onClick={this.handleNewWakeUp} color={"primary"}
-                                className={"margin-left-35"}>Submit</Button>
-                        {' '}
-                        <WrappedButton link={routes.HOME} name={"Cancel"} id={"wrappedButton"}/>
+                        <br/>
+                        <div className={"row"}>
+                            <div className={"col-sm-6 center"}>
+                                <Button className={"col-sm-4"} onClick={this.handleNewWakeUp} color={"primary"}>Submit</Button>
+                                <Button className={"col-sm-4"} link={routes.HOME} name={"Cancel"}>Cancel</Button>
+                            </div>
+                        </div>
                     </Form>
                 </div>
             </div>
