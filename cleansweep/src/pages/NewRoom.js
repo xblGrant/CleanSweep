@@ -121,19 +121,6 @@ class NewRoom extends React.Component {
                             <CreateFloorOptions displayAll={false}/>
                         </Input>
                     </FormGroup>
-                    <FormGroup>
-                        <Label className={"margin-left-35"} for={"numberRooms"}># New Rooms</Label>
-                        <Input onClick={this.handleNumRooms} type={"select"} className={"margin-left-35 width-30"}>
-                            <NumberOfRooms total={NewRoom.NUM_ROOMS}/>
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label className={"margin-left-35"} for={"roomNum"}>
-                            New Rooms
-                        </Label>
-                        <Input type={"text"} className={"margin-left-35 width-30"} id={"roomNum"}
-                               value={displayValue} readOnly/>
-                    </FormGroup>
                 </div>
 
         } else {
@@ -152,19 +139,6 @@ class NewRoom extends React.Component {
                             <option value={newFloor}>{newFloor / 100}</option>
                         </Input>
                     </FormGroup>
-                    <FormGroup>
-                        <Label className={"margin-left-35"} for={"numberRooms"}># New Rooms</Label>
-                        <Input onClick={this.handleNumRooms} type={"select"} className={"margin-left-35 width-30"}>
-                            <NumberOfRooms total={NewRoom.NUM_ROOMS}/>
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label className={"margin-left-35"} for={"roomNum"}>
-                            New Rooms
-                        </Label>
-                        <Input type={"text"} className={"margin-left-35 width-30"} id={"roomNum"}
-                               value={displayValue} readOnly/>
-                    </FormGroup>
                 </div>
         }
 
@@ -176,6 +150,19 @@ class NewRoom extends React.Component {
                 <div id={"newRoomForm"}>
                     <Form>
                         {formDisplay}
+                        <FormGroup>
+                            <Label className={"margin-left-35"} for={"numberRooms"}># New Rooms</Label>
+                            <Input onClick={this.handleNumRooms} type={"select"} className={"margin-left-35 width-30"}>
+                                <NumberOfRooms total={NewRoom.NUM_ROOMS}/>
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label className={"margin-left-35"} for={"roomNum"}>
+                                New Rooms
+                            </Label>
+                            <Input type={"text"} className={"margin-left-35 width-30"} id={"roomNum"}
+                                   value={displayValue} readOnly/>
+                        </FormGroup>
                         <FormGroup check>
                             <Label className={"margin-left-35"} check>
                                 <Input onChange={this.handleNewFloor} type={"checkbox"} id={"newFloor"}/>{' '}
