@@ -62,12 +62,14 @@ class NewEmployee extends React.Component {
                             </div>
                         </FormGroup>
                         <br/>
+                        <FormGroup>
                         <div className={"row"}>
                             <div className={"col-sm-5 center"}>
-                                <Button className={"col-sm-4"} onClick={this.handleNewEmployee} color={"primary"}>Add Employee</Button>
-                                <Button className={"col-sm-4"} href={routes.HOME}>Cancel</Button>
+                                <Button className={"col-sm-4 btn"} onClick={this.handleNewEmployee} color={"primary"}>Add Employee</Button>
+                                <Button className={"col-sm-4 btn"} href={routes.HOME}>Cancel</Button>
                             </div>
                         </div>
+                        </FormGroup>
                 </Form>
                 </div>
             </div>
