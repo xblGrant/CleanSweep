@@ -6,7 +6,7 @@ const radix = 10;
 function NumberOfRooms(props){
     let returnField = [];
     for (let current = 1; current <= props.total; current++) {
-        returnField[current] = <option value={current}>{current}</option>
+        returnField[current] = <option key={current} value={current}>{current}</option>
     }
     return (
         returnField.map(
@@ -24,7 +24,7 @@ function CreateRoomOptions(props) {
         props.rooms.map(
             (roomNum) => {
                 return (
-                    <option value={roomNum}>{roomNum}</option>
+                    <option key={roomNum} value={roomNum}>{roomNum}</option>
                 )
             }
         )
@@ -53,13 +53,13 @@ class CreateFloorOptions extends React.Component {
                     if (this.props.displayAll){
                         return (
                             (floorNum !== 0) ?
-                                <option value={floorNum}>{parseInt(floorNum, radix) / 100}</option> :
-                                <option value={'000'}>All</option>
+                                <option key={floorNum} value={floorNum}>{parseInt(floorNum, radix) / 100}</option> :
+                                <option key={floorNum} value={'000'}>All</option>
                         )
                     } else {
                         return (
                             (floorNum !== 0) ?
-                                <option value={floorNum}>{parseInt(floorNum, radix) / 100}</option> :
+                                <option key={floorNum} value={floorNum}>{parseInt(floorNum, radix) / 100}</option> :
                                 null
                         )
                     }

@@ -25,8 +25,8 @@ const SelectableRooms = ({items}) => (
 
 const LinkToRooms = ({items}) => (
     items.map((item, i) => (
-            item[IS_RESERVABLE] ? <ReservableLink item={item} id={i}/> :
-                <NonReservableLink item={item} id={i}/>
+            item[IS_RESERVABLE] ? <ReservableLink key={i} item={item} id={i}/> :
+                <NonReservableLink key={i} item={item} id={i}/>
     ))
 );
 

@@ -45,7 +45,7 @@ class PasswordChange extends React.Component {
                     {error && <p type={"error"} className={"error"}>{error.message}</p>}
                     <FormGroup>
                         <Input  className={"col-sm-6 center"}
-                                id={"pwChange"}
+                                id={"pwChangeNew"}
                                 value={passwordOne}
                                 onChange={e => this.setState(byPropKey('passwordOne', e.target.value))}
                                 type={"password"}
@@ -53,7 +53,7 @@ class PasswordChange extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <Input  className={"col-sm-6 center"}
-                                id={"pwChange"}
+                                id={"pwChangeConfirm"}
                                 value={passwordTwo}
                                 onChange={e => this.setState(byPropKey('passwordTwo', e.target.value))}
                                 type={"password"}
