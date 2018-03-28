@@ -41,7 +41,7 @@ class PasswordForgetForm extends React.Component {
 
         return (
             <Form onSubmit={this.onSubmit} id={"pwForgetForm"}>
-                {error && <p type={"error"} className={"error"} id={"error"}>{error.message}</p>}
+                {error && <p typeof={"error"} className={"error center"} id={"error"}>{error.message}</p>}
                 <FormGroup>
                     <Input
                         id={"emailAddress"}
