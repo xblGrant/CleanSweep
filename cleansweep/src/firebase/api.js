@@ -722,10 +722,10 @@ export const getNonReservableRoomInformation = (that, roomID) => {
 };
 
 // new room
-export const generateNewRoomNumber = (that) => {
+export const generateNewRoomNumber = (that, floor) => {
     const radix = 10;
     let lastRoom = null;
-    let roomRef = firebase.db.ref("/Rooms/Reservable/100");
+    let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
     roomRef.orderByKey().limitToLast(1).once('value', function (allRooms) {
         allRooms.forEach(function (room) {
             lastRoom = room.key;

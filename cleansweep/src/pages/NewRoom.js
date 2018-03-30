@@ -36,7 +36,7 @@ class NewRoom extends React.Component {
     static NUM_ROOMS = 99;
 
     componentDidMount() {
-        api.generateNewRoomNumber(this);
+        api.generateNewRoomNumber(this, '100');
         api.getNewFloor(this);
     }
 
@@ -85,6 +85,10 @@ class NewRoom extends React.Component {
         } else {
             this.handleNonReservableRoom()
         }
+
+        // Calling this method refreshes data displayed
+        let floor = document.getElementById('floorDisplay').value;
+        api.generateNewRoomNumber(this, floor);
     }
 
     handleReservableRoom() {
