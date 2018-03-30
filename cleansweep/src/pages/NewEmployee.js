@@ -26,31 +26,31 @@ class NewEmployee extends React.Component {
                         <FormGroup row>
                             <div className={"col-sm-4 center"}>
                                 <Label for="employeeFName">First Name</Label>
-                                <Input type="text" className={"center"} id="employeeFName" placeholder={"First name"}/>
+                                <Input type="text" className={"center"} id="employeeFName" placeholder={"First name"} autoComplete={"given-name"}/>
                             </div>
                         </FormGroup>
                         <FormGroup row>
                             <div className={"col-sm-4 center"}>
                                 <Label for="employeeLName">Last Name</Label>
-                                <Input type="text" className={"center"} id="employeeLName" placeholder={"Last name"}/>
+                                <Input type="text" className={"center"} id="employeeLName" placeholder={"Last name"} autoComplete={"family-name"}/>
                             </div>
                         </FormGroup>
                         <FormGroup row>
                             <div className={"col-sm-4 center"}>
                                 <Label for="employeeDOB">Date Of Birth</Label>
-                                <Input type="date" className={"center"} id="employeeDOB"/>
+                                <Input type="date" className={"center"} id="employeeDOB" autoComplete={"dob"}/>
                             </div>
                         </FormGroup>
                         <FormGroup row>
                             <div className={"col-sm-4 center"}>
                                 <Label for="employeePass">Email</Label>
-                                <Input type="email" className={"center"} id="employeeEmail" placeholder={"Email"}/>
+                                <Input type="email" className={"center"} id="employeeEmail" placeholder={"Email"} autoComplete={"email"}/>
                             </div>
                         </FormGroup>
                         <FormGroup row>
                             <div className={"col-sm-4 center"}>
                                 <Label for="employeePass">Password</Label>
-                                <Input type="password" className={"center"} id="employeePass" placeholder={"Password"}/>
+                                <Input type="password" className={"center"} id="employeePass" placeholder={"Password"} autoComplete={"current-password"}/>
                             </div>
                         </FormGroup>
                         <FormGroup check>

@@ -49,7 +49,8 @@ class PasswordChange extends React.Component {
                                 value={passwordOne}
                                 onChange={e => this.setState(byPropKey('passwordOne', e.target.value))}
                                 type={"password"}
-                                placeholder={"New Password"}/>
+                                placeholder={"New Password"}
+                                autoComplete={"new-password"}/>
                     </FormGroup>
                     <FormGroup>
                         <Input  className={"col-sm-6 center"}
@@ -57,7 +58,8 @@ class PasswordChange extends React.Component {
                                 value={passwordTwo}
                                 onChange={e => this.setState(byPropKey('passwordTwo', e.target.value))}
                                 type={"password"}
-                                placeholder={"Confirm New Password"}/>
+                                placeholder={"Confirm New Password"}
+                                autoComplete={"new-password"}/>
                     </FormGroup>
                     <div className={"center"}>
                         <Button className={"col-sm-4 center"}

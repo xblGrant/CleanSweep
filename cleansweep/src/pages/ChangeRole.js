@@ -27,7 +27,7 @@ class AddWakeUp extends React.Component {
                             <FormGroup>
                                 <div className={"col-sm-11 center"}>
                                     <Label for="employeeName">Employee Name</Label>
-                                    <Input placeholder={"Employee name"} type="text" id="employeeName"/>
+                                    <Input placeholder={"Employee name"} type="text" id="employeeName" autoComplete={"name"}/>
                                 </div>
                             </FormGroup>
                         </div>
