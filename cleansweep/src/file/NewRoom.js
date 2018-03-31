@@ -78,7 +78,6 @@ class NewRoom extends React.Component {
     }
 
     handleSubmit() {
-        // TODO: handle isReservable and pass in generated room value
         let isReservable = this.state.isReservable;
         if (isReservable) {
             this.handleReservableRoom()
@@ -92,7 +91,6 @@ class NewRoom extends React.Component {
     }
 
     handleReservableRoom() {
-        //TODO: handle proper floor here
         let roomNum, floor, info = this.state;
         let roomName = document.getElementById('roomName').value;
 

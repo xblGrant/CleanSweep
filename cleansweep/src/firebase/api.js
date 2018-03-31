@@ -796,6 +796,14 @@ export const createNewNonReservableRoom = (floor, room) => {
     })
 };
 
+// add wake up call
+export const addNewWakeUpCall = (room, floor, date, time) => {
+    let updateDate = date + ' - ' + time;
+    firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
+        wakeupCall: updateDate
+    })
+};
+
 // assign rooms
 export const assignRooms = (that) => {
     //TODO: pass in proper parameters, such as room path and selected employee
