@@ -514,6 +514,62 @@ export const getListofAllRoomsByFloor = (that, floor) => {
         })
     })
 };
+export const getListofAllReservableRooms = (that) => {
+    let roomList = [];
+    let roomRef = firebase.db.ref("/Rooms/Reservable/");
+    roomRef.orderByKey().once('value', function (floors) {
+        floors.forEach(function (allRooms) {
+            allRooms.forEach(function (room) {
+                roomList.push(room.key);
+            })
+        })
+    }).then(() =>
+        that.setState({
+            rooms: roomList
+        })
+    )
+};
+export const getListofAllReservableRoomsByFloor = (that, floor) => {
+    let roomList = [];
+    let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
+    roomRef.orderByKey().once('value', function (allRooms) {
+        allRooms.forEach(function (room) {
+            roomList.push(room.key);
+        })
+    }).then(() => {
+        that.setState({
+            rooms: roomList
+        })
+    })
+};
+export const getListofAllNonReservableRooms = (that) => {
+    let roomList = [];
+    let roomRef = firebase.db.ref("/Rooms/NonReservable/");
+    roomRef.orderByKey().once('value', function (floors) {
+        floors.forEach(function (allRooms) {
+            allRooms.forEach(function (room) {
+                roomList.push(room.key);
+            })
+        })
+    }).then(() => {
+        that.setState({
+            rooms: roomList
+        })
+    });
+};
+export const getListofAllNonReservableRoomsByFloor = (that, floor) => {
+    let roomList = [];
+    let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
+    roomRef.orderByKey().once('value', function (allRooms) {
+        allRooms.forEach(function (room) {
+            roomList.push(room.key);
+        })
+    }).then(() => {
+        that.setState({
+            rooms: roomList
+        })
+    })
+};
 export const getListofAllReservedRooms = (that) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -530,7 +586,7 @@ export const getListofAllReservedRooms = (that) => {
         })
     )
 };
-export const getListofAllReservableRoomsByFloor = (that, floor) => {
+export const getListofAllReservedRoomsByFloor = (that, floor) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
     roomRef.orderByKey().once('value', function (allRooms) {
@@ -769,7 +825,7 @@ export const getNewFloor = (that) => {
     }).then(() => {
         let radix = 10;
         let newFloor = parseInt(lastFloor, radix) + 100;
-        let newRoom = newFloor  + 1;
+        let newRoom = newFloor + 1;
 
         that.setState({
             newFloor: newFloor,
@@ -786,14 +842,14 @@ export const createNewReservableRoom = (floor, room) => {
         isReservable: true,
         status: "Clean",
         wakeupCall: "none"
-    })
+    });
 };
 export const createNewNonReservableRoom = (floor, room) => {
     firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).set({
         assignedEmployee: "none",
         incident: false,
         status: "Clean",
-    })
+    });
 };
 
 // add wake up call
@@ -802,6 +858,51 @@ export const addNewWakeUpCall = (room, floor, date, time) => {
     firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
         wakeupCall: updateDate
     })
+};
+
+// add incident
+export const addIncident = (floor, room, comment, areReservableRooms) => {
+    let lastIncident = 0;
+    let ref = firebase.db.ref('/Incidents/' + room);
+
+    ref.orderByKey().once('value', function (allIncidents) {
+        allIncidents.forEach(function (incident) {
+            lastIncident = parseInt(incident.key, 10);
+        });
+    }).then(() => {
+        let updates = {};
+        let currentIncident = lastIncident + 1;
+        updates['/Incidents/' + room + '/' + currentIncident] = comment;
+        firebase.db.ref().update(updates);
+
+        if (areReservableRooms)
+            addReservableRoomIncident(floor, room);
+        else
+            addNonReservableRoomIncident(room);
+    });
+};
+const addReservableRoomIncident = (floor, room) => {
+    firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
+        incident: true
+    })
+};
+const addNonReservableRoomIncident = (room) => {
+    let floor;
+    let roomRef = firebase.db.ref("/Rooms/NonReservable/");
+    roomRef.orderByKey().once('value', function (floors) {
+        floors.forEach(function (allRooms) {
+            allRooms.forEach(function (currentRoom) {
+                if (room === currentRoom.key)
+                    floor = allRooms.key;
+            })
+        })
+    }).then(() => {
+        firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).update({
+            incident: true
+        })
+    });
+
+
 };
 
 // assign rooms

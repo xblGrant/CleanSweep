@@ -32,7 +32,7 @@ class AddWakeUp extends React.Component {
         if (e.target.value === '000')
             api.getListofAllReservedRooms(this);
         else
-            api.getListofAllReservableRoomsByFloor(this, e.target.value);
+            api.getListofAllReservedRoomsByFloor(this, e.target.value);
     }
 
     handleTime(e) {
