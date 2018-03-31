@@ -30,7 +30,7 @@ class AddWakeUp extends React.Component {
 
     handleFloorSelect(e) {
         if (e.target.value === '000')
-            api.getListofAllReservableRooms(this);
+            api.getListofAllReservedRooms(this);
         else
             api.getListofAllReservableRoomsByFloor(this, e.target.value);
     }
