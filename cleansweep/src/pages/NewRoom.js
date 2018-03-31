@@ -60,7 +60,8 @@ class NewRoom extends React.Component {
         if (createNewFloor) {
             api.getNewFloor(this);
         } else {
-            api.generateNewRoomNumber(this);
+            let floor = document.getElementById('floorDisplay').value;
+            api.generateNewRoomNumber(this, floor);
         }
     }
 
