@@ -29,14 +29,13 @@ class AddIncident extends React.Component {
         this.handleIncident = this.handleIncident.bind(this);
     }
 
-
     componentDidMount() {
         api.getListofAllReservableRooms(this);
     }
 
     handleFloorSelect(e) {
-        let {reservableRooms} = this.state;
-        if (reservableRooms) {
+        let {areReservableRooms} = this.state;
+        if (!areReservableRooms) {
             if (e.target.value === '000')
                 api.getListofAllReservableRooms(this);
             else
