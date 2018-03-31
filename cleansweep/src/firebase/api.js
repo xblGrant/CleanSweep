@@ -514,7 +514,7 @@ export const getListofAllRoomsByFloor = (that, floor) => {
         })
     })
 };
-export const getListofAllReservableRooms = (that) => {
+export const getListofAllReservedRooms = (that) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
     roomRef.orderByKey().once('value', function (floors) {

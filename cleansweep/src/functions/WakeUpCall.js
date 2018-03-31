@@ -25,7 +25,7 @@ class AddWakeUp extends React.Component {
     }
 
     componentDidMount() {
-        api.getListofAllReservableRooms(this);
+        api.getListofAllReservedRooms(this);
     }
 
     handleFloorSelect(e) {
