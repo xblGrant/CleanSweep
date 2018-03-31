@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { SelectableGroup } from 'react-selectable-fast';
 import SelectableList from './SelectableList';
 
@@ -26,6 +27,8 @@ class GroupSelect extends React.Component {
                     deselectOnEsc={false}
                     tolerance={tolerance}
                     globalMouse={isGlobal}
+                    onSelectionFinish={this.props.onSelectionFinish}
+                    onSelectionClear={this.props.onSelectionClear}
                     allowClickWithoutSelected={true}
                     disabled={this.props.isDisabled}
                 >
@@ -38,6 +41,10 @@ class GroupSelect extends React.Component {
 
 GroupSelect.defaultProps = {
     isDisabled: true
+};
+GroupSelect.propTypes = {
+    onSelectionFinish: PropTypes.func.isRequired,
+    onSelectionClear: PropTypes.func.isRequired
 };
 
 export default GroupSelect;

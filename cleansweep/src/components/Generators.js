@@ -19,6 +19,22 @@ function NumberOfRooms(props){
     );
 }
 
+function CreateEmployeeOptions(props) {
+    const EMP_ID = 0;
+    const EMP_NAME = 1;
+    // const EMP_EMAIL = 2;
+
+    return (
+        props.employees.map(
+            (employee) => {
+                return (
+                    <option key={employee[EMP_ID]} value={employee[EMP_ID]}>{employee[EMP_NAME]}</option>
+                )
+            }
+        )
+    )
+}
+
 function CreateRoomOptions(props) {
     return (
         props.rooms.map(
@@ -74,5 +90,6 @@ CreateFloorOptions.defaultProps = {
 export {
     CreateFloorOptions,
     CreateRoomOptions,
+    CreateEmployeeOptions,
     NumberOfRooms
 };

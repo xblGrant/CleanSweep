@@ -11,12 +11,12 @@ const Label = ({ incident, guest, assigned }) => (
     </div>
 );
 
-const Album = ({ selectableRef, selected, selecting, roomNum, status, assigned, incident, guest}) => (
+const Album = ({ selectableRef, selected, selecting, roomName, status, assigned, incident, guest}) => (
   <div
       ref={selectableRef}
       className={`item ${selecting && 'selecting'} ${selected && 'selected'}`}
   >
-      <h2>{roomNum}</h2>
+      <h2>{roomName}</h2>
       <small>{status}</small>
       { (incident !== null && guest !== null) ?
           <Label assigned={assigned} incident={incident} guest={guest}/> :

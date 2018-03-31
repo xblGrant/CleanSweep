@@ -9,16 +9,19 @@ const INCIDENT = 2;
 const GUEST = 3;
 const ASSIGNED = 4;
 const IS_RESERVABLE = 5;
+const FLOOR = 6;
 
 const SelectableRooms = ({items}) => (
     items.map((item, i) => (
         <SelectableAlbum
             key={`${item[ROOM]}${i}`}
-            roomNum={item[ROOM]}
+            roomName={item[ROOM]}
             status={item[STATUS]}
             assigned={item[ASSIGNED]}
             incident={item[INCIDENT]}
             guest={item[GUEST]}
+            isReservable={item[IS_RESERVABLE]}
+            floor={item[FLOOR]}
         />
     ))
 );
@@ -35,11 +38,13 @@ function ReservableLink(props) {
         <Link to={routes.RESERVABLE_ROOM + props.item[ROOM]}>
             <SelectableAlbum
                 key={`${props.item[ROOM]}${props.id}`}
-                roomNum={props.item[ROOM]}
+                roomName={props.item[ROOM]}
                 status={props.item[STATUS]}
                 assigned={props.item[ASSIGNED]}
                 incident={props.item[INCIDENT]}
                 guest={props.item[GUEST]}
+                isReservable={props.item[IS_RESERVABLE]}
+                floor={props.item[FLOOR]}
             />
         </Link>
     )
@@ -50,24 +55,22 @@ function NonReservableLink(props) {
         <Link to={routes.NON_RESERVABLE_ROOM + props.item[ROOM]}>
             <SelectableAlbum
                 key={`${props.item[ROOM]}${props.id}`}
-                roomNum={props.item[ROOM]}
+                roomName={props.item[ROOM]}
                 status={props.item[STATUS]}
                 assigned={props.item[ASSIGNED]}
                 incident={props.item[INCIDENT]}
                 guest={props.item[GUEST]}
+                isReservable={props.item[IS_RESERVABLE]}
+                floor={props.item[FLOOR]}
             />
         </Link>
     )
 }
 
-
-
-
 class SelectableList extends React.Component {
     shouldComponentUpdate(nextProps) {
         return nextProps.items !== this.props.items;
     }
-
 
     //Link to section
     //  --look at routes.ROOM and how we pass the room Number

@@ -79,15 +79,14 @@ export const signUp = (that, email, password, userName, history) => {
 
 // functions used with react-selectable-fast element
 export const getAllEmployees = (that) => {
-    let employeeList = [];
+    let employeeList = [[null,null,null]];
     let empRef = firebase.db.ref("/Employee");
     empRef.orderByKey().once('value', function (allEmployees) {
         allEmployees.forEach(function (employee) {
             employeeList.push(
-                [employee.val().username,
+                [ employee.key,
+                    employee.val().username,
                     employee.val().email,
-                    null,
-                    null
                 ]
             );
         })
@@ -111,7 +110,8 @@ export const getAllRooms = (that) => {
                         room.val().incident,
                         "n/a",
                         assigned,
-                        !isReservable
+                        !isReservable,
+                        allRooms.key
                     ]
                 );
             })
@@ -128,7 +128,8 @@ export const getAllRooms = (that) => {
                             room.val().incident,
                             room.val().guest,
                             assigned,
-                            isReservable
+                            isReservable,
+                            allRooms.key
                         ]
                     );
                 })
@@ -159,7 +160,8 @@ export const getAssignedRooms = (that) => {
                             room.val().incident,
                             room.val().guest,
                             true,
-                            isReservable
+                            isReservable,
+                            allRooms.key
                         ]
                     );
                 }
@@ -177,7 +179,8 @@ export const getAssignedRooms = (that) => {
                                 room.val().incident,
                                 "n/a",
                                 true,
-                                !isReservable
+                                !isReservable,
+                                allRooms.key
                             ]
                         );
                     }
@@ -204,7 +207,8 @@ export const getAvailableRooms = (that) => {
                             room.val().incident,
                             room.val().guest,
                             assigned,
-                            isReservable
+                            isReservable,
+                            allRooms.key
                         ]
                     );
                 }
@@ -232,7 +236,8 @@ export const getInspectRooms = (that) => {
                             room.val().incident,
                             room.val().guest,
                             assigned,
-                            isReservable
+                            isReservable,
+                            allRooms.key
                         ]
                     );
                 }
@@ -259,7 +264,8 @@ export const getRoomsWithIncidents = (that) => {
                             room.val().incident,
                             room.val().guest,
                             assigned,
-                            isReservable
+                            isReservable,
+                            allRooms.key
                         ]
                     );
                 }
@@ -278,7 +284,8 @@ export const getRoomsWithIncidents = (that) => {
                                 room.val().incident,
                                 "n/a",
                                 assigned,
-                                !isReservable
+                                !isReservable,
+                                allRooms.key
                             ]
                         );
                     }
@@ -305,7 +312,8 @@ export const getRoomsWithWakeUpCalls = (that) => {
                             room.val().incident,
                             room.val().guest,
                             assigned,
-                            isReservable
+                            isReservable,
+                            allRooms.key
                         ]
                     );
                 }
@@ -343,7 +351,8 @@ export const getRoomsWithDepartingGuests = (that) => {
                             room.val().incident,
                             room.val().guest,
                             assigned,
-                            isReservable
+                            isReservable,
+                            allRooms.key
                         ]
                     );
                 }
@@ -369,7 +378,8 @@ export const getAllUnassignedSelectableRooms = (that) => {
                             room.val().incident,
                             "n/a",
                             false,
-                            !isReservable
+                            !isReservable,
+                            allRooms.key
                         ]
                     );
                 }
@@ -387,7 +397,8 @@ export const getAllUnassignedSelectableRooms = (that) => {
                                 room.val().incident,
                                 "n/a",
                                 false,
-                                isReservable
+                                isReservable,
+                                allRooms.key
                             ]
                         );
                     }
@@ -413,7 +424,8 @@ export const getAllUnassignedSelectableRoomsByFloor = (that, floor) => {
                         room.val().incident,
                         "n/a",
                         false,
-                        isReservable
+                        isReservable,
+                        allRooms.key
                     ]
                 );
             }
@@ -429,7 +441,8 @@ export const getAllUnassignedSelectableRoomsByFloor = (that, floor) => {
                             room.val().incident,
                             "n/a",
                             false,
-                            !isReservable
+                            !isReservable,
+                            allRooms.key
                         ]
                     );
                 }
@@ -906,17 +919,20 @@ const addNonReservableRoomIncident = (room) => {
 };
 
 // assign rooms
-export const assignRooms = (that) => {
-    //TODO: pass in proper parameters, such as room path and selected employee
-    // let roomPath, employee;
-    // let updates = {};
-    // roomPath = 'Rooms/Reservable/100/101/';
-    // employee = "Yoyo";
-    // updates[roomPath + 'assignedEmployee'] = employee;
-    // firebase.db.ref().update(updates);
-
-    //calling getAllRooms gets the system to update the list
-    getAllUnassignedSelectableRooms(that);
+export const assignRoom = (room, employee) => {
+    (room.isReservable) ?
+        assignReservableRoom(room, employee) :
+        assignNonReservableRoom(room, employee);
+};
+const assignReservableRoom = (room, employee) => {
+    firebase.db.ref('/Rooms/Reservable/' + room.floor + '/' + room.roomName).update({
+        assignedEmployee: employee
+    })
+};
+const assignNonReservableRoom = (room, employee) => {
+    firebase.db.ref('/Rooms/NonReservable/' + room.floor + '/' + room.roomName).update({
+        assignedEmployee: employee
+    })
 };
 
 // check in
