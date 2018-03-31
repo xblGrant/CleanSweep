@@ -1,35 +1,35 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Help from '../pages/Help';
-import Login from '../pages/Login';
-import {SignUp} from '../pages/SignUp';
-import NewRoom from '../pages/NewRoom';
+import Help from '../pages/Help'
+import Login from '../account/Login';
+import {SignUp} from '../account/SignUp';
+import NewRoom from '../file/NewRoom';
 import ReservableRoom from '../pages/ReservableRoom';
 import NonReservableRoom from '../pages/NonReservableRoom';
-import AddWakeUp from '../pages/WakeUpCall';
-import ChangeRole from '../pages/ChangeRole';
-import AssignRooms from '../pages/AssignRooms';
-import InspectRoom from '../pages/InspectRoom';
-import NewEmployee from '../pages/NewEmployee';
-import AddIncident from '../pages/AddIncident';
-import CheckInGuest from '../pages/CheckInGuest';
-import CheckOutGuest from '../pages/CheckOutGuest';
-import ChangePassword from '../pages/PasswordChange';
-import PasswordForgetPage from '../pages/PasswordForget';
-import AllRooms from '../pages/AllRooms';
-import AssignedRooms from '../pages/AssignedRooms';
-import AvailableRooms from '../pages/AvailableRooms';
-import Inspections from '../pages/InspectList';
-import Incidents from '../pages/IncidentList';
-import WakeUpList from '../pages/WakeUpList';
-import DepartingGuests from '../pages/DepartingGuests';
+import AddWakeUp from '../functions/WakeUpCall';
+import ChangeRole from '../options/ChangeRole';
+import AssignRooms from '../functions/AssignRooms';
+import InspectRoom from '../functions/InspectRoom';
+import NewEmployee from '../file/NewEmployee';
+import AddIncident from '../functions/AddIncident';
+import CheckInGuest from '../functions/CheckInGuest';
+import CheckOutGuest from '../functions/CheckOutGuest';
+import ChangePassword from '../options/PasswordChange';
+import PasswordForgetPage from '../account/PasswordForget';
+import AllRooms from '../lists/AllRooms';
+import AssignedRooms from '../lists/AssignedRooms';
+import AvailableRooms from '../lists/AvailableRooms';
+import Inspections from '../lists/InspectList';
+import Incidents from '../lists/IncidentList';
+import WakeUpList from '../lists/WakeUpList';
+import DepartingGuests from '../lists/DepartingGuests';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/custom.css';
 import * as routes from '../constants/routes';
 import NavigationBar from "./NavigationBar";
 
-import withAuthentication from './withAuthentication';
+import withAuthentication from '../auth/withAuthentication';
 function App() {
     return (
         <Router>
@@ -70,10 +70,10 @@ function App() {
 
                 {/*Options Paths*/}
                 <Route path={routes.CHANGE_PW} component={ChangePassword}/>
+                <Route path={routes.CHANGE_ROLE} component={ChangeRole}/>
 
                 {/*Help Path*/}
                 <Route path={routes.HELP} component={Help}/>
-                <Route path={routes.CHANGE_ROLE} component={ChangeRole}/>
             </div>
         </Router>
     );

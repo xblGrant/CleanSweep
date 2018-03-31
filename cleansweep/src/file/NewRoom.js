@@ -60,8 +60,7 @@ class NewRoom extends React.Component {
         if (createNewFloor) {
             api.getNewFloor(this);
         } else {
-            let floor = document.getElementById('floorDisplay').value;
-            api.generateNewRoomNumber(this, floor);
+            api.generateNewRoomNumber(this, '100');
         }
     }
 
@@ -97,7 +96,7 @@ class NewRoom extends React.Component {
         let roomNum, floor, info = this.state;
         let roomName = document.getElementById('roomName').value;
 
-        if (info.createNewFloor){
+        if (info.createNewFloor) {
             roomNum = info.newFloorRoomNum;
             floor = info.newFloor;
         } else {
@@ -105,7 +104,7 @@ class NewRoom extends React.Component {
             floor = document.getElementById('floorDisplay').value;
         }
 
-        if (roomName !== ''){
+        if (roomName !== '') {
             api.createNewReservableRoom(floor, roomName);
         } else {
             for (let i = 0; i < info.numNewRooms; i++) {
@@ -117,7 +116,7 @@ class NewRoom extends React.Component {
     handleNonReservableRoom() {
         let room, floor, info = this.state;
 
-        if (info.createNewFloor){
+        if (info.createNewFloor) {
             floor = info.newFloor;
         } else {
             floor = document.getElementById('floorDisplay').value;
@@ -136,7 +135,7 @@ class NewRoom extends React.Component {
             newFloorRoomNum,
             newFloor,
             isReservable,
-            roomName
+            roomName,
         } = this.state;
 
         let displayValue,
@@ -158,14 +157,10 @@ class NewRoom extends React.Component {
             }
 
             floorDisplay =
-                <div className={'oldFloors'}>
-                    <FormGroup>
-                        <Label className={"margin-left-35"}>Floor</Label>
-                        <Input onClick={this.handleFloorSelect} id={'floorDisplay'} type={"select"} className={"margin-left-35 width-30"}>
-                            <CreateFloorOptions displayAll={false}/>
-                        </Input>
-                    </FormGroup>
-                </div>
+                <Input onClick={this.handleFloorSelect} id={'floorDisplay'} type={"select"}
+                       className={"margin-left-35 width-30"}>
+                    <CreateFloorOptions displayAll={false}/>
+                </Input>
 
         } else {
             if (numNewRooms === 1) {
@@ -178,26 +173,22 @@ class NewRoom extends React.Component {
             }
 
             floorDisplay =
-                <div className={'newFloor'}>
-                    <FormGroup>
-                        <Label className={"margin-left-35"}>Floor</Label>
-                        <Input id={'floorDisplay'} type={"select"} className={"margin-left-35 width-30"}>
-                            <option value={newFloor}>{newFloor / 100}</option>
-                        </Input>
-                    </FormGroup>
-                </div>
+                <Input id={'floorDisplay'} type={"select"} className={"margin-left-35 width-30"}>
+                    <option value={newFloor}>{newFloor / 100}</option>
+                </Input>
         }
 
         let roomNameDisplay;
-        if (numNewRooms === 1){
-            roomNameDisplay =  <Input onChange={this.handleRoomName} value={roomName} type={"text"} className={"margin-left-35 width-30"} id={"roomName"}/>
+        if (numNewRooms === 1) {
+            roomNameDisplay = <Input onChange={this.handleRoomName} value={roomName} type={"text"}
+                                     className={"margin-left-35 width-30"} id={"roomName"}/>
         } else {
             roomNameDisplay = <Input type={"text"} className={"margin-left-35 width-30"} id={"roomName"}
-                              value={''} readOnly/>
+                                     value={''} readOnly/>
         }
 
         let numberOfRooms;
-        if (isReservable){
+        if (isReservable) {
 
             let totalRooms;
             if (createNewFloor)
@@ -230,7 +221,12 @@ class NewRoom extends React.Component {
                 </Helmet>
                 <div id={"newRoomForm"}>
                     <Form>
-                        {floorDisplay}
+                        <div className={'newFloor'}>
+                            <FormGroup>
+                                <Label className={"margin-left-35"}>Floor</Label>
+                                {floorDisplay}
+                            </FormGroup>
+                        </div>
                         <FormGroup>
                             <Label className={"margin-left-35"} for={"numberRooms"}># New Rooms</Label>
                             <Input onClick={this.handleNumRooms} type={"select"} className={"margin-left-35 width-30"}>

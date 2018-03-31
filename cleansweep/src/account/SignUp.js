@@ -69,7 +69,7 @@ class SignUpForm extends React.Component {
 
         return (
             <Form onSubmit={this.handleSignUp}>
-                {error && <p type={"error"} className={"error"}>{error.message}</p>}
+                {error && <p typeof={"error"} className={"error"}>{error.message}</p>}
                 <FormGroup>
                     <Label className={"margin-left-35"} for={"userName"}>Full Name</Label>
                     <Input value={userName}

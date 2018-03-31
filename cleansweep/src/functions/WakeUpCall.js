@@ -30,9 +30,12 @@ class AddWakeUp extends React.Component {
 
     handleNewWakeUp() {
         //TODO: submit new wake up call
+
     }
 
     render() {
+
+
         return (
             <div className={"container"}>
                 <Helmet>
