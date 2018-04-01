@@ -62,13 +62,15 @@ class LoginForm extends React.Component {
                             <Label for={"userEmail"}>Email</Label>
                             <Input value={email}
                                    onChange={e => this.setState(byPropKey('email', e.target.value))}
-                                   type={"email"} id={"userEmail"} placeholder={"Enter email"}/>
+                                   type={"email"} id={"userEmail"} placeholder={"Enter email"}
+                                    autoComplete={"email"}/>
                         </FormGroup>
                         <FormGroup>
                             <Label for={"userPass"}>Password</Label>
                             <Input value={password}
                                    onChange={e => this.setState(byPropKey('password', e.target.value))}
-                                   type={"password"} id={"userPass"} placeholder={"Enter password"}/>
+                                   type={"password"} id={"userPass"} placeholder={"Enter password"}
+                                    autoComplete={"current-password"}/>
                         </FormGroup>
                         <br/>
                         <Button className={"col-sm-4"} type={"submit"} disabled={isInvalid} color={"primary"}>Login</Button>
