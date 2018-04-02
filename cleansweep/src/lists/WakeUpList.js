@@ -13,7 +13,7 @@ class WakeUpList extends React.Component {
         }
     }
 
-    // TODO: instead of links for rooms, keep rooms selectable and display wake up time for room when selected
+    // TODO: instead of links for rooms, keep rooms selectable
     componentDidMount() {
         api.getRoomsWithWakeUpCalls(this);
     }

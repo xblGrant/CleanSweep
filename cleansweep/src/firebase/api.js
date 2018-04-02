@@ -308,7 +308,7 @@ export const getRoomsWithWakeUpCalls = (that) => {
                     let assigned = (room.val().assignedEmployee !== 'none');
                     roomList.push(
                         [room.key,
-                            room.val().status,
+                            room.val().wakeupCall,
                             room.val().incident,
                             room.val().guest,
                             assigned,
