@@ -156,7 +156,7 @@ class NewRoom extends React.Component {
 
             floorDisplay =
                 <Input onClick={this.handleFloorSelect} id={'floorDisplay'} type={"select"}
-                       className={"margin-left-35 width-30"}>
+                       className={"col-sm-4 center"}>
                     <CreateFloorOptions displayAll={false}/>
                 </Input>
 
@@ -171,7 +171,7 @@ class NewRoom extends React.Component {
             }
 
             floorDisplay =
-                <Input id={'floorDisplay'} type={"select"} className={"margin-left-35 width-30"}>
+                <Input id={'floorDisplay'} type={"select"} className={"col-sm-4 center"}>
                     <option value={newFloor}>{newFloor / 100}</option>
                 </Input>
         }
@@ -181,7 +181,7 @@ class NewRoom extends React.Component {
             roomNameDisplay = <Input onChange={this.handleRoomName} value={roomName} type={"text"}
                                      className={"margin-left-35 width-30"} id={"roomName"}/>
         } else {
-            roomNameDisplay = <Input type={"text"} className={"margin-left-35 width-30"} id={"roomName"}
+            roomNameDisplay = <Input type={"text"} className={"col-sm-4 center"} id={"roomName"}
                                      value={''} readOnly/>
         }
 
@@ -213,54 +213,69 @@ class NewRoom extends React.Component {
         }
 
         return (
-            <div>
+            <div className={"container"}>
                 <Helmet>
                     <title>New Room</title>
                 </Helmet>
                 <div id={"newRoomForm"}>
                     <Form>
-                        <div className={'newFloor'}>
-                            <FormGroup>
-                                <Label className={"margin-left-35"}>Floor</Label>
+
+                            <FormGroup row>
+                                <div className="col-sm-4 center">
+                                <Label for={"newFloor"}>Floor</Label>
                                 {floorDisplay}
+                                </div>
                             </FormGroup>
-                        </div>
-                        <FormGroup>
-                            <Label className={"margin-left-35"} for={"numberRooms"}># New Rooms</Label>
-                            <Input onClick={this.handleNumRooms} type={"select"} className={"margin-left-35 width-30"}>
+
+                        <FormGroup row>
+                            <div className ="col-sm-4 center">
+                            <Label for={"numberRooms"}># New Rooms</Label>
+                            <Input onClick={this.handleNumRooms} type={"select"}>
                                 {numberOfRooms}
                             </Input>
+                            </div>
                         </FormGroup>
-                        <FormGroup>
-                            <Label className={"margin-left-35"} for={"roomNum"}>
+                        <FormGroup row>
+                            <div className={"col-sm-4 center"}>
+                            <Label  for={"roomNum"}>
                                 {newRoomLabel}
                             </Label>
-                            <Input type={"text"} className={"margin-left-35 width-30"} id={"roomNum"}
+                            <Input type={"text"} id={"roomNum"}
                                    value={displayValue} readOnly/>
+                            </div>
                         </FormGroup>
-                        <FormGroup>
-                            <Label className={"margin-left-35"} for={"roomName"}>
+                        <FormGroup row>
+                            <div className={"col-sm-4 center"}>
+                            <Label  for={"roomName"}>
                                 Room Name (*Optional)
                             </Label>
                             {roomNameDisplay}
+                            </div>
                         </FormGroup>
                         <FormGroup check>
-                            <Label className={"margin-left-35"} check>
+                            <div className={"col-sm-4 center"}>
+                            <Label check>
                                 <Input onChange={this.handleNewFloor} type={"checkbox"} id={"newFloor"}/>{' '}
                                 New Floor
                             </Label>
+                        </div>
                             <br/>
-                            <Label className={"margin-left-35"} check>
+                            <div className={"col-sm-4 center"}>
+                            <Label check>
                                 <Input onChange={this.handleReservable} type={"checkbox"} id={"isNonReservable"}/>{' '}
                                 Non-Reservable
                             </Label>
+                            </div>
                         </FormGroup>
                         <br/>
+                        <div className={"row"}>
+                        <div className={"col-sm-5 center"}>
                         <Button disabled={isDisabled} onClick={this.handleSubmit} color={"primary"}
-                                className={"margin-left-35"}>Submit</Button>
+                                className={"col-sm-4"}>Submit</Button>
                         {' '}
-                        <WrappedButton className={"margin-left-35"} link={routes.HOME} name={"Cancel"}
-                                       id={"wrappedButton"}/>
+                        <Button className={"col-sm-4"} link={routes.HOME}> Cancel </Button>
+                        </div>
+                        </div>
                     </Form>
                     {error && <p typeof={"error"} className={"error center"} id={"error"}>
                         {"No more rooms can be added to this floor."}</p>}
