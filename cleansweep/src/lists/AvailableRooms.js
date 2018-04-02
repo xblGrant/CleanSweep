@@ -28,7 +28,7 @@ class AvailableRooms extends React.Component {
                         <div className={"container text-center"}>
                             <Label className={"header center"}>Available Rooms</Label>
                         </div>
-                        <GroupSelect items={this.state.rooms}/>
+                        <GroupSelect items={this.state.rooms} onSelectionClear={null} onSelectionFinish={null}/>
                     </Form>
                 </div>
             </div>

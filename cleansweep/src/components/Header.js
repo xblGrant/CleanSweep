@@ -1,10 +1,12 @@
 import React from 'react';
-import { Button, Label, Form } from 'reactstrap';
-import { WrappedButton, SignOutButton } from './Buttons';
-import { firebase } from "../firebase/index";
+import {Link} from 'react-router-dom';
+import {Button, Label, Form} from 'reactstrap';
+import {WrappedButton, SignOutButton} from './Buttons';
+import {firebase} from "../firebase/index";
+import * as routes from '../constants/routes';
 
-class Header extends React.Component{
-    constructor(props){
+class Header extends React.Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -17,7 +19,7 @@ class Header extends React.Component{
         if (currentUser !== null) {
             let username = null;
             let userRef = firebase.db.ref("/Employee/" + currentUser.uid);
-            userRef.once('value', function(currentUser) {
+            userRef.once('value', function (currentUser) {
                 username = currentUser.val().username;
             }).then(() => {
                 this.setState({
@@ -35,7 +37,8 @@ class Header extends React.Component{
 
         let button;
         if (!authorized) {
-            button = <WrappedButton className={"center"} isOutlined={true} link={"/login"} name={"Login"} id={"wrappedButton"}/>
+            button = <WrappedButton className={"center"} isOutlined={true} link={"/login"} name={"Login"}
+                                    id={"wrappedButton"}/>
         } else {
             button = <SignOutButton className={"center"}/>
         }
@@ -44,13 +47,17 @@ class Header extends React.Component{
             <div className={"ml-auto"}>
                 <Form id={"header"} inline>
                     <Label for={"userLink"} size={"sm"}>Hello,</Label>{' '}
-                    <Button id={"userLink"} className={"color1 center"} color={"link"} size={"sm"}>{this.state.user}</Button>
+                    <Link to={routes.ASSIGNED_ROOMS}>
+                        <Button id={"userLink"} className={"color1 center"} color={"link"}
+                                size={"sm"}>{this.state.user}</Button>
+                    </Link>
                     <div>
                         {button}
                     </div>
                 </Form>
             </div>
-        );
+        )
+            ;
     }
 }
 
