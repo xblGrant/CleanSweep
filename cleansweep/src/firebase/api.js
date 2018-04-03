@@ -632,7 +632,7 @@ export const getListofAllRoomsNeedInspected = (that) => {
     roomRef.orderByKey().once('value', function (floors) {
         floors.forEach(function (allRooms) {
             allRooms.forEach(function (room) {
-                if (!room.val().incident && room.val().status === 'Clean')
+                if (room.val().inspect)
                     roomList.push(room.key);
             })
         })
@@ -641,8 +641,7 @@ export const getListofAllRoomsNeedInspected = (that) => {
         roomRef.orderByKey().once('value', function (floors) {
             floors.forEach(function (allRooms) {
                 allRooms.forEach(function (room) {
-                    if (!room.val().incident && room.val().status === 'Clean'
-                        && room.val().guest === 'none' && !room.val().isReservable)
+                    if (room.val().inspect)
                         roomList.push(room.key);
                 })
             })
@@ -658,15 +657,14 @@ export const getListofAllRoomsNeedInspectedByFloor = (that, floor) => {
     let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
     roomRef.orderByKey().once('value', function (allRooms) {
         allRooms.forEach(function (room) {
-            if (!room.val().incident && room.val().status === 'Clean')
+            if (room.val().inspect)
                 roomList.push(room.key);
         })
     }).then(() => {
         roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
         roomRef.orderByKey().once('value', function (allRooms) {
             allRooms.forEach(function (room) {
-                if (!room.val().incident && room.val().status === 'Clean'
-                    && room.val().guest === 'none' && !room.val().isReservable)
+                if (room.val().inspect)
                     roomList.push(room.key);
             })
         }).then(() => {
