@@ -22,7 +22,7 @@ class IncidentList extends React.Component {
             <div>
                 <Helmet>
                     <title>Incidents</title>
-                    <body className={"background-to-bottom"}></body>
+                    <body className={"background-to-bottom"} />
                 </Helmet>
                 <div>
                     <Form>

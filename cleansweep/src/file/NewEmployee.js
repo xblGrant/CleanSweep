@@ -20,7 +20,7 @@ class NewEmployee extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>New Employee</title>
-                    <body className={"background-to-bottom"}></body>
+                    <body className={"background-to-bottom"} />
                 </Helmet>
                 <div id={"newEmployeeForm"}>
                     <Form>

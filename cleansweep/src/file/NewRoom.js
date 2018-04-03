@@ -1,6 +1,5 @@
 import React from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
-import {WrappedButton} from "../components/Buttons";
 import {CreateFloorOptions, NumberOfRooms} from "../components/Generators";
 import * as routes from "../constants/routes";
 import * as api from '../firebase/api';
@@ -216,7 +215,7 @@ class NewRoom extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>New Room</title>
-                    <body className={"background-to-bottom"}></body>
+                    <body className={"background-to-bottom"} />
                 </Helmet>
                 <div id={"newRoomForm"}>
                     <Form>

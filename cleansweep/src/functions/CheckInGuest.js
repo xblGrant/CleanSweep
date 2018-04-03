@@ -68,7 +68,7 @@ class CheckInGuest extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>Check-In Guest</title>
-                    <body className={"background-to-bottom"}></body>
+                    <body className={"background-to-bottom"} />
                 </Helmet>
                 <br/>
                 <Form>

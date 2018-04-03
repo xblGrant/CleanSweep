@@ -37,7 +37,7 @@ class InspectRoom extends React.Component {
     handleFloorSelect(e) {
         let floor = e.target.value;
         this.setState({
-            selectedFoor: floor
+            selectedFloor: floor
         });
 
         if (e.target.value === '000')
@@ -67,7 +67,7 @@ class InspectRoom extends React.Component {
     }
 
     handleInspect() {
-        api.InspectRoom(this);
+        api.inspectRoom(this);
     }
 
     handleDecline() {
@@ -80,7 +80,7 @@ class InspectRoom extends React.Component {
             <div className="container">
                 <Helmet>
                     <title>Inspect Room</title>
-                    <body className={"background-to-bottom"}></body>
+                    <body className={"background-to-bottom"} />
                 </Helmet>
                 <Form>
                     <FormGroup row>

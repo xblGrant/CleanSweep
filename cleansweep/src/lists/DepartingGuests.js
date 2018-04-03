@@ -22,7 +22,7 @@ class DepartingGuests extends React.Component {
             <div>
                 <Helmet>
                     <title>Departing Guests</title>
-                    <body className={"background-to-bottom"}></body>
+                    <body className={"background-to-bottom"} />
                 </Helmet>
                 <div>
                     <Form>

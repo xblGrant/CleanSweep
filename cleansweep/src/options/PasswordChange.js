@@ -42,7 +42,7 @@ class PasswordChange extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>Change Password</title>
-                    <body className={"background-to-bottom"}></body>
+                    <body className={"background-to-bottom"} />
                 </Helmet>
                 <h3 className={"center"}> Password Change</h3>
                 <br/>

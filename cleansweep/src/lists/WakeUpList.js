@@ -40,7 +40,7 @@ class WakeUpList extends React.Component {
             <div>
                 <Helmet>
                     <title>Wake-Up Calls</title>
-                    <body className={"background-to-bottom"}></body>
+                    <body className={"background-to-bottom"} />
                 </Helmet>
                 <div>
                     <Form>
