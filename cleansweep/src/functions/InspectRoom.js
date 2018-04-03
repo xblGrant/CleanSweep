@@ -23,7 +23,6 @@ class InspectRoom extends React.Component {
 
         this.handleInspect = this.handleInspect.bind(this);
         this.handleDecline = this.handleDecline.bind(this);
-        this.handleRoomType = this.handleRoomType.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleSelectedRoom = this.handleSelectedRoom.bind(this);
 
@@ -32,28 +31,6 @@ class InspectRoom extends React.Component {
     componentDidMount() {
         // TODO: query on inspect field of each room
         api.getListofAllRoomsNeedInspected(this);
-    }
-
-    handleRoomType() {
-        this.setState({
-            areReservableRooms: !this.state.areReservableRooms,
-            selectedRoom: null
-        });
-
-        let {areReservableRooms} = this.state;
-        let floor = document.getElementById('floorSelect').value;
-
-        if (areReservableRooms) {
-            if (floor === '000')
-                api.getListofAllReservableRooms(this);
-            else
-                api.getListofAllReservableRoomsByFloor(this, floor);
-        } else {
-            if (floor === '000')
-                api.getListofAllNonReservableRooms(this);
-            else
-                api.getListofAllNonReservableRoomsByFloor(this, floor);
-        }
     }
 
     handleFloorSelect(e) {
@@ -94,13 +71,6 @@ class InspectRoom extends React.Component {
                                 <CreateFloorOptions />
                             </Input>
                         </div>
-                    </FormGroup>
-
-                    <FormGroup check>
-                        <Label className={"margin-left-35"} check>
-                            <Input onChange={this.handleRoomType} type={"checkbox"} id={"isNonReservable"}/>{' '}
-                            Non-Reservable Rooms
-                        </Label>
                     </FormGroup>
 
                     <FormGroup row>
