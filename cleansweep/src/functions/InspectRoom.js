@@ -86,7 +86,7 @@ class InspectRoom extends React.Component {
                     <FormGroup row>
                         <div className={"col-sm-4 center"}>
                             <Label for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" id="floorSelect">
+                            <Input onClick={this.handleFloorSelect} type="select" id="floorSelect" multiple>
                                 <CreateFloorOptions />
                             </Input>
                         </div>

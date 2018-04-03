@@ -957,9 +957,7 @@ export const inspectRoom = (that) => {
     let room = that.state.selectedRoom;
     let floor = that.state.selectedFloor;
     let isReservable = that.state.areReservableRooms;
-
     if (floor === '000'){
-        console.log("GETS INTO ALL SELECTION");
         //'all' selection for floor. must search entire db for room
         if (isReservable){
             //reservable room
@@ -968,16 +966,17 @@ export const inspectRoom = (that) => {
                     dbFloors.forEach(function (dbAllRooms) {
                         dbAllRooms.forEach(function (dbRoom) {
                             if(dbRoom.key === room){
-
-                                firebase.db.ref("/Rooms/Reservable/" + dbFloors.key.toString() + "/"
-                                    + room + "/").update({
-                                    inspect: false,
-                                    status: "Clean"
-                                });
+                                floor = dbAllRooms.key.toString();
                             }
                         })
                     })
+                }).then(() => {
+                firebase.db.ref("/Rooms/Reservable/" + floor + "/"
+                    + room + "/").update({
+                    inspect: false,
+                    status: "Clean"
                 });
+            });
         }
         else {
             //nonreservable room
@@ -1000,8 +999,6 @@ export const inspectRoom = (that) => {
         }
     }
     else {
-        console.log("PASSES ALL ROOM SELECTION");
-        floor = floor * 100;
         if(isReservable){
             firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
                 inspect: false,
@@ -1015,6 +1012,7 @@ export const inspectRoom = (that) => {
             });
         }
     }
+    that.forceUpdate();
 };
 
 // check in
