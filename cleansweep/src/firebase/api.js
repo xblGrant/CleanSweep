@@ -1012,7 +1012,6 @@ export const inspectRoom = (that) => {
             });
         }
     }
-    that.forceUpdate();
 };
 
 // check in
