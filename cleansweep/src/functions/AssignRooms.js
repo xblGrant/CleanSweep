@@ -77,6 +77,7 @@ class AssignRooms extends React.Component {
             <div className="container">
                 <Helmet>
                     <title>Assign Rooms</title>
+                    <body className={"background-to-bottom"}></body>
                 </Helmet>
                 <Form>
                     <FormGroup>

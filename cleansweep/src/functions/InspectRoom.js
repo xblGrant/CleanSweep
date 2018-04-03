@@ -80,6 +80,7 @@ class InspectRoom extends React.Component {
             <div className="container">
                 <Helmet>
                     <title>Inspect Room</title>
+                    <body className={"background-to-bottom"}></body>
                 </Helmet>
                 <Form>
                     <FormGroup row>

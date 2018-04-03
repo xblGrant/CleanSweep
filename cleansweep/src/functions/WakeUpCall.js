@@ -85,6 +85,7 @@ class AddWakeUp extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>Add Wake-Up Call</title>
+                    <body className={"background-to-bottom"}></body>
                 </Helmet>
                 <div>
                     <Form>

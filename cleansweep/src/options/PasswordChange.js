@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
 import * as api from '../firebase/api';
+import {Helmet} from "react-helmet";
 
 const byPropKey = (propName, value) => () => ({
     [propName]: value,
@@ -39,6 +40,10 @@ class PasswordChange extends React.Component {
 
         return (
             <div className={"container"}>
+                <Helmet>
+                    <title>Change Password</title>
+                    <body className={"background-to-bottom"}></body>
+                </Helmet>
                 <h3 className={"center"}> Password Change</h3>
                 <br/>
                 <Form onSubmit={this.onSubmit}>

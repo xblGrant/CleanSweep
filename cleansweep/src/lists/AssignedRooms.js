@@ -22,6 +22,7 @@ class AssignedRooms extends React.Component {
             <div>
                 <Helmet>
                     <title>Assigned Rooms</title>
+                    <body className={"background-to-bottom"}></body>
                 </Helmet>
                 <div id={"loadRooms"}>
                     <Form>

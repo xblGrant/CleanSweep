@@ -9,8 +9,11 @@ const SignUp = ({history}) =>
     <div>
         <Helmet>
             <title>Sign-Up</title>
+            <body className={"background-to-bottom"}></body>
         </Helmet>
-        <div id={"signUpForm"}>
+
+
+        <div>
             <SignUpForm history={history}/>
         </div>
     </div>;
@@ -102,7 +105,7 @@ class SignUpForm extends React.Component {
 }
 
 const SignUpLink = () =>
-    <p className={"margin-left-35"}>
+    <p className={"center"}>
         <Link to={"/signup"}>Sign Up</Link>
     </p>;
 

@@ -2,10 +2,14 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
 import * as api from '../firebase/api';
+import {Helmet} from "react-helmet";
 
 const PasswordForgetPage = () =>
     <div>
-        <h4>Password Forget</h4>
+        <Helmet>
+            <title>Password Forget</title>
+            <body className={"background-to-bottom"}></body>
+        </Helmet>
         <PasswordForgetForm/>
     </div>;
 
@@ -40,29 +44,36 @@ class PasswordForgetForm extends React.Component {
         const isInvalid = email === '';
 
         return (
-            <Form onSubmit={this.onSubmit} id={"pwForgetForm"}>
-                {error && <p typeof={"error"} className={"error center"} id={"error"}>{error.message}</p>}
-                <FormGroup>
-                    <Input
-                        id={"emailAddress"}
-                        value={this.state.email}
-                        onChange={e => this.setState(byPropKey('email', e.target.value))}
-                        type={"text"}
-                        placeholder={"Email Address"}
-                    />
-                </FormGroup>
-                <Button id={"pwForgetBtn"}
-                        color={"primary"}
-                        disabled={isInvalid} type={"submit"}>
-                    Reset Password
-                </Button>
-            </Form>
+            <div className={"container"}>
+                <div className={"center col-sm-6"}>
+                    <Form onSubmit={this.onSubmit}>
+                        <h4 className={"center"}>Password Forget</h4>
+                        {error && <p typeof={"error"} className={"error center"} id={"error"}>{error.message}</p>}
+                        <br/><br/>
+                            <div className={"center col-sm-4 col-md-12"}>
+                                <FormGroup>
+                                    <Input
+                                        id={"emailAddress"}
+                                        value={this.state.email}
+                                        onChange={e => this.setState(byPropKey('email', e.target.value))}
+                                        type={"text"}
+                                        placeholder={"Email Address"}/>
+                                </FormGroup>
+                            </div>
+                            <Button className={"center"}
+                                    color={"primary"}
+                                    disabled={isInvalid} type={"submit"}>
+                                Reset Password
+                            </Button>
+                    </Form>
+                </div>
+            </div>
         )
     }
 }
 
 const PasswordForgetLink = () =>
-    <p className={"margin-left-35"}>
+    <p className={"center"}>
         <Link to={"/pwforget"}>Forgot Password?</Link>
     </p>;
 

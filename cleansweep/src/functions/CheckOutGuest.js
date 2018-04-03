@@ -19,6 +19,7 @@ class CheckOutGuest extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>Check-Out Guest</title>
+                    <body className={"background-to-bottom"}></body>
                 </Helmet>
                 <Form>
                     <FormGroup row>

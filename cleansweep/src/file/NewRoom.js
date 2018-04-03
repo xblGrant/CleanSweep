@@ -216,6 +216,7 @@ class NewRoom extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>New Room</title>
+                    <body className={"background-to-bottom"}></body>
                 </Helmet>
                 <div id={"newRoomForm"}>
                     <Form>

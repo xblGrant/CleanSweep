@@ -24,6 +24,7 @@ class Help extends React.Component {
             <div>
                 <Helmet>
                     <title>Contact Us</title>
+                    <body className={"background-to-bottom"}></body>
                 </Helmet>
                 <div className={"container"}>
                     <div className={"col-sm-6 center"}>

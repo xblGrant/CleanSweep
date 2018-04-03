@@ -107,6 +107,7 @@ class AddIncident extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>Incident Report</title>
+                    <body className={"background-to-bottom"}></body>
                 </Helmet>
                 <Form>
                     <FormGroup>

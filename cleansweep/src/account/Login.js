@@ -9,8 +9,9 @@ const Login = ({ history }) =>
     <div>
         <Helmet>
             <title>Login</title>
+            <body className={"background-to-bottom"}></body>
         </Helmet>
-        <div id={"loginForm"}>
+        <div>
             <LoginForm history={history} />
             <SignUpLink />
             <PasswordForgetLink />

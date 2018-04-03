@@ -22,6 +22,7 @@ class InspectList extends React.Component {
             <div>
                 <Helmet>
                     <title>Inspections</title>
+                    <body className={"background-to-bottom"}></body>
                 </Helmet>
                 <div>
                     <Form>

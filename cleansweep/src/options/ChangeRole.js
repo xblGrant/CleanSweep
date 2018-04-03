@@ -19,6 +19,7 @@ class AddWakeUp extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>Change Employee Role</title>
+                    <body className={"background-to-bottom"}></body>
                 </Helmet>
                 <Form>
                     <h6 className={"text-center"}>Search By</h6>
