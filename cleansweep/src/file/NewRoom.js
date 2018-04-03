@@ -221,7 +221,7 @@ class NewRoom extends React.Component {
                     <Form>
 
                             <FormGroup row>
-                                <div className="col-sm-4 center">
+                                <div className="col-sm-12 center">
                                 <Label for={"newFloor"}>Floor</Label>
                                 {floorDisplay}
                                 </div>
@@ -245,7 +245,7 @@ class NewRoom extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup row>
-                            <div className={"col-sm-4 center"}>
+                            <div className={"col-sm-12 center"}>
                             <Label  for={"roomName"}>
                                 Room Name (*Optional)
                             </Label>
