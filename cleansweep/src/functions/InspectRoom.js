@@ -23,11 +23,14 @@ class InspectRoom extends React.Component {
 
         this.handleInspect = this.handleInspect.bind(this);
         this.handleDecline = this.handleDecline.bind(this);
-        this.handleSelectedRoom = this.handleSelectedRoom.bind(this);
+        this.handleRoomType = this.handleRoomType.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
+        this.handleSelectedRoom = this.handleSelectedRoom.bind(this);
+
     }
 
     componentDidMount() {
+        // TODO: query on inspect field of each room
         api.getListofAllRoomsNeedInspected(this);
     }
 

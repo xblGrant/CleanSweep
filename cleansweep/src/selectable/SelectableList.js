@@ -2,49 +2,46 @@ import React from 'react';
 import SelectableAlbum from './SelectableAlbum';
 import {Link} from 'react-router-dom';
 import * as routes from '../constants/routes';
-
-const ROOM = 0;
-const STATUS = 1;
-const INCIDENT = 2;
-const GUEST = 3;
-const ASSIGNED = 4;
-const IS_RESERVABLE = 5;
-const FLOOR = 6;
+import * as constant from '../constants/constants';
 
 const SelectableRooms = ({items}) => (
     items.map((item, i) => (
         <SelectableAlbum
-            key={`${item[ROOM]}${i}`}
-            roomName={item[ROOM]}
-            status={item[STATUS]}
-            assigned={item[ASSIGNED]}
-            incident={item[INCIDENT]}
-            guest={item[GUEST]}
-            isReservable={item[IS_RESERVABLE]}
-            floor={item[FLOOR]}
+            key={`${item[constant.ROOM]}${i}`}
+            roomName={item[constant.ROOM]}
+            status={item[constant.STATUS]}
+            incident={item[constant.INCIDENT]}
+            inspect={item[constant.INSPECT]}
+            guest={item[constant.GUEST]}
+            wakeupcall={item[constant.WAKE_UP_CALL]}
+            assigned={item[constant.ASSIGNED]}
+            isReservable={item[constant.IS_RESERVABLE]}
+            floor={item[constant.FLOOR]}
         />
     ))
 );
 
 const LinkToRooms = ({items}) => (
     items.map((item, i) => (
-            item[IS_RESERVABLE] ? <ReservableLink key={i} item={item} id={i}/> :
+            item[constant.IS_RESERVABLE] ? <ReservableLink key={i} item={item} id={i}/> :
                 <NonReservableLink key={i} item={item} id={i}/>
     ))
 );
 
 function ReservableLink(props) {
     return (
-        <Link to={routes.RESERVABLE_ROOM + props.item[ROOM]}>
+        <Link to={routes.RESERVABLE_ROOM + props.item[constant.ROOM]}>
             <SelectableAlbum
-                key={`${props.item[ROOM]}${props.id}`}
-                roomName={props.item[ROOM]}
-                status={props.item[STATUS]}
-                assigned={props.item[ASSIGNED]}
-                incident={props.item[INCIDENT]}
-                guest={props.item[GUEST]}
-                isReservable={props.item[IS_RESERVABLE]}
-                floor={props.item[FLOOR]}
+                key={`${props.item[constant.ROOM]}${props.id}`}
+                roomName={props.item[constant.ROOM]}
+                status={props.item[constant.STATUS]}
+                incident={props.item[constant.INCIDENT]}
+                inspect={props.item[constant.INSPECT]}
+                guest={props.item[constant.GUEST]}
+                wakeupcall={props.item[constant.WAKE_UP_CALL]}
+                assigned={props.item[constant.ASSIGNED]}
+                isReservable={props.item[constant.IS_RESERVABLE]}
+                floor={props.item[constant.FLOOR]}
             />
         </Link>
     )
@@ -52,16 +49,18 @@ function ReservableLink(props) {
 
 function NonReservableLink(props) {
     return (
-        <Link to={routes.NON_RESERVABLE_ROOM + props.item[ROOM]}>
+        <Link to={routes.NON_RESERVABLE_ROOM + props.item[constant.ROOM]}>
             <SelectableAlbum
-                key={`${props.item[ROOM]}${props.id}`}
-                roomName={props.item[ROOM]}
-                status={props.item[STATUS]}
-                assigned={props.item[ASSIGNED]}
-                incident={props.item[INCIDENT]}
-                guest={props.item[GUEST]}
-                isReservable={props.item[IS_RESERVABLE]}
-                floor={props.item[FLOOR]}
+                key={`${props.item[constant.ROOM]}${props.id}`}
+                roomName={props.item[constant.ROOM]}
+                status={props.item[constant.STATUS]}
+                incident={props.item[constant.INCIDENT]}
+                inspect={props.item[constant.INSPECT]}
+                guest={props.item[constant.GUEST]}
+                wakeupcall={props.item[constant.WAKE_UP_CALL]}
+                assigned={props.item[constant.ASSIGNED]}
+                isReservable={props.item[constant.IS_RESERVABLE]}
+                floor={props.item[constant.FLOOR]}
             />
         </Link>
     )

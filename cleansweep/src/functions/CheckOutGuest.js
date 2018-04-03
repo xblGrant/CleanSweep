@@ -31,7 +31,7 @@ class CheckOutGuest extends React.Component {
                     <br/>
                     <div className={"row"}>
                         <div className={"col-sm-5 center"}>
-                            <Button className={"col-sm-4"}onClick={this.handleCheckOut} color={"primary"}>Check-Out</Button>
+                            <Button className={"col-sm-4"} onClick={this.handleCheckOut} color={"primary"}>Check-Out</Button>
                             <Button className={"col-sm-4"} href={routes.HOME}> Cancel </Button>
                         </div>
                     </div>
