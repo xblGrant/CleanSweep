@@ -26,7 +26,7 @@ class InspectRoom extends React.Component {
         this.handleDecline = this.handleDecline.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleRoomSelect = this.handleRoomSelect.bind(this);
-
+        this.handleUpdateRooms = this.handleUpdateRooms.bind(this);
     }
 
     componentDidMount() {
@@ -68,12 +68,23 @@ class InspectRoom extends React.Component {
 
     handleInspect() {
         api.inspectRoom(this);
-        this.forceUpdate();
+        this.handleUpdateRooms();
     }
 
     handleDecline() {
         // TODO: implement when inspection is declined
         // TODO: should set the room status = dirty, isReservable = false,
+    }
+
+    handleUpdateRooms() {
+        let roomlist = this.state.rooms;
+        let selectedRoom = this.state.selectedRoom;
+        let updatedRoomList = roomlist.filter(function(e) {
+            return e !== selectedRoom
+        });
+        this.setState({
+            rooms: updatedRoomList
+        });
     }
 
     render() {
