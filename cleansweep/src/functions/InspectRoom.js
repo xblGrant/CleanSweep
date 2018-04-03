@@ -35,7 +35,7 @@ class InspectRoom extends React.Component {
 
     //TODO: if "all" is floor selection, this doesn't work
     handleFloorSelect(e) {
-        let floor = e.target.value * 100;
+        let floor = e.target.value;
         this.setState({
             selectedFoor: floor
         });

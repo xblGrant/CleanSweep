@@ -259,17 +259,62 @@ export const InspectRoom = (that) => {
     let floor = that.state.selectedFloor;
     let isReservable = that.state.areReservableRooms;
 
-    if(isReservable){
-        firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
-            inspect: false,
-            status: "Clean"
-        });
+    if (floor === '000'){
+        console.log("GETS INTO ALL SELECTION");
+        //'all' selection for floor. must search entire db for room
+        if (isReservable){
+            //reservable room
+            firebase.db.ref("/Rooms/Reservable/").once('value',
+                function(dbFloors) {
+                dbFloors.forEach(function (dbAllRooms) {
+                    dbAllRooms.forEach(function (dbRoom) {
+                        if(dbRoom.key === room){
+
+                            firebase.db.ref("/Rooms/Reservable/" + dbFloors.key.toString() + "/"
+                                + room + "/").update({
+                                inspect: false,
+                                status: "Clean"
+                            });
+                        }
+                    })
+                })
+            });
+        }
+        else {
+            //nonreservable room
+            firebase.db.ref("/Rooms/NonReservable/").once('value',
+                function(dbFloors) {
+                    dbFloors.forEach(function (dbAllRooms) {
+                        dbAllRooms.forEach(function (dbRoom) {
+                            if(dbRoom.key === room){
+                                floor = dbAllRooms.key.toString();
+                            }
+                        })
+                    })
+                }).then(() => {
+                firebase.db.ref("/Rooms/NonReservable/" + floor + "/"
+                    + room + "/").update({
+                    inspect: false,
+                    status: "Clean"
+                });
+            });
+        }
     }
     else {
-        firebase.db.ref("/Rooms/NonReservable/" + floor + "/" + room + "/").update({
-            inspect: false,
-            status: "Clean"
-        });
+        console.log("PASSES ALL ROOM SELECTION");
+        floor = floor * 100;
+        if(isReservable){
+            firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
+                inspect: false,
+                status: "Clean"
+            });
+        }
+        else {
+            firebase.db.ref("/Rooms/NonReservable/" + floor + "/" + room + "/").update({
+                inspect: false,
+                status: "Clean"
+            });
+        }
     }
 };
 export const getRoomsWithIncidents = (that) => {
