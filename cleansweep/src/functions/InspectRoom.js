@@ -68,6 +68,7 @@ class InspectRoom extends React.Component {
 
     handleInspect() {
         api.inspectRoom(this);
+        this.forceUpdate();
     }
 
     handleDecline() {
@@ -76,6 +77,9 @@ class InspectRoom extends React.Component {
     }
 
     render() {
+        let isDisabled = this.state.selectedRoom === null ||
+            this.state.selectedFloor === null;
+
         return (
             <div className="container">
                 <Helmet>
@@ -104,8 +108,8 @@ class InspectRoom extends React.Component {
                     <br/>
                     <div className={"row"}>
                         <div className={"col-sm-5 center"}>
-                            <Button className={"col-sm-4"} onClick={this.handleInspect} color={"primary"}>Approve</Button>
-                            <Button className={"col-sm-4"} onClick={this.handleDecline} color={"danger"}>Decline</Button>
+                            <Button className={"col-sm-4"} onClick={this.handleInspect} color={"primary"} disabled={isDisabled}>Approve</Button>
+                            <Button className={"col-sm-4"} onClick={this.handleDecline} color={"danger"} disabled={isDisabled}>Decline</Button>
                             <Button className={"col-sm-4"} href={routes.HOME}> Cancel </Button>
                         </div>
                     </div>
