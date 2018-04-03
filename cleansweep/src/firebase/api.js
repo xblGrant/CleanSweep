@@ -1013,6 +1013,69 @@ export const inspectRoom = (that) => {
         }
     }
 };
+//decline inspection
+export const DeclineinspectRoom = (that) => {
+    let room = that.state.selectedRoom;
+    let floor = that.state.selectedFloor;
+    let isReservable = that.state.areReservableRooms;
+    if (floor === '000'){
+        //'all' selection for floor. must search entire db for room
+        if (isReservable){
+            //reservable room
+            firebase.db.ref("/Rooms/Reservable/").once('value',
+                function(dbFloors) {
+                    dbFloors.forEach(function (dbAllRooms) {
+                        dbAllRooms.forEach(function (dbRoom) {
+                            if(dbRoom.key === room){
+                                floor = dbAllRooms.key.toString();
+                            }
+                        })
+                    })
+                }).then(() => {
+                firebase.db.ref("/Rooms/Reservable/" + floor + "/"
+                    + room + "/").update({
+                    inspect: false,
+                    status: "Dirty",
+                    isReservable: false
+                });
+            });
+        }
+        else {
+            //nonreservable room
+            firebase.db.ref("/Rooms/NonReservable/").once('value',
+                function(dbFloors) {
+                    dbFloors.forEach(function (dbAllRooms) {
+                        dbAllRooms.forEach(function (dbRoom) {
+                            if(dbRoom.key === room){
+                                floor = dbAllRooms.key.toString();
+                            }
+                        })
+                    })
+                }).then(() => {
+                firebase.db.ref("/Rooms/NonReservable/" + floor + "/"
+                    + room + "/").update({
+                    inspect: false,
+                    status: "Dirty"
+                });
+            });
+        }
+    }
+    else {
+        if(isReservable){
+            firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
+                inspect: false,
+                status: "Dirty",
+                isReservable: false
+            });
+        }
+        else {
+            firebase.db.ref("/Rooms/NonReservable/" + floor + "/" + room + "/").update({
+                inspect: false,
+                status: "Dirty"
+            });
+        }
+    }
+};
 
 // check in
 export const checkInGuest = (that, firstName, lastName, roomPath, roomNum) => {

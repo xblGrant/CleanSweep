@@ -53,12 +53,13 @@ class InspectRoom extends React.Component {
     handleRoomSelect(e) {
         let room = e.target.value;
         if (room === '') {room = null}
-
-        if (room.charAt(0) >= '0' && room.charAt(0) <= '9') {
-            this.setState({areReservableRooms: true});
-        }
         else {
-            this.setState({areReservableRooms: false});
+            if (room.charAt(0) >= '0' && room.charAt(0) <= '9') {
+                this.setState({areReservableRooms: true});
+            }
+            else {
+                this.setState({areReservableRooms: false});
+            }
         }
 
         this.setState({
@@ -72,8 +73,8 @@ class InspectRoom extends React.Component {
     }
 
     handleDecline() {
-        // TODO: implement when inspection is declined
-        // TODO: should set the room status = dirty, isReservable = false,
+        api.DeclineinspectRoom(this);
+        this.handleUpdateRooms();
     }
 
     handleUpdateRooms() {
