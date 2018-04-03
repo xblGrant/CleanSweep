@@ -18,38 +18,56 @@ class InspectRoom extends React.Component {
         this.state = {
             rooms: [],
             selectedRoom: null,
+            selectedFloor: null,
             areReservableRooms: false
         };
 
         this.handleInspect = this.handleInspect.bind(this);
         this.handleDecline = this.handleDecline.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
-        this.handleSelectedRoom = this.handleSelectedRoom.bind(this);
+        this.handleRoomSelect = this.handleRoomSelect.bind(this);
 
     }
 
     componentDidMount() {
-        // TODO: query on inspect field of each room
         api.getListofAllRoomsNeedInspected(this);
     }
 
+    //TODO: if "all" is floor selection, this doesn't work
     handleFloorSelect(e) {
+        let floor = e.target.value * 100;
+        this.setState({
+            selectedFoor: floor
+        });
+
         if (e.target.value === '000')
             api.getListofAllRoomsNeedInspected(this);
         else
             api.getListofAllRoomsNeedInspectedByFloor(this, e.target.value);
+
+        this.setState({
+            selectedRoom: null
+        })
     }
 
-    handleSelectedRoom(e) {
+    handleRoomSelect(e) {
         let room = e.target.value;
         if (room === '') {room = null}
+
+        if (room.charAt(0) >= '0' && room.charAt(0) <= '9') {
+            this.setState({areReservableRooms: true});
+        }
+        else {
+            this.setState({areReservableRooms: false});
+        }
+
         this.setState({
             selectedRoom: room
         })
     }
 
     handleInspect() {
-        // TODO: implement when inspection is approved
+        api.InspectRoom(this);
     }
 
     handleDecline() {
@@ -76,7 +94,7 @@ class InspectRoom extends React.Component {
                     <FormGroup row>
                         <div className={"col-sm-4 center"}>
                             <Label for="assignableRoom">Rooms</Label>
-                            <Input type="select" multiple>
+                            <Input onClick={this.handleRoomSelect} type="select" multiple>
                                 <CreateRoomOptions rooms={this.state.rooms}/>
                             </Input>
                         </div>

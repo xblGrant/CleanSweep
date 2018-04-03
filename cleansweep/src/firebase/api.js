@@ -232,7 +232,6 @@ export const getInspectRooms = (that) => {
     roomRef.orderByKey().once('value', function (floors) {
         floors.forEach(function (allRooms) {
             allRooms.forEach(function (room) {
-                // TODO: need to confirm how we determine a room needs to be inspected  (guest = none? & isReservable = false?)
                 if (room.val().inspect === true) {
                     let assigned = (room.val().assignedEmployee !== 'none');
                     roomList.push(
@@ -254,6 +253,24 @@ export const getInspectRooms = (that) => {
             rooms: roomList
         });
     });
+};
+export const InspectRoom = (that) => {
+    let room = that.state.selectedRoom;
+    let floor = that.state.selectedFloor;
+    let isReservable = that.state.areReservableRooms;
+
+    if(isReservable){
+        firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
+            inspect: false,
+            status: "Clean"
+        });
+    }
+    else {
+        firebase.db.ref("/Rooms/NonReservable/" + floor + "/" + room + "/").update({
+            inspect: false,
+            status: "Clean"
+        });
+    }
 };
 export const getRoomsWithIncidents = (that) => {
     let roomList = [];
