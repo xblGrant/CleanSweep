@@ -877,16 +877,29 @@ export const addNewWakeUpCall = (room, floor, date, time) => {
 export const addIncident = (floor, room, comment, areReservableRooms) => {
     let lastIncident = 0;
     let ref = firebase.db.ref('/Incidents/' + room);
+    let hasDBPosition = true;
 
     ref.orderByKey().once('value', function (allIncidents) {
+        if(!allIncidents.exists())
+            hasDBPosition = false;
+
         allIncidents.forEach(function (incident) {
             lastIncident = parseInt(incident.key, 10);
         });
     }).then(() => {
         let updates = {};
         let currentIncident = lastIncident + 1;
+
+        if (!hasDBPosition)
+        {
+            updates['/Incidents/' + room + '/' + currentIncident] = "placeholder";
+            currentIncident = currentIncident + 1;
+        }
+
         updates['/Incidents/' + room + '/' + currentIncident] = comment;
         firebase.db.ref().update(updates);
+
+
 
         if (areReservableRooms)
             addReservableRoomIncident(floor, room);
