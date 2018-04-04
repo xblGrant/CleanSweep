@@ -95,6 +95,7 @@ class AddIncident extends React.Component {
         let floor = Math.floor(selectedRoom / 100) * 100;
 
         api.addIncident(floor, selectedRoom, comment, !areReservableRooms);
+        window.location.reload();
     }
 
     render() {
