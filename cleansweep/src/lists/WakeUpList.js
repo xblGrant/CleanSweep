@@ -49,7 +49,7 @@ const WakeUpComponent = ({rooms}) => (
         </tr>
         </tbody>
         {((rooms === null)) ? null : rooms.map((room) => (
-            <WakeUpElement room={room}/> ))}
+            <WakeUpElement key={room} room={room}/> ))}
     </table>
 );
 
@@ -59,6 +59,7 @@ function WakeUpElement(props) {
     let date = parts[0], time = parts[1];
 
     return (
+        <tbody>
         <tr>
             <td>
                 <Link to={routes.RESERVABLE_ROOM + room[constant.ROOM]}>
@@ -67,6 +68,7 @@ function WakeUpElement(props) {
             <td>{date}</td>
             <td>{time}</td>
         </tr>
+        </tbody>
     )
 }
 
