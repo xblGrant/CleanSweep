@@ -15,12 +15,15 @@ class CheckInGuest extends React.Component {
             lastName: '',
             roomNum: '',
             roomPath: '',
+            checkout: false
         };
+
 
         this.handleCheckIn = this.handleCheckIn.bind(this);
         this.handleLastName = this.handleLastName.bind(this);
         this.handleFirstName = this.handleFirstName.bind(this);
         this.handleRoomSelect = this.handleRoomSelect.bind(this);
+        this.handleStatus = this.handleStatus.bind(this);
     }
 
     componentDidMount(){
@@ -49,18 +52,29 @@ class CheckInGuest extends React.Component {
             info
         });
     }
+
+    handleStatus(){
+        this.setState({
+            checkout: !this.state.checkout
+        });
+    }
+
+
     handleCheckIn() {
         //TODO: check if guest is not already checked-in
         //TODO: make sure first and last name fields aren't empty
         //TODO: make sure roomPath and roomNum aren't empty
         //TODO: invalidate check-in button unless all fields are selected/entered. (see login page for example)
-
         let firstName = this.state.firstName;
         let lastName = this.state.lastName;
         let roomPath = this.state.roomPath;
         let roomNum = this.state.roomNum;
+        if(this.state.checkout !== true)
+            api.checkInGuest(this, firstName, lastName, roomPath, roomNum);
+        else
+            api.checkOutGuest(this, firstName, lastName, roomPath, roomNum);
 
-        api.checkInGuest(this, firstName, lastName, roomPath, roomNum);
+        window.location.reload();
     }
 
     render() {
@@ -92,11 +106,19 @@ class CheckInGuest extends React.Component {
                             </Input>
                         </div>
                     </FormGroup>
+                    <FormGroup check>
+                        <div className={"col-sm-4 center"}>
+                            <Label check>
+                                <Input onChange={this.handleStatus} type={"checkbox"} id={"checkOut"}/>{' '}
+                                Check-Out
+                            </Label>
+                        </div>
+                    </FormGroup>
 
                     <br/>
                     <div className={"row"}>
                         <div className={"col-sm-5 center"}>
-                            <Button className={"col-sm-4"} onClick={this.handleCheckIn} color={"primary"}>Check-In</Button>
+                            <Button className={"col-sm-4"} onClick={this.handleCheckIn} color={"primary"}>Update</Button>
                             <Button className={"col-sm-4"} href={routes.HOME} name={"Cancel"}> Cancel </Button>
                         </div>
                     </div>

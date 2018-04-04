@@ -1101,6 +1101,8 @@ export const checkInGuest = (that, firstName, lastName, roomPath, roomNum) => {
     });
 };
 
+export const checkOutGuest = (that, firstName, lastName, roomPath, roomNum) => {}
+
 // misc
 const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
