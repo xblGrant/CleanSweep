@@ -1099,22 +1099,6 @@ export const checkInGuest = (that, firstName, lastName, roomPath, roomNum) => {
             room: roomNum
         });
     });
-    // let lastGuest = null;
-    // let roomRef = firebase.db.ref("/Guests/");
-    // roomRef.orderByKey().limitToLast(1).once('value', function (allRooms) {
-    //     allRooms.forEach(function (room) {
-    //         lastGuest = room.key;
-    //     })
-    // }).then(() => {
-    //     that.setState({
-    //         newGuestNumber: parseInt(lastGuest, radix) + 1
-    //     })
-    // });
-    // firebase.db.ref('Guests/' + this.newGuestNumber).set({
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     room: roomNum
-    // })
 };
 
 // misc
