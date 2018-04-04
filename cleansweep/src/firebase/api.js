@@ -1079,14 +1079,26 @@ export const DeclineinspectRoom = (that) => {
 
 // check in
 export const checkInGuest = (that, firstName, lastName, roomPath, roomNum) => {
-    // let updates = {};
-    // updates[roomPath + 'guest'] = firstName + " " + lastName;
-    // firebase.db.ref().update(updates);
-    //
-    // const radix = 10;
-    //
-    // //Adds Guest to guest DB
-    // //TODO: properly generate the next number for guest, coming up undefined right now
+    let updates = {};
+    updates[roomPath + '/guest'] = firstName + " " + lastName;
+    firebase.db.ref().update(updates);
+
+    let lastGuest = 0;
+    let ref = firebase.db.ref('/Guests/');
+
+    ref.orderByKey().once('value', function (allGuests) {
+        allGuests.forEach(function (incident) {
+            lastGuest = parseInt(incident.key, 10);
+        });
+    }).then(() => {
+        let currentGuest = lastGuest + 1;
+
+        firebase.db.ref('/Guests/' + currentGuest).set({
+            firstName: firstName,
+            lastName: lastName,
+            room: roomNum
+        });
+    });
     // let lastGuest = null;
     // let roomRef = firebase.db.ref("/Guests/");
     // roomRef.orderByKey().limitToLast(1).once('value', function (allRooms) {
