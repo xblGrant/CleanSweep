@@ -1,5 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {CreateEmployeeOptions} from "../components/Generators";
+import * as api from '../firebase/api';
 import * as routes from "../constants/routes";
 import {Helmet} from "react-helmet";
 
@@ -7,7 +9,15 @@ class AddWakeUp extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            employees: []
+        };
+
         this.handleChangeRole = this.handleChangeRole.bind(this);
+    }
+
+    componentDidMount() {
+        api.getAllEmployees(this);
     }
 
     handleChangeRole() {
@@ -19,34 +29,19 @@ class AddWakeUp extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>Change Employee Role</title>
-                    <body className={"background-to-bottom"} />
+                    <body className={"background-to-bottom"}/>
                 </Helmet>
                 <Form>
                     <h6 className={"text-center"}>Search By</h6>
-                    <div className={"row"}>
-                        <div className={"col-sm-6"}>
-                            <FormGroup>
-                                <div className={"col-sm-11 center"}>
-                                    <Label for="employeeName">Employee Name</Label>
-                                    <Input placeholder={"Employee name"} type="text" id="employeeName" autoComplete={"name"}/>
-                                </div>
-                            </FormGroup>
-                        </div>
-                        <div className={"col-sm-6"}>
-                            <FormGroup>
-                                <div className={"col-sm-11 center"}>
-                                    <Label for="employeeRoleID">Employee ID</Label>
-                                    <Input placeholder={"Employee ID"} type="text" id="employeeRoleID"/>
-                                </div>
-                            </FormGroup>
-                            <FormGroup>
-                                <div className={"col-sm-11 center"}>
-                                    <Label for="employeeResults">Search Results</Label>
-                                    <Input placeholder={"Search Results"} type="textarea" id="employeeResults"/>
-                                </div>
-                            </FormGroup>
-
-                        </div>
+                    <div className={"center"}>
+                        <FormGroup row>
+                            <div className={"col-sm-10 center"}>
+                                <Label className={"center"}>Employees</Label>
+                                <Input onClick={this.handleEmployeeSelect} id={'employeeSelect'} type="select">
+                                    <CreateEmployeeOptions employees={this.state.employees}/>
+                                </Input>
+                            </div>
+                        </FormGroup>
                     </div>
                     <hr/>
                     <FormGroup check>
@@ -65,7 +60,8 @@ class AddWakeUp extends React.Component {
                     <br/>
                     <div className={"row"}>
                         <div className={"col-sm-6 center"}>
-                            <Button className={"col-sm-5 center"} onClick={this.handleChangeRole} color={"primary"}>Submit</Button>
+                            <Button className={"col-sm-5 center"} onClick={this.handleChangeRole}
+                                    color={"primary"}>Submit</Button>
                             <Button className={"col-sm-5 center"} href={routes.HOME}> Cancel </Button>
                         </div>
                     </div>

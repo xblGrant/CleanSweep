@@ -17,7 +17,6 @@ export const AVAILABLE_ROOMS = '/availablerooms';
 export const INSPECTIONS = '/inspections';
 export const INCIDENTS = '/incidents';
 export const WAKE_UP_LIST = '/wakeuplist';
-export const DEPARTING_GUESTS = '/departingguests';
 export const CHANGE_PW = '/changepassword';
 export const HELP = '/help';
 export const CHANGE_ROLE = '/changerole';

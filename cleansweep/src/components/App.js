@@ -22,7 +22,6 @@ import AvailableRooms from '../lists/AvailableRooms';
 import Inspections from '../lists/InspectList';
 import Incidents from '../lists/IncidentList';
 import WakeUpList from '../lists/WakeUpList';
-import DepartingGuests from '../lists/DepartingGuests';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/custom.css';
@@ -66,7 +65,6 @@ function App() {
                 <Route path={routes.INSPECTIONS} component={Inspections} />
                 <Route path={routes.INCIDENTS} component={Incidents} />
                 <Route path={routes.WAKE_UP_LIST} component={WakeUpList} />
-                <Route path={routes.DEPARTING_GUESTS} component={DepartingGuests} />
 
                 {/*Options Paths*/}
                 <Route path={routes.CHANGE_PW} component={ChangePassword}/>

@@ -77,10 +77,10 @@ class NavigationAuth extends React.Component {
                                                       routes.CHECK_OUT_GUEST]} />
                                     <DropDContent title={"Lists"}
                                                   contents={["All Rooms", "Assigned Rooms", "Available Rooms",
-                                                      "Inspections", "Incidents", "Wake-Up Calls", "Departing Guests"]}
+                                                      "Inspections", "Incidents", "Wake-Up Calls"]}
                                                   links={[routes.ALL_ROOMS, routes.ASSIGNED_ROOMS,
                                                       routes.AVAILABLE_ROOMS, routes.INSPECTIONS, routes.INCIDENTS,
-                                                      routes.WAKE_UP_LIST, routes.DEPARTING_GUESTS]} />
+                                                      routes.WAKE_UP_LIST]} />
                                     <DropDContent title={"Options"}
                                                   contents={["Change Password", "Change Role"]}
                                                   links={[routes.CHANGE_PW, routes.CHANGE_ROLE]}/>
