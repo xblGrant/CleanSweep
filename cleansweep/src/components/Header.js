@@ -37,8 +37,7 @@ class Header extends React.Component {
 
         let button;
         if (!authorized) {
-            button = <WrappedButton className={"center"} isOutlined={true} link={"/login"} name={"Login"}
-                                    id={"wrappedButton"}/>
+            button = <WrappedButton className={"center"} isOutlined={true} link={"/login"} name={"Login"}/>
         } else {
             button = <SignOutButton className={"center"}/>
         }
@@ -46,9 +45,9 @@ class Header extends React.Component {
         return (
             <div className={"ml-auto"}>
                 <Form id={"header"} inline>
-                    <Label for={"userLink"} size={"sm"}>Hello,</Label>{' '}
+                    <Label className={"noMargin"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
                     <Link to={routes.ASSIGNED_ROOMS}>
-                        <Button id={"userLink"} className={"color1 center"} color={"link"}
+                        <Button id={"userLink"} className={"center"} color={"link"}
                                 size={"sm"}>{this.state.user}</Button>
                     </Link>
                     <div>

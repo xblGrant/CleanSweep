@@ -7,7 +7,7 @@ import * as routes from '../constants/routes';
 
 export function SignOutButton(props) {
     return (
-        <Button id={props.id} outline size={"sm"} onClick={auth.doSignOut}>
+        <Button id={props.id} outline size={"sm"} className={"noMargin"} onClick={auth.doSignOut}>
             <Link style={{
                 textDecoration: 'none',
                 color: 'black'
