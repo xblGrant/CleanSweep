@@ -41,11 +41,13 @@ class WakeUpList extends React.Component {
 
 const WakeUpComponent = ({rooms}) => (
     <table className={"container text-center"}>
+        <tbody>
         <tr>
             <th>Room</th>
             <th>Date</th>
             <th>Time</th>
         </tr>
+        </tbody>
         {((rooms === null)) ? null : rooms.map((room) => (
             <WakeUpElement room={room}/> ))}
     </table>
