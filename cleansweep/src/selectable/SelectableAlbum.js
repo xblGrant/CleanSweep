@@ -1,13 +1,15 @@
 import React from 'react';
 import { createSelectable } from 'react-selectable-fast';
 
-const Label = ({ incident, guest, assigned }) => (
+const Label = ({ status, incident, guest, assigned }) => (
     <div className={"album-label"}>
-        Assigned: <span>{`${assigned}`}</span>
+        <span className={"floatLeft"}> Status: </span> <span className={"floatRight"}>{`${status}`}</span>
         <br/>
-        Incident: <span>{`${incident}`}</span>
+        <span className={"floatLeft"}> Assigned: </span> <span className={"floatRight"}>{`${assigned}`}</span>
         <br/>
-        Guest: <span>{`${guest}`}</span>
+        <span className={"floatLeft"}> Incident:</span> <span className={"floatRight"}>{`${incident}`}</span>
+        <br/>
+        <span className={"floatLeft"}> Guest: </span> <span className={"floatRight"}> {`${guest}`}</span>
     </div>
 );
 
@@ -16,10 +18,9 @@ const Album = ({ selectableRef, selected, selecting, roomName, status, assigned,
       ref={selectableRef}
       className={`item ${selecting && 'selecting'} ${selected && 'selected'}`}
   >
-      <h2>{roomName}</h2>
-      <small>{status}</small>
+      <h5>{roomName}</h5>
       { (incident !== null && guest !== null) ?
-          <Label assigned={assigned} incident={incident} guest={guest}/> :
+          <Label status={status} assigned={assigned} incident={incident} guest={guest}/> :
           null
       }
   </div>
