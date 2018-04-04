@@ -1,15 +1,10 @@
 import React from 'react';
 import { createSelectable } from 'react-selectable-fast';
 
-const Label = ({ status, incident, guest, assigned }) => (
+const Label = ({ status }) => (
     <div className={"album-label"}>
         <span className={"floatLeft"}> Status: </span> <span className={"floatRight"}>{`${status}`}</span>
         <br/>
-        <span className={"floatLeft"}> Assigned: </span> <span className={"floatRight"}>{`${assigned}`}</span>
-        <br/>
-        <span className={"floatLeft"}> Incident:</span> <span className={"floatRight"}>{`${incident}`}</span>
-        <br/>
-        <span className={"floatLeft"}> Guest: </span> <span className={"floatRight"}> {`${guest}`}</span>
     </div>
 );
 
