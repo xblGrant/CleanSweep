@@ -37,7 +37,7 @@ class Header extends React.Component {
 
         let button;
         if (!authorized) {
-            button = <WrappedButton className={"center"} isOutlined={true} link={"/login"} name={"Login"}/>
+            button = <WrappedButton id={"login"} className={"center"} isOutlined={true} link={"/login"} name={"Login"}/>
         } else {
             button = <SignOutButton className={"center"}/>
         }

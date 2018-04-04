@@ -241,7 +241,7 @@ class NewRoom extends React.Component {
                                 {newRoomLabel}
                             </Label>
                             <Input type={"text"} id={"roomNum"}
-                                   value={displayValue} readOnly/>
+                                   value={displayValue || ""} readOnly/>
                             </div>
                         </FormGroup>
                         <FormGroup row>

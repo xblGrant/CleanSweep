@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { SelectableGroup } from 'react-selectable-fast';
 import SelectableList from './SelectableList';
 
@@ -40,11 +39,9 @@ class GroupSelect extends React.Component {
 }
 
 GroupSelect.defaultProps = {
-    isDisabled: true
-};
-GroupSelect.propTypes = {
-    onSelectionFinish: PropTypes.func.isRequired,
-    onSelectionClear: PropTypes.func.isRequired
+    isDisabled: true,
+    onSelectionClear: function(){},
+    onSelectionFinish: function(){}
 };
 
 export default GroupSelect;

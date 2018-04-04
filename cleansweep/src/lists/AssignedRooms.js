@@ -29,7 +29,7 @@ class AssignedRooms extends React.Component {
                         <div className={"container text-center"}>
                             <Label className={"center"}>Assigned Rooms</Label>
                         </div>
-                        <GroupSelect items={this.state.rooms} onSelectionClear={null} onSelectionFinish={null}/>
+                        <GroupSelect items={this.state.rooms} />
                     </Form>
                 </div>
             </div>
