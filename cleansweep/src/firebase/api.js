@@ -135,10 +135,11 @@ export const getAllRooms = (that) => {
                     );
                 })
             })
-        }).then(() =>
-            that.setState({
-                rooms: roomList
-            })
+        }).then(() => {
+                that.setState({
+                    rooms: roomList
+                });
+            }
         )
     });
 };
