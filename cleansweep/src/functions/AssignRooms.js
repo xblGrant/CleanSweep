@@ -52,6 +52,7 @@ class AssignRooms extends React.Component {
 
         this.setState({ selectedRooms: selectedRooms})
     };
+
     handleSelectionClear() {
         this.setState({ selectedRooms: null })
     }

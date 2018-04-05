@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
-import {CreateRoomOptions, CreateFloorOptions} from "../components/Generators";
+import {CreateFloorOptions} from "../components/Generators";
+import GroupSelect from "../selectable/GroupSelect";
 import * as api from '../firebase/api';
 import * as routes from "../constants/routes";
 import {Helmet} from "react-helmet";
@@ -11,18 +12,18 @@ class CheckInGuest extends React.Component {
 
         this.state = {
             rooms: [],
-            roomNum: null,
             floorNum: '000',
-            roomPath: null,
-            checkIn: true
+            checkIn: true,
+            selectedRooms: null
         };
 
+        this.handleStatus = this.handleStatus.bind(this);
         this.handleCheckIn = this.handleCheckIn.bind(this);
         this.handleCheckOut = this.handleCheckOut.bind(this);
+        this.handleSelectionClear = this.handleSelectionClear.bind(this);
+        this.handleSelectionFinish = this.handleSelectionFinish.bind(this);
         this.handleCheckInFloorSelect = this.handleCheckInFloorSelect.bind(this);
         this.handleCheckOutFloorSelect = this.handleCheckOutFloorSelect.bind(this);
-        this.handleRoomSelect = this.handleRoomSelect.bind(this);
-        this.handleStatus = this.handleStatus.bind(this);
         this.handleStatusChangeRoomDisplay = this.handleStatusChangeRoomDisplay.bind(this);
     }
 
@@ -30,48 +31,54 @@ class CheckInGuest extends React.Component {
         // api.getListofAllAvailableRooms(this);
     }
 
+    handleSelectionFinish = selectedItems => {
+        let selectedRooms = [];
+        for (let i = 0; i < selectedItems.length; i++)
+            selectedRooms[i] = selectedItems[i].props;
+
+        if (selectedRooms === []) selectedRooms = null;
+        this.setState({ selectedRooms: selectedRooms})
+    };
+
+    handleSelectionClear() {
+        this.setState({ selectedRooms: null })
+    }
+
     handleCheckInFloorSelect(e) {
         if (e.target.value === '000')
-            api.getListofAllAvailableRooms(this);
+            api.getAvailableRooms(this);
         else
-            api.getListofAllAvailableRoomsByFloor(this, e.target.value);
+            api.getAvailableRoomsByFloor(this, e.target.value);
 
         this.setState({
             floorNum: e.target.value,
-            roomNum: null
+            selectedRooms: null
         })
     }
 
     handleCheckOutFloorSelect(e) {
         if (e.target.value === '000')
-            api.getListofAllReservedRooms(this);
+            api.getAllReservedRooms(this);
         else
-            api.getListofAllReservedRoomsByFloor(this, e.target.value);
+            api.getAllReservedRoomsByFloor(this, e.target.value);
 
         this.setState({
             floorNum: e.target.value,
-            roomNum: null
+            selectedRooms: null
         })
-    }
-
-    handleRoomSelect(e) {
-        let roomNum = e.target.value;
-        this.setState({
-            roomNum: roomNum
-        });
     }
 
     handleStatusChangeRoomDisplay(floor, checkIn) {
         if (checkIn) {
             if (floor === '000')
-                api.getListofAllAvailableRooms(this);
+                api.getAvailableRooms(this);
             else
-                api.getListofAllAvailableRoomsByFloor(this, floor);
+                api.getAvailableRoomsByFloor(this, floor);
         } else {
             if (floor === '000')
-                api.getListofAllReservedRooms(this);
+                api.getAllReservedRooms(this);
             else
-                api.getListofAllReservedRoomsByFloor(this, floor);
+                api.getAllReservedRoomsByFloor(this, floor);
         }
     }
 
@@ -83,21 +90,23 @@ class CheckInGuest extends React.Component {
 
         this.setState({
             checkIn: checkIn,
-            roomNum: null
+            selectedRooms: null
         });
 
         this.handleStatusChangeRoomDisplay(this.state.floorNum, checkIn);
     }
 
     handleCheckIn() {
-        let floor = Math.floor(this.state.roomNum / 100) * 100;
-        api.checkIn(this, floor, this.state.roomNum);
+        let {selectedRooms} = this.state;
+        for (let i = 0; i < selectedRooms.length; i++)
+            api.checkIn(this, selectedRooms[i].floor, selectedRooms[i].roomName);
         this.handleStatusChangeRoomDisplay(this.state.floorNum, true);
     }
 
     handleCheckOut() {
-        let floor = Math.floor(this.state.roomNum / 100) * 100;
-        api.checkOut(this, floor, this.state.roomNum);
+        let {selectedRooms} = this.state;
+        for (let i = 0; i < selectedRooms.length; i++)
+            api.checkOut(this, selectedRooms[i].floor, selectedRooms[i].roomName);
         this.handleStatusChangeRoomDisplay(this.state.floorNum, false);
     }
 
@@ -105,7 +114,7 @@ class CheckInGuest extends React.Component {
 
         let {checkIn} = this.state;
         let isDisabled =
-            this.state.roomNum === null;
+            this.state.selectedRooms === null;
 
         let button = (checkIn) ?
             <Button disabled={isDisabled} className={"col-sm-4"}
@@ -131,11 +140,12 @@ class CheckInGuest extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup row>
-                        <div className={"col-sm-4 center"}>
-                            <Label for="floorSelect">Rooms</Label>
-                            <Input onClick={this.handleRoomSelect} id={'roomOptions'} type="select" multiple>
-                                <CreateRoomOptions rooms={this.state.rooms}/>
-                            </Input>
+                        <div className={"col-sm-10 center"}>
+                            <Label className={"center"}>Rooms</Label>
+                            <GroupSelect items={this.state.rooms}
+                                         onSelectionFinish={this.handleSelectionFinish}
+                                         onSelectionClear={this.handleSelectionClear}
+                                         isDisabled={false}/>
                         </div>
                     </FormGroup>
                     <div className={"center"} onChange={this.handleStatus}>
