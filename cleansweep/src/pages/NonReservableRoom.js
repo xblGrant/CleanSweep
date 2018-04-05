@@ -11,12 +11,10 @@ class NonReservableRoom extends React.Component {
             roomID: null,
             floorNum: null,
             assignedEmployee: null,
-            departureDate: null,
-            guest: null,
-            incidents: null,
-            isReservable: null,
+            incidentList: null,
             status: null,
-            wakeupCall: null
+            incident: null,
+            inspect: null,
         }
     }
 
@@ -39,9 +37,13 @@ class NonReservableRoom extends React.Component {
     render() {
         return (
             <div className={"container"}>
-                <p>{this.state.roomID}</p>
-                <p>{this.state.floorNum}</p>
-                <p>{this.state.incidents}</p>
+                <h2 className={"center"}>{this.state.roomID}</h2>
+                <h6 className={"center"}>{this.state.status}</h6>
+                <p>{"Assigned Employee: " + this.state.assignedEmployee}</p>
+                <p>{"Floor: " + this.state.floorNum / 100}</p>
+                <p>{"Incident: " + this.state.incident}</p>
+                <p>{"Incident List: " + this.state.incidentList}</p>
+                <p>{"Needs inspected: " + this.state.inspect}</p>
             </div>
         );
     }

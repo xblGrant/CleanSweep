@@ -139,9 +139,11 @@ class CheckInGuest extends React.Component {
                             </Input>
                         </div>
                     </FormGroup>
-                    <div className={"center"} onChange={this.handleStatus}>
-                        <input type={"radio"} name={"status"} value={"checkIn"}/> Check-In<br/>
-                        <input type={"radio"} name={"status"} value={"checkOut"}/> Check-Out<br/>
+                    <div className={"col-sm-4 center"}>
+                        <Input type={"select"} onClick={this.handleStatus}>
+                            <option value={"checkIn"}>Check-In</option>
+                            <option value={"checkOut"}>Check-Out</option>
+                        </Input>
                     </div>
                     <br/>
                     <div className={"row"}>

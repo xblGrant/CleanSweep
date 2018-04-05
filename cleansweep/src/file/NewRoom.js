@@ -193,7 +193,7 @@ class NewRoom extends React.Component {
             else
                 totalRooms = NewRoom.NUM_ROOMS - (newRoomNumber % 100) + 1;
 
-            // TODO: add an warning when all possible rooms have been added to a floor (#99)
+            if (totalRooms === 0) error = true;
 
             numberOfRooms = <NumberOfRooms total={totalRooms}/>;
 
@@ -215,66 +215,66 @@ class NewRoom extends React.Component {
             <div className={"container"}>
                 <Helmet>
                     <title>New Room</title>
-                    <body className={"background-to-bottom"} />
+                    <body className={"background-to-bottom"}/>
                 </Helmet>
                 <div id={"newRoomForm"}>
                     <Form>
-
-                            <FormGroup row>
-                                <div className="col-sm-12 center">
+                        <FormGroup row>
+                            <div className="col-sm-12 center">
                                 <Label for={"newFloor"}>Floor</Label>
                                 {floorDisplay}
-                                </div>
-                            </FormGroup>
+                            </div>
+                        </FormGroup>
 
                         <FormGroup row>
-                            <div className ="col-sm-4 center">
-                            <Label for={"numberRooms"}># New Rooms</Label>
-                            <Input onClick={this.handleNumRooms} type={"select"}>
-                                {numberOfRooms}
-                            </Input>
+                            <div className="col-sm-4 center">
+                                <Label for={"numberRooms"}># New Rooms</Label>
+                                <Input onClick={this.handleNumRooms} type={"select"}>
+                                    {numberOfRooms}
+                                </Input>
                             </div>
                         </FormGroup>
                         <FormGroup row>
                             <div className={"col-sm-4 center"}>
-                            <Label  for={"roomNum"}>
-                                {newRoomLabel}
-                            </Label>
-                            <Input type={"text"} id={"roomNum"}
-                                   value={displayValue || ""} readOnly/>
+                                <Label for={"roomNum"}>
+                                    {newRoomLabel}
+                                </Label>
+                                <Input type={"text"} id={"roomNum"}
+                                       value={displayValue || ""} readOnly/>
                             </div>
                         </FormGroup>
                         <FormGroup row>
                             <div className={"col-sm-12 center"}>
-                            <Label  for={"roomName"}>
-                                Room Name (*Optional)
-                            </Label>
-                            {roomNameDisplay}
+                                <Label for={"roomName"}>
+                                    Room Name (*Optional)
+                                </Label>
+                                {roomNameDisplay}
                             </div>
                         </FormGroup>
                         <FormGroup check>
                             <div className={"col-sm-4 center"}>
-                            <Label check>
-                                <Input onChange={this.handleNewFloor} type={"checkbox"} id={"newFloor"}/>{' '}
-                                New Floor
-                            </Label>
-                        </div>
+                                <Label check>
+                                    <Input onChange={this.handleNewFloor} type={"checkbox"} id={"newFloor"}/>{' '}
+                                    New Floor
+                                </Label>
+                            </div>
                             <br/>
                             <div className={"col-sm-4 center"}>
-                            <Label check>
-                                <Input onChange={this.handleReservable} type={"checkbox"} id={"isNonReservable"}/>{' '}
-                                Non-Reservable
-                            </Label>
+                                <Label check>
+                                    <Input onChange={this.handleReservable} type={"checkbox"}
+                                           id={"isNonReservable"}/>{' '}
+                                    Non-Reservable
+                                </Label>
                             </div>
                         </FormGroup>
                         <br/>
                         <div className={"row"}>
-                        <div className={"col-sm-5 center"}>
-                        <Button disabled={isDisabled} onClick={this.handleSubmit} color={"primary"}
-                                className={"col-sm-4"}>Submit</Button>
-                        {' '}
-                        <Button className={"col-sm-4"} link={routes.HOME}> Cancel </Button>
-                        </div>
+                            <div className={"col-sm-5 center"}>
+                                <Button disabled={isDisabled} onClick={this.handleSubmit} color={"primary"}
+                                        className={"col-sm-4"}>Submit</Button>
+                                {' '}
+                                <Button className={"col-sm-4"} link={routes.HOME}> Cancel </Button>
+                            </div>
                         </div>
                     </Form>
                     {error && <p typeof={"error"} className={"error center"} id={"error"}>

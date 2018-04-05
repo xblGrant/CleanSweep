@@ -12,10 +12,10 @@ class Help extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state={
-            name: null,
-            email: null,
-            message: null
+        this.state = {
+            name: '',
+            email: '',
+            message: ''
         };
 
         this.handleHelp = this.handleHelp.bind(this);
@@ -24,26 +24,22 @@ class Help extends React.Component {
         this.handleMessageChange = this.handleMessageChange(this);
     }
 
-    handleNameChange(event) {
-        let usrName = event.target.value;
-        if (usrName === '') {usrName = null}
+    handleNameChange(e) {
+        let roomName = e.target.value;
         this.setState({
-            name: usrName
-        })
+            name: roomName
+        });
     }
 
-    handleEmailChange(event){
-        let usrEmail = event.target.value;
-        if (usrEmail === '') {usrEmail = null}
+    handleEmailChange(e) {
+        let usrEmail = e.target.value;
         this.setState({
             email: usrEmail
         })
     }
 
-    handleMessageChange(event){
-        let usrMessage = event.target.value;
-        console.log(usrMessage);
-        if (usrMessage === '') {usrMessage = null}
+    handleMessageChange(e) {
+        let usrMessage = e.target.value;
         this.setState({
             message: usrMessage
         })
@@ -54,52 +50,62 @@ class Help extends React.Component {
     }
 
     render() {
-        let isDisabled = this.state.name === null ||
-            this.state.email === null ||
-            this.state.message === null;
+        let isDisabled = this.state.name === '' ||
+            this.state.email === '' ||
+            this.state.message === '';
 
+        let info = this.state;
 
         return (
             <div>
                 <Helmet>
                     <title>Contact Us</title>
-                    <body className={"background-to-bottom"} />
+                    <body className={"background-to-bottom"}/>
                 </Helmet>
                 <div className={"container"}>
                     <div className={"col-sm-6 center"}>
+                        <h2 className={"center"}>Contact Us</h2>
                         <Form>
-                            <h2 className={"center"}>Contact Us</h2>
-                            <br/>
-                            <FormGroup>
-                                <Label>Name: (required) </Label>
-                                <Input onChange={this.handleNameChange}
-                                       placeholder={"Please enter your name"}
-                                       type="text"
-                                       id="contactName"
-                                       autoComplete={'name'}/>
+                            <FormGroup row>
+                                <div className={"col-sm-12 center"}>
+                                    <Label>Name: (required) </Label>
+                                    <Input onChange={this.handleNameChange}
+                                           value={info.name}
+                                           type={"text"}
+                                           className={"margin-left-35 width-30"}
+                                           id={"contactName"}
+                                           autoComplete={'name'}/>
+                                </div>
                             </FormGroup>
 
-                            <FormGroup>
-                                <Label>Email: (required)</Label>
-                                <Input onChange={this.handleEmailChange}
-                                       placeholder={"Please enter your email address"}
-                                       type="email"
-                                       id="contactEmail"
-                                       autoComplete={'email'}/>
+                            <FormGroup row>
+                                <div className={"col-sm-12 center"}>
+                                    <Label>Email: (required)</Label>
+                                    <Input onChange={this.handleEmailChange}
+                                           value={info.email}
+                                           type={"text"}
+                                           className={"margin-left-35 width-30"}
+                                           id={"contactEmail"}
+                                           autoComplete={'email'}/>
+                                </div>
                             </FormGroup>
 
-                            <FormGroup>
-                                <Label>Message: (required)</Label>
-                                <Input onChange={this.handleMessageChange}
-                                       placeholder={"Include all of the details you can"}
-                                       id="contactMessage"
-                                       type="textarea"/>
+                            <FormGroup row>
+                                <div className={"col-sm-12 center"}>
+                                    <Label>Message: (required)</Label>
+                                    <Input onChange={this.handleMessageChange}
+                                           value={info.message}
+                                           type={"textarea"}
+                                           className={"margin-left-35 width-30"}
+                                           id={"contactMessage"}
+                                           autoComplete={'message'}/>
+                                </div>
                             </FormGroup>
                             <br/>
                             <Button disabled={isDisabled}
                                     className={"col-sm-4"}
                                     onClick={this.handleHelp}
-                                    color={"primary"}>Send Email</Button>
+                                    color={"primary"}>Send</Button>
                         </Form>
                     </div>
                 </div>

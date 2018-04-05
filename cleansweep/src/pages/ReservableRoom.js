@@ -39,9 +39,9 @@ class ReservableRoom extends React.Component {
     render() {
         return (
             <div className={"container"}>
-                <p>{this.state.roomID}</p>
+                <h2 className={"center"}>{this.state.roomID}</h2>
                 <p>{this.state.guest}</p>
-                <p>{this.state.incidents}</p>
+                <p>{this.state.incidentList}</p>
             </div>
         );
     }
