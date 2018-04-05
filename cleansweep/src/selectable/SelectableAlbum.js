@@ -8,14 +8,34 @@ const Label = ({status}) => (
     </div>
 );
 
+function Album(props){
+    let {selectableRef, selected, selecting, roomName, status, assigned, incident, guest} = props;
+    let classStatus = null;
+    if (status === 'Clean'){
+        classStatus = 'cleanStatus';
+    }
+    else {
+        classStatus = 'dirtyStatus';
+    }
+
+    return(
+    <div ref={selectableRef}
+        className={`item ${selecting && 'selecting'} ${selected && 'selected'} ${classStatus}` + {classStatus}}>
+        <h5>{roomName}</h5>
+        <Label status={status}/>
+    </div>
+    )
+}
+//old const version. function version is better
+/*
 const Album = ({selectableRef, selected, selecting, roomName, status, assigned, incident, guest}) => (
     <div
         ref={selectableRef}
-        className={`item ${selecting && 'selecting'} ${selected && 'selected'}`}
+        className={`item ${selecting && 'selecting'} ${selected && 'selected'} ${status}`}
     >
         <h5>{roomName}</h5>
         <Label status={status}/>
     </div>
 );
-
+*/
 export default createSelectable(Album);

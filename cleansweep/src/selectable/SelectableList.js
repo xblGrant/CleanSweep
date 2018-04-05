@@ -29,8 +29,14 @@ const LinkToRooms = ({items}) => (
 );
 
 function ReservableLink(props) {
+    let status = null;
+    if (props.item[constant.STATUS] === 'Clean'){
+        status = "cleanStatus";
+    }
+    else status = "dirtyStatus";
+
     return (
-        <Link to={routes.RESERVABLE_ROOM + props.item[constant.ROOM]}>
+        <Link to={routes.RESERVABLE_ROOM + props.item[constant.ROOM]} className={status}>
             <SelectableAlbum
                 key={`${props.item[constant.ROOM]}${props.id}`}
                 roomName={props.item[constant.ROOM]}
@@ -48,8 +54,13 @@ function ReservableLink(props) {
 }
 
 function NonReservableLink(props) {
+    let status = null;
+    if (props.item[constant.STATUS] === 'Clean'){
+        status = "cleanStatus";
+    }
+    else status = "dirtyStatus";
     return (
-        <Link to={routes.NON_RESERVABLE_ROOM + props.item[constant.ROOM]}>
+        <Link to={routes.NON_RESERVABLE_ROOM + props.item[constant.ROOM]} className={status}>
             <SelectableAlbum
                 key={`${props.item[constant.ROOM]}${props.id}`}
                 roomName={props.item[constant.ROOM]}
