@@ -12,8 +12,7 @@ import AssignRooms from '../functions/AssignRooms';
 import InspectRoom from '../functions/InspectRoom';
 import NewEmployee from '../file/NewEmployee';
 import AddIncident from '../functions/AddIncident';
-import CheckInGuest from '../functions/CheckInGuest';
-import CheckOutGuest from '../functions/CheckOutGuest';
+import CheckInOut from '../functions/CheckInOut';
 import ChangePassword from '../options/PasswordChange';
 import PasswordForgetPage from '../account/PasswordForget';
 import AllRooms from '../lists/AllRooms';
@@ -55,8 +54,7 @@ function App() {
                 <Route path={routes.ADD_INCIDENT} component={AddIncident}/>
                 <Route path={routes.ASSIGN_ROOMS} component={AssignRooms}/>
                 <Route path={routes.INSPECT_ROOM} component={InspectRoom}/>
-                <Route path={routes.CHECK_IN_GUEST} component={CheckInGuest}/>
-                <Route path={routes.CHECK_OUT_GUEST} component={CheckOutGuest}/>
+                <Route path={routes.CHECK_IN_OUT} component={CheckInOut}/>
 
                 {/*List Paths*/}
                 <Route path={routes.ALL_ROOMS} component={AllRooms}/>

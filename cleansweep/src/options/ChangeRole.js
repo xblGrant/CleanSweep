@@ -44,19 +44,10 @@ class AddWakeUp extends React.Component {
                         </FormGroup>
                     </div>
                     <hr/>
-                    <FormGroup check>
-                        <div className={"center"}>
-                            <Label check>
-                                <Input type="checkbox" id="isManager"/>
-                                Promote to Manager
-                            </Label>
-                            <br/>
-                            <Label check>
-                                <Input type="checkbox" id="isEmployee"/>
-                                Demote to Employee
-                            </Label>
-                        </div>
-                    </FormGroup>
+                    <div className={"center"} onChange={{/*this.handlePromotionDemotion*/}}>
+                        <input type={"radio"} name={"career"} value={"promote"}/> Promote to Manager<br/>
+                        <input type={"radio"} name={"career"} value={"demote"}/> Demote to Employee<br/>
+                    </div>
                     <br/>
                     <div className={"row"}>
                         <div className={"col-sm-6 center"}>

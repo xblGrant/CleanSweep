@@ -71,10 +71,9 @@ class NavigationAuth extends React.Component {
                                                   links={[routes.NEW_EMPLOYEE, routes.NEW_ROOM]} />
                                     <DropDContent title={"Functions"}
                                                   contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms",
-                                                      "Inspect Room", "Check-in Guest", "Check-out Guest"]}
+                                                      "Inspect Room", "Check In/Out"]}
                                                   links={[routes.WAKE_UP_CALL, routes.ADD_INCIDENT, routes.ASSIGN_ROOMS,
-                                                      routes.INSPECT_ROOM, routes.CHECK_IN_GUEST,
-                                                      routes.CHECK_OUT_GUEST]} />
+                                                      routes.INSPECT_ROOM, routes.CHECK_IN_OUT]} />
                                     <DropDContent title={"Lists"}
                                                   contents={["All Rooms", "Assigned Rooms", "Available Rooms",
                                                       "Inspections", "Incidents", "Wake-Up Calls"]}

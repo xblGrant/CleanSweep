@@ -73,14 +73,14 @@ class InspectRoom extends React.Component {
     }
 
     handleDecline() {
-        api.DeclineinspectRoom(this);
+        api.declineInspectRoom(this);
         this.handleUpdateRooms();
     }
 
     handleUpdateRooms() {
-        let roomlist = this.state.rooms;
+        let roomList = this.state.rooms;
         let selectedRoom = this.state.selectedRoom;
-        let updatedRoomList = roomlist.filter(function(e) {
+        let updatedRoomList = roomList.filter(function(e) {
             return e !== selectedRoom
         });
         this.setState({
