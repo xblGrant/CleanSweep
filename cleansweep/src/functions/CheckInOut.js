@@ -28,7 +28,7 @@ class CheckInGuest extends React.Component {
     }
 
     componentDidMount() {
-        // api.getListofAllAvailableRooms(this);
+        api.getAvailableRooms(this);
     }
 
     handleSelectionFinish = selectedItems => {
