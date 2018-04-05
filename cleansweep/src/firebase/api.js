@@ -698,7 +698,7 @@ export const getListofAllUnavailableRooms = (that) => {
         allFloors.forEach(function (floors) {
             floors.forEach(function (rooms) {
                 if (rooms.val().guest !== "none")
-                    roomList.push(rooms.val().room);
+                    roomList.push(rooms.key + " - " + rooms.val().guest);
             })
         })
     }).then(() => {
@@ -1101,7 +1101,25 @@ export const checkInGuest = (that, firstName, lastName, roomPath, roomNum) => {
     });
 };
 
-export const checkOutGuest = (that, firstName, lastName, roomPath, roomNum) => {}
+export const checkOutGuest = (that, firstName, lastName, roomPath, roomNum) => {
+    let updates = {};
+    updates[roomPath + '/guest'] = "none";
+    firebase.db.ref().update(updates);
+
+    let lastGuest = 0;
+    let ref = firebase.db.ref('/Guests/');
+
+    ref.orderByKey().once('value', function (allGuests) {
+        allGuests.forEach(function (incident) {
+            lastGuest = parseInt(incident.key, 10);
+            if ((firstName) === firebase.db.ref('/Guests/' + lastGuest + "/" + firstName)){
+                if ((lastName) === firebase.db.ref('/Guests/' + lastGuest + "/" + lastName)){
+                    firebase.db.ref('/Guests/' + lastGuest).remove();
+                }
+            }
+        });
+    });
+}
 
 // misc
 const byPropKey = (propertyName, value) => () => ({

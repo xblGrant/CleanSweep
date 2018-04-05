@@ -57,6 +57,10 @@ class CheckInGuest extends React.Component {
         this.setState({
             checkout: !this.state.checkout
         });
+        if(this.state.checkout !== true)
+            api.getListofAllUnavailableRooms(this);
+        else
+            api.getListofAllAvailableRooms(this);
     }
 
 
