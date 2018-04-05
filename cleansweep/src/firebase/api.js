@@ -232,7 +232,7 @@ export const getAvailableRoomsByFloor = (that, floor) => {
     let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
     roomRef.orderByKey().once('value', function (allRooms) {
         allRooms.forEach(function (room) {
-            if (room.val().guest === false && room.val().status === 'Clean' && room.val().inspect === false){
+            if (room.val().guest === false && room.val().status === 'Clean' && room.val().inspect === false) {
                 let assigned = (room.val().assignedEmployee !== 'none');
                 roomList.push(
                     [room.key,
@@ -489,7 +489,7 @@ export const getAllReservedRooms = (that) => {
         floors.forEach(function (allRooms) {
             allRooms.forEach(function (room) {
                 let assigned = (room.val().assignedEmployee !== 'none');
-                if (room.val().guest === true){
+                if (room.val().guest === true) {
                     roomList.push(
                         [room.key,
                             room.val().status,
@@ -517,7 +517,7 @@ export const getAllReservedRoomsByFloor = (that, floor) => {
     roomRef.orderByKey().once('value', function (allRooms) {
         allRooms.forEach(function (room) {
             let assigned = (room.val().assignedEmployee !== 'none');
-            if (room.val().guest === true){
+            if (room.val().guest === true) {
                 roomList.push(
                     [room.key,
                         room.val().status,
@@ -793,18 +793,22 @@ export const getReservableRoomInformation = (that, roomID) => {
             })
         })
     }).then(() => {
-        that.setState(updates);
+        firebase.db.ref("/Employee/" + updates.assignedEmployee).once('value', function (employee) {
+            updates.assignedEmployee = employee.val().username;
+        }).then(() => {
+            that.setState(updates);
 
-        if (hasIncident) {
-            let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
-            IncidentsRef.orderByKey().once('value', function (room) {
-                room.forEach(function (incident) {
-                    incidentsList.push(incident.val());
-                })
-            }).then(() => {
-                that.setState({incidents: incidentsList});
-            });
-        }
+            if (hasIncident) {
+                let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
+                IncidentsRef.orderByKey().once('value', function (room) {
+                    room.forEach(function (incident) {
+                        incidentsList.push(incident.val());
+                    })
+                }).then(() => {
+                    that.setState({incidentList: incidentsList});
+                });
+            }
+        });
     });
 };
 export const getNonReservableRoomInformation = (that, roomID) => {
@@ -830,18 +834,21 @@ export const getNonReservableRoomInformation = (that, roomID) => {
             })
         })
     }).then(() => {
-        that.setState(updates);
-
-        if (hasIncident) {
-            let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
-            IncidentsRef.orderByKey().once('value', function (room) {
-                room.forEach(function (incident) {
-                    incidentsList.push(incident.val());
-                })
-            }).then(() => {
-                that.setState({incidents: incidentsList});
-            });
-        }
+        firebase.db.ref("/Employee/" + updates.assignedEmployee).once('value', function (employee) {
+            updates.assignedEmployee = employee.val().username;
+        }).then(() => {
+            that.setState(updates);
+            if (hasIncident) {
+                let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
+                IncidentsRef.orderByKey().once('value', function (room) {
+                    room.forEach(function (incident) {
+                        incidentsList.push(incident.val());
+                    })
+                }).then(() => {
+                    that.setState({incidentList: incidentsList});
+                });
+            }
+        });
     });
 };
 
@@ -998,15 +1005,15 @@ export const inspectRoom = (that) => {
     let room = that.state.selectedRoom;
     let floor = that.state.selectedFloor;
     let isReservable = that.state.areReservableRooms;
-    if (floor === '000'){
+    if (floor === '000') {
         //'all' selection for floor. must search entire db for room
-        if (isReservable){
+        if (isReservable) {
             //reservable room
             firebase.db.ref("/Rooms/Reservable/").once('value',
-                function(dbFloors) {
+                function (dbFloors) {
                     dbFloors.forEach(function (dbAllRooms) {
                         dbAllRooms.forEach(function (dbRoom) {
-                            if(dbRoom.key === room){
+                            if (dbRoom.key === room) {
                                 floor = dbAllRooms.key.toString();
                             }
                         })
@@ -1022,10 +1029,10 @@ export const inspectRoom = (that) => {
         else {
             //nonreservable room
             firebase.db.ref("/Rooms/NonReservable/").once('value',
-                function(dbFloors) {
+                function (dbFloors) {
                     dbFloors.forEach(function (dbAllRooms) {
                         dbAllRooms.forEach(function (dbRoom) {
-                            if(dbRoom.key === room){
+                            if (dbRoom.key === room) {
                                 floor = dbAllRooms.key.toString();
                             }
                         })
@@ -1040,7 +1047,7 @@ export const inspectRoom = (that) => {
         }
     }
     else {
-        if(isReservable){
+        if (isReservable) {
             firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
                 inspect: false,
                 status: "Clean"
@@ -1059,15 +1066,15 @@ export const declineInspectRoom = (that) => {
     let room = that.state.selectedRoom;
     let floor = that.state.selectedFloor;
     let isReservable = that.state.areReservableRooms;
-    if (floor === '000'){
+    if (floor === '000') {
         //'all' selection for floor. must search entire db for room
-        if (isReservable){
+        if (isReservable) {
             //reservable room
             firebase.db.ref("/Rooms/Reservable/").once('value',
-                function(dbFloors) {
+                function (dbFloors) {
                     dbFloors.forEach(function (dbAllRooms) {
                         dbAllRooms.forEach(function (dbRoom) {
-                            if(dbRoom.key === room){
+                            if (dbRoom.key === room) {
                                 floor = dbAllRooms.key.toString();
                             }
                         })
@@ -1084,10 +1091,10 @@ export const declineInspectRoom = (that) => {
         else {
             //nonreservable room
             firebase.db.ref("/Rooms/NonReservable/").once('value',
-                function(dbFloors) {
+                function (dbFloors) {
                     dbFloors.forEach(function (dbAllRooms) {
                         dbAllRooms.forEach(function (dbRoom) {
-                            if(dbRoom.key === room){
+                            if (dbRoom.key === room) {
                                 floor = dbAllRooms.key.toString();
                             }
                         })
@@ -1102,7 +1109,7 @@ export const declineInspectRoom = (that) => {
         }
     }
     else {
-        if(isReservable){
+        if (isReservable) {
             firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
                 inspect: false,
                 status: "Dirty",

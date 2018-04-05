@@ -28,10 +28,6 @@ class NonReservableRoom extends React.Component {
         api.getNonReservableRoomInformation(this, this.props.match.params.roomid);
     }
 
-    componentDidMount() {
-        //console.log(this.state);
-    }
-
     //TODO: Display and format corresponding room information from state
     //TODO: cont... regarding roomID (don't change roomID. it is correct)
     render() {
