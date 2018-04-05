@@ -33,11 +33,11 @@ class Help extends React.Component {
                             <br/>
                             <FormGroup>
                                 <Label>Name: (required) </Label>
-                                <Input placeholder={"Please enter your name"} type="text" id="contactName" required/>
+                                <Input placeholder={"Please enter your name"} type="text" id="contactName" autoComplete={'name'} required/>
                             </FormGroup>
                             <FormGroup>
                                 <Label>Email: (required)</Label>
-                                <Input placeholder={"Please enter your email address"} type="email" id="contactEmail"
+                                <Input placeholder={"Please enter your email address"} type="email" id="contactEmail" autoComplete={'email'}
                                        required/>
                             </FormGroup>
                             <FormGroup>
