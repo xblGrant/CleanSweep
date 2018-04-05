@@ -15,7 +15,7 @@ const SelectableRooms = ({items}) => (
             guest={item[constant.GUEST]}
             wakeupcall={item[constant.WAKE_UP_CALL]}
             assigned={item[constant.ASSIGNED]}
-            isReservable={item[constant.IS_RESERVABLE]}
+            isReservableRoom={item[constant.IS_RESERVABLE_ROOM]}
             floor={item[constant.FLOOR]}
         />
     ))
@@ -23,7 +23,7 @@ const SelectableRooms = ({items}) => (
 
 const LinkToRooms = ({items}) => (
     items.map((item, i) => (
-            item[constant.IS_RESERVABLE] ? <ReservableLink key={i} item={item} id={i}/> :
+            item[constant.IS_RESERVABLE_ROOM] ? <ReservableLink key={i} item={item} id={i}/> :
                 <NonReservableLink key={i} item={item} id={i}/>
     ))
 );
@@ -40,7 +40,7 @@ function ReservableLink(props) {
                 guest={props.item[constant.GUEST]}
                 wakeupcall={props.item[constant.WAKE_UP_CALL]}
                 assigned={props.item[constant.ASSIGNED]}
-                isReservable={props.item[constant.IS_RESERVABLE]}
+                isReservableRoom={props.item[constant.IS_RESERVABLE_ROOM]}
                 floor={props.item[constant.FLOOR]}
             />
         </Link>
@@ -59,7 +59,7 @@ function NonReservableLink(props) {
                 guest={props.item[constant.GUEST]}
                 wakeupcall={props.item[constant.WAKE_UP_CALL]}
                 assigned={props.item[constant.ASSIGNED]}
-                isReservable={props.item[constant.IS_RESERVABLE]}
+                isReservableRoom={props.item[constant.IS_RESERVABLE_ROOM]}
                 floor={props.item[constant.FLOOR]}
             />
         </Link>

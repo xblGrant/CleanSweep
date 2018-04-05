@@ -5,5 +5,5 @@ export const INSPECT = 3;
 export const GUEST = 4;
 export const WAKE_UP_CALL = 5;
 export const ASSIGNED = 6;
-export const IS_RESERVABLE = 7;
+export const IS_RESERVABLE_ROOM = 7;
 export const FLOOR = 8;
