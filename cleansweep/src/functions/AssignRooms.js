@@ -91,15 +91,6 @@ class AssignRooms extends React.Component {
                     </FormGroup>
                     <FormGroup row>
                         <div className={"col-sm-10 center"}>
-                            <Label className={"center"}>Rooms</Label>
-                            <GroupSelect items={this.state.rooms}
-                                         onSelectionFinish={this.handleSelectionFinish}
-                                         onSelectionClear={this.handleSelectionClear}
-                                         isDisabled={false}/>
-                        </div>
-                    </FormGroup>
-                    <FormGroup row>
-                        <div className={"col-sm-10 center"}>
                             <Label className={"center"}>Employees</Label>
                             <Input onClick={this.handleEmployeeSelect} id={'employeeSelect'} type="select">
                                 <CreateEmployeeOptions employees={this.state.employees}/>
@@ -116,6 +107,16 @@ class AssignRooms extends React.Component {
                             <Button className={"col-sm-3"} href={routes.HOME} name={"Cancel"}> Cancel </Button>
                         </div>
                     </div>
+                    <FormGroup row>
+                        <div className={"col-sm-10 center"}>
+                            <Label className={"center"}>Rooms</Label>
+                            <GroupSelect items={this.state.rooms}
+                                         onSelectionFinish={this.handleSelectionFinish}
+                                         onSelectionClear={this.handleSelectionClear}
+                                         isDisabled={false}/>
+                        </div>
+                    </FormGroup>
+
                 </Form>
             </div>
         );
