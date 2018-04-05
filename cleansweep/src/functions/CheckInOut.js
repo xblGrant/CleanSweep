@@ -139,15 +139,6 @@ class CheckInGuest extends React.Component {
                             </Input>
                         </div>
                     </FormGroup>
-                    <FormGroup row>
-                        <div className={"col-sm-10 center"}>
-                            <Label className={"center"}>Rooms</Label>
-                            <GroupSelect items={this.state.rooms}
-                                         onSelectionFinish={this.handleSelectionFinish}
-                                         onSelectionClear={this.handleSelectionClear}
-                                         isDisabled={false}/>
-                        </div>
-                    </FormGroup>
                     <div className={"center"} onChange={this.handleStatus}>
                         <input type={"radio"} name={"status"} value={"checkIn"}/> Check-In<br/>
                         <input type={"radio"} name={"status"} value={"checkOut"}/> Check-Out<br/>
@@ -159,6 +150,15 @@ class CheckInGuest extends React.Component {
                             <Button className={"col-sm-4"} href={routes.HOME} name={"Cancel"}> Cancel </Button>
                         </div>
                     </div>
+                    <FormGroup row>
+                        <div className={"col-sm-10 center"}>
+                            <Label className={"center"}>Rooms</Label>
+                            <GroupSelect items={this.state.rooms}
+                                         onSelectionFinish={this.handleSelectionFinish}
+                                         onSelectionClear={this.handleSelectionClear}
+                                         isDisabled={false}/>
+                        </div>
+                    </FormGroup>
                 </Form>
             </div>
         );
