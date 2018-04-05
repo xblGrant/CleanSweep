@@ -33,7 +33,6 @@ class InspectRoom extends React.Component {
         api.getListofAllRoomsNeedInspected(this);
     }
 
-    //TODO: if "all" is floor selection, this doesn't work
     handleFloorSelect(e) {
         let floor = e.target.value;
         this.setState({

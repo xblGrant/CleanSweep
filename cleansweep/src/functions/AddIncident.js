@@ -95,6 +95,7 @@ class AddIncident extends React.Component {
         let floor = Math.floor(selectedRoom / 100) * 100;
 
         api.addIncident(floor, selectedRoom, comment, !areReservableRooms);
+        //TODO: possibly change window.location.reload() to a more reactful method. possibly a popup window? but not top priority
         window.location.reload();
     }
 
