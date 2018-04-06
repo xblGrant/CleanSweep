@@ -70,7 +70,8 @@ class AddWakeUp extends React.Component {
         let date = parts[1] + '/' + parts[2] + '/' + parts[0];
         let floor = Math.floor(selectedRoom / 100) * 100;
 
-        api.addNewWakeUpCall(selectedRoom, floor, date, wakeUpTime)
+        api.addNewWakeUpCall(selectedRoom, floor, date, wakeUpTime);
+        window.alert("Wakeup Call Added Successfully!");
     }
 
     render() {
