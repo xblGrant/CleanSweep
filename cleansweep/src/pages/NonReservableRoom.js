@@ -15,34 +15,87 @@ class NonReservableRoom extends React.Component {
             status: null,
             incident: null,
             inspect: null,
-        }
+            editIncidents: false
+        };
+
+        this.handleEditIncidents = this.handleEditIncidents.bind(this);
     }
 
-    //when component is passed through react router
-    //and the route has a ":" in it,
-    //the identifier after it is the parameter.
-    //I call the parameter by this.props.match.params.roomid
-    //roomid is the explicit name of the identifier after the
-    //route in App.js.
     componentWillMount() {
         api.getNonReservableRoomInformation(this, this.props.match.params.roomid);
     }
 
-    //TODO: Display and format corresponding room information from state
-    //TODO: cont... regarding roomID (don't change roomID. it is correct)
+    handleEditIncidents() {
+        this.setState({
+            editIncidents: !this.state.editIncidents
+        })
+    }
+
     render() {
+        let info = this.state;
+
+        let employeeMessage;
+        if (info.assignedEmployee !== null) {
+            employeeMessage = "Assigned to " + info.assignedEmployee;
+        } else {
+            employeeMessage = "Not Assigned";
+        }
+
+        // TODO: create Inspection Needed: check or X
+        let inspectMessage;
+        if (info.inspect) {
+            inspectMessage = "Needs Inspected";
+        } else {
+            inspectMessage = "No Inspection Needed";
+        }
+
+        let incidentComponent;
+        if (info.incident) {
+            if (info.editIncidents) {
+                incidentComponent = <EditIncidentComponent incidents={info.incidentList} editIncidents={this.handleEditIncidents}/>;
+            } else {
+                incidentComponent = <IncidentComponent incidents={info.incidentList} editIncidents={this.handleEditIncidents}/>;
+            }
+        } else {
+            incidentComponent = null;
+        }
+
+
         return (
             <div className={"container"}>
-                <h2 className={"center"}>{this.state.roomID}</h2>
-                <h6 className={"center"}>{this.state.status}</h6>
-                <p>{"Assigned Employee: " + this.state.assignedEmployee}</p>
-                <p>{"Floor: " + this.state.floorNum / 100}</p>
-                <p>{"Incident: " + this.state.incident}</p>
-                <p>{"Incident List: " + this.state.incidentList}</p>
-                <p>{"Needs inspected: " + this.state.inspect}</p>
+                <h2 className={"center"}>{info.roomID}</h2>
+                <h6 className={"center"}>{info.status}</h6>
+                <p className={"center"}>{"Floor: " + info.floorNum / 100}</p>
+                <br/>
+                <p className={"center"}>{employeeMessage}</p>
+                <p className={"center"}>{inspectMessage}</p>
+                <br/>
+                {incidentComponent}
             </div>
         );
     }
+}
+
+function IncidentComponent(props) {
+    let {incidents, editIncidents} = props;
+
+    return (
+        <div>
+            <label>Incidents</label>{' '}
+            <button onClick={editIncidents}>Edit</button>
+        </div>
+    );
+}
+
+function EditIncidentComponent(props) {
+    let {incidents, editIncidents} = props;
+
+    return(
+        <div>
+            <label>Edit Incidents</label>{' '}
+            <button onClick={editIncidents}>Done</button>
+        </div>
+    );
 }
 
 export default NonReservableRoom;

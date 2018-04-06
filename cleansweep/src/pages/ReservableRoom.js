@@ -37,11 +37,15 @@ class ReservableRoom extends React.Component {
     //TODO: Display and format corresponding room information from state
     //TODO: cont... regarding roomID (don't change roomID. it is correct)
     render() {
+
+        let info = this.state;
+
         return (
             <div className={"container"}>
-                <h2 className={"center"}>{this.state.roomID}</h2>
-                <p>{this.state.guest}</p>
-                <p>{this.state.incidentList}</p>
+                <h2 className={"center"}>{info.roomID}</h2>
+                <h6 className={"center"}>{info.status}</h6>
+                <p>{info.guest}</p>
+                <p>{info.incidentList}</p>
             </div>
         );
     }
