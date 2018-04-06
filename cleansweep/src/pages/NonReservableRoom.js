@@ -1,6 +1,6 @@
 import React from 'react';
 import * as api from '../firebase/api';
-import {Input, Button, Label} from 'reactstrap';
+import {Input, Button} from 'reactstrap';
 
 class NonReservableRoom extends React.Component {
     constructor(props) {
@@ -34,6 +34,7 @@ class NonReservableRoom extends React.Component {
 
     render() {
         let info = this.state;
+        let roomInfo = [info.roomID, info.floorNum];
 
         let employeeMessage;
         if (info.assignedEmployee !== null) {
@@ -54,7 +55,7 @@ class NonReservableRoom extends React.Component {
         if (info.incident) {
             if (info.editIncidents) {
                 incidentComponent =
-                    <EditIncidentComponent roomInfo={[info.roomID, info.floorNum]}
+                    <EditIncidentComponent roomInfo={roomInfo}
                                            incidents={info.incidentList}
                                            editIncidents={this.handleEditIncidents}
                                            instance={this}/>;
@@ -145,8 +146,7 @@ class EditIncidentComponent extends React.Component {
                     <button className={"width-10 right-side2"} onClick={this.handleAddIncident}>Add</button>
                     <button className={"width-10"} onClick={editIncidents}>Done</button>
                     {(incidents !== null) ? incidents.map((incident) => (
-                        <EditIndividualIncident key={incident[0]}
-                                                value={incident}
+                        <EditIndividualIncident value={incident}
                                                 roomInfo={roomInfo}
                                                 instance={instance}/>
                     )) : null}
@@ -155,7 +155,7 @@ class EditIncidentComponent extends React.Component {
             let isDisabled = this.state.comment === null;
             renderedComponent =
                 <div>
-                    <Label for="incidentComment">Comment</Label>
+                    <label>Add Incident</label>{' '}
                     <Input onChange={this.handleComment} type="textarea" className={"center"}
                            id="incidentComment"
                            placeholder={"Enter comment here"}/>
@@ -168,7 +168,17 @@ class EditIncidentComponent extends React.Component {
         }
 
         return (
-            {renderedComponent}
+            <div>
+                <label>Edit Incidents</label>{' '}
+                <button className={"width-10 right-side2"} onClick={this.handleAddIncident}>Add</button>
+                <button className={"width-10"} onClick={editIncidents}>Done</button>
+                {(incidents !== null) ? incidents.map((incident) => (
+                    <EditIndividualIncident value={incident}
+                                            roomInfo={roomInfo}
+                                            key={incident[0]}
+                                            instance={instance}/>
+                )) : null}
+            </div>
         );
     }
 }
@@ -181,7 +191,8 @@ class EditIndividualIncident extends React.Component {
             key: props.value[0],
             incident: props.value[1],
             updatedIncident: props.value[1],
-            room: props.roomInfo[0]
+            room: props.roomInfo[0],
+            floor: props.roomInfo[1]
         };
 
         this.handleResolve = this.handleResolve.bind(this);
@@ -190,7 +201,7 @@ class EditIndividualIncident extends React.Component {
 
     handleResolve() {
         let info = this.state;
-        api.resolveIncident(info.room, info.key);
+        api.resolveIncident(info.room, info.key, info.floor, false);
         api.getNonReservableRoomInformation(this.props.instance, info.room);
     }
 
@@ -213,7 +224,7 @@ class EditIndividualIncident extends React.Component {
             <div>
                 <Input onChange={e => this.setState(byPropKey('updatedIncident', e.target.value))}
                        className={"width-50"}
-                       type={"text"} key={info.key} value={info.updatedIncident}/>
+                       type={"text"} value={info.updatedIncident}/>
                 <button onClick={this.handleUpdateComment} disabled={isDisabled}>Update</button>
                 <button onClick={this.handleResolve}>Resolve</button>
             </div>

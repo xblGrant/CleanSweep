@@ -802,7 +802,7 @@ export const getReservableRoomInformation = (that, roomID) => {
                 let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
                 IncidentsRef.orderByKey().once('value', function (room) {
                     room.forEach(function (incident) {
-                        incidentsList.push(incident.val());
+                        incidentsList.push([incident.key, incident.val()]);
                     })
                 }).then(() => {
                     that.setState({incidentList: incidentsList});
@@ -842,6 +842,7 @@ export const getNonReservableRoomInformation = (that, roomID) => {
                 let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
                 IncidentsRef.orderByKey().once('value', function (room) {
                     room.forEach(function (incident) {
+                        console.log(incident.key);
                         incidentsList.push([incident.key, incident.val()]);
                     })
                 }).then(() => {
@@ -856,8 +857,33 @@ export const updateIncident = (room, incidentKey, comment) => {
     updates['/Incidents/' + room + '/' + incidentKey] = comment;
     firebase.db.ref().update(updates);
 };
-export const resolveIncident = (room, incidentkey) => {
-    firebase.db.ref('/Incidents/' + room + '/' + incidentkey).remove();
+export const resolveIncident = (room, incidentKey, floor, isReservableRoom) => {
+    firebase.db.ref('/Incidents/' + room + '/' + incidentKey).remove()
+        .then(() => {
+            let reference;
+            firebase.db.ref('/Incidents/' + room).once('value', function (snapshot) {
+                reference = snapshot.val();
+            }).then(() => {
+                console.log(reference);
+                if (reference === null) {
+                    if (isReservableRoom) {
+                        reservableRoomNoIncidents(room, floor);
+                    } else {
+                        nonReservableRoomNoIncidents(room, floor);
+                    }
+                }
+            });
+        });
+};
+const reservableRoomNoIncidents = (room, floor) => {
+    firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
+        incident: false
+    });
+};
+const nonReservableRoomNoIncidents = (room, floor) => {
+    firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).update({
+        incident: false
+    });
 };
 
 // new room
@@ -970,7 +996,8 @@ export const addIncident = (floor, room, comment, areReservableRooms) => {
 };
 const addReservableRoomIncident = (floor, room) => {
     firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
-        incident: true
+        incident: true,
+        status: "Dirty"
     })
 };
 const addNonReservableRoomIncident = (room) => {
@@ -985,7 +1012,8 @@ const addNonReservableRoomIncident = (room) => {
         })
     }).then(() => {
         firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).update({
-            incident: true
+            incident: true,
+            status: "Dirty"
         })
     });
 
