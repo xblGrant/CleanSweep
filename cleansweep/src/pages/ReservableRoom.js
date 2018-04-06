@@ -192,19 +192,29 @@ class WakeUpComponent extends React.Component {
     }
 
     handleEditWakeUp() {
-        this.setState({editWakeUp: !this.state.editWakeUp});
+        this.setState({
+            editWakeUp: !this.state.editWakeUp,
+            wakeUpDate: null,
+            wakeUpTime: null,
+            error: false
+        });
     }
 
     handleUpdateWakeUpCall() {
         let {room, that} = this.props;
         let {wakeUpDate, wakeUpTime} = this.state;
 
-        let parts = wakeUpDate.split('-');
-        let date = parts[1] + '/' + parts[2] + '/' + parts[0];
-        let floor = Math.floor(room / 100) * 100;
+        if (wakeUpDate !== null && wakeUpTime !== null) {
+            let parts = wakeUpDate.split('-');
+            let date = parts[1] + '/' + parts[2] + '/' + parts[0];
+            let floor = Math.floor(room / 100) * 100;
 
-        api.updateWakeUpCallFromRoom(that, room, floor, date, wakeUpTime);
-        this.handleEditWakeUp();
+            api.updateWakeUpCallFromRoom(that, room, floor, date, wakeUpTime);
+            this.handleEditWakeUp();
+        } else {
+            this.setState({ error: true })
+        }
+
     }
 
     handleClearWakeUpCall() {
@@ -233,7 +243,7 @@ class WakeUpComponent extends React.Component {
 
     render() {
         let {wakeUpCall} = this.props;
-        let {editWakeUp} = this.state;
+        let {editWakeUp, error} = this.state;
         let wakeUpComponent;
 
         let parts = wakeUpCall.split('-');
@@ -288,6 +298,8 @@ class WakeUpComponent extends React.Component {
             <div className={"center"}>
                 <label>Wake-Up Call</label><br/>
                 {table}
+                {error && <p typeof={"error"} className={"error"} id={"error"}>
+                    {"Both date and time need to be selected"}</p>}
                 {wakeUpComponent}
                 {buttons}
             </div>
