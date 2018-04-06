@@ -71,12 +71,27 @@ th {
 .margin-top-02{
     margin-top: 2%;
 }
+.right-side1{
+    margin-left: 75%;
+}
+.right-side2{
+    margin-left: 60%;
+}
 .row{
     margin: 0 0;
     margin-bottom: 1rem;
 }
+.width-50{
+    width: 50%;
+}
 .width-30{
     width: 30%;
+}
+.width-10{
+    border-color: white;
+    background-color: white;
+    color: royalblue;
+    width: 10%;
 }
 .btn{
     margin-top: auto;

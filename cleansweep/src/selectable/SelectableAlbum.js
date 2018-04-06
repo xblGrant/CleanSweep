@@ -9,12 +9,11 @@ const Label = ({status}) => (
 );
 
 function Album(props){
-    let {selectableRef, selected, selecting, roomName, status, assigned, incident, guest} = props;
+    let {selectableRef, selected, selecting, roomName, status} = props;
     let classStatus = null;
     if (status === 'Clean'){
         classStatus = 'cleanStatus';
-    }
-    else {
+    } else {
         classStatus = 'dirtyStatus';
     }
 

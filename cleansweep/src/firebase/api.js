@@ -842,7 +842,7 @@ export const getNonReservableRoomInformation = (that, roomID) => {
                 let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
                 IncidentsRef.orderByKey().once('value', function (room) {
                     room.forEach(function (incident) {
-                        incidentsList.push(incident.val());
+                        incidentsList.push([incident.key, incident.val()]);
                     })
                 }).then(() => {
                     that.setState({incidentList: incidentsList});
@@ -850,6 +850,14 @@ export const getNonReservableRoomInformation = (that, roomID) => {
             }
         });
     });
+};
+export const updateIncident = (room, incidentKey, comment) => {
+    let updates = {};
+    updates['/Incidents/' + room + '/' + incidentKey] = comment;
+    firebase.db.ref().update(updates);
+};
+export const resolveIncident = (room, incidentkey) => {
+    firebase.db.ref('/Incidents/' + room + '/' + incidentkey).remove();
 };
 
 // new room
@@ -949,6 +957,7 @@ export const addIncident = (floor, room, comment, areReservableRooms) => {
     }).then(() => {
         let updates = {};
         let currentIncident = lastIncident + 1;
+        console.log(currentIncident);
 
         updates['/Incidents/' + room + '/' + currentIncident] = comment;
         firebase.db.ref().update(updates);
@@ -982,6 +991,7 @@ const addNonReservableRoomIncident = (room) => {
 
 
 };
+
 
 // assign rooms
 export const assignRoom = (room, employee) => {

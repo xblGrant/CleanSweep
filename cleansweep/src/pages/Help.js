@@ -51,7 +51,7 @@ class Help extends React.Component {
                                 <div className={"col-sm-12 col-md-6 center"}>
                                     <Label>Name: (required) </Label>
                                     <Input onChange={e => this.setState(byPropKey('name', e.target.value))}
-                                           value={this.state.name}
+                                           value={info.name}
                                            type={"text"}
                                            className={""}
                                            id={"contactName"}
@@ -64,8 +64,8 @@ class Help extends React.Component {
                                 <div className={"col-sm-12 col-md-6 center"}>
                                     <Label>Email: (required)</Label>
                                     <Input onChange={e => this.setState(byPropKey('email', e.target.value))}
-                                           value={this.state.email}
-                                           type={"text"}
+                                           value={info.email}
+                                           type={"email"}
                                            className={""}
                                            id={"contactEmail"}
                                            autoComplete={'email'}
@@ -77,7 +77,7 @@ class Help extends React.Component {
                                 <div className={"col-sm-12 col-md-10 center"}>
                                     <Label>Message: (required)</Label>
                                     <Input onChange={e => this.setState(byPropKey('message', e.target.value))}
-                                           value={this.state.message}
+                                           value={info.message}
                                            type={"textarea"}
                                            className={""}
                                            id={"contactMessage"}
