@@ -8,6 +8,10 @@ import {
 } from 'reactstrap';
 import {Helmet} from "react-helmet";
 
+const byPropKey = (propertyName, value) => () => ({
+    [propertyName]: value,
+});
+
 class Help extends React.Component {
     constructor(props) {
         super(props);
@@ -19,30 +23,6 @@ class Help extends React.Component {
         };
 
         this.handleHelp = this.handleHelp.bind(this);
-        this.handleNameChange = this.handleNameChange(this);
-        this.handleEmailChange = this.handleEmailChange(this);
-        this.handleMessageChange = this.handleMessageChange(this);
-    }
-
-    handleNameChange(e) {
-        let roomName = e.target.value;
-        this.setState({
-            name: roomName
-        });
-    }
-
-    handleEmailChange(e) {
-        let usrEmail = e.target.value;
-        this.setState({
-            email: usrEmail
-        })
-    }
-
-    handleMessageChange(e) {
-        let usrMessage = e.target.value;
-        this.setState({
-            message: usrMessage
-        })
     }
 
     handleHelp() {
@@ -63,48 +43,53 @@ class Help extends React.Component {
                     <body className={"background-to-bottom"}/>
                 </Helmet>
                 <div className={"container"}>
-                    <div className={"col-sm-6 center"}>
+                    <div className={"col-sm-6  col-md-10 center"}>
                         <h2 className={"center"}>Contact Us</h2>
-                        <Form>
+                        <Form action="https://formspree.io/team6ixsheets@gmail.com"
+                              method="POST">
                             <FormGroup row>
-                                <div className={"col-sm-12 center"}>
+                                <div className={"col-sm-12 col-md-6 center"}>
                                     <Label>Name: (required) </Label>
-                                    <Input onChange={this.handleNameChange}
-                                           value={info.name}
+                                    <Input onChange={e => this.setState(byPropKey('name', e.target.value))}
+                                           value={this.state.name}
                                            type={"text"}
-                                           className={"margin-left-35 width-30"}
+                                           className={""}
                                            id={"contactName"}
-                                           autoComplete={'name'}/>
+                                           autoComplete={'name'}
+                                            name="Name"/>
                                 </div>
                             </FormGroup>
 
                             <FormGroup row>
-                                <div className={"col-sm-12 center"}>
+                                <div className={"col-sm-12 col-md-6 center"}>
                                     <Label>Email: (required)</Label>
-                                    <Input onChange={this.handleEmailChange}
-                                           value={info.email}
+                                    <Input onChange={e => this.setState(byPropKey('email', e.target.value))}
+                                           value={this.state.email}
                                            type={"text"}
-                                           className={"margin-left-35 width-30"}
+                                           className={""}
                                            id={"contactEmail"}
-                                           autoComplete={'email'}/>
+                                           autoComplete={'email'}
+                                           name="Email"/>
                                 </div>
                             </FormGroup>
 
                             <FormGroup row>
-                                <div className={"col-sm-12 center"}>
+                                <div className={"col-sm-12 col-md-10 center"}>
                                     <Label>Message: (required)</Label>
-                                    <Input onChange={this.handleMessageChange}
-                                           value={info.message}
+                                    <Input onChange={e => this.setState(byPropKey('message', e.target.value))}
+                                           value={this.state.message}
                                            type={"textarea"}
-                                           className={"margin-left-35 width-30"}
+                                           className={""}
                                            id={"contactMessage"}
-                                           autoComplete={'message'}/>
+                                           autoComplete={'message'}
+                                           name="Message"/>
                                 </div>
                             </FormGroup>
+
                             <br/>
                             <Button disabled={isDisabled}
                                     className={"col-sm-4"}
-                                    onClick={this.handleHelp}
+                                    type="submit"
                                     color={"primary"}>Send</Button>
                         </Form>
                     </div>
