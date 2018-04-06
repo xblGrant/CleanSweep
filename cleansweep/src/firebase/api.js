@@ -842,7 +842,6 @@ export const getNonReservableRoomInformation = (that, roomID) => {
                 let IncidentsRef = firebase.db.ref("/Incidents/" + roomID);
                 IncidentsRef.orderByKey().once('value', function (room) {
                     room.forEach(function (incident) {
-                        console.log(incident.key);
                         incidentsList.push([incident.key, incident.val()]);
                     })
                 }).then(() => {
@@ -857,6 +856,7 @@ export const updateIncident = (room, incidentKey, comment) => {
     updates['/Incidents/' + room + '/' + incidentKey] = comment;
     firebase.db.ref().update(updates);
 };
+
 export const resolveIncident = (room, incidentKey, floor, isReservableRoom) => {
     firebase.db.ref('/Incidents/' + room + '/' + incidentKey).remove()
         .then(() => {
@@ -884,6 +884,58 @@ const nonReservableRoomNoIncidents = (room, floor) => {
     firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).update({
         incident: false
     });
+};
+
+export const addIncidentFromRoomPage = (that, floor, room, comment, areReservableRooms) => {
+    let lastIncident = 0;
+    let ref = firebase.db.ref('/Incidents/' + room);
+
+    ref.orderByKey().once('value', function (allIncidents) {
+        allIncidents.forEach(function (incident) {
+            lastIncident = parseInt(incident.key, 10);
+        });
+    }).then(() => {
+        let updates = {};
+        let currentIncident = lastIncident + 1;
+        console.log(currentIncident);
+
+        updates['/Incidents/' + room + '/' + currentIncident] = comment;
+        firebase.db.ref().update(updates);
+
+        if (areReservableRooms)
+            addReservableRoomIncidentFromRoomPage(that, floor, room);
+        else
+            addNonReservableRoomIncidentFromRoomPage(that, room);
+    });
+};
+const addReservableRoomIncidentFromRoomPage = (that, floor, room) => {
+    firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
+        incident: true,
+        status: "Dirty"
+    }).then(() => {
+        getReservableRoomInformation(that, room);
+    })
+};
+const addNonReservableRoomIncidentFromRoomPage = (that, room) => {
+    let floor;
+    let roomRef = firebase.db.ref("/Rooms/NonReservable/");
+    roomRef.orderByKey().once('value', function (floors) {
+        floors.forEach(function (allRooms) {
+            allRooms.forEach(function (currentRoom) {
+                if (room === currentRoom.key)
+                    floor = allRooms.key;
+            })
+        })
+    }).then(() => {
+        firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).update({
+            incident: true,
+            status: "Dirty"
+        }).then(() => {
+            getNonReservableRoomInformation(that, room);
+        })
+    });
+
+
 };
 
 // new room

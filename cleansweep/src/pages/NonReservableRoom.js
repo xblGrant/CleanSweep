@@ -12,7 +12,7 @@ class NonReservableRoom extends React.Component {
             roomID: null,
             floorNum: null,
             assignedEmployee: null,
-            incidentList: null,
+            incidentList: [],
             status: null,
             incident: null,
             inspect: null,
@@ -130,8 +130,7 @@ class EditIncidentComponent extends React.Component {
 
     handleIncident() {
         let info = this.state;
-        api.addIncident(info.roomInfo[1], info.roomInfo[0], info.comment, false);
-        api.getNonReservableRoomInformation(this.props.instance, info.roomInfo[0]);
+        api.addIncidentFromRoomPage(this.props.instance, info.roomInfo[1], info.roomInfo[0], info.comment, false);
     }
 
     render() {
@@ -145,34 +144,37 @@ class EditIncidentComponent extends React.Component {
                     <label>Edit Incidents</label>{' '}
                     <button className={"width-10 right-side2"} onClick={this.handleAddIncident}>Add</button>
                     <button className={"width-10"} onClick={editIncidents}>Done</button>
-                    {(incidents !== null) ? incidents.map((incident) => (
+                    {(incidents !== []) ? incidents.map((incident) => (
                         <EditIndividualIncident value={incident}
                                                 roomInfo={roomInfo}
+                                                key={incident[0]}
                                                 instance={instance}/>
                     )) : null}
                 </div>;
+
         } else {
             let isDisabled = this.state.comment === null;
             renderedComponent =
-                <div>
+                <div className={"center"}>
                     <label>Add Incident</label>{' '}
-                    <Input onChange={this.handleComment} type="textarea" className={"center"}
+                    <Input onChange={this.handleComment} type="textarea" className={"width-30 center"}
                            id="incidentComment"
                            placeholder={"Enter comment here"}/>
                     <div className={"col-sm-5 center"}>
                         <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-4"}
-                                                          color={"primary"}>Add Incident</Button>
+                                color={"primary"}>Add Incident</Button>
                         <Button className={"col-sm-4"} onClick={this.handleAddIncident}>Done</Button>
                     </div>
                 </div>;
         }
 
+        // TODO: GET renderedComponent TO WORK
         return (
             <div>
                 <label>Edit Incidents</label>{' '}
                 <button className={"width-10 right-side2"} onClick={this.handleAddIncident}>Add</button>
                 <button className={"width-10"} onClick={editIncidents}>Done</button>
-                {(incidents !== null) ? incidents.map((incident) => (
+                {(incidents !== []) ? incidents.map((incident) => (
                     <EditIndividualIncident value={incident}
                                             roomInfo={roomInfo}
                                             key={incident[0]}
