@@ -16,10 +16,15 @@ class NonReservableRoom extends React.Component {
             status: null,
             incident: null,
             inspect: null,
-            editIncidents: false
+            editIncidents: false,
+            add: false,
+            comment: null
         };
 
         this.handleEditIncidents = this.handleEditIncidents.bind(this);
+        this.handleAddIncident = this.handleAddIncident.bind(this);
+        this.handleIncident = this.handleIncident.bind(this);
+        this.handleComment = this.handleComment.bind(this);
     }
 
     componentWillMount() {
@@ -29,6 +34,28 @@ class NonReservableRoom extends React.Component {
     handleEditIncidents() {
         this.setState({
             editIncidents: !this.state.editIncidents
+        })
+    }
+
+    handleAddIncident() {
+        this.setState({add: !this.state.add});
+    }
+
+    handleComment(e) {
+        let comment = e.target.value;
+        if (comment === '') {
+            comment = null
+        }
+        this.setState({
+            comment: comment
+        })
+    }
+
+    handleIncident() {
+        let info = this.state;
+        api.addIncidentFromRoomPage(this, info.floorNum, info.roomID, info.comment, false);
+        this.setState({
+            add: false
         })
     }
 
@@ -65,7 +92,26 @@ class NonReservableRoom extends React.Component {
                                        editIncidents={this.handleEditIncidents}/>;
             }
         } else {
-            incidentComponent = null;
+            if (!info.add) {
+                incidentComponent =
+                    <div className={"center"}>
+                        <button className={"color2"} onClick={this.handleAddIncident}>Add Incident</button>
+                    </div>
+            } else {
+                let isDisabled = this.state.comment === null;
+                incidentComponent =
+                    <div className={"center"}>
+                        <label>Add Incident</label>{' '}
+                        <Input onChange={this.handleComment} type="textarea" className={"width-30 center"}
+                               id="incidentComment"
+                               placeholder={"Enter comment here"}/>
+                        <div className={"col-sm-5 center"}>
+                            <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-4"}
+                                    color={"primary"}>Add Incident</Button>
+                            <Button className={"col-sm-4"} onClick={this.handleAddIncident}>Done</Button>
+                        </div>
+                    </div>;
+            }
         }
 
 
@@ -191,8 +237,7 @@ class EditIndividualIncident extends React.Component {
 
     handleResolve() {
         let info = this.state;
-        api.resolveIncident(info.room, info.key, info.floor, false);
-        api.getNonReservableRoomInformation(this.props.instance, info.room);
+        api.resolveIncident(this.props.instance, info.room, info.key, info.floor, false);
     }
 
     handleUpdateComment() {

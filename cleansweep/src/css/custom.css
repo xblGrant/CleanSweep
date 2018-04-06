@@ -43,7 +43,9 @@ th {
 }
 
 .color2{
-
+    border-color: white;
+    background-color: white;
+    color: royalblue;
 }
 
 .color3{

@@ -857,32 +857,35 @@ export const updateIncident = (room, incidentKey, comment) => {
     firebase.db.ref().update(updates);
 };
 
-export const resolveIncident = (room, incidentKey, floor, isReservableRoom) => {
+export const resolveIncident = (that, room, incidentKey, floor, isReservableRoom) => {
     firebase.db.ref('/Incidents/' + room + '/' + incidentKey).remove()
         .then(() => {
             let reference;
             firebase.db.ref('/Incidents/' + room).once('value', function (snapshot) {
                 reference = snapshot.val();
             }).then(() => {
-                console.log(reference);
                 if (reference === null) {
                     if (isReservableRoom) {
-                        reservableRoomNoIncidents(room, floor);
+                        reservableRoomNoIncidents(that, room, floor);
                     } else {
-                        nonReservableRoomNoIncidents(room, floor);
+                        nonReservableRoomNoIncidents(that, room, floor);
                     }
                 }
             });
         });
 };
-const reservableRoomNoIncidents = (room, floor) => {
+const reservableRoomNoIncidents = (that, room, floor) => {
     firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
         incident: false
+    }).then(() => {
+        getReservableRoomInformation(that, room);
     });
 };
-const nonReservableRoomNoIncidents = (room, floor) => {
+const nonReservableRoomNoIncidents = (that, room, floor) => {
     firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).update({
         incident: false
+    }).then(() => {
+        getNonReservableRoomInformation(that, room);
     });
 };
 
