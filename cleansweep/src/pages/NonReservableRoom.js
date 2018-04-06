@@ -139,20 +139,6 @@ class EditIncidentComponent extends React.Component {
 
         let renderedComponent = null;
         if (addIncident) {
-            renderedComponent =
-                <div>
-                    <label>Edit Incidents</label>{' '}
-                    <button className={"width-10 right-side2"} onClick={this.handleAddIncident}>Add</button>
-                    <button className={"width-10"} onClick={editIncidents}>Done</button>
-                    {(incidents !== []) ? incidents.map((incident) => (
-                        <EditIndividualIncident value={incident}
-                                                roomInfo={roomInfo}
-                                                key={incident[0]}
-                                                instance={instance}/>
-                    )) : null}
-                </div>;
-
-        } else {
             let isDisabled = this.state.comment === null;
             renderedComponent =
                 <div className={"center"}>
@@ -168,18 +154,20 @@ class EditIncidentComponent extends React.Component {
                 </div>;
         }
 
-        // TODO: GET renderedComponent TO WORK
         return (
             <div>
-                <label>Edit Incidents</label>{' '}
-                <button className={"width-10 right-side2"} onClick={this.handleAddIncident}>Add</button>
-                <button className={"width-10"} onClick={editIncidents}>Done</button>
-                {(incidents !== []) ? incidents.map((incident) => (
-                    <EditIndividualIncident value={incident}
-                                            roomInfo={roomInfo}
-                                            key={incident[0]}
-                                            instance={instance}/>
-                )) : null}
+                <div>
+                    <label>Edit Incidents</label>{' '}
+                    <button className={"width-10 right-side2"} onClick={this.handleAddIncident}>Add</button>
+                    <button className={"width-10"} onClick={editIncidents}>Done</button>
+                    {(incidents !== []) ? incidents.map((incident) => (
+                        <EditIndividualIncident value={incident}
+                                                roomInfo={roomInfo}
+                                                key={incident[0]}
+                                                instance={instance}/>
+                    )) : null}
+                </div>
+                {renderedComponent}
             </div>
         );
     }
