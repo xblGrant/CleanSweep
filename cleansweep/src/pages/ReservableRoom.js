@@ -17,7 +17,7 @@ class ReservableRoom extends React.Component {
             incidentList: [],
             isReservable: null,
             status: null,
-            wakeupCall: null
+            wakeupCall: 'none'
         };
 
         this.handleEditIncidents = this.handleEditIncidents.bind(this);
@@ -35,6 +35,13 @@ class ReservableRoom extends React.Component {
         let info = this.state;
         let roomInfo = [info.roomID, info.floorNum];
 
+        let guestMessage;
+        if (info.guest) {
+            guestMessage = "Occupied";
+        } else {
+            guestMessage = "Vacant";
+        }
+
         let employeeMessage;
         if (info.assignedEmployee !== null) {
             employeeMessage = "Assigned to " + info.assignedEmployee;
@@ -50,6 +57,9 @@ class ReservableRoom extends React.Component {
             inspectMessage = "No Inspection Needed";
         }
 
+        let wakeUpComponent = <WakeUpComponent wakeUpCall={info.wakeupCall}
+                                               room={info.roomID}
+                                               that={this}/>;
         let statusComponent = <StatusComponent floor={info.floorNum}
                                                room={info.roomID}
                                                status={info.status}
@@ -78,16 +88,17 @@ class ReservableRoom extends React.Component {
                 <h2 className={"center"}>{info.roomID}</h2>
                 <h6 className={"center"}>{info.status}</h6>
                 <p className={"center"}>{"Floor: " + info.floorNum / 100}</p>
+                <p className={"center"}>{guestMessage}</p>
                 <br/>
                 <p className={"center"}>{employeeMessage}</p>
                 <p className={"center"}>{inspectMessage}</p>
-                <br/>
+                <hr/>
+                {wakeUpComponent}
+                <hr/>
                 {statusComponent}
-                <br/>
+                <hr/>
                 {incidentComponent}
                 <br/>
-                <p>occupiedbyguest</p>
-                <p>wakeupcall</p>
             </div>
         );
     }
@@ -163,6 +174,127 @@ class StatusComponent extends React.Component {
     }
 }
 
+class WakeUpComponent extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            editWakeUp: false,
+            wakeUpDate: null,
+            wakeUpTime: null
+        };
+
+        this.handleDate = this.handleDate.bind(this);
+        this.handleTime = this.handleTime.bind(this);
+        this.handleEditWakeUp = this.handleEditWakeUp.bind(this);
+        this.handleClearWakeUpCall = this.handleClearWakeUpCall.bind(this);
+        this.handleUpdateWakeUpCall = this.handleUpdateWakeUpCall.bind(this);
+    }
+
+    handleEditWakeUp() {
+        this.setState({editWakeUp: !this.state.editWakeUp});
+    }
+
+    handleUpdateWakeUpCall() {
+        let {room, that} = this.props;
+        let {wakeUpDate, wakeUpTime} = this.state;
+
+        let parts = wakeUpDate.split('-');
+        let date = parts[1] + '/' + parts[2] + '/' + parts[0];
+        let floor = Math.floor(room / 100) * 100;
+
+        api.updateWakeUpCallFromRoom(that, room, floor, date, wakeUpTime);
+        this.handleEditWakeUp();
+    }
+
+    handleClearWakeUpCall() {
+        let {room, that} = this.props;
+        let floor = Math.floor(room / 100) * 100;
+
+        api.clearWakeUpCallFromRoom(that, room, floor);
+        this.handleEditWakeUp();
+    }
+
+    handleTime(e) {
+        let time = e.target.value;
+        if (time === '') {
+            time = null
+        }
+        this.setState({wakeUpTime: time})
+    }
+
+    handleDate(e) {
+        let date = e.target.value;
+        if (date === '') {
+            date = null
+        }
+        this.setState({wakeUpDate: date})
+    }
+
+    render() {
+        let {wakeUpCall} = this.props;
+        let {editWakeUp} = this.state;
+        let wakeUpComponent;
+
+        let parts = wakeUpCall.split('-');
+        let date = parts[0], time = parts[1];
+
+        let table = null;
+        let buttonName = "Add Wake-Up Call";
+        if (wakeUpCall !== 'none') {
+            buttonName = "Update Wake-Up Call";
+            table =
+                <div>
+                    <table className={"container text-center"}>
+                        <tbody>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                        <tr>
+                            <td>{date}</td>
+                            <td>{time}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                </div>;
+        }
+
+
+        let buttons = <button className={"color2"} onClick={this.handleEditWakeUp}>{buttonName}</button>;
+        if (editWakeUp) {
+            buttons =
+                <div>
+                    <br/>
+                    <button className={"color2"} onClick={this.handleUpdateWakeUpCall}>Update</button>
+                    <button className={"color2"} onClick={this.handleClearWakeUpCall}>Clear</button>
+                    <button className={"color2"} onClick={this.handleEditWakeUp}>Cancel</button>
+                </div>;
+            wakeUpComponent =
+                <div>
+                    <div className={"col-sm-4 center"}>
+                        <label>Date</label>
+                        <Input onChange={this.handleDate} type="date" id="wakeUpDate" placeholder={"date"}/>
+                    </div>
+                    <div className={"col-sm-4 center"}>
+                        <label>Time</label>
+                        <Input onChange={this.handleTime} type="time" id="wakeUpTime" placeholder={"time"}/>
+                    </div>
+                </div>;
+        }
+
+        return (
+            <div className={"center"}>
+                <label>Wake-Up Call</label><br/>
+                {table}
+                {wakeUpComponent}
+                {buttons}
+            </div>
+        )
+    }
+}
+
 class AddIncidentComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -183,7 +315,9 @@ class AddIncidentComponent extends React.Component {
 
     handleComment(e) {
         let comment = e.target.value;
-        if (comment === '') { comment = null }
+        if (comment === '') {
+            comment = null
+        }
         this.setState({comment: comment});
     }
 
@@ -257,7 +391,9 @@ class EditIncidentComponent extends React.Component {
 
     handleComment(e) {
         let comment = e.target.value;
-        if (comment === '') { comment = null }
+        if (comment === '') {
+            comment = null
+        }
         this.setState({comment: comment});
     }
 

@@ -31,7 +31,9 @@ th {
     font-weight: 700;
     font-stretch: expanded;
 }
-
+.btn{
+    margin-top: auto;
+}
 .center{
      text-align: center;
      margin: auto auto;
@@ -73,6 +75,9 @@ th {
 .margin-top-02{
     margin-top: 2%;
 }
+.noMargin{
+    margin: 0 0;
+}
 .right-side1{
     margin-left: 75%;
 }
@@ -83,21 +88,15 @@ th {
     margin: 0 0;
     margin-bottom: 1rem;
 }
-.width-50{
-    width: 50%;
-}
-.width-30{
-    width: 30%;
-}
 .width-10{
     border-color: white;
     background-color: white;
     color: royalblue;
     width: 10%;
 }
-.btn{
-    margin-top: auto;
+.width-30{
+    width: 30%;
 }
-.noMargin{
-    margin: 0 0;
+.width-50{
+    width: 50%;
 }

@@ -82,7 +82,7 @@ class NonReservableRoom extends React.Component {
                 <p className={"center"}>{inspectMessage}</p>
                 <br/>
                 {statusComponent}
-                <br/>
+                <hr/>
                 {incidentComponent}
             </div>
         );

@@ -108,13 +108,13 @@ class AddWakeUp extends React.Component {
                         <FormGroup row>
                             <div className={"col-sm-4 center"}>
                                 <Label for="wakeUpDate">Date</Label>
-                                <Input onChange={this.handleDate} type="date" id="wakeUpDate" placeholder={"Email"}/>
+                                <Input onChange={this.handleDate} type="date" id="wakeUpDate" placeholder={"date"}/>
                             </div>
                         </FormGroup>
                         <FormGroup row>
                             <div className={"col-sm-4 center"}>
                                 <Label for="wakeUpTime">Time</Label>
-                                <Input onChange={this.handleTime} type="time" id="wakeUpTime" placeholder={"Password"}/>
+                                <Input onChange={this.handleTime} type="time" id="wakeUpTime" placeholder={"time"}/>
                             </div>
                         </FormGroup>
                         <br/>

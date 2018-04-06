@@ -967,6 +967,22 @@ const changeNonReservableRoomStatus = (that, status, floor, room) => {
     });
 };
 
+export const updateWakeUpCallFromRoom = (that, room, floor, date, time) => {
+    let updateDate = date + ' - ' + time;
+    firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
+        wakeupCall: updateDate
+    }).then(() => {
+        getReservableRoomInformation(that, room);
+    })
+};
+export const clearWakeUpCallFromRoom = (that, room, floor) => {
+    firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
+        wakeupCall: "none"
+    }).then(() => {
+        getReservableRoomInformation(that, room);
+    })
+};
+
 // new room
 export const generateNewRoomNumber = (that, floor) => {
     const radix = 10;
