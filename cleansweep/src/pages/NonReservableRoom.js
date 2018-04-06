@@ -17,14 +17,9 @@ class NonReservableRoom extends React.Component {
             incident: null,
             inspect: null,
             editIncidents: false,
-            add: false,
-            comment: null
         };
 
         this.handleEditIncidents = this.handleEditIncidents.bind(this);
-        this.handleAddIncident = this.handleAddIncident.bind(this);
-        this.handleIncident = this.handleIncident.bind(this);
-        this.handleComment = this.handleComment.bind(this);
     }
 
     componentWillMount() {
@@ -32,31 +27,7 @@ class NonReservableRoom extends React.Component {
     }
 
     handleEditIncidents() {
-        this.setState({
-            editIncidents: !this.state.editIncidents
-        })
-    }
-
-    handleAddIncident() {
-        this.setState({add: !this.state.add});
-    }
-
-    handleComment(e) {
-        let comment = e.target.value;
-        if (comment === '') {
-            comment = null
-        }
-        this.setState({
-            comment: comment
-        })
-    }
-
-    handleIncident() {
-        let info = this.state;
-        api.addIncidentFromRoomPage(this, info.floorNum, info.roomID, info.comment, false);
-        this.setState({
-            add: false
-        })
+        this.setState({editIncidents: !this.state.editIncidents})
     }
 
     render() {
@@ -78,6 +49,12 @@ class NonReservableRoom extends React.Component {
             inspectMessage = "No Inspection Needed";
         }
 
+        let statusComponent = <StatusComponent floor={info.floorNum}
+                                               room={info.roomID}
+                                               status={info.status}
+                                               haveIncident={info.incident}
+                                               that={this}/>;
+
         let incidentComponent;
         if (info.incident) {
             if (info.editIncidents) {
@@ -92,28 +69,8 @@ class NonReservableRoom extends React.Component {
                                        editIncidents={this.handleEditIncidents}/>;
             }
         } else {
-            if (!info.add) {
-                incidentComponent =
-                    <div className={"center"}>
-                        <button className={"color2"} onClick={this.handleAddIncident}>Add Incident</button>
-                    </div>
-            } else {
-                let isDisabled = this.state.comment === null;
-                incidentComponent =
-                    <div className={"center"}>
-                        <label>Add Incident</label>{' '}
-                        <Input onChange={this.handleComment} type="textarea" className={"width-30 center"}
-                               id="incidentComment"
-                               placeholder={"Enter comment here"}/>
-                        <div className={"col-sm-5 center"}>
-                            <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-4"}
-                                    color={"primary"}>Add Incident</Button>
-                            <Button className={"col-sm-4"} onClick={this.handleAddIncident}>Done</Button>
-                        </div>
-                    </div>;
-            }
+            incidentComponent = <AddIncidentComponent floor={info.floorNum} room={info.roomID} that={this}/>
         }
-
 
         return (
             <div className={"container"}>
@@ -124,9 +81,141 @@ class NonReservableRoom extends React.Component {
                 <p className={"center"}>{employeeMessage}</p>
                 <p className={"center"}>{inspectMessage}</p>
                 <br/>
+                {statusComponent}
+                <br/>
                 {incidentComponent}
             </div>
         );
+    }
+}
+
+class StatusComponent extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            statusChange: false,
+            updatedStatus: "Dirty",
+            error: false
+        };
+
+        this.handleUpdatedStatus = this.handleUpdatedStatus.bind(this);
+        this.handleStatusChange = this.handleStatusChange.bind(this);
+        this.changeStatus = this.changeStatus.bind(this);
+    }
+
+    changeStatus() {
+        let {updatedStatus} = this.state;
+        let {floor, room, that, haveIncident, status} = this.props;
+        if (!haveIncident || status === 'Clean') {
+            api.changeRoomStatus(that, updatedStatus, floor, room, false);
+            this.handleStatusChange();
+        } else {
+            this.setState({error: true});
+        }
+    }
+
+    handleUpdatedStatus(e) {
+        let updatedStatus = e.target.value;
+        this.setState({updatedStatus: updatedStatus});
+    }
+
+    handleStatusChange() {
+        this.setState({
+            statusChange: !this.state.statusChange,
+            error: false
+        });
+    }
+
+    render() {
+        let info = this.state;
+        let statusComponent;
+        if (info.statusChange) {
+            statusComponent =
+                <div className={"col-sm-4 center"}>
+                    <label>Status</label>
+                    <Input onClick={this.handleUpdatedStatus} type="select" id="statusSelect">
+                        <option value={"Dirty"}>Dirty</option>
+                        <option value={"Clean"}>Clean</option>
+                    </Input>
+                    <button className={"color2"} onClick={this.changeStatus}>Update</button>
+                    <button className={"color2"} onClick={this.handleStatusChange}>Cancel</button>
+                </div>
+
+        } else {
+            statusComponent =
+                <div className={"center"}>
+                    <button className={"color2"} onClick={this.handleStatusChange}>Update Status</button>
+                </div>
+        }
+
+        return (
+            <div>
+                {info.error && <p typeof={"error"} className={"error"} id={"error"}>
+                    {"All incidents must be resolved before status can be changed"}</p>}
+                {statusComponent}
+            </div>
+        );
+    }
+}
+
+class AddIncidentComponent extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            add: false,
+            comment: null,
+        };
+
+        this.handleAddIncident = this.handleAddIncident.bind(this);
+        this.handleIncident = this.handleIncident.bind(this);
+        this.handleComment = this.handleComment.bind(this);
+    }
+
+    handleAddIncident() {
+        this.setState({add: !this.state.add});
+    }
+
+    handleComment(e) {
+        let comment = e.target.value;
+        if (comment === '') {
+            comment = null
+        }
+        this.setState({comment: comment});
+    }
+
+    handleIncident() {
+        let info = this.state;
+        let {that, floor, room} = this.props;
+        api.addIncidentFromRoomPage(that, floor, room, info.comment, false);
+        this.setState({add: false});
+    }
+
+    render() {
+        let info = this.state, incidentComponent;
+        if (!info.add) {
+            incidentComponent =
+                <div className={"center"}>
+                    <button className={"color2"} onClick={this.handleAddIncident}>Add Incident</button>
+                </div>
+        } else {
+            let isDisabled = this.state.comment === null;
+            incidentComponent =
+                <div className={"center"}>
+                    <label>Add Incident</label>{' '}
+                    <Input onChange={this.handleComment} type="textarea" className={"width-30 center"}
+                           id="incidentComment"
+                           placeholder={"Enter comment here"}/>
+                    <div className={"col-sm-5 center"}>
+                        <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-4"}
+                                color={"primary"}>Add Incident</Button>
+                        <Button className={"col-sm-4"} onClick={this.handleAddIncident}>Done</Button>
+                    </div>
+                </div>;
+        }
+
+        return (incidentComponent);
     }
 }
 
@@ -169,9 +258,7 @@ class EditIncidentComponent extends React.Component {
         if (comment === '') {
             comment = null
         }
-        this.setState({
-            comment: comment
-        })
+        this.setState({comment: comment});
     }
 
     handleIncident() {
@@ -243,17 +330,12 @@ class EditIndividualIncident extends React.Component {
     handleUpdateComment() {
         let info = this.state;
         api.updateIncident(info.room, info.key, info.updatedIncident);
-
-        this.setState({
-            incident: info.updatedIncident
-        })
+        this.setState({incident: info.updatedIncident});
     }
 
     render() {
         let info = this.state;
-
-        let isDisabled =
-            info.incident === info.updatedIncident;
+        let isDisabled = info.incident === info.updatedIncident;
 
         return (
             <div>

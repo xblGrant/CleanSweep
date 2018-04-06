@@ -780,7 +780,6 @@ export const getReservableRoomInformation = (that, roomID) => {
                     updates.roomID = room.key;
                     updates.floorNum = floor.key;
                     updates.assignedEmployee = room.val().assignedEmployee;
-                    updates.departureDate = room.val().departureDate;
                     updates.guest = room.val().guest;
                     updates.isReservable = room.val().isReservable;
                     updates.wakeupCall = room.val().wakeupCall;
@@ -870,6 +869,12 @@ export const resolveIncident = (that, room, incidentKey, floor, isReservableRoom
                     } else {
                         nonReservableRoomNoIncidents(that, room, floor);
                     }
+                } else {
+                    if (isReservableRoom) {
+                        getReservableRoomInformation(that, room);
+                    } else {
+                        getNonReservableRoomInformation(that, room);
+                    }
                 }
             });
         });
@@ -900,7 +905,6 @@ export const addIncidentFromRoomPage = (that, floor, room, comment, areReservabl
     }).then(() => {
         let updates = {};
         let currentIncident = lastIncident + 1;
-        console.log(currentIncident);
 
         updates['/Incidents/' + room + '/' + currentIncident] = comment;
         firebase.db.ref().update(updates);
@@ -939,6 +943,28 @@ const addNonReservableRoomIncidentFromRoomPage = (that, room) => {
     });
 
 
+};
+
+export const changeRoomStatus = (that, status, floor, room, isReservableRoom) => {
+    if (isReservableRoom){
+        changeReservableRoomStatus(that, status, floor, room);
+    } else {
+        changeNonReservableRoomStatus(that, status, floor, room);
+    }
+};
+const changeReservableRoomStatus = (that, status, floor, room) => {
+    firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
+        status: status
+    }).then(() => {
+        getReservableRoomInformation(that, room);
+    });
+};
+const changeNonReservableRoomStatus = (that, status, floor, room) => {
+    firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).update({
+        status: status
+    }).then(() => {
+        getNonReservableRoomInformation(that, room);
+    });
 };
 
 // new room
@@ -1000,7 +1026,6 @@ export const getNewFloor = (that) => {
 export const createNewReservableRoom = (floor, room) => {
     firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).set({
         assignedEmployee: "none",
-        departureDate: "",
         guest: false,
         incident: false,
         inspect: false,
@@ -1222,7 +1247,7 @@ export const declineInspectRoom = (that) => {
 export const checkIn = (that, floorNum, roomNum) => {
     firebase.db.ref('/Rooms/Reservable/' + floorNum + '/' + roomNum).update({
         guest: true
-    })
+    });
 };
 export const checkOut = (that, floorNum, roomNum) => {
     firebase.db.ref('/Rooms/Reservable/' + floorNum + '/' + roomNum).update({
