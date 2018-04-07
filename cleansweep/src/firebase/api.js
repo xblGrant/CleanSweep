@@ -1372,7 +1372,6 @@ const addNonReservableRoomIncident = (room) => {
 
 };
 
-
 // assign rooms
 export const assignRoom = (room, employee) => {
     (room.isReservableRoom) ?

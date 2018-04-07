@@ -18,10 +18,13 @@ class InspectRoom extends React.Component {
         this.state = {
             rooms: [],
             selectedRoom: null,
-            selectedFloor: null,
-            areReservableRooms: false
+            selectedFloor: '000',
+            areReservableRooms: false,
+            submitted: false,
+            submissionMessage: ''
         };
 
+        this.isSubmitted = this.isSubmitted.bind(this);
         this.handleInspect = this.handleInspect.bind(this);
         this.handleDecline = this.handleDecline.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
@@ -31,6 +34,10 @@ class InspectRoom extends React.Component {
 
     componentDidMount() {
         api.getListofAllRoomsNeedInspected(this);
+    }
+
+    isSubmitted(val) {
+        this.setState({submitted: val});
     }
 
     handleFloorSelect(e) {
@@ -44,9 +51,8 @@ class InspectRoom extends React.Component {
         else
             api.getListofAllRoomsNeedInspectedByFloor(this, e.target.value);
 
-        this.setState({
-            selectedRoom: null
-        })
+        this.setState({ selectedRoom: null });
+        this.isSubmitted(false);
     }
 
     handleRoomSelect(e) {
@@ -61,18 +67,19 @@ class InspectRoom extends React.Component {
             }
         }
 
-        this.setState({
-            selectedRoom: room
-        })
+        this.setState({ selectedRoom: room });
+        this.isSubmitted(false);
     }
 
     handleInspect() {
         api.inspectRoom(this);
+        this.setState({ submissionMessage: "Room Approved"});
         this.handleUpdateRooms();
     }
 
     handleDecline() {
         api.declineInspectRoom(this);
+        this.setState({ submissionMessage: "Room Declined"});
         this.handleUpdateRooms();
     }
 
@@ -82,14 +89,17 @@ class InspectRoom extends React.Component {
         let updatedRoomList = roomList.filter(function(e) {
             return e !== selectedRoom
         });
+
         this.setState({
-            rooms: updatedRoomList
+            rooms: updatedRoomList,
+            submitted: true
         });
+
+        this.isSubmitted(true);
     }
 
     render() {
-        let isDisabled = this.state.selectedRoom === null ||
-            this.state.selectedFloor === null;
+        let isDisabled = this.state.selectedRoom === null;
 
         return (
             <div className="container">
@@ -101,7 +111,7 @@ class InspectRoom extends React.Component {
                     <FormGroup row>
                         <div className={"col-sm-4 center"}>
                             <Label for="floorSelect">Floor</Label>
-                            <Input onClick={this.handleFloorSelect} type="select" id="floorSelect" multiple>
+                            <Input onClick={this.handleFloorSelect} type="select" id="floorSelect">
                                 <CreateFloorOptions />
                             </Input>
                         </div>
@@ -115,7 +125,8 @@ class InspectRoom extends React.Component {
                             </Input>
                         </div>
                     </FormGroup>
-
+                    {this.state.submitted && <p className={"submission"} id={"submitMessage"}>
+                        {this.state.submissionMessage}</p>}
                     <br/>
                     <div className={"row"}>
                         <div className={"col-sm-5 center"}>

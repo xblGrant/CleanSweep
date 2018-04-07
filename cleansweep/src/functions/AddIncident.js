@@ -19,9 +19,11 @@ class AddIncident extends React.Component {
             rooms: [],
             selectedRoom: null,
             comment: null,
-            areReservableRooms: false
+            areReservableRooms: false,
+            submitted: false
         };
 
+        this.isSubmitted = this.isSubmitted.bind(this);
         this.handleComment = this.handleComment.bind(this);
         this.handleRoomType = this.handleRoomType.bind(this);
         this.handleRoomSelect = this.handleRoomSelect.bind(this);
@@ -31,6 +33,10 @@ class AddIncident extends React.Component {
 
     componentDidMount() {
         api.getListofAllReservableRooms(this);
+    }
+
+    isSubmitted(val) {
+        this.setState({submitted: val});
     }
 
     handleFloorSelect(e) {
@@ -47,25 +53,22 @@ class AddIncident extends React.Component {
                 api.getListofAllNonReservableRoomsByFloor(this, e.target.value);
         }
 
-        this.setState({
-            selectedRoom: null
-        })
+        this.setState({ selectedRoom: null });
+        this.isSubmitted(false);
     }
 
     handleRoomSelect(e) {
         let room = e.target.value;
         if (room === '') {room = null}
-        this.setState({
-            selectedRoom: room
-        })
+        this.setState({ selectedRoom: room });
+        this.isSubmitted(false);
     }
 
     handleComment(e) {
         let comment = e.target.value;
         if (comment === '') {comment = null}
-        this.setState({
-            comment: comment
-        })
+        this.setState({ comment: comment });
+        this.isSubmitted(false);
     }
 
     handleRoomType() {
@@ -88,6 +91,8 @@ class AddIncident extends React.Component {
             else
                 api.getListofAllNonReservableRoomsByFloor(this, floor);
         }
+
+        this.isSubmitted(false);
     }
 
     handleIncident() {
@@ -95,10 +100,10 @@ class AddIncident extends React.Component {
         let floor = Math.floor(selectedRoom / 100) * 100;
 
         api.addIncident(floor, selectedRoom, comment, !areReservableRooms);
-        window.alert("Incident successfully added!");
 
         document.getElementById("incidentComment").value = "";
-        this.setState({comment: null});
+        this.setState({ comment: null });
+        this.isSubmitted(true);
     }
 
     render() {
@@ -156,6 +161,8 @@ class AddIncident extends React.Component {
                         </div>
                     </div>
                 </Form>
+                {this.state.submitted && <p className={"submission"} id={"submitMessage"}>
+                    {"Incident added successfully"}</p>}
             </div>
         );
     }

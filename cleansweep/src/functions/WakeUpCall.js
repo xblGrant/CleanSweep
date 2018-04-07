@@ -15,8 +15,10 @@ class AddWakeUp extends React.Component {
             wakeUpDate: null,
             isDisabled: true,
             selectedRoom: null,
+            submitted: false
         };
 
+        this.isSubmitted = this.isSubmitted.bind(this);
         this.handleDate = this.handleDate.bind(this);
         this.handleTime = this.handleTime.bind(this);
         this.handleSelectedRoom = this.handleSelectedRoom.bind(this);
@@ -28,35 +30,37 @@ class AddWakeUp extends React.Component {
         api.getListofAllReservedRooms(this);
     }
 
+    isSubmitted(val) {
+        this.setState({submitted: val});
+    }
+
     handleFloorSelect(e) {
         if (e.target.value === '000')
             api.getListofAllReservedRooms(this);
         else
             api.getListofAllReservedRoomsByFloor(this, e.target.value);
+        this.isSubmitted(false);
     }
 
     handleTime(e) {
         let time = e.target.value;
         if (time === '') {time = null}
-        this.setState({
-            wakeUpTime: time,
-        })
+        this.setState({ wakeUpTime: time });
+        this.isSubmitted(false);
     }
 
     handleDate(e) {
         let date = e.target.value;
         if (date === '') {date = null}
-        this.setState({
-            wakeUpDate: date,
-        })
+        this.setState({ wakeUpDate: date });
+        this.isSubmitted(false);
     }
 
     handleSelectedRoom(e) {
         let room = e.target.value;
         if (room === '') {room = null}
-        this.setState({
-            selectedRoom: room
-        })
+        this.setState({ selectedRoom: room });
+        this.isSubmitted(false);
     }
 
     handleNewWakeUp(){
@@ -71,7 +75,7 @@ class AddWakeUp extends React.Component {
         let floor = Math.floor(selectedRoom / 100) * 100;
 
         api.addNewWakeUpCall(selectedRoom, floor, date, wakeUpTime);
-        window.alert("Wakeup Call Added Successfully!");
+        this.isSubmitted(true);
     }
 
     render() {
@@ -126,6 +130,8 @@ class AddWakeUp extends React.Component {
                             </div>
                         </div>
                     </Form>
+                    {this.state.submitted && <p className={"submission"} id={"submitMessage"}>
+                        {"Wake-Up call added successfully"}</p>}
                 </div>
             </div>
         );
