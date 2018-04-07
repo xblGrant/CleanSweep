@@ -347,11 +347,26 @@ export const getRoomsWithIncidents = (that) => {
 };
 export const getRoomsWithWakeUpCalls = (that) => {
     let roomList = [];
+    let RoomDateArr = null;
+    let RoomDate = null;
     let isReservableRoom = true;
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
     roomRef.orderByKey().once('value', function (floors) {
         floors.forEach(function (allRooms) {
             allRooms.forEach(function (room) {
+                //splits the wakeupcall into two pices. 00/00/00 & 00:00 portion
+                //parses each section into how many milliseconds passed from 1970 00:00
+                //in order for easy testing.
+                if (room.val().wakeupCall !== 'none') {
+                    RoomDateArr = room.val().wakeupCall.split('-');
+                    RoomDate = new Date(RoomDateArr[0] + RoomDateArr[1]);
+                    if (Date.parse(RoomDate) < Date.now())
+                        firebase.db.ref("/Rooms/Reservable/" + allRooms.key.toString()
+                            + "/" + room.key.toString() + "/")
+                            .update({
+                                wakeupCall: 'none'
+                            });
+                }
                 if (room.val().wakeupCall !== 'none') {
                     let assigned = (room.val().assignedEmployee !== 'none');
                     roomList.push(
