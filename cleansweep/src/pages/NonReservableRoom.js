@@ -12,7 +12,7 @@ class NonReservableRoom extends React.Component {
             roomID: null,
             floorNum: null,
             currentUser: null,
-            assignedEmployee: null,
+            assignedEmployee: "none",
             assignedEmployeeName: null,
             incidentList: [],
             status: null,
@@ -37,7 +37,7 @@ class NonReservableRoom extends React.Component {
         let roomInfo = [info.roomID, info.floorNum];
 
         let employeeMessage;
-        if (info.assignedEmployee !== null) {
+        if (info.assignedEmployee !== "none") {
             employeeMessage = "Assigned to " + info.assignedEmployeeName;
         } else {
             employeeMessage = "Not Assigned";

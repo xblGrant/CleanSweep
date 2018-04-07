@@ -12,7 +12,7 @@ class ReservableRoom extends React.Component {
             roomID: null,
             floorNum: null,
             currentUser: null,
-            assignedEmployee: null,
+            assignedEmployee: "none",
             assignedEmployeeName: null,
             guest: null,
             incidents: null,
@@ -45,7 +45,7 @@ class ReservableRoom extends React.Component {
         }
 
         let employeeMessage;
-        if (info.assignedEmployee !== null) {
+        if (info.assignedEmployee !== "none") {
             employeeMessage = "Assigned to " + info.assignedEmployeeName;
         } else {
             employeeMessage = "Not Assigned";

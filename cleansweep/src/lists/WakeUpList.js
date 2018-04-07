@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Form, FormGroup} from 'reactstrap';
+import {Form, Label, FormGroup, Input} from 'reactstrap';
+import {CreateFloorOptions} from "../components/Generators";
 import * as api from '../firebase/api';
 import {Helmet} from "react-helmet";
 import * as routes from "../constants/routes";
@@ -14,10 +15,21 @@ class WakeUpList extends React.Component {
             rooms: [],
             selectedRooms: null,
         };
+
+        this.handleFloorSelect = this.handleFloorSelect.bind(this);
     }
 
     componentDidMount() {
         api.getRoomsWithWakeUpCalls(this);
+    }
+
+    handleFloorSelect(e) {
+        let floor = e.target.value;
+        if (floor === '000') {
+            api.getRoomsWithWakeUpCalls(this);
+        } else {
+            api.getRoomsWithWakeUpCallsByFloor(this, floor);
+        }
     }
 
     render() {
@@ -29,6 +41,15 @@ class WakeUpList extends React.Component {
                 </Helmet>
                 <div>
                     <Form>
+                        <FormGroup>
+                            <div className={"col-sm-4 center"}>
+                                <Label for="floorSelect">Floor</Label>
+                                <Input onClick={this.handleFloorSelect} type="select" id="floorSelect">
+                                    <CreateFloorOptions/>
+                                </Input>
+                            </div>
+                        </FormGroup>
+
                         <FormGroup>
                             <WakeUpComponent rooms={this.state.rooms}/>
                         </FormGroup>
