@@ -15,10 +15,12 @@ class AssignRooms extends React.Component {
             employees: [],
             selectedRooms: null,
             selectedEmployee: null,
+            selectedFloor: '000',
             submitted: false
         };
 
         this.isSubmitted = this.isSubmitted.bind(this);
+        this.updateRooms = this.updateRooms.bind(this);
         this.handleSelectionFinish = this.handleSelectionFinish.bind(this);
         this.handleSelectionClear = this.handleSelectionClear.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
@@ -42,6 +44,7 @@ class AssignRooms extends React.Component {
         else
             api.getAllUnassignedSelectableRoomsByFloor(this, e.target.value);
 
+        this.setState({ selectedFloor: e.target.value });
         this.isSubmitted(false);
     }
 
@@ -72,8 +75,15 @@ class AssignRooms extends React.Component {
         let {selectedRooms, selectedEmployee} = this.state;
         for (let i = 0; i < selectedRooms.length; i++)
             api.assignRoom(selectedRooms[i], selectedEmployee);
-        api.getAllUnassignedSelectableRooms(this);
+        this.updateRooms(this.state.selectedFloor);
         this.isSubmitted(true);
+    }
+
+    updateRooms(floor) {
+        if (floor === '000')
+            api.getAllUnassignedSelectableRooms(this);
+        else
+            api.getAllUnassignedSelectableRoomsByFloor(this, floor);
     }
 
     clearAssignments() {
