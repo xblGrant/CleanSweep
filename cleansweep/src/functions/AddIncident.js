@@ -96,7 +96,9 @@ class AddIncident extends React.Component {
 
         api.addIncident(floor, selectedRoom, comment, !areReservableRooms);
         window.alert("Incident successfully added!");
-        window.location.reload();
+
+        document.getElementById("incidentComment").value = "";
+        this.setState({comment: null});
     }
 
     render() {

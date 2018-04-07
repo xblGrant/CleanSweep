@@ -418,6 +418,8 @@ class EditIncidentComponent extends React.Component {
     handleIncident() {
         let info = this.state;
         api.addIncidentFromRoomPage(this.props.instance, info.roomInfo[1], info.roomInfo[0], info.comment, true);
+        document.getElementById("incidentComment").value = '';
+        this.setState({comment: null});
     }
 
     render() {
