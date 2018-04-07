@@ -1558,6 +1558,13 @@ export const checkOut = (that, floorNum, roomNum) => {
     })
 };
 
+// change role
+export const changeRole = (employee, isAdmin) => {
+    firebase.db.ref('/Employee/' + employee).update({
+       isAdmin: isAdmin
+    });
+};
+
 // misc
 const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,

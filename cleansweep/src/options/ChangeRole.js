@@ -10,21 +10,38 @@ class AddWakeUp extends React.Component {
         super(props);
 
         this.state = {
-            employees: []
+            employees: [],
+            selectedEmployee: '',
+            isAdmin: null
         };
 
         this.handleChangeRole = this.handleChangeRole.bind(this);
+        this.handleEmployeeSelect = this.handleEmployeeSelect.bind(this);
+        this.handlePromotionDemotion = this.handlePromotionDemotion.bind(this);
     }
 
     componentDidMount() {
         api.getAllEmployees(this);
     }
 
+    handlePromotionDemotion(e) {
+        this.setState({isAdmin: e.target.value});
+    }
+
+    handleEmployeeSelect(e) {
+        this.setState({selectedEmployee: e.target.value});
+    }
+
     handleChangeRole() {
-        //TODO: handle changing of employee role
+        let {isAdmin, selectedEmployee} = this.state;
+        api.changeRole(selectedEmployee, isAdmin);
     }
 
     render() {
+        let isDisabled =
+            this.state.selectedEmployee === '' ||
+            this.state.isAdmin === null;
+
         return (
             <div className={"container"}>
                 <Helmet>
@@ -44,15 +61,15 @@ class AddWakeUp extends React.Component {
                         </FormGroup>
                     </div>
                     <hr/>
-                    <div className={"center"} onChange={{/*this.handlePromotionDemotion*/}}>
-                        <input type={"radio"} name={"career"} value={"promote"}/> Promote to Manager<br/>
-                        <input type={"radio"} name={"career"} value={"demote"}/> Demote to Employee<br/>
+                    <div className={"center"} onChange={this.handlePromotionDemotion}>
+                        <input type={"radio"} name={"career"} value={true}/> Promote to Manager<br/>
+                        <input type={"radio"} name={"career"} value={false}/> Demote to Employee<br/>
                     </div>
                     <br/>
                     <div className={"row"}>
                         <div className={"col-sm-6 center"}>
                             <Button className={"col-sm-5 center"} onClick={this.handleChangeRole}
-                                    color={"primary"}>Submit</Button>
+                                    disabled={isDisabled} color={"primary"}>Submit</Button>
                             <Button className={"col-sm-5 center"} href={routes.HOME}> Cancel </Button>
                         </div>
                     </div>
