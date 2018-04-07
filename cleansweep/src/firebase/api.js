@@ -1032,6 +1032,8 @@ export const getReservableRoomInformation = (that, roomID) => {
         firebase.db.ref("/Employee/" + updates.assignedEmployee).once('value', function (employee) {
             if (updates.assignedEmployee !== "none") {
                 updates.assignedEmployeeName = employee.val().username;
+            } else {
+                updates.assignedEmployeeName = '';
             }
         }).then(() => {
             that.setState(updates);
@@ -1076,6 +1078,8 @@ export const getNonReservableRoomInformation = (that, roomID) => {
         firebase.db.ref("/Employee/" + updates.assignedEmployee).once('value', function (employee) {
             if (updates.assignedEmployee !== "none") {
                 updates.assignedEmployeeName = employee.val().username;
+            } else {
+                updates.assignedEmployeeName = '';
             }
         }).then(() => {
             that.setState(updates);
@@ -1193,31 +1197,43 @@ const addNonReservableRoomIncidentFromRoomPage = (that, room) => {
 
 };
 
-export const changeRoomStatus = (that, status, floor, room, isReservableRoom) => {
+export const changeRoomStatus = (that, status, floor, room, assignedEmp, isReservableRoom) => {
     if (isReservableRoom) {
-        changeReservableRoomStatus(that, status, floor, room);
+        changeReservableRoomStatus(that, status, floor, room, assignedEmp);
     } else {
-        changeNonReservableRoomStatus(that, status, floor, room);
+        changeNonReservableRoomStatus(that, status, floor, room, assignedEmp);
     }
 };
-const changeReservableRoomStatus = (that, status, floor, room) => {
+const changeReservableRoomStatus = (that, status, floor, room, assignedEmp) => {
     let needInspected = false;
-    if (status === 'Clean')
+    let currentEmp = assignedEmp, prevEmp = "none";
+    if (status === 'Clean') {
         needInspected = true;
+        currentEmp = "none";
+        prevEmp = assignedEmp;
+    }
     firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
         status: status,
         inspect: needInspected,
+        assignedEmployee: currentEmp,
+        prevAssignedEmployee: prevEmp,
     }).then(() => {
         getReservableRoomInformation(that, room);
     });
 };
-const changeNonReservableRoomStatus = (that, status, floor, room) => {
+const changeNonReservableRoomStatus = (that, status, floor, room, assignedEmp) => {
     let needInspected = false;
-    if (status === 'Clean')
+    let currentEmp = assignedEmp, prevEmp = "none";
+    if (status === 'Clean') {
         needInspected = true;
+        currentEmp = "none";
+        prevEmp = assignedEmp;
+    }
     firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).update({
         status: status,
-        inspect: needInspected
+        inspect: needInspected,
+        assignedEmployee: currentEmp,
+        prevAssignedEmployee: prevEmp,
     }).then(() => {
         getNonReservableRoomInformation(that, room);
     });
@@ -1298,6 +1314,7 @@ export const getNewFloor = (that) => {
 export const createNewReservableRoom = (floor, room) => {
     firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).set({
         assignedEmployee: "none",
+        prevAssignedEmployee: "none",
         guest: false,
         incident: false,
         inspect: false,
@@ -1309,6 +1326,7 @@ export const createNewReservableRoom = (floor, room) => {
 export const createNewNonReservableRoom = (floor, room) => {
     firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).set({
         assignedEmployee: "none",
+        prevAssignedEmployee: "none",
         incident: false,
         inspect: false,
         status: "Clean",
@@ -1390,128 +1408,140 @@ const assignNonReservableRoom = (room, employee) => {
 };
 
 // inspect room
-export const inspectRoom = (that) => {
-    let room = that.state.selectedRoom;
-    let floor = that.state.selectedFloor;
-    let isReservable = that.state.areReservableRooms;
+export const inspectRoom = (floor, room, isReservableRoom) => {
     if (floor === '000') {
-        //'all' selection for floor. must search entire db for room
-        if (isReservable) {
-            //reservable room
-            firebase.db.ref("/Rooms/Reservable/").once('value',
-                function (dbFloors) {
-                    dbFloors.forEach(function (dbAllRooms) {
-                        dbAllRooms.forEach(function (dbRoom) {
-                            if (dbRoom.key === room) {
-                                floor = dbAllRooms.key.toString();
-                            }
-                        })
-                    })
-                }).then(() => {
-                firebase.db.ref("/Rooms/Reservable/" + floor + "/"
-                    + room + "/").update({
-                    inspect: false,
-                    status: "Clean"
-                });
-            });
-        }
-        else {
-            //nonreservable room
-            firebase.db.ref("/Rooms/NonReservable/").once('value',
-                function (dbFloors) {
-                    dbFloors.forEach(function (dbAllRooms) {
-                        dbAllRooms.forEach(function (dbRoom) {
-                            if (dbRoom.key === room) {
-                                floor = dbAllRooms.key.toString();
-                            }
-                        })
-                    })
-                }).then(() => {
-                firebase.db.ref("/Rooms/NonReservable/" + floor + "/"
-                    + room + "/").update({
-                    inspect: false,
-                    status: "Clean"
-                });
-            });
-        }
+        if (isReservableRoom)
+            inspectReservableRoom(room);
+        else
+            inspectNonReservableRoom(room);
     }
     else {
-        if (isReservable) {
+        if (isReservableRoom) {
             firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
                 inspect: false,
-                status: "Clean"
             });
         }
         else {
             firebase.db.ref("/Rooms/NonReservable/" + floor + "/" + room + "/").update({
                 inspect: false,
-                status: "Clean"
             });
         }
     }
 };
+const inspectReservableRoom = (room) => {
+    let floor;
+    firebase.db.ref("/Rooms/Reservable/").once('value', function (dbFloors) {
+        dbFloors.forEach(function (dbAllRooms) {
+            dbAllRooms.forEach(function (dbRoom) {
+                if (dbRoom.key === room)
+                    floor = dbAllRooms.key.toString();
+            })
+        })
+    }).then(() => {
+        firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
+            inspect: false
+        });
+    });
+};
+const inspectNonReservableRoom = (room) => {
+    let floor;
+    firebase.db.ref("/Rooms/NonReservable/").once('value', function (dbFloors) {
+        dbFloors.forEach(function (dbAllRooms) {
+            dbAllRooms.forEach(function (dbRoom) {
+                if (dbRoom.key === room) {
+                    floor = dbAllRooms.key.toString();
+                }
+            })
+        })
+    }).then(() => {
+        firebase.db.ref("/Rooms/NonReservable/" + floor + "/" + room + "/").update({
+            inspect: false,
+        });
+    });
+};
+
 //decline inspection
-export const declineInspectRoom = (that) => {
-    let room = that.state.selectedRoom;
-    let floor = that.state.selectedFloor;
-    let isReservable = that.state.areReservableRooms;
+export const declineInspectRoom = (floor, room, isReservableRoom) => {
     if (floor === '000') {
-        //'all' selection for floor. must search entire db for room
-        if (isReservable) {
-            //reservable room
-            firebase.db.ref("/Rooms/Reservable/").once('value',
-                function (dbFloors) {
-                    dbFloors.forEach(function (dbAllRooms) {
-                        dbAllRooms.forEach(function (dbRoom) {
-                            if (dbRoom.key === room) {
-                                floor = dbAllRooms.key.toString();
-                            }
-                        })
-                    })
-                }).then(() => {
-                firebase.db.ref("/Rooms/Reservable/" + floor + "/"
-                    + room + "/").update({
-                    inspect: false,
-                    status: "Dirty",
-                    isReservable: false
-                });
-            });
-        }
-        else {
-            //nonreservable room
-            firebase.db.ref("/Rooms/NonReservable/").once('value',
-                function (dbFloors) {
-                    dbFloors.forEach(function (dbAllRooms) {
-                        dbAllRooms.forEach(function (dbRoom) {
-                            if (dbRoom.key === room) {
-                                floor = dbAllRooms.key.toString();
-                            }
-                        })
-                    })
-                }).then(() => {
-                firebase.db.ref("/Rooms/NonReservable/" + floor + "/"
-                    + room + "/").update({
-                    inspect: false,
-                    status: "Dirty"
-                });
-            });
-        }
+        if (isReservableRoom)
+            declineReservableRoom(room);
+        else
+            declineNonReservableRoom(room);
     }
     else {
-        if (isReservable) {
-            firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
-                inspect: false,
-                status: "Dirty",
-                isReservable: false
-            });
-        }
-        else {
-            firebase.db.ref("/Rooms/NonReservable/" + floor + "/" + room + "/").update({
-                inspect: false,
-                status: "Dirty"
-            });
-        }
+        if (isReservableRoom)
+            declineReservableRoomWithFloor(floor, room);
+        else
+            declineNonReservableRoomWithFloor(floor, room);
     }
+};
+const declineReservableRoom = (room) => {
+    let floor, assignedEmp;
+    firebase.db.ref("/Rooms/Reservable/").once('value', function (dbFloors) {
+        dbFloors.forEach(function (dbAllRooms) {
+            dbAllRooms.forEach(function (dbRoom) {
+                if (dbRoom.key === room) {
+                    floor = dbAllRooms.key.toString();
+                    assignedEmp = dbRoom.val().prevAssignedEmployee;
+                }
+            })
+        })
+    }).then(() => {
+        firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
+            inspect: false,
+            status: "Dirty",
+            isReservable: false,
+            assignedEmployee: assignedEmp
+        });
+    });
+};
+const declineReservableRoomWithFloor = (floor, room) => {
+    let assignedEmp;
+    let ref = firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/");
+    ref.once('value', function(info) {
+        assignedEmp = info.val().prevAssignedEmployee;
+    }).then(() => {
+        ref.update({
+            inspect: false,
+            status: "Dirty",
+            isReservable: false,
+            assignedEmployee: assignedEmp
+        });
+    })
+
+};
+const declineNonReservableRoom = (room) => {
+    let floor, assignedEmp;
+    firebase.db.ref("/Rooms/NonReservable/").once('value', function (dbFloors) {
+        dbFloors.forEach(function (dbAllRooms) {
+            dbAllRooms.forEach(function (dbRoom) {
+                if (dbRoom.key === room) {
+                    floor = dbAllRooms.key.toString();
+                    assignedEmp = dbRoom.val().prevAssignedEmployee;
+                }
+            })
+        })
+    }).then(() => {
+        firebase.db.ref("/Rooms/NonReservable/" + floor + "/" + room + "/").update({
+            inspect: false,
+            status: "Dirty",
+            assignedEmployee: assignedEmp
+        });
+    });
+};
+const declineNonReservableRoomWithFloor = (floor, room) => {
+    let assignedEmp;
+    let ref = firebase.db.ref("/Rooms/NonReservable/" + floor + "/" + room + "/");
+    ref.once('value', function(info) {
+        assignedEmp = info.val().prevAssignedEmployee;
+    }).then(() => {
+        ref.update({
+            inspect: false,
+            status: "Dirty",
+            assignedEmployee: assignedEmp
+        });
+    })
+
 };
 
 // check in/out

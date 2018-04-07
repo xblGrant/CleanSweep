@@ -19,7 +19,7 @@ class InspectRoom extends React.Component {
             rooms: [],
             selectedRoom: null,
             selectedFloor: '000',
-            areReservableRooms: false,
+            isReservableRoom: false,
             submitted: false,
             submissionMessage: ''
         };
@@ -60,10 +60,10 @@ class InspectRoom extends React.Component {
         if (room === '') {room = null}
         else {
             if (room.charAt(0) >= '0' && room.charAt(0) <= '9') {
-                this.setState({areReservableRooms: true});
+                this.setState({isReservableRoom: true});
             }
             else {
-                this.setState({areReservableRooms: false});
+                this.setState({isReservableRoom: false});
             }
         }
 
@@ -72,13 +72,15 @@ class InspectRoom extends React.Component {
     }
 
     handleInspect() {
-        api.inspectRoom(this);
+        let {selectedRoom, selectedFloor, isReservableRoom } = this.state;
+        api.inspectRoom(selectedFloor, selectedRoom, isReservableRoom);
         this.setState({ submissionMessage: "Room Approved"});
         this.handleUpdateRooms();
     }
 
     handleDecline() {
-        api.declineInspectRoom(this);
+        let {selectedRoom, selectedFloor, isReservableRoom } = this.state;
+        api.declineInspectRoom(selectedFloor, selectedRoom, isReservableRoom);
         this.setState({ submissionMessage: "Room Declined"});
         this.handleUpdateRooms();
     }

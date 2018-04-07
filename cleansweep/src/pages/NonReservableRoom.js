@@ -11,7 +11,7 @@ class NonReservableRoom extends React.Component {
             roomType: null,
             roomID: null,
             floorNum: null,
-            currentUser: null,
+            currentUser: '',
             assignedEmployee: "none",
             assignedEmployeeName: null,
             incidentList: [],
@@ -54,10 +54,11 @@ class NonReservableRoom extends React.Component {
         let statusComponent = null;
         if (info.currentUser === info.assignedEmployee) {
             statusComponent = <StatusComponent floor={info.floorNum}
-                                                   room={info.roomID}
-                                                   status={info.status}
-                                                   haveIncident={info.incident}
-                                                   that={this}/>;
+                                               room={info.roomID}
+                                               status={info.status}
+                                               haveIncident={info.incident}
+                                               assignedEmp={info.assignedEmployee}
+                                               that={this}/>;
         }
 
         let incidentComponent;
@@ -111,9 +112,9 @@ class StatusComponent extends React.Component {
 
     changeStatus() {
         let {updatedStatus} = this.state;
-        let {floor, room, that, haveIncident, status} = this.props;
+        let {floor, room, that, haveIncident, status, assignedEmp} = this.props;
         if (!haveIncident || status === 'Clean') {
-            api.changeRoomStatus(that, updatedStatus, floor, room, false);
+            api.changeRoomStatus(that, updatedStatus, floor, room, assignedEmp, false);
             this.handleStatusChange();
         } else {
             this.setState({error: true});

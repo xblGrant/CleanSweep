@@ -70,7 +70,7 @@ class ReservableRoom extends React.Component {
             statusComponent =
                 <div>
                     <StatusComponent floor={info.floorNum} room={info.roomID} status={info.status}
-                                     haveIncident={info.incident} that={this}/>
+                                     haveIncident={info.incident} assignedEmp={info.assignedEmployee} that={this}/>
                     <hr/>
                 </div>;
         }
@@ -127,9 +127,9 @@ class StatusComponent extends React.Component {
 
     changeStatus() {
         let {updatedStatus} = this.state;
-        let {floor, room, that, haveIncident, status} = this.props;
+        let {floor, room, that, haveIncident, status, assignedEmp} = this.props;
         if (!haveIncident || status === 'Clean') {
-            api.changeRoomStatus(that, updatedStatus, floor, room, true);
+            api.changeRoomStatus(that, updatedStatus, floor, room, assignedEmp, true);
             this.handleStatusChange();
         } else {
             this.setState({error: true});
