@@ -11,13 +11,15 @@ class ReservableRoom extends React.Component {
             roomType: null,
             roomID: null,
             floorNum: null,
+            currentUser: null,
             assignedEmployee: null,
+            assignedEmployeeName: null,
             guest: null,
             incidents: null,
             incidentList: [],
             isReservable: null,
             status: null,
-            wakeupCall: 'none'
+            wakeupCall: 'none',
         };
 
         this.handleEditIncidents = this.handleEditIncidents.bind(this);
@@ -44,7 +46,7 @@ class ReservableRoom extends React.Component {
 
         let employeeMessage;
         if (info.assignedEmployee !== null) {
-            employeeMessage = "Assigned to " + info.assignedEmployee;
+            employeeMessage = "Assigned to " + info.assignedEmployeeName;
         } else {
             employeeMessage = "Not Assigned";
         }
@@ -57,14 +59,21 @@ class ReservableRoom extends React.Component {
             inspectMessage = "No Inspection Needed";
         }
 
-        let wakeUpComponent = <WakeUpComponent wakeUpCall={info.wakeupCall}
-                                               room={info.roomID}
-                                               that={this}/>;
-        let statusComponent = <StatusComponent floor={info.floorNum}
-                                               room={info.roomID}
-                                               status={info.status}
-                                               haveIncident={info.incident}
-                                               that={this}/>;
+        let wakeUpComponent =
+            <div>
+                <WakeUpComponent wakeUpCall={info.wakeupCall} room={info.roomID} that={this}/>
+                <hr/>
+            </div>;
+
+        let statusComponent = null;
+        if (info.currentUser === info.assignedEmployee) {
+            statusComponent =
+                <div>
+                    <StatusComponent floor={info.floorNum} room={info.roomID} status={info.status}
+                                     haveIncident={info.incident} that={this}/>
+                    <hr/>
+                </div>;
+        }
 
         let incidentComponent;
         if (info.incident) {
@@ -93,12 +102,9 @@ class ReservableRoom extends React.Component {
                 <p className={"center"}>{employeeMessage}</p>
                 <p className={"center"}>{inspectMessage}</p>
                 <hr/>
-                {wakeUpComponent}
-                <hr/>
                 {statusComponent}
-                <hr/>
+                {wakeUpComponent}
                 {incidentComponent}
-                <br/>
             </div>
         );
     }
@@ -212,7 +218,7 @@ class WakeUpComponent extends React.Component {
             api.updateWakeUpCallFromRoom(that, room, floor, date, wakeUpTime);
             this.handleEditWakeUp();
         } else {
-            this.setState({ error: true })
+            this.setState({error: true})
         }
 
     }

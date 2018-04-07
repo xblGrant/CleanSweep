@@ -2,31 +2,21 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button, Label, Form} from 'reactstrap';
 import {WrappedButton, SignOutButton} from './Buttons';
-import {firebase} from "../firebase/index";
 import * as routes from '../constants/routes';
+import * as api from '../firebase/api';
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            user: "Guest"
+            currentUser: "Guest"
         };
     }
 
     componentDidMount() {
-        let currentUser = firebase.auth.currentUser;
-        if (currentUser !== null) {
-            let username = null;
-            let userRef = firebase.db.ref("/Employee/" + currentUser.uid);
-            userRef.once('value', function (currentUser) {
-                username = currentUser.val().username;
-            }).then(() => {
-                this.setState({
-                    user: username
-                })
-            })
-        }
+        let currentUser = api.getCurrentUser();
+        api.getCurrentUserName(this, currentUser);
     }
 
     render() {
@@ -48,7 +38,7 @@ class Header extends React.Component {
                     <Label className={"noMargin"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
                     <Link to={routes.ASSIGNED_ROOMS}>
                         <Button id={"userLink"} className={"center"} color={"link"}
-                                size={"sm"}>{this.state.user}</Button>
+                                size={"sm"}>{this.state.currentUser}</Button>
                     </Link>
                     <div>
                         {button}

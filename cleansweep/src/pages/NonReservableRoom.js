@@ -11,7 +11,9 @@ class NonReservableRoom extends React.Component {
             roomType: null,
             roomID: null,
             floorNum: null,
+            currentUser: null,
             assignedEmployee: null,
+            assignedEmployeeName: null,
             incidentList: [],
             status: null,
             incident: null,
@@ -36,7 +38,7 @@ class NonReservableRoom extends React.Component {
 
         let employeeMessage;
         if (info.assignedEmployee !== null) {
-            employeeMessage = "Assigned to " + info.assignedEmployee;
+            employeeMessage = "Assigned to " + info.assignedEmployeeName;
         } else {
             employeeMessage = "Not Assigned";
         }
@@ -49,11 +51,14 @@ class NonReservableRoom extends React.Component {
             inspectMessage = "No Inspection Needed";
         }
 
-        let statusComponent = <StatusComponent floor={info.floorNum}
-                                               room={info.roomID}
-                                               status={info.status}
-                                               haveIncident={info.incident}
-                                               that={this}/>;
+        let statusComponent = null;
+        if (info.currentUser === info.assignedEmployee) {
+            statusComponent = <StatusComponent floor={info.floorNum}
+                                                   room={info.roomID}
+                                                   status={info.status}
+                                                   haveIncident={info.incident}
+                                                   that={this}/>;
+        }
 
         let incidentComponent;
         if (info.incident) {

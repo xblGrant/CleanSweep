@@ -76,6 +76,20 @@ export const signUp = (that, email, password, userName, history) => {
             that.setState(byPropKey('error', error));
         });
 };
+export const getCurrentUser = () => {
+    return firebase.auth.currentUser;
+};
+export const getCurrentUserName = (that, currentUser) => {
+    if (currentUser !== null) {
+        let username = null;
+        let userRef = firebase.db.ref("/Employee/" + currentUser.uid);
+        userRef.once('value', function (currentUser) {
+            username = currentUser.val().username;
+        }).then(() => {
+            that.setState({currentUser: username});
+        })
+    }
+};
 
 // functions used with react-selectable-fast element
 export const getAllEmployees = (that) => {
@@ -779,6 +793,7 @@ export const getReservableRoomInformation = (that, roomID) => {
                     updates.roomType = 'Reservable';
                     updates.roomID = room.key;
                     updates.floorNum = floor.key;
+                    updates.currentUser = firebase.auth.currentUser.uid;
                     updates.assignedEmployee = room.val().assignedEmployee;
                     updates.guest = room.val().guest;
                     updates.isReservable = room.val().isReservable;
@@ -793,7 +808,7 @@ export const getReservableRoomInformation = (that, roomID) => {
         })
     }).then(() => {
         firebase.db.ref("/Employee/" + updates.assignedEmployee).once('value', function (employee) {
-            updates.assignedEmployee = employee.val().username;
+            updates.assignedEmployeeName = employee.val().username;
         }).then(() => {
             that.setState(updates);
 
@@ -823,6 +838,7 @@ export const getNonReservableRoomInformation = (that, roomID) => {
                     updates.roomType = 'NonReservable';
                     updates.roomID = room.key;
                     updates.floorNum = floor.key;
+                    updates.currentUser = firebase.auth.currentUser.uid;
                     updates.assignedEmployee = room.val().assignedEmployee;
                     updates.status = room.val().status;
                     updates.incident = room.val().incident;
@@ -834,7 +850,7 @@ export const getNonReservableRoomInformation = (that, roomID) => {
         })
     }).then(() => {
         firebase.db.ref("/Employee/" + updates.assignedEmployee).once('value', function (employee) {
-            updates.assignedEmployee = employee.val().username;
+            updates.assignedEmployeeName = employee.val().username;
         }).then(() => {
             that.setState(updates);
             if (hasIncident) {
