@@ -31,7 +31,7 @@ NavigationBar.contextTypes = {
 
 //TODO: use this for maid navigation once we are testing for
 //TODO: current user isAdmin status
-class MaidNavigation extends React.Component {
+class EmployeeAuth extends React.Component {
     constructor(props) {
         super(props);
 
