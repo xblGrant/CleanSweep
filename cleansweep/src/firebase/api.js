@@ -50,6 +50,64 @@ export const passwordReset = (that, email) => {
             this.setState(byPropKey('error', error));
         });
 };
+
+export const handleNewEmployee = (that, email, password, userName, history) => {
+    const INITIAL_STATE = {
+        userName: '',
+        email: '',
+        passwordOne: '',
+        passwordTwo: '',
+        error: null,
+    };
+
+    auth.doCreateUserWithEmailAndPassword(email, password)
+        .then(() => {
+            let employeeRef = firebase.db.ref("/Employee/");
+            employeeRef.child(firebase.auth.currentUser.uid)
+                .set({
+                    username: userName,
+                    email: email,
+                    isAdmin: false
+                });
+
+            that.setState(() => ({...INITIAL_STATE}));
+            history.push(routes.ASSIGNED_ROOMS);
+        })
+        .catch(error => {
+            that.setState(byPropKey('error', error));
+        });
+};
+
+export const handleNewManager = (that, email, password, userName, history) => {
+    const INITIAL_STATE = {
+        userName: '',
+        email: '',
+        passwordOne: '',
+        passwordTwo: '',
+        error: null,
+    };
+
+    auth.doCreateUserWithEmailAndPassword(email, password)
+        .then(() => {
+            let employeeRef = firebase.db.ref("/Employee/");
+            employeeRef.child(firebase.auth.currentUser.uid)
+                .set({
+                    username: userName,
+                    email: email,
+                    isAdmin: true
+                });
+
+            that.setState(() => ({...INITIAL_STATE}));
+            history.push(routes.ASSIGNED_ROOMS);
+        })
+        .catch(error => {
+            that.setState(byPropKey('error', error));
+        });
+};
+
+
+
+
 export const signUp = (that, email, password, userName, history) => {
     const INITIAL_STATE = {
         userName: '',
