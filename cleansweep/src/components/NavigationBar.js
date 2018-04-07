@@ -29,6 +29,69 @@ NavigationBar.contextTypes = {
     authUser: PropTypes.object,
 };
 
+//TODO: use this for maid navigation once we are testing for
+//TODO: current user isAdmin status
+class MaidNavigation extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            isOpen: false
+        };
+    }
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+    render() {
+        let headerExpanded, headerCollapsed;
+        if (this.state.isOpen){
+            headerCollapsed = <Header className={"ml-auto"} isAuthUser={true}/>;
+            headerExpanded = null;
+        } else {
+            headerCollapsed = null;
+            headerExpanded = <Header className={"ml-auto"} isAuthUser={true}/>;
+        }
+
+        /*
+        -Maid navigation bar (all rooms, assigned rooms, ReservableRoom(only shows Clean button for when they finish cleaning),
+        NonReservableRoom(only shows clean button for when they finish cleaning), Incident List, Password Change)
+         */
+        return (
+            <div>
+                <Navbar className={"background-to-top"} color="faded" light expand="md">
+                    <div className={"container"}>
+                        <NavbarToggler onClick={this.toggle} />
+                        <NavbarBrand className={"brand"} href={routes.HOME}>CleanSweep</NavbarBrand>
+                        { headerCollapsed }
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="mr-auto" navbar>
+                                <DropDContent title={"Functions"}
+                                              contents={["Add Incident"]}
+                                              links={[routes.ADD_INCIDENT]}
+                                              instance={this}/>
+                                <DropDContent title={"Lists"}
+                                              contents={["All Rooms", "Assigned Rooms",
+                                                  "Incidents"]}
+                                              links={[routes.ALL_ROOMS, routes.ASSIGNED_ROOMS,
+                                                  routes.INCIDENTS]}
+                                              instance={this}/>
+                                <DropDContent title={"Options"}
+                                              contents={["Change Password"]}
+                                              links={[routes.CHANGE_PW]}
+                                              instance={this}/>
+                            </Nav>
+                        </Collapse>
+                        { headerExpanded }
+                    </div>
+                </Navbar>
+            </div>
+        );
+    }
+}
+
 class NavigationAuth extends React.Component {
     constructor(props) {
         super(props);
@@ -44,9 +107,6 @@ class NavigationAuth extends React.Component {
         });
     }
     render() {
-        // TODO: discern if anyone is logged in and render appropriate NavigationBar
-        // TODO: discern if manager or employee is logged in then render appropriate NavigationBar
-        // TODO: create employee NavigationBar
 
         let headerExpanded, headerCollapsed;
         if (this.state.isOpen){
