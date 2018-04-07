@@ -483,7 +483,8 @@ class EditIndividualIncident extends React.Component {
 
     handleUpdateComment() {
         let info = this.state;
-        api.updateIncident(info.room, info.key, info.updatedIncident);
+        let that = this.props.instance;
+        api.updateIncident(that, info.room, info.key, info.updatedIncident, true);
         this.setState({incident: info.updatedIncident});
     }
 

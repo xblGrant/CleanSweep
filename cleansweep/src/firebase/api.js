@@ -881,10 +881,16 @@ export const getNonReservableRoomInformation = (that, roomID) => {
         });
     });
 };
-export const updateIncident = (room, incidentKey, comment) => {
+export const updateIncident = (that, room, incidentKey, comment, isReservableRoom) => {
     let updates = {};
     updates['/Incidents/' + room + '/' + incidentKey] = comment;
-    firebase.db.ref().update(updates);
+    firebase.db.ref().update(updates).then(() => {
+        if (isReservableRoom){
+            getReservableRoomInformation(that, room);
+        } else {
+            getNonReservableRoomInformation(that, room);
+        }
+    });
 };
 
 export const resolveIncident = (that, room, incidentKey, floor, isReservableRoom) => {
