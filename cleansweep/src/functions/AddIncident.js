@@ -129,10 +129,12 @@ class AddIncident extends React.Component {
                     </FormGroup>
 
                     <FormGroup check>
-                        <Label className={"margin-left-35"} check>
+                        <div className={"col-sm-4 center"}>
+                        <Label check>
                             <Input onChange={this.handleRoomType} type={"checkbox"} id={"isNonReservable"}/>{' '}
                             Non-Reservable Rooms
                         </Label>
+                        </div>
                     </FormGroup>
 
                     <FormGroup>
@@ -154,10 +156,10 @@ class AddIncident extends React.Component {
 
                     <br/>
                     <div className={"row"}>
-                        <div className={"col-sm-5 center"}>
-                            <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-4"}
+                        <div className={"col-sm-4 center"}>
+                            <Button disabled={isDisabled} onClick={this.handleIncident}
                                     color={"primary"}>Add Incident</Button>
-                            <Button href={routes.HOME} className={"col-sm-4"}>Cancel</Button>
+                            <Button href={routes.HOME} >Cancel</Button>
                         </div>
                     </div>
                 </Form>
