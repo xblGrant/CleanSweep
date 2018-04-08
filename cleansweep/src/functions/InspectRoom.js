@@ -110,6 +110,8 @@ class InspectRoom extends React.Component {
                     <body className={"background-to-bottom"} />
                 </Helmet>
                 <Form>
+                    {this.state.submitted && <p className={"submission col-sm-4 center"} id={"submitMessage"}>
+                    {this.state.submissionMessage}</p>}
                     <FormGroup row>
                         <div className={"col-sm-4 center"}>
                             <Label for="floorSelect">Floor</Label>
@@ -127,8 +129,7 @@ class InspectRoom extends React.Component {
                             </Input>
                         </div>
                     </FormGroup>
-                    {this.state.submitted && <p className={"submission"} id={"submitMessage"}>
-                        {this.state.submissionMessage}</p>}
+
                     <br/>
                     <div className={"row"}>
                         <div className={"col-sm-5 center"}>
