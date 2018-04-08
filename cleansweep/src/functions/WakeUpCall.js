@@ -94,11 +94,13 @@ class AddWakeUp extends React.Component {
                 </Helmet>
                 <div>
                     <Form>
+                        { <p className={"submission col-sm-4 center"} id={"submitMessage"}>
+                        {"Wake-Up call added successfully"}</p>}
                         <FormGroup row>
                             <div className={"col-sm-4 center"}>
                                 <Label for="floorSelect">Floor</Label>
                                 <Input onClick={this.handleFloorSelect} type="select" id="floorSelect">
-                                <CreateFloorOptions/>
+                                <CreateFloorOptions displayAll={false}/>
                                 </Input>
                             </div>
                         </FormGroup>
@@ -124,14 +126,13 @@ class AddWakeUp extends React.Component {
                         </FormGroup>
                         <br/>
                         <div className={"row"}>
-                            <div className={"col-sm-5 center"}>
-                                <Button className={"col-sm-4"} disabled={isDisabled} onClick={this.handleNewWakeUp} color={"primary"}>Add Call</Button>
-                                <Button className={"col-sm-4"} href={routes.HOME} name={"Cancel"}>Cancel</Button>
+                            <div className={"col-sm-4 center"}>
+                                <Button  disabled={isDisabled} onClick={this.handleNewWakeUp} color={"primary"}>Add Call</Button>
+                                <Button  href={routes.HOME} name={"Cancel"}>Cancel</Button>
                             </div>
                         </div>
                     </Form>
-                    {this.state.submitted && <p className={"submission"} id={"submitMessage"}>
-                        {"Wake-Up call added successfully"}</p>}
+
                 </div>
             </div>
         );
