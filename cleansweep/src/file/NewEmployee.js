@@ -14,6 +14,7 @@ const INITIAL_STATE = {
     passwordOne: '',
     passwordTwo: '',
     error: null,
+    submitted: false
 };
 
 class NewEmployee extends React.Component {
@@ -22,6 +23,7 @@ class NewEmployee extends React.Component {
 
         this.state = {...INITIAL_STATE};
         this.handleNewEmployee = this.handleNewEmployee.bind(this);
+        this.isSubmitted = this.isSubmitted.bind(this);
         this.isManager = this.isManager.bind(this);
     }
 
@@ -36,13 +38,17 @@ class NewEmployee extends React.Component {
             history,
         } = this.props;
         let isManager = this.state.isManager;
-// console.log(isManager);
         if (isManager)
             api.handleNewManager(this, email, passwordOne, userName, history);
         else
             api.handleNewEmployee(this, email, passwordOne, userName, history);
+        this.isSubmitted(true);
 
         e.preventDefault();
+    }
+
+    isSubmitted(val) {
+        this.setState({submitted: val});
     }
 
     isManager() {
@@ -73,6 +79,8 @@ class NewEmployee extends React.Component {
                 </Helmet>
                 <div id={"newEmployeeForm"}>
                     <Form onSubmit={this.handleNewEmployee}>
+                        { this.state.submitted && <p className={"submission col-sm-4 center"} id={"submitMessage"}>
+                            {"New Employee Created Successfully"}</p>}
                         {error && <p typeof={"error col-sm-4 center"} className={"error"}>{error.message}</p>}
                         <FormGroup>
                             <div className={"col-sm-4 center"}>
