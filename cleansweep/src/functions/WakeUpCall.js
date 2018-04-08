@@ -94,7 +94,7 @@ class AddWakeUp extends React.Component {
                 </Helmet>
                 <div>
                     <Form>
-                        { <p className={"submission col-sm-4 center"} id={"submitMessage"}>
+                        { this.state.submitted && <p className={"submission col-sm-4 center"} id={"submitMessage"}>
                         {"Wake-Up call added successfully"}</p>}
                         <FormGroup row>
                             <div className={"col-sm-4 center"}>
