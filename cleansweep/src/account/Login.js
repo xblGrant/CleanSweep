@@ -57,7 +57,7 @@ class LoginForm extends React.Component {
             <div className="container">
                 <div className={"center col-sm-6"}>
                     <Form onSubmit={this.handleLogin}>
-                        { error && <p typeof={"error"} className={"error center"} id={"error"}>
+                        { error && <p typeof={"error"} className={"error col-sm-4 center"} id={"error"}>
                         {"Your Email/Password is incorrect. Please retry or click Forgot Password"}</p> }
                         <FormGroup>
                             <Label for={"userEmail"}>Email</Label>
