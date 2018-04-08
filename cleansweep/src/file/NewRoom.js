@@ -154,8 +154,7 @@ class NewRoom extends React.Component {
             }
 
             floorDisplay =
-                <Input onClick={this.handleFloorSelect} id={'floorDisplay'} type={"select"}
-                       className={"col-sm-4 center"}>
+                <Input onClick={this.handleFloorSelect} id={'floorDisplay'} type={"select"}>
                     <CreateFloorOptions displayAll={false}/>
                 </Input>
 
@@ -170,7 +169,7 @@ class NewRoom extends React.Component {
             }
 
             floorDisplay =
-                <Input id={'floorDisplay'} type={"select"} className={"col-sm-4 center"}>
+                <Input id={'floorDisplay'} type={"select"}>
                     <option value={newFloor}>{newFloor / 100}</option>
                 </Input>
         }
@@ -178,9 +177,9 @@ class NewRoom extends React.Component {
         let roomNameDisplay;
         if (numNewRooms === 1) {
             roomNameDisplay = <Input onChange={this.handleRoomName} value={roomName} type={"text"}
-                                     className={"margin-left-35 width-30"} id={"roomName"}/>
+                                     id={"roomName"}/>
         } else {
-            roomNameDisplay = <Input type={"text"} className={"col-sm-4 center"} id={"roomName"}
+            roomNameDisplay = <Input type={"text"} id={"roomName"}
                                      value={''} readOnly/>
         }
 
@@ -220,7 +219,7 @@ class NewRoom extends React.Component {
                 <div id={"newRoomForm"}>
                     <Form>
                         <FormGroup row>
-                            <div className="col-sm-12 center">
+                            <div className="col-sm-4 center">
                                 <Label for={"newFloor"}>Floor</Label>
                                 {floorDisplay}
                             </div>
@@ -244,7 +243,7 @@ class NewRoom extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup row>
-                            <div className={"col-sm-12 center"}>
+                            <div className={"col-sm-4 center"}>
                                 <Label for={"roomName"}>
                                     Room Name (*Optional)
                                 </Label>
