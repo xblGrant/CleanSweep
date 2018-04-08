@@ -78,26 +78,30 @@ class NewEmployee extends React.Component {
                             <Label className={"margin-left-35"} for={"userName"}>Full Name</Label>
                             <Input value={userName}
                                    onChange={e => this.setState(byPropKey('userName', e.target.value))}
-                                   className={"margin-left-35 width-30"} id={"userName"} placeholder={"Full Name"}/>
+                                   className={"margin-left-35 width-30"} id={"userName"} placeholder={"Full Name"}
+                                    autoComplete={"name"}/>
                         </FormGroup>
                         <FormGroup>
                             <Label className={"margin-left-35"} for={"userEmail"}>Email</Label>
                             <Input value={email}
                                    onChange={e => this.setState(byPropKey('email', e.target.value))}
-                                   type={"email"} className={"margin-left-35 width-30"} id={"userEmail"} placeholder={"Enter email"}/>
+                                   type={"email"} className={"margin-left-35 width-30"} id={"userEmail"} placeholder={"Enter email"}
+                                    autoComplete={"email"}/>
                         </FormGroup>
                         <FormGroup>
                             <Label className={"margin-left-35"} for={"userPass"}>Password</Label>
                             <Input value={passwordOne}
                                    onChange={e => this.setState(byPropKey('passwordOne', e.target.value))}
-                                   type={"password"} className={"margin-left-35 width-30"} id={"userPass"} placeholder={"Enter password"}/>
+                                   type={"password"} className={"margin-left-35 width-30"} id={"userPass"} placeholder={"Enter password"}
+                                    autoComplete={"password"}/>
                         </FormGroup>
                         <FormGroup>
                             <Label className={"margin-left-35"} for={"confirmUserPass"}>Confirm Password</Label>
                             <Input value={passwordTwo}
                                    onChange={e => this.setState(byPropKey('passwordTwo', e.target.value))}
                                    type={"password"} className={"margin-left-35 width-30"} id={"confirmUserPass"}
-                                   placeholder={"Confirm password"}/>
+                                   placeholder={"Confirm password"}
+                                    autoComplete={"password"}/>
                         </FormGroup>
                         <FormGroup check>
                             <div className={"col-sm-4 center"}>
