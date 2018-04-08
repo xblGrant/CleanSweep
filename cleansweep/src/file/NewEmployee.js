@@ -75,39 +75,49 @@ class NewEmployee extends React.Component {
                     <Form onSubmit={this.handleNewEmployee}>
                         {error && <p typeof={"error"} className={"error"}>{error.message}</p>}
                         <FormGroup>
-                            <Label className={"margin-left-35"} for={"userName"}>Full Name</Label>
+                            <div className={"col-sm-4 center"}>
+                            <Label for={"userName"}>Full Name</Label>
                             <Input value={userName}
                                    onChange={e => this.setState(byPropKey('userName', e.target.value))}
-                                   className={"margin-left-35 width-30"} id={"userName"} placeholder={"Full Name"}
+                                   id={"userName"} placeholder={"Full Name"}
                                     autoComplete={"name"}/>
+                            </div>
                         </FormGroup>
                         <FormGroup>
-                            <Label className={"margin-left-35"} for={"userEmail"}>Email</Label>
+                        <div className={"col-sm-4 center"}>
+                            <Label for={"userEmail"}>Email</Label>
                             <Input value={email}
                                    onChange={e => this.setState(byPropKey('email', e.target.value))}
-                                   type={"email"} className={"margin-left-35 width-30"} id={"userEmail"} placeholder={"Enter email"}
+                                   type={"email"} id={"userEmail"} placeholder={"Enter email"}
                                     autoComplete={"email"}/>
+                        </div>
                         </FormGroup>
                         <FormGroup>
-                            <Label className={"margin-left-35"} for={"userPass"}>Password</Label>
+                            <div className={"col-sm-4 center"}>
+                            <Label for={"userPass"}>Password</Label>
                             <Input value={passwordOne}
                                    onChange={e => this.setState(byPropKey('passwordOne', e.target.value))}
-                                   type={"password"} className={"margin-left-35 width-30"} id={"userPass"} placeholder={"Enter password"}
+                                   type={"password"} id={"userPass"} placeholder={"Enter password"}
                                     autoComplete={"password"}/>
+                            </div>
                         </FormGroup>
                         <FormGroup>
-                            <Label className={"margin-left-35"} for={"confirmUserPass"}>Confirm Password</Label>
+                            <div className={"col-sm-4 center"}>
+                            <Label for={"confirmUserPass"}>Confirm Password</Label>
                             <Input value={passwordTwo}
                                    onChange={e => this.setState(byPropKey('passwordTwo', e.target.value))}
-                                   type={"password"} className={"margin-left-35 width-30"} id={"confirmUserPass"}
+                                   type={"password"}  id={"confirmUserPass"}
                                    placeholder={"Confirm password"}
                                     autoComplete={"password"}/>
+                            </div>
                         </FormGroup>
                         <FormGroup check>
                             <div className={"col-sm-4 center"}>
-                                <Label className={"col-sm-4"} check>
-                                    <Input onChange={this.isManager} type="checkbox" id="isManager"/>{' '}
+                                <Label check>
+                                    <Input onChange={this.isManager} type="checkbox" id="isManager"/>
+                                    {' '}
                                     Manager
+                                    {' '}
                                 </Label>
                             </div>
                         </FormGroup>
