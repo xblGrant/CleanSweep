@@ -1,7 +1,8 @@
 //User API
 
-import {auth, firebase} from "./index";
+import {auth, firebase, secondApp} from "./index";
 import * as routes from "../constants/routes";
+//secondApp is a second auth instance that should be only used for creation of a new employee while someone is already logged in.
 
 // authentication
 export const login = (that, email, password, history) => {
@@ -60,18 +61,18 @@ export const handleNewEmployee = (that, email, password, userName, history) => {
         error: null,
     };
 
-    auth.doCreateUserWithEmailAndPassword(email, password)
-        .then(() => {
+    secondApp.auth().createUserWithEmailAndPassword(email, password)
+        .then((firebaseUser) => {
             let employeeRef = firebase.db.ref("/Employee/");
-            employeeRef.child(firebase.auth.currentUser.uid)
-                .set({
+            employeeRef.child(firebaseUser.uid)
+                .update({
                     username: userName,
                     email: email,
                     isAdmin: false
                 });
 
             that.setState(() => ({...INITIAL_STATE}));
-            history.push(routes.ASSIGNED_ROOMS);
+            secondApp.auth().signOut();
         })
         .catch(error => {
             that.setState(byPropKey('error', error));
@@ -87,18 +88,18 @@ export const handleNewManager = (that, email, password, userName, history) => {
         error: null,
     };
 
-    auth.doCreateUserWithEmailAndPassword(email, password)
-        .then(() => {
+    secondApp.createUserWithEmailAndPassword(email, password)
+        .then((firebaseUser) => {
             let employeeRef = firebase.db.ref("/Employee/");
-            employeeRef.child(firebase.auth.currentUser.uid)
-                .set({
+            employeeRef.child(firebaseUser.uid)
+                .update({
                     username: userName,
                     email: email,
                     isAdmin: true
                 });
 
             that.setState(() => ({...INITIAL_STATE}));
-            history.push(routes.ASSIGNED_ROOMS);
+            secondApp.auth().signOut();
         })
         .catch(error => {
             that.setState(byPropKey('error', error));
