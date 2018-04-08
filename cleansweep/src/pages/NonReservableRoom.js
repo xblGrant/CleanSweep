@@ -157,7 +157,7 @@ class StatusComponent extends React.Component {
 
         return (
             <div>
-                {info.error && <p typeof={"error col-sm-4 center"} className={"error"} id={"error"}>
+                {info.error && <p typeof={"error"} className={"error col-sm-4 center"} id={"error"}>
                     {"All incidents must be resolved before status can be changed"}</p>}
                 {statusComponent}
             </div>

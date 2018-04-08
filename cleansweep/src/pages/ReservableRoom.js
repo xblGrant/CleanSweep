@@ -172,7 +172,7 @@ class StatusComponent extends React.Component {
 
         return (
             <div>
-                {info.error && <p typeof={"error"} className={"error"} id={"error"}>
+                {info.error && <p typeof={"error "} className={"error col-sm-4 center"} id={"error"}>
                     {"All incidents must be resolved before status can be changed"}</p>}
                 {statusComponent}
             </div>
@@ -304,7 +304,7 @@ class WakeUpComponent extends React.Component {
             <div className={"center"}>
                 <label>Wake-Up Call</label><br/>
                 {table}
-                {error && <p typeof={"error"} className={"error"} id={"error"}>
+                {error && <p typeof={"error"} className={"error col-sm-4 center"} id={"error"}>
                     {"Both date and time need to be selected"}</p>}
                 {wakeUpComponent}
                 {buttons}
