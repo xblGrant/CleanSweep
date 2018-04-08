@@ -73,7 +73,7 @@ class NewEmployee extends React.Component {
                 </Helmet>
                 <div id={"newEmployeeForm"}>
                     <Form onSubmit={this.handleNewEmployee}>
-                        {error && <p typeof={"error"} className={"error"}>{error.message}</p>}
+                        {error && <p typeof={"error col-sm-4 center"} className={"error"}>{error.message}</p>}
                         <FormGroup>
                             <div className={"col-sm-4 center"}>
                             <Label for={"userName"}>Full Name</Label>

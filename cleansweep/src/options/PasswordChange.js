@@ -47,7 +47,7 @@ class PasswordChange extends React.Component {
                 <h3 className={"center"}> Password Change</h3>
                 <br/>
                 <Form onSubmit={this.onSubmit}>
-                    {error && <p typeof={"error"} className={"error"}>{error.message}</p>}
+                    {error && <p typeof={"error col-sm-4 center"} className={"error"}>{error.message}</p>}
                     <FormGroup>
                         <Input  className={"col-sm-6 center"}
                                 id={"pwChangeNew"}

@@ -47,6 +47,8 @@ class Help extends React.Component {
                         <h2 className={"center"}>Contact Us</h2>
                         <Form action="https://formspree.io/team6ixsheets@gmail.com"
                               method="POST">
+                            { this.state.submitted && <p className={"submission col-sm-4 center"} id={"submitMessage"}>
+                                {"E-mail successfully sent."}</p>}
                             <FormGroup row>
                                 <div className={"col-sm-12 col-md-6 center"}>
                                     <Label>Name: (required) </Label>
