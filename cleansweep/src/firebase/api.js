@@ -87,7 +87,7 @@ export const handleNewManager = (that, email, password, userName, history) => {
         error: null,
     };
 
-    secondApp.createUserWithEmailAndPassword(email, password)
+    secondApp.auth().createUserWithEmailAndPassword(email, password)
         .then((firebaseUser) => {
             let employeeRef = firebase.db.ref("/Employee/");
             employeeRef.child(firebaseUser.uid)
