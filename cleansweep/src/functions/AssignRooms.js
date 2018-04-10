@@ -62,6 +62,8 @@ class AssignRooms extends React.Component {
         for (let i = 0; i < selectedItems.length; i++)
             selectedRooms[i] = selectedItems[i].props;
 
+        console.log(selectedRooms);
+
         this.setState({ selectedRooms: selectedRooms});
         this.isSubmitted(false);
     };
@@ -75,6 +77,9 @@ class AssignRooms extends React.Component {
         let {selectedRooms, selectedEmployee} = this.state;
         for (let i = 0; i < selectedRooms.length; i++)
             api.assignRoom(selectedRooms[i], selectedEmployee);
+
+        console.log(selectedRooms);
+
         this.updateRooms(this.state.selectedFloor);
         this.isSubmitted(true);
     }
@@ -87,8 +92,9 @@ class AssignRooms extends React.Component {
     }
 
     clearAssignments() {
-        api.clearRoomAssignments(this);
+        api.clearRoomAssignments();
         this.isSubmitted(false);
+        this.updateRooms(this.state.selectedFloor);
     }
 
     render() {

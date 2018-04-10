@@ -786,33 +786,6 @@ export const getAllUnassignedSelectableRoomsByFloor = (that, floor) => {
         })
     })
 };
-export const clearRoomAssignments = (that) => {
-    let roomPath;
-    let updates = {};
-    let roomRef = firebase.db.ref("/Rooms/Reservable/");
-    roomRef.orderByKey().once('value', function (floors) {
-        floors.forEach(function (allRooms) {
-            allRooms.forEach(function (room) {
-                roomPath = 'Rooms/' + floors.key.toString() + '/' + allRooms.key.toString() + '/' + room.key.toString() + '/';
-                updates[roomPath + 'assignedEmployee'] = "none";
-            })
-        })
-    }).then(() => {
-        roomRef = firebase.db.ref("/Rooms/NonReservable/");
-        roomRef.orderByKey().once('value', function (floors) {
-            floors.forEach(function (allRooms) {
-                allRooms.forEach(function (room) {
-                    roomPath = 'Rooms/' + floors.key.toString() + '/' + allRooms.key.toString() + '/' + room.key.toString() + '/';
-                    updates[roomPath + 'assignedEmployee'] = "none";
-                })
-            })
-        }).then(() => {
-                firebase.db.ref().update(updates);
-                getAllUnassignedSelectableRooms(that);
-            }
-        );
-    })
-};
 export const getAllReservedRooms = (that) => {
     let roomList = [];
     let isReservableRoom = true;
@@ -1502,6 +1475,33 @@ const assignNonReservableRoom = (room, employee) => {
     firebase.db.ref('/Rooms/NonReservable/' + room.floor + '/' + room.roomName).update({
         assignedEmployee: employee,
         status: 'Dirty'
+    })
+};
+
+export const clearRoomAssignments = () => {
+    let roomPath;
+    let updates = {};
+    let roomRef = firebase.db.ref("/Rooms/Reservable/");
+    roomRef.orderByKey().once('value', function (floors) {
+        floors.forEach(function (allRooms) {
+            allRooms.forEach(function (room) {
+                roomPath = 'Rooms/' + floors.key.toString() + '/' + allRooms.key.toString() + '/' + room.key.toString() + '/';
+                updates[roomPath + 'assignedEmployee'] = "none";
+            })
+        })
+    }).then(() => {
+        roomRef = firebase.db.ref("/Rooms/NonReservable/");
+        roomRef.orderByKey().once('value', function (floors) {
+            floors.forEach(function (allRooms) {
+                allRooms.forEach(function (room) {
+                    roomPath = 'Rooms/' + floors.key.toString() + '/' + allRooms.key.toString() + '/' + room.key.toString() + '/';
+                    updates[roomPath + 'assignedEmployee'] = "none";
+                })
+            })
+        }).then(() => {
+                firebase.db.ref().update(updates);
+            }
+        );
     })
 };
 
