@@ -1460,25 +1460,35 @@ const addNonReservableRoomIncident = (room) => {
 };
 
 // assign rooms
-export const assignRoom = (room, employee) => {
+export const assignRoom = (that, room, employee, floor) => {
     (room.isReservableRoom) ?
-        assignReservableRoom(room, employee) :
-        assignNonReservableRoom(room, employee);
+        assignReservableRoom(that, room, employee, floor) :
+        assignNonReservableRoom(that, room, employee, floor);
 };
-const assignReservableRoom = (room, employee) => {
+const assignReservableRoom = (that, room, employee, floor) => {
     firebase.db.ref('/Rooms/Reservable/' + room.floor + '/' + room.roomName).update({
         assignedEmployee: employee,
         status: 'Dirty'
+    }).then(() => {
+        if (floor === '000')
+            getAllUnassignedSelectableRooms(that);
+        else
+            getAllUnassignedSelectableRoomsByFloor(that, floor);
     })
 };
-const assignNonReservableRoom = (room, employee) => {
+const assignNonReservableRoom = (that, room, employee, floor) => {
     firebase.db.ref('/Rooms/NonReservable/' + room.floor + '/' + room.roomName).update({
         assignedEmployee: employee,
         status: 'Dirty'
+    }).then(() => {
+        if (floor === '000')
+            getAllUnassignedSelectableRooms(that);
+        else
+            getAllUnassignedSelectableRoomsByFloor(that, floor);
     })
 };
 
-export const clearRoomAssignments = () => {
+export const clearRoomAssignments = (that, floor) => {
     let roomPath;
     let updates = {};
     let roomRef = firebase.db.ref("/Rooms/Reservable/");
@@ -1499,7 +1509,12 @@ export const clearRoomAssignments = () => {
                 })
             })
         }).then(() => {
-                firebase.db.ref().update(updates);
+                firebase.db.ref().update(updates).then(() => {
+                    if (floor === '000')
+                        getAllUnassignedSelectableRooms(that);
+                    else
+                        getAllUnassignedSelectableRoomsByFloor(that, floor);
+                });
             }
         );
     })

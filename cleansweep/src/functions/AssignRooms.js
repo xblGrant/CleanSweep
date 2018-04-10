@@ -20,7 +20,6 @@ class AssignRooms extends React.Component {
         };
 
         this.isSubmitted = this.isSubmitted.bind(this);
-        this.updateRooms = this.updateRooms.bind(this);
         this.handleSelectionFinish = this.handleSelectionFinish.bind(this);
         this.handleSelectionClear = this.handleSelectionClear.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
@@ -62,9 +61,8 @@ class AssignRooms extends React.Component {
         for (let i = 0; i < selectedItems.length; i++)
             selectedRooms[i] = selectedItems[i].props;
 
-        console.log(selectedRooms);
-
-        this.setState({ selectedRooms: selectedRooms});
+        if (selectedRooms === []) selectedRooms = null;
+        this.setState({ selectedRooms: selectedRooms });
         this.isSubmitted(false);
     };
 
@@ -74,27 +72,15 @@ class AssignRooms extends React.Component {
     }
 
     handleAssignRooms() {
-        let {selectedRooms, selectedEmployee} = this.state;
+        let {selectedRooms, selectedEmployee, selectedFloor} = this.state;
         for (let i = 0; i < selectedRooms.length; i++)
-            api.assignRoom(selectedRooms[i], selectedEmployee);
-
-        console.log(selectedRooms);
-
-        this.updateRooms(this.state.selectedFloor);
+            api.assignRoom(this, selectedRooms[i], selectedEmployee, selectedFloor);
         this.isSubmitted(true);
     }
 
-    updateRooms(floor) {
-        if (floor === '000')
-            api.getAllUnassignedSelectableRooms(this);
-        else
-            api.getAllUnassignedSelectableRoomsByFloor(this, floor);
-    }
-
     clearAssignments() {
-        api.clearRoomAssignments();
+        api.clearRoomAssignments(this, this.state.selectedFloor);
         this.isSubmitted(false);
-        this.updateRooms(this.state.selectedFloor);
     }
 
     render() {
