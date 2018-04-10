@@ -169,13 +169,13 @@ export const getCurrentUserIsAdminRole = (that) => {
         }).then(() => {
             let role;
             (isAdmin) ? role = "admin" : role = "employee";
-                
+
             that.setState({
                 isAdmin: isAdmin,
                 role: role
             });
         })
-    } else{
+    } else {
         that.setState({
             isAdmin: false,
             role: "guest"
@@ -511,9 +511,78 @@ export const getInspectRoomsByFloor = (that, floor) => {
 export const getRoomsWithIncidents = (that) => {
     let roomList = [];
     let isReservableRoom = true;
-    let roomRef = firebase.db.ref("/Rooms/Reservable/");
+    let roomRef = firebase.db.ref("/Rooms/NonReservable/");
     roomRef.orderByKey().once('value', function (floors) {
         floors.forEach(function (allRooms) {
+            allRooms.forEach(function (room) {
+                if (room.val().incident === true) {
+                    let assigned = (room.val().assignedEmployee !== 'none');
+                    roomList.push(
+                        [room.key,
+                            room.val().status,
+                            room.val().incident,
+                            room.val().inspect,
+                            room.val().guest,
+                            room.val().wakeupCall,
+                            assigned,
+                            !isReservableRoom,
+                            allRooms.key]
+                    );
+                }
+            })
+        })
+    }).then(() => {
+        roomRef = firebase.db.ref("/Rooms/Reservable/");
+        roomRef.orderByKey().once('value', function (floors) {
+            floors.forEach(function (allRooms) {
+                allRooms.forEach(function (room) {
+                    if (room.val().incident === true) {
+                        let assigned = (room.val().assignedEmployee !== 'none');
+                        roomList.push(
+                            [room.key,
+                                room.val().status,
+                                room.val().incident,
+                                room.val().inspect,
+                                room.val().guest,
+                                room.val().wakeupCall,
+                                assigned,
+                                isReservableRoom,
+                                allRooms.key]
+                        );
+                    }
+                })
+            })
+        }).then(() => {
+            that.setState({
+                rooms: roomList
+            })
+        });
+    });
+};
+export const getRoomsWithIncidentsByFloor = (that, floor) => {
+    let roomList = [];
+    let isReservableRoom = true;
+    let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
+    roomRef.orderByKey().once('value', function (allRooms) {
+        allRooms.forEach(function (room) {
+            if (room.val().incident === true) {
+                let assigned = (room.val().assignedEmployee !== 'none');
+                roomList.push(
+                    [room.key,
+                        room.val().status,
+                        room.val().incident,
+                        room.val().inspect,
+                        room.val().guest,
+                        room.val().wakeupCall,
+                        assigned,
+                        !isReservableRoom,
+                        allRooms.key]
+                );
+            }
+        })
+    }).then(() => {
+        roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
+        roomRef.orderByKey().once('value', function (allRooms) {
             allRooms.forEach(function (room) {
                 if (room.val().incident === true) {
                     let assigned = (room.val().assignedEmployee !== 'none');
@@ -530,76 +599,11 @@ export const getRoomsWithIncidents = (that) => {
                     );
                 }
             })
-        })
-    }).then(() => {
-        roomRef = firebase.db.ref("/Rooms/NonReservable/");
-        roomRef.orderByKey().once('value', function (floors) {
-            floors.forEach(function (allRooms) {
-                allRooms.forEach(function (room) {
-                    if (room.val().incident === true) {
-                        let assigned = (room.val().assignedEmployee !== 'none');
-                        roomList.push(
-                            [room.key,
-                                room.val().status,
-                                room.val().incident,
-                                room.val().guest,
-                                room.val().wakeupCall,
-                                assigned,
-                                !isReservableRoom,
-                                allRooms.key]
-                        );
-                    }
-                })
-            })
-        }).then(() =>
+        }).then(() => {
             that.setState({
                 rooms: roomList
-            }));
-    });
-};
-export const getRoomsWithIncidentsByFloor = (that, floor) => {
-    let roomList = [];
-    let isReservableRoom = true;
-    let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
-    roomRef.orderByKey().once('value', function (allRooms) {
-        allRooms.forEach(function (room) {
-            if (room.val().incident === true) {
-                let assigned = (room.val().assignedEmployee !== 'none');
-                roomList.push(
-                    [room.key,
-                        room.val().status,
-                        room.val().incident,
-                        room.val().inspect,
-                        room.val().guest,
-                        room.val().wakeupCall,
-                        assigned,
-                        isReservableRoom,
-                        allRooms.key]
-                );
-            }
-        })
-    }).then(() => {
-        roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
-        roomRef.orderByKey().once('value', function (allRooms) {
-            allRooms.forEach(function (room) {
-                if (room.val().incident === true) {
-                    let assigned = (room.val().assignedEmployee !== 'none');
-                    roomList.push(
-                        [room.key,
-                            room.val().status,
-                            room.val().incident,
-                            room.val().guest,
-                            room.val().wakeupCall,
-                            assigned,
-                            !isReservableRoom,
-                            allRooms.key]
-                    );
-                }
             })
-        }).then(() =>
-            that.setState({
-                rooms: roomList
-            }));
+        });
     });
 };
 export const getRoomsWithWakeUpCalls = (that) => {
@@ -1653,7 +1657,7 @@ export const checkOut = (that, floorNum, roomNum) => {
 // change role
 export const changeRole = (employee, isAdmin) => {
     firebase.db.ref('/Employee/' + employee).update({
-       isAdmin: isAdmin
+        isAdmin: isAdmin
     });
 };
 
