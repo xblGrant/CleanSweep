@@ -78,7 +78,6 @@ export const handleNewEmployee = (that, email, password, userName, history) => {
             that.setState(byPropKey('error', error));
         });
 };
-
 export const handleNewManager = (that, email, password, userName, history) => {
     const INITIAL_STATE = {
         userName: '',
@@ -105,9 +104,6 @@ export const handleNewManager = (that, email, password, userName, history) => {
             that.setState(byPropKey('error', error));
         });
 };
-
-
-
 
 export const signUp = (that, email, password, userName, history) => {
     const INITIAL_STATE = {
@@ -146,6 +142,43 @@ export const getCurrentUserName = (that, currentUser) => {
             username = currentUser.val().username;
         }).then(() => {
             that.setState({currentUser: username});
+        })
+    }
+};
+export const getCurrentUserIsAdmin = (that) => {
+    let currentUser = getCurrentUser();
+    if (currentUser != null) {
+        let isAdmin = false;
+        let userRef = firebase.db.ref("/Employee/" + currentUser.uid);
+        userRef.once('value', function (currentUser) {
+            isAdmin = currentUser.val().isAdmin;
+        }).then(() => {
+            that.setState({
+                isAdmin: isAdmin,
+            });
+        })
+    }
+};
+export const getCurrentUserIsAdminRole = (that) => {
+    let currentUser = getCurrentUser();
+    if (currentUser != null) {
+        let isAdmin = false;
+        let userRef = firebase.db.ref("/Employee/" + currentUser.uid);
+        userRef.once('value', function (currentUser) {
+            isAdmin = currentUser.val().isAdmin;
+        }).then(() => {
+            let role;
+            (isAdmin) ? role = "admin" : role = "employee";
+                
+            that.setState({
+                isAdmin: isAdmin,
+                role: role
+            });
+        })
+    } else{
+        that.setState({
+            isAdmin: false,
+            role: "guest"
         })
     }
 };

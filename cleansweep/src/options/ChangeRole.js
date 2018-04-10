@@ -12,7 +12,7 @@ class AddWakeUp extends React.Component {
         this.state = {
             employees: [],
             selectedEmployee: '',
-            isAdmin: null
+            isAdmin: false
         };
 
         this.handleChangeRole = this.handleChangeRole.bind(this);
@@ -25,7 +25,9 @@ class AddWakeUp extends React.Component {
     }
 
     handlePromotionDemotion(e) {
-        this.setState({isAdmin: e.target.value});
+        let value;
+        (e.target.value === "true") ? value = true : value = false;
+        this.setState({isAdmin: value});
     }
 
     handleEmployeeSelect(e) {

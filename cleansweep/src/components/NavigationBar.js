@@ -15,12 +15,12 @@ import {
 import Header from './Header';
 import { Link } from 'react-router-dom';
 import * as routes from '../constants/routes';
-
+import * as api from '../firebase/api';
 
 const NavigationBar = (props, { authUser }) =>
     <div>
         { authUser
-            ? <NavigationAuth />
+            ? <IsAdmin />
             : <NavigationNonAuth />
         }
     </div>;
@@ -28,6 +28,30 @@ const NavigationBar = (props, { authUser }) =>
 NavigationBar.contextTypes = {
     authUser: PropTypes.object,
 };
+
+class IsAdmin extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isAdmin: false
+        }
+    }
+
+    componentWillMount() {
+        api.getCurrentUserIsAdmin(this);
+    }
+
+    render(){
+        let isAdmin = this.state.isAdmin;
+
+        return(
+            (isAdmin)
+                ? <NavigationAuth/>
+                : <EmployeeAuth/>
+        )
+    }
+}
 
 //TODO: use this for maid navigation once we are testing for
 //TODO: current user isAdmin status
@@ -71,17 +95,17 @@ class EmployeeAuth extends React.Component {
                                 <DropDContent title={"Functions"}
                                               contents={["Add Incident"]}
                                               links={[routes.ADD_INCIDENT]}
-                                              instance={this}/>
+                                              /*instance={this}*//>
                                 <DropDContent title={"Lists"}
                                               contents={["All Rooms", "Assigned Rooms",
                                                   "Incidents"]}
                                               links={[routes.ALL_ROOMS, routes.ASSIGNED_ROOMS,
                                                   routes.INCIDENTS]}
-                                              instance={this}/>
+                                              /*instance={this}*//>
                                 <DropDContent title={"Options"}
                                               contents={["Change Password"]}
                                               links={[routes.CHANGE_PW]}
-                                              instance={this}/>
+                                              /*instance={this*//>
                             </Nav>
                         </Collapse>
                         { headerExpanded }
@@ -129,24 +153,24 @@ class NavigationAuth extends React.Component {
                                     <DropDContent title={"File"}
                                                   contents={["New Employee", "New Room"]}
                                                   links={[routes.NEW_EMPLOYEE, routes.NEW_ROOM]}
-                                                  instance={this}/>
+                                                  /*instance={this}*//>
                                     <DropDContent title={"Functions"}
                                                   contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms",
                                                       "Inspect Room", "Check In/Out"]}
                                                   links={[routes.WAKE_UP_CALL, routes.ADD_INCIDENT, routes.ASSIGN_ROOMS,
                                                       routes.INSPECT_ROOM, routes.CHECK_IN_OUT]}
-                                                  instance={this}/>
+                                                  /*instance={this}*//>
                                     <DropDContent title={"Lists"}
                                                   contents={["All Rooms", "Assigned Rooms", "Available Rooms",
                                                       "Inspections", "Incidents", "Wake-Up Calls"]}
                                                   links={[routes.ALL_ROOMS, routes.ASSIGNED_ROOMS,
                                                       routes.AVAILABLE_ROOMS, routes.INSPECTIONS, routes.INCIDENTS,
                                                       routes.WAKE_UP_LIST]}
-                                                  instance={this}/>
+                                                  /*instance={this}*//>
                                     <DropDContent title={"Options"}
                                                   contents={["Change Password", "Change Role"]}
                                                   links={[routes.CHANGE_PW, routes.CHANGE_ROLE]}
-                                                  instance={this}/>
+                                                  /*instance={this}*//>
                                     <NavItem>
                                         <NavLink href={routes.HELP} onClick={this.toggle}>Help</NavLink>
                                     </NavItem>
@@ -201,10 +225,10 @@ class NavigationNonAuth extends React.Component {
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
                                 <NavItem>
-                                    <NavLink href={routes.HELP} onClick={this.toggle}>Help</NavLink>
+                                    <NavLink href={routes.HELP} /*onClick={this.toggle}*/>Help</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink href={routes.GITHUB} onClick={this.toggle}>Github</NavLink>
+                                    <NavLink href={routes.GITHUB} /*onClick={this.toggle}*/>Github</NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
@@ -223,7 +247,7 @@ function DropDContent(props) {
                 {props.title}
             </DropdownToggle>
                 <DropdownMenu>
-                    <DropDItem contents={props.contents} links={props.links} procedure={props.instance.toggle}/>
+                    <DropDItem contents={props.contents} links={props.links} /*procedure={props.instance.toggle}*/ />
                 </DropdownMenu>
         </UncontrolledDropdown>
     );
@@ -232,12 +256,12 @@ function DropDContent(props) {
 function DropDItem(props) {
     return (
         props.contents.map(
-            (content,  index, procedure) => {
+            (content,  index/*, procedure*/) => {
                 let link = props.links[index];
                 return(
                     <DropdownItem key={index}>
                         <NavItem>
-                            <Link to={link} onClick={procedure}>{content}</Link>
+                            <Link to={link} /*onClick={procedure}*/>{content}</Link>
                         </NavItem>
                     </DropdownItem>
                 )
