@@ -20,7 +20,7 @@ class GroupSelect extends React.Component {
             <div className={"container"}>
                 <SelectableGroup
                     ref={ref => window.selectableGroup = ref}
-                    className="main"
+                    className="main rounded "
                     clickClassName="tick"
                     enableDeselect
                     deselectOnEsc={false}

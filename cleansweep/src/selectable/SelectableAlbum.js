@@ -19,7 +19,7 @@ function Album(props){
 
     return(
     <div ref={selectableRef}
-        className={`item ${selecting && 'selecting'} ${selected && 'selected'} ${classStatus}` + {classStatus}}>
+        className={`selectableButtons col-lg-2 col-md-3 rounded item ${selecting && 'selecting'} ${selected && 'selected'} ${classStatus}` + {classStatus}}>
         <h5>{roomName}</h5>
         <Label status={status}/>
     </div>
