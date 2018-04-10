@@ -1032,6 +1032,34 @@ export const getListofAllAvailableRoomsByFloor = (that, floor) => {
         })
     )
 };
+export const makeAllRoomsDirty = (that) => {
+    let roomPath;
+    let updates = {};
+    let roomRef = firebase.db.ref("/Rooms/Reservable/");
+    roomRef.orderByKey().once('value', function (floors) {
+        floors.forEach(function (allRooms) {
+            allRooms.forEach(function (room) {
+                roomPath = 'Rooms/' + floors.key.toString() + '/' + allRooms.key.toString() + '/' + room.key.toString() + '/';
+                if (room.val().guest !== false)
+                    updates[roomPath + 'status'] = "Dirty";
+            })
+        })
+    }).then(() => {
+        roomRef = firebase.db.ref("/Rooms/NonReservable/");
+        roomRef.orderByKey().once('value', function (floors) {
+            floors.forEach(function (allRooms) {
+                allRooms.forEach(function (room) {
+                    roomPath = 'Rooms/' + floors.key.toString() + '/' + allRooms.key.toString() + '/' + room.key.toString() + '/';
+                    updates[roomPath + 'status'] = "Dirty";
+                })
+            })
+        }).then(() => {
+                firebase.db.ref().update(updates);
+                getAllUnassignedSelectableRooms(that);
+            }
+        );
+    })
+};
 export const getListofAllRoomsNeedInspected = (that) => {
     let roomList = [];
     let roomRef = firebase.db.ref("/Rooms/NonReservable/");

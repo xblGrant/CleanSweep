@@ -27,6 +27,7 @@ class AssignRooms extends React.Component {
         this.handleAssignRooms = this.handleAssignRooms.bind(this);
         this.clearAssignments = this.clearAssignments.bind(this);
         this.handleEmployeeSelect = this.handleEmployeeSelect.bind(this);
+        this.makeAllRoomsDirty = this.makeAllRoomsDirty.bind(this);
     }
 
     componentDidMount() {
@@ -91,6 +92,11 @@ class AssignRooms extends React.Component {
         this.isSubmitted(false);
     }
 
+    makeAllRoomsDirty() {
+        api.makeAllRoomsDirty(this);
+        this.isSubmitted(false);
+    }
+
     render() {
 
         const isDisabled =
@@ -127,6 +133,8 @@ class AssignRooms extends React.Component {
                                     color={"primary"}>Assign</Button>
                             <Button className={"col-sm-3"} onClick={this.clearAssignments} color={"secondary"}>Clear
                                 Assignments</Button>
+                            <Button className={"col-sm-3"} onClick={this.makeAllRoomsDirty} color={"secondary"}>
+                                Update Dirty</Button>
                             <Button className={"col-sm-3"} href={routes.HOME} name={"Cancel"}> Cancel </Button>
                         </div>
                     </div>
