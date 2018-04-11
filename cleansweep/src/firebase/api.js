@@ -1542,17 +1542,25 @@ export const inspectRoom = (floor, room, isReservableRoom) => {
     }
 };
 const inspectReservableRoom = (room) => {
-    let floor;
+    let floor, hasGuest;
     firebase.db.ref("/Rooms/Reservable/").once('value', function (dbFloors) {
         dbFloors.forEach(function (dbAllRooms) {
             dbAllRooms.forEach(function (dbRoom) {
-                if (dbRoom.key === room)
+                if (dbRoom.key === room) {
                     floor = dbAllRooms.key.toString();
+                    hasGuest = dbRoom.val().guest;
+                }
             })
         })
     }).then(() => {
+
+        let isReservable = true;
+        if (hasGuest)
+            isReservable  = false;
+
         firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
-            inspect: false
+            inspect: false,
+            isReservable: isReservable
         });
     });
 };

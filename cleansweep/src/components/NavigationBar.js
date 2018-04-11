@@ -88,7 +88,7 @@ class EmployeeAuth extends React.Component {
                 <Navbar className={"background-to-top"} color="faded" light expand="md">
                     <div className={"container"}>
                         <NavbarToggler onClick={this.toggle} />
-                        <NavbarBrand className={"brand"} href={routes.HOME}>CleanSweep</NavbarBrand>
+                        <NavbarBrand className={"brand"}>CleanSweep</NavbarBrand>
                         { headerCollapsed }
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
@@ -146,7 +146,7 @@ class NavigationAuth extends React.Component {
                 <Navbar className={"background-to-top"} color="faded" light expand="md">
                     <div className={"container"}>
                         <NavbarToggler onClick={this.toggle} />
-                        <NavbarBrand className={"brand"} href={routes.HOME}>CleanSweep</NavbarBrand>
+                        <NavbarBrand className={"brand"}>CleanSweep</NavbarBrand>
                         { headerCollapsed }
                         <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="mr-auto" navbar>
@@ -220,7 +220,7 @@ class NavigationNonAuth extends React.Component {
                 <Navbar className={"color1"} color="faded" light expand="md">
                     <div className={"container"}>
                         <NavbarToggler onClick={this.toggle} />
-                        <NavbarBrand className={"brand"} href={routes.LANDING}>CleanSweep</NavbarBrand>
+                        <NavbarBrand className={"brand"}>CleanSweep</NavbarBrand>
                         { headerCollapsed }
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
