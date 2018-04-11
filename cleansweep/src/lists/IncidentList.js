@@ -51,7 +51,7 @@ class IncidentList extends React.Component {
                             <div className={"container text-center"}>
                                 <Label className={"header"}>Rooms with Incidents</Label>
                             </div>
-                            <GroupSelect items={this.state.rooms} onSelectionClear={null} onSelectionFinish={null}/>
+                            <GroupSelect items={this.state.rooms}/>
                         </FormGroup>
                     </Form>
                 </div>
