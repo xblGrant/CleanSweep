@@ -11,7 +11,7 @@ const RoleBasedAuthorization = (allowedRoles) => (WrappedComponent) => {
 
             this.state = {
                 isAdmin: false,
-                role: 'guest'
+                role: null
             }
         }
 
@@ -20,11 +20,18 @@ const RoleBasedAuthorization = (allowedRoles) => (WrappedComponent) => {
         }
 
         render() {
+
+
             const { role } = this.state;
             if (allowedRoles.includes(role))
-                return <WrappedComponent {...this.props}/>
-            else
-                return <h1>Not Authorized</h1>
+                return <WrappedComponent {...this.props}/>;
+            else{
+                if (this.state.role === null)
+                    return null;
+                else {
+                    return <h1>Not Authorized</h1>;
+                }
+            }
         }
     };
 };
