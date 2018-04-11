@@ -1,6 +1,5 @@
 import React from 'react';
 import SelectableAlbum from './SelectableAlbum';
-import {DeselectAll} from 'react-selectable-fast';
 import {Link} from 'react-router-dom';
 import * as routes from '../constants/routes';
 import * as constant from '../constants/constants';
@@ -97,12 +96,8 @@ class SelectableList extends React.Component {
         }
 
         return (
-            <div>
-            <DeselectAll>Clear Selection</DeselectAll>
-                <label className={"center"}>Rooms</label>
             <div className={"container"}>
                 {display}
-            </div>
             </div>
         )
     }

@@ -61,6 +61,7 @@ class AssignRooms extends React.Component {
         for (let i = 0; i < selectedItems.length; i++)
             selectedRooms[i] = selectedItems[i].props;
 
+        console.log("Selection Finish");
         console.log(selectedRooms);
 
         if (selectedRooms === []) selectedRooms = null;
@@ -128,6 +129,7 @@ class AssignRooms extends React.Component {
                         {"Rooms assigned successfully"}</p>}
                     <FormGroup row>
                         <div className={"col-sm-10 center"}>
+                            <Label className={"center"}>Rooms</Label>
                             <GroupSelect items={this.state.rooms}
                                          onSelectionFinish={this.handleSelectionFinish}
                                          onSelectionClear={this.handleSelectionClear}

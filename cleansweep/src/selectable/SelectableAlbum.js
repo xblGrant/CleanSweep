@@ -1,5 +1,6 @@
 import React from 'react';
-import {createSelectable} from 'react-selectable-fast';
+// import {createSelectable} from 'react-selectable-fast';
+import createSelectable from './react-selectable-fast/createSelectable';
 
 const Label = ({status}) => (
     <div className={"album-label"}>
@@ -25,16 +26,4 @@ function Album(props){
     </div>
     )
 }
-//old const version. function version is better
-/*
-const Album = ({selectableRef, selected, selecting, roomName, status, assigned, incident, guest}) => (
-    <div
-        ref={selectableRef}
-        className={`item ${selecting && 'selecting'} ${selected && 'selected'} ${status}`}
-    >
-        <h5>{roomName}</h5>
-        <Label status={status}/>
-    </div>
-);
-*/
 export default createSelectable(Album);
