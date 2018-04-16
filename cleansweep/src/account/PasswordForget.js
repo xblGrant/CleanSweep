@@ -8,7 +8,7 @@ const PasswordForgetPage = () =>
     <div>
         <Helmet>
             <title>Password Forget</title>
-            <body className={"background-to-bottom"}></body>
+            <body className={"background-to-bottom"}/>
         </Helmet>
         <PasswordForgetForm/>
     </div>;

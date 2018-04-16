@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { PasswordForgetLink } from "./PasswordForget";
 import { SignUpLink } from "./SignUp";
 import * as api from '../firebase/api';
+import * as routes from '../constants/routes';
 import {Helmet} from "react-helmet";
 
 const Login = ({ history }) =>
@@ -25,6 +26,12 @@ class LoginForm extends React.Component {
         this.state = {...INITIAL_STATE};
 
         this.handleLogin = this.handleLogin.bind(this);
+    }
+
+    componentWillMount() {
+        if (api.getCurrentUser() !== null){
+            this.props.history.push(routes.ASSIGNED_ROOMS);
+        }
     }
 
     handleLogin(e) {
