@@ -144,41 +144,46 @@ class CheckInGuest extends React.Component {
                     <title>Check-In Guest</title>
                     <body className={"background-to-bottom"}/>
                 </Helmet>
-                <br/>
-                <Form>
-                    <FormGroup row>
+                <div>
+                    <Form>
+                        <FormGroup row>
+                            <div className={"col-sm-4 center"}>
+                                <Label for="floorSelect">Floor</Label>
+                                <Input onClick={floorFunction} type="select" id="floorSelect">
+                                    <CreateFloorOptions/>
+                                </Input>
+                            </div>
+                        </FormGroup>
                         <div className={"col-sm-4 center"}>
-                            <Label for="floorSelect">Floor</Label>
-                            <Input onClick={floorFunction} type="select" id="floorSelect">
-                                <CreateFloorOptions/>
+                            <Input type={"select"} onClick={this.handleStatus}>
+                                <option value={"checkIn"}>Check-In</option>
+                                <option value={"checkOut"}>Check-Out</option>
                             </Input>
                         </div>
-                    </FormGroup>
-                    <div className={"col-sm-4 center"}>
-                        <Input type={"select"} onClick={this.handleStatus}>
-                            <option value={"checkIn"}>Check-In</option>
-                            <option value={"checkOut"}>Check-Out</option>
-                        </Input>
-                    </div>
-                    <br/>
-                    <div className={"row"}>
-                        <div className={"col-sm-5 center"}>
-                            {button}
-                            <Button className={"col-sm-4"} href={routes.HOME} name={"Cancel"}> Cancel </Button>
+                        
+                        {/*This gets overwritten by the second this.state call*/}
+                        {this.state.submitted && <p className={"submission"} id={"submitMessage"}>
+                            {submissionMessage}</p>}
+                        <br/>
+                        <div className={"row"}>
+                            <div className={"col-sm-5 center"}>
+                                {button}
+                                <Button className={"col-sm-4"} href={routes.HOME} name={"Cancel"}> Cancel </Button>
+                            </div>
                         </div>
-                    </div>
-                    {this.state.submitted && <p className={"submission"} id={"submitMessage"}>
-                        {submissionMessage}</p>}
-                    <FormGroup row>
-                        <div className={"col-sm-10 center"}>
-                            <Label className={"center"}>Rooms</Label>
-                            <GroupSelect items={this.state.rooms}
-                                         onSelectionFinish={this.handleSelectionFinish}
-                                         onSelectionClear={this.handleSelectionClear}
-                                         isDisabled={false}/>
-                        </div>
-                    </FormGroup>
-                </Form>
+                        <FormGroup row>
+                            <div className={"col-sm-10 center"}>
+                                <Label className={"center"}>Rooms</Label>
+
+                                {/*This overwrites the above message code*/}
+                                <GroupSelect items={this.state.rooms}
+                                             onSelectionFinish={this.handleSelectionFinish}
+                                             onSelectionClear={this.handleSelectionClear}
+                                             isDisabled={false}/>
+                            </div>
+                        </FormGroup>
+                    </Form>
+                </div>
             </div>
         );
     }

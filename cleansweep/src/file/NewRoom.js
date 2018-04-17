@@ -19,8 +19,11 @@ class NewRoom extends React.Component {
             createNewFloor: false,
             newFloor: '',
             newFloorRoomNum: '',
+
+            submitted: false
         };
 
+        this.isSubmitted = this.isSubmitted.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleNumRooms = this.handleNumRooms.bind(this);
         this.handleNewFloor = this.handleNewFloor.bind(this);
@@ -29,6 +32,10 @@ class NewRoom extends React.Component {
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
         this.handleReservableRoom = this.handleReservableRoom.bind(this);
         this.handleNonReservableRoom = this.handleNonReservableRoom.bind(this);
+    }
+
+    isSubmitted(val) {
+        this.setState({submitted: val});
     }
 
     static RADIX = 10;
@@ -48,6 +55,7 @@ class NewRoom extends React.Component {
 
     handleFloorSelect(e) {
         api.newRoomFloorSelect(this, e.target.value);
+        this.isSubmitted(false);
     }
 
     handleNewFloor() {
@@ -61,6 +69,7 @@ class NewRoom extends React.Component {
         } else {
             api.generateNewRoomNumber(this, '100');
         }
+        this.isSubmitted(false);
     }
 
     handleRoomName(e) {
@@ -68,12 +77,14 @@ class NewRoom extends React.Component {
         this.setState({
             roomName: roomName
         });
+        this.isSubmitted(false);
     }
 
     handleReservable() {
         this.setState({
             isReservable: !this.state.isReservable
-        })
+        });
+        this.isSubmitted(false);
     }
 
     handleSubmit() {
@@ -87,6 +98,8 @@ class NewRoom extends React.Component {
         // Calling this method refreshes data displayed
         let floor = document.getElementById('floorDisplay').value;
         api.generateNewRoomNumber(this, floor);
+
+        this.isSubmitted(true);
     }
 
     handleReservableRoom() {
@@ -108,6 +121,7 @@ class NewRoom extends React.Component {
                 api.createNewReservableRoom(floor, roomNum + i);
             }
         }
+        this.isSubmitted(false);
     }
 
     handleNonReservableRoom() {
@@ -121,6 +135,7 @@ class NewRoom extends React.Component {
 
         room = document.getElementById('roomName').value;
         api.createNewNonReservableRoom(floor, room);
+        this.isSubmitted(false);
     }
 
     render() {
@@ -276,6 +291,8 @@ class NewRoom extends React.Component {
                             </div>
                         </div>
                     </Form>
+                    { this.state.submitted && <p className={"submission col-sm-4 center"} id={"submitMessage"}>
+                        {"Room added successfully"}</p>}
                     {error && <p typeof={"error"} className={"error center"} id={"error"}>
                         {"No more rooms can be added to this floor."}</p>}
                 </div>
