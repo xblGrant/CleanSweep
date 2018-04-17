@@ -34,6 +34,10 @@ class About extends React.Component {
                                 Hobbies include: researching multitudes of subjects, such as politics, business, games,
                                 and especially anything Elon Musk gets his fingers on. Also enjoys volleyball, table tennis,
                                 video games, and cats when in his free time.
+                                <br />
+                                <a href = "https://www.linkedin.com/in/grant-abbondanza-4a075a115/">
+                                    <img className={"center col-sm-1"} src = {Linkedin}
+                                         alt = "linkedin"/></a>
                             </p>
                         <h3>Christian Brand</h3>
                             <p>
