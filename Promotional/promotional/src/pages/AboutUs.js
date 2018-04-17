@@ -37,11 +37,18 @@ class About extends React.Component {
                             </p>
                         <h3>Christian Brand</h3>
                             <p>
-
+                                Currently a senior working towards a B.S. in Computer Science at Penn State Harrisburg.
+                                Interested in: Data Science, Java, Python, Software Engineering, and Web Development.
+                                Hobbies include: listening to music, going to live shows and festivals, cooking, reddit,
+                                walking my dog, and video games.
+                                <br />
+                                <a href = "https://www.linkedin.com/in/christian-brand-947189108/">
+                                    <img className={"center col-sm-1"} src = {Linkedin}
+                                         alt = "linkedin"/></a>
                             </p>
                         <h3>Adina Lamboy</h3>
                             <p>
-                                Currently a Senior at Penn State Harrisburg persuing a
+                                Currently a Senior at Penn State Harrisburg pursuing a
                                 Bachelors Degree in Computer science.
                                 <br/>
                                 <a href = "https://www.linkedin.com/in/adina-lamboy-a15a43b4">
