@@ -44,6 +44,7 @@ class Help extends React.Component {
                 <div className={"container"}>
                     <div className={"col-sm-6  col-md-10 center"}>
                         <h2 className={"center"}>Contact Us</h2>
+                        <hr />
                         <Form action="https://formspree.io/team6ixsheets@gmail.com"
                               method="POST">
                             { this.state.submitted && <p className={"submission col-sm-4 center"} id={"submitMessage"}>
@@ -75,7 +76,7 @@ class Help extends React.Component {
                             </FormGroup>
 
                             <FormGroup row>
-                                <div className={"col-sm-12 col-md-10 center"}>
+                                <div className={"col-sm-12 col-md-6 center"}>
                                     <Label>Message: (required)</Label>
                                     <Input onChange={e => this.setState(byPropKey('message', e.target.value))}
                                            value={info.message}

@@ -1,6 +1,5 @@
 import React from 'react';
 import {Helmet} from "react-helmet";
-import {ABOUT} from "../constants/routes";
 import twitter from "../Doc/Twitter.png";
 import Linkedin from "../Doc/Linkedin.png";
 
@@ -27,10 +26,14 @@ class About extends React.Component {
                 <div className={"container"}>
                     <div className={"col-sm-6  col-md-10 center"}>
                         <h2 className={"center"}>About Us</h2>
-                        <br/>
+                        <hr />
                         <h3>Grant Abbondanza</h3>
                             <p>
-
+                                Student working towards B.S. in Computer Science at Penn State Harrisburg.
+                                Interested in: Turing machines, Java, website design, and bleeding edge technologies.
+                                Hobbies include: researching multitudes of subjects, such as politics, business, games,
+                                and especially anything Elon Musk gets his fingers on. Also enjoys volleyball, table tennis,
+                                video games, and cats when in his free time.
                             </p>
                         <h3>Christian Brand</h3>
                             <p>
@@ -42,7 +45,8 @@ class About extends React.Component {
                                 Bachelors Degree in Computer science.
                                 <br/>
                                 <a href = "https://www.linkedin.com/in/adina-lamboy-a15a43b4">
-                                    <img className={"center col-sm-1"} src = {Linkedin}/></a>
+                                    <img className={"center col-sm-1"} src = {Linkedin}
+                                        alt = "linkedin"/></a>
                             </p>
                         <h3>Stuart Perry</h3>
                             <p>
@@ -57,7 +61,8 @@ class About extends React.Component {
                                 proud father, loving husband.
                                 <br/>
                                 <a href = "https://twitter.com/JamesRingler86?s=09">
-                                    <img className={"center col-sm-1"} src = {twitter}/></a>
+                                    <img className={"center col-sm-1"} src = {twitter}
+                                        alt = "twitter"/></a>
                             </p>
                         <h3>Kyle Weldon</h3>
                             <p>

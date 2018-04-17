@@ -7,10 +7,7 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    } from 'reactstrap';
 
 class NavigationBar extends React.Component {
     constructor(props) {
@@ -30,7 +27,7 @@ class NavigationBar extends React.Component {
 
         return (
             <div>
-                <Navbar color="faded" light expand="md">
+                <Navbar className={"background-to-top"} color="faded" light expand="md">
                     <NavbarToggler onClick={this.toggle} />
                     <NavbarBrand href="/home">CleanSweep</NavbarBrand>
                     <Collapse isOpen={this.state.isOpen} navbar>
@@ -45,7 +42,7 @@ class NavigationBar extends React.Component {
                                 <NavLink href="/aboutus">About Us</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/help">Help</NavLink>
+                                <NavLink href="/help">Contact Us</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="https://github.com/xblGrant/CleanSweep">Github</NavLink>

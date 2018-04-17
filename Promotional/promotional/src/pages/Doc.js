@@ -1,6 +1,5 @@
 import React from 'react';
 import {Helmet} from "react-helmet";
-import {DOC} from "../constants/routes";
 import pic1 from "../Doc/_Project CleanSweep-page-001.jpg";
 import pic2 from "../Doc/_Project CleanSweep-page-002.jpg";
 import pic3 from "../Doc/_Project CleanSweep-page-003.jpg";
@@ -42,24 +41,42 @@ class Doc extends React.Component {
                 <div className={"container"}>
                     <div className={"col-sm-6  col-md-10 center"}>
                         <h2 className={"center"}>Documentation</h2>
+                        <hr />
                         <p>
-                            <img className={"center col-sm-12"} src = {pic1}/>
-                            <img className={"center col-sm-12"} src = {pic2}/>
-                            <img className={"center col-sm-12"} src = {pic3}/>
-                            <img className={"center col-sm-12"} src = {pic4}/>
-                            <img className={"center col-sm-12"} src = {pic5}/>
-                            <img className={"center col-sm-12"} src = {pic6}/>
-                            <img className={"center col-sm-12"} src = {pic7}/>
-                            <img className={"center col-sm-12"} src = {pic8}/>
-                            <img className={"center col-sm-12"} src = {pic9}/>
-                            <img className={"center col-sm-12"} src = {pic10}/>
-                            <img className={"center col-sm-12"} src = {pic11}/>
-                            <img className={"center col-sm-12"} src = {pic12}/>
-                            <img className={"center col-sm-12"} src = {pic13}/>
-                            <img className={"center col-sm-12"} src = {pic14}/>
-                            <img className={"center col-sm-12"} src = {pic15}/>
-                            <img className={"center col-sm-12"} src = {pic16}/>
-                            <img className={"center col-sm-12"} src = {pic17}/>
+                            <img className={"center col-sm-12"} src = {pic1}
+                                alt = "cleansweepdoc1"/>
+                            <img className={"center col-sm-12"} src = {pic2}
+                                 alt = "cleansweepdoc2"/>
+                            <img className={"center col-sm-12"} src = {pic3}
+                                 alt = "cleansweepdoc3"/>
+                            <img className={"center col-sm-12"} src = {pic4}
+                                 alt = "cleansweepdoc4"/>
+                            <img className={"center col-sm-12"} src = {pic5}
+                                 alt = "cleansweepdoc5"/>
+                            <img className={"center col-sm-12"} src = {pic6}
+                                 alt = "cleansweepdoc6"/>
+                            <img className={"center col-sm-12"} src = {pic7}
+                                 alt = "cleansweepdoc7"/>
+                            <img className={"center col-sm-12"} src = {pic8}
+                                 alt = "cleansweepdoc8"/>
+                            <img className={"center col-sm-12"} src = {pic9}
+                                 alt = "cleansweepdoc9"/>
+                            <img className={"center col-sm-12"} src = {pic10}
+                                 alt = "cleansweepdoc10"/>
+                            <img className={"center col-sm-12"} src = {pic11}
+                                 alt = "cleansweepdoc11"/>
+                            <img className={"center col-sm-12"} src = {pic12}
+                                 alt = "cleansweepdoc12"/>
+                            <img className={"center col-sm-12"} src = {pic13}
+                                 alt = "cleansweepdoc13"/>
+                            <img className={"center col-sm-12"} src = {pic14}
+                                 alt = "cleansweepdoc14"/>
+                            <img className={"center col-sm-12"} src = {pic15}
+                                 alt = "cleansweepdoc15"/>
+                            <img className={"center col-sm-12"} src = {pic16}
+                                 alt = "cleansweepdoc16"/>
+                            <img className={"center col-sm-12"} src = {pic17}
+                                 alt = "cleansweepdoc17"/>
                         </p>
 
                     </div>
