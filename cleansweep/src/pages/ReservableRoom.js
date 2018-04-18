@@ -302,7 +302,8 @@ class WakeUpComponent extends React.Component {
 
         return (
             <div className={"center"}>
-                <label>Wake-Up Call</label><br/>
+                <label>Wake-Up Call</label>
+                <br/>
                 {table}
                 {error && <p typeof={"error"} className={"error col-sm-4 center"} id={"error"}>
                     {"Both date and time need to be selected"}</p>}

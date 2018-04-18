@@ -49,7 +49,8 @@ class PasswordForgetForm extends React.Component {
                     <Form onSubmit={this.onSubmit}>
                         <h4 className={"center"}>Password Forget</h4>
                         {error && <p typeof={"error"} className={"error col-sm-4 center"} id={"error"}>{error.message}</p>}
-                        <br/><br/>
+                        <br/>
+                        <br/>
                             <div className={"center col-sm-4 col-md-12"}>
                                 <FormGroup>
                                     <Input
