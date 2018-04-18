@@ -19,7 +19,7 @@ export function SignOutButton(props) {
 export function WrappedButton(props) {
     if (props.isOutlined){
         return (
-            <Button id={props.id} outline size={"sm"}>
+            <Button id={props.id} outline size={"sm"} className={"noMargin"}>
                 <Link style={{
                     textDecoration: 'none',
                     color: 'black'
@@ -28,7 +28,7 @@ export function WrappedButton(props) {
         );
     } else {
         return (
-            <Button id={props.id}>
+            <Button id={props.id} className={"noMargin"}>
                 <Link style={{
                     textDecoration: 'none',
                     color: 'white'
