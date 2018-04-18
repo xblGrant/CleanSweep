@@ -202,9 +202,6 @@ class NavigationNonAuth extends React.Component {
         });
     }
     render() {
-        // TODO: discern if anyone is logged in and render appropriate NavigationBar
-        // TODO: discern if manager or employee is logged in then render appropriate NavigationBar
-        // TODO: create employee NavigationBar
 
         let headerExpanded, headerCollapsed;
         if (this.state.isOpen){
@@ -217,7 +214,7 @@ class NavigationNonAuth extends React.Component {
 
         return (
             <div>
-                <Navbar className={"color1"} color="faded" light expand="md">
+                <Navbar className={"background-to-top"} color="faded" light expand="md">
                     <div className={"container"}>
                         <NavbarToggler onClick={this.toggle} />
                         <NavbarBrand className={"brand"}>CleanSweep</NavbarBrand>
