@@ -62,7 +62,7 @@ class WakeUpList extends React.Component {
 
 const WakeUpComponent = ({rooms}) => (
     <div className={"container"}>
-        <table className={"text-center table table-striped table-hover"}>
+        <table className={"text-center table table-striped table-hover whiteBG"}>
             <thead>
                 <tr>
                     <th scope={"col"}>Room</th>

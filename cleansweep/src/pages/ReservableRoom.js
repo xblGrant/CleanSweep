@@ -1,6 +1,7 @@
 import React from 'react';
 import * as api from '../firebase/api';
 import {Input, Button} from 'reactstrap';
+import {Helmet} from "react-helmet";
 
 class ReservableRoom extends React.Component {
     constructor(props) {
@@ -93,18 +94,24 @@ class ReservableRoom extends React.Component {
         }
 
         return (
-            <div className={"container"}>
-                <h2 className={"center"}>{info.roomID}</h2>
-                <h6 className={"center"}>{info.status}</h6>
-                <p className={"center"}>{"Floor: " + info.floorNum / 100}</p>
-                <p className={"center"}>{guestMessage}</p>
-                <br/>
-                <p className={"center"}>{employeeMessage}</p>
-                <p className={"center"}>{inspectMessage}</p>
-                <hr/>
-                {statusComponent}
-                {wakeUpComponent}
-                {incidentComponent}
+            <div>
+                <Helmet>
+                    <title>{info.roomID}</title>
+                    <body className={"background-to-bottom"}/>
+                </Helmet>
+                <div className={"container"}>
+                    <h2 className={"center"}>{info.roomID}</h2>
+                    <h6 className={"center"}>{info.status}</h6>
+                    <p className={"center"}>{"Floor: " + info.floorNum / 100}</p>
+                    <p className={"center"}>{guestMessage}</p>
+                    <br/>
+                    <p className={"center"}>{employeeMessage}</p>
+                    <p className={"center"}>{inspectMessage}</p>
+                    <hr/>
+                    {statusComponent}
+                    {wakeUpComponent}
+                    {incidentComponent}
+                </div>
             </div>
         );
     }
@@ -261,7 +268,7 @@ class WakeUpComponent extends React.Component {
             buttonName = "Update Wake-Up Call";
             table =
                 <div>
-                    <table className={"container text-center"}>
+                    <table className={"text-center table table-striped table-hover whiteBG"}>
                         <tbody>
                         <tr>
                             <th>Date</th>

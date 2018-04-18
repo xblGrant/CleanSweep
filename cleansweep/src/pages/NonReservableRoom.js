@@ -1,6 +1,7 @@
 import React from 'react';
 import * as api from '../firebase/api';
 import {Input, Button} from 'reactstrap';
+import {Helmet} from "react-helmet";
 
 class NonReservableRoom extends React.Component {
     constructor(props) {
@@ -79,17 +80,23 @@ class NonReservableRoom extends React.Component {
         }
 
         return (
-            <div className={"container"}>
-                <h2 className={"center"}>{info.roomID}</h2>
-                <h6 className={"center"}>{info.status}</h6>
-                <p className={"center"}>{"Floor: " + info.floorNum / 100}</p>
-                <br/>
-                <p className={"center"}>{employeeMessage}</p>
-                <p className={"center"}>{inspectMessage}</p>
-                <br/>
-                {statusComponent}
-                <hr/>
-                {incidentComponent}
+            <div>
+                <Helmet>
+                    <title>{info.roomID}</title>
+                    <body className={"background-to-bottom"}/>
+                </Helmet>
+                <div className={"container"}>
+                    <h2 className={"center"}>{info.roomID}</h2>
+                    <h6 className={"center"}>{info.status}</h6>
+                    <p className={"center"}>{"Floor: " + info.floorNum / 100}</p>
+                    <br/>
+                    <p className={"center"}>{employeeMessage}</p>
+                    <p className={"center"}>{inspectMessage}</p>
+                    <br/>
+                    {statusComponent}
+                    <hr/>
+                    {incidentComponent}
+                </div>
             </div>
         );
     }
