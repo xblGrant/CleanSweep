@@ -259,11 +259,13 @@ function DropDItem(props) {
             (content,  index/*, procedure*/) => {
                 let link = props.links[index];
                 return(
+                    <Link to={link} /*onClick={procedure}*/>
                     <DropdownItem key={index}>
-                        <NavItem>
-                            <Link to={link} /*onClick={procedure}*/>{content}</Link>
-                        </NavItem>
+                            <NavItem>
+                                {content}
+                            </NavItem>
                     </DropdownItem>
+                    </Link>
                 )
             })
     );
