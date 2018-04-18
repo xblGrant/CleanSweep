@@ -4,12 +4,13 @@ import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import * as api from '../firebase/api';
 import {withRouter} from 'react-router-dom';
 import {Helmet} from "react-helmet";
+import * as routes from "../constants/routes";
 
 const SignUp = ({history}) =>
     <div>
         <Helmet>
             <title>Sign-Up</title>
-            <body className={"background-to-bottom"}></body>
+            <body className={"background-to-bottom"}/>
         </Helmet>
 
 
@@ -36,6 +37,12 @@ class SignUpForm extends React.Component {
 
         this.state = {...INITIAL_STATE};
         this.handleSignUp = this.handleSignUp.bind(this);
+    }
+
+    componentWillMount() {
+        if (api.getCurrentUser() !== null){
+            this.props.history.push(routes.ASSIGNED_ROOMS);
+        }
     }
 
     handleSignUp(e) {
