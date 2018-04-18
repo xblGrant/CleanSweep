@@ -11,17 +11,18 @@ import {
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    DropdownItem
+} from 'reactstrap';
 import Header from './Header';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import * as routes from '../constants/routes';
 import * as api from '../firebase/api';
 
-const NavigationBar = (props, { authUser }) =>
+const NavigationBar = (props, {authUser}) =>
     <div>
-        { authUser
-            ? <IsAdmin />
-            : <NavigationNonAuth />
+        {authUser
+            ? <IsAdmin/>
+            : <NavigationNonAuth/>
         }
     </div>;
 
@@ -42,10 +43,10 @@ class IsAdmin extends React.Component {
         api.getCurrentUserIsAdmin(this);
     }
 
-    render(){
+    render() {
         let isAdmin = this.state.isAdmin;
 
-        return(
+        return (
             (isAdmin)
                 ? <NavigationAuth/>
                 : <EmployeeAuth/>
@@ -53,8 +54,6 @@ class IsAdmin extends React.Component {
     }
 }
 
-//TODO: use this for maid navigation once we are testing for
-//TODO: current user isAdmin status
 class EmployeeAuth extends React.Component {
     constructor(props) {
         super(props);
@@ -64,14 +63,16 @@ class EmployeeAuth extends React.Component {
             isOpen: false
         };
     }
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
+
     render() {
         let headerExpanded, headerCollapsed;
-        if (this.state.isOpen){
+        if (this.state.isOpen) {
             headerCollapsed = <Header className={"ml-auto"} isAuthUser={true}/>;
             headerExpanded = null;
         } else {
@@ -87,28 +88,25 @@ class EmployeeAuth extends React.Component {
             <div>
                 <Navbar className={"background-to-top"} color="faded" light expand="md">
                     <div className={"container"}>
-                        <NavbarToggler onClick={this.toggle} />
+                        <NavbarToggler onClick={this.toggle}/>
                         <NavbarBrand className={"brand"}>CleanSweep</NavbarBrand>
-                        { headerCollapsed }
+                        {headerCollapsed}
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
                                 <DropDContent title={"Functions"}
                                               contents={["Add Incident"]}
-                                              links={[routes.ADD_INCIDENT]}
-                                              /*instance={this}*//>
+                                              links={[routes.ADD_INCIDENT]}/>
                                 <DropDContent title={"Lists"}
                                               contents={["All Rooms", "Assigned Rooms",
                                                   "Incidents"]}
                                               links={[routes.ALL_ROOMS, routes.ASSIGNED_ROOMS,
-                                                  routes.INCIDENTS]}
-                                              /*instance={this}*//>
+                                                  routes.INCIDENTS]}/>
                                 <DropDContent title={"Options"}
                                               contents={["Change Password"]}
-                                              links={[routes.CHANGE_PW]}
-                                              /*instance={this*//>
+                                              links={[routes.CHANGE_PW]}/>
                             </Nav>
                         </Collapse>
-                        { headerExpanded }
+                        {headerExpanded}
                     </div>
                 </Navbar>
             </div>
@@ -125,15 +123,17 @@ class NavigationAuth extends React.Component {
             isOpen: false
         };
     }
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
+
     render() {
 
         let headerExpanded, headerCollapsed;
-        if (this.state.isOpen){
+        if (this.state.isOpen) {
             headerCollapsed = <Header className={"ml-auto"} isAuthUser={true}/>;
             headerExpanded = null;
         } else {
@@ -145,41 +145,37 @@ class NavigationAuth extends React.Component {
             <div>
                 <Navbar className={"background-to-top"} color="faded" light expand="md">
                     <div className={"container"}>
-                        <NavbarToggler onClick={this.toggle} />
+                        <NavbarToggler onClick={this.toggle}/>
                         <NavbarBrand className={"brand"}>CleanSweep</NavbarBrand>
-                        { headerCollapsed }
+                        {headerCollapsed}
                         <Collapse isOpen={this.state.isOpen} navbar>
-                                <Nav className="mr-auto" navbar>
-                                    <DropDContent title={"File"}
-                                                  contents={["New Employee", "New Room"]}
-                                                  links={[routes.NEW_EMPLOYEE, routes.NEW_ROOM]}
-                                                  /*instance={this}*//>
-                                    <DropDContent title={"Functions"}
-                                                  contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms",
-                                                      "Inspect Room", "Check In/Out"]}
-                                                  links={[routes.WAKE_UP_CALL, routes.ADD_INCIDENT, routes.ASSIGN_ROOMS,
-                                                      routes.INSPECT_ROOM, routes.CHECK_IN_OUT]}
-                                                  /*instance={this}*//>
-                                    <DropDContent title={"Lists"}
-                                                  contents={["All Rooms", "Assigned Rooms", "Available Rooms",
-                                                      "Inspections", "Incidents", "Wake-Up Calls"]}
-                                                  links={[routes.ALL_ROOMS, routes.ASSIGNED_ROOMS,
-                                                      routes.AVAILABLE_ROOMS, routes.INSPECTIONS, routes.INCIDENTS,
-                                                      routes.WAKE_UP_LIST]}
-                                                  /*instance={this}*//>
-                                    <DropDContent title={"Options"}
-                                                  contents={["Change Password", "Change Role"]}
-                                                  links={[routes.CHANGE_PW, routes.CHANGE_ROLE]}
-                                                  /*instance={this}*//>
-                                    <NavItem>
-                                        <NavLink href={routes.HELP} onClick={this.toggle}>Help</NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink href={routes.GITHUB} onClick={this.toggle}>Github</NavLink>
-                                    </NavItem>
-                                </Nav>
+                            <Nav className="mr-auto" navbar>
+                                <DropDContent title={"File"}
+                                              contents={["New Employee", "New Room"]}
+                                              links={[routes.NEW_EMPLOYEE, routes.NEW_ROOM]}/>
+                                <DropDContent title={"Functions"}
+                                              contents={["Add Wake-Up Call", "Add Incident", "Assign Rooms",
+                                                  "Inspect Room", "Check In/Out"]}
+                                              links={[routes.WAKE_UP_CALL, routes.ADD_INCIDENT, routes.ASSIGN_ROOMS,
+                                                  routes.INSPECT_ROOM, routes.CHECK_IN_OUT]}/>
+                                <DropDContent title={"Lists"}
+                                              contents={["All Rooms", "Assigned Rooms", "Available Rooms",
+                                                  "Inspections", "Incidents", "Wake-Up Calls"]}
+                                              links={[routes.ALL_ROOMS, routes.ASSIGNED_ROOMS,
+                                                  routes.AVAILABLE_ROOMS, routes.INSPECTIONS, routes.INCIDENTS,
+                                                  routes.WAKE_UP_LIST]}/>
+                                <DropDContent title={"Options"}
+                                              contents={["Change Password", "Change Role"]}
+                                              links={[routes.CHANGE_PW, routes.CHANGE_ROLE]}/>
+                                <NavItem>
+                                    <NavLink href={routes.HELP} onClick={this.toggle}>Help</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href={routes.GITHUB} onClick={this.toggle}>Github</NavLink>
+                                </NavItem>
+                            </Nav>
                         </Collapse>
-                        { headerExpanded }
+                        {headerExpanded}
                     </div>
                 </Navbar>
             </div>
@@ -196,40 +192,42 @@ class NavigationNonAuth extends React.Component {
             isOpen: false
         };
     }
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
+
     render() {
 
         let headerExpanded, headerCollapsed;
-        if (this.state.isOpen){
-            headerCollapsed = <Header className={"ml-auto"} />;
+        if (this.state.isOpen) {
+            headerCollapsed = <Header className={"ml-auto"}/>;
             headerExpanded = null;
         } else {
             headerCollapsed = null;
-            headerExpanded = <Header className={"ml-auto"} />;
+            headerExpanded = <Header className={"ml-auto"}/>;
         }
 
         return (
             <div>
                 <Navbar className={"background-to-top"} color="faded" light expand="md">
                     <div className={"container"}>
-                        <NavbarToggler onClick={this.toggle} />
+                        <NavbarToggler onClick={this.toggle}/>
                         <NavbarBrand className={"brand"}>CleanSweep</NavbarBrand>
-                        { headerCollapsed }
+                        {headerCollapsed}
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
                                 <NavItem>
-                                    <NavLink href={routes.HELP} /*onClick={this.toggle}*/>Help</NavLink>
+                                    <NavLink href={routes.HELP}>Help</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink href={routes.GITHUB} /*onClick={this.toggle}*/>Github</NavLink>
+                                    <NavLink href={routes.GITHUB}>Github</NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
-                        { headerExpanded }
+                        {headerExpanded}
                     </div>
                 </Navbar>
             </div>
@@ -243,9 +241,9 @@ function DropDContent(props) {
             <DropdownToggle nav>
                 {props.title}
             </DropdownToggle>
-                <DropdownMenu>
-                    <DropDItem contents={props.contents} links={props.links} /*procedure={props.instance.toggle}*/ />
-                </DropdownMenu>
+            <DropdownMenu>
+                <DropDItem contents={props.contents} links={props.links}/>
+            </DropdownMenu>
         </UncontrolledDropdown>
     );
 }
@@ -253,15 +251,15 @@ function DropDContent(props) {
 function DropDItem(props) {
     return (
         props.contents.map(
-            (content,  index/*, procedure*/) => {
+            (content, index) => {
                 let link = props.links[index];
-                return(
-                    <Link to={link} /*onClick={procedure}*/>
-                    <DropdownItem key={index}>
+                return (
+                    <Link to={link}>
+                        <DropdownItem key={index}>
                             <NavItem>
                                 {content}
                             </NavItem>
-                    </DropdownItem>
+                        </DropdownItem>
                     </Link>
                 )
             })
