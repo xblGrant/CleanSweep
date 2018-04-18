@@ -267,13 +267,13 @@ class WakeUpComponent extends React.Component {
         if (wakeUpCall !== 'none') {
             buttonName = "Update Wake-Up Call";
             table =
-                <div>
+                <div className={"col-sm-4 center"}>
                     <table className={"text-center table table-striped table-hover whiteBG"}>
-                        <tbody>
-                        <tr>
+                        <thead>
                             <th>Date</th>
                             <th>Time</th>
-                        </tr>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td>{date}</td>
                             <td>{time}</td>
