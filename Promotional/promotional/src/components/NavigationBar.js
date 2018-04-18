@@ -29,7 +29,7 @@ class NavigationBar extends React.Component {
             <div>
                 <Navbar className={"background-to-top"} color="faded" light expand="md">
                     <NavbarToggler onClick={this.toggle} />
-                    <NavbarBrand href="/home">CleanSweep</NavbarBrand>
+                    <NavbarBrand href="/">CleanSweep</NavbarBrand>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>

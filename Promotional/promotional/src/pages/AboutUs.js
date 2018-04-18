@@ -64,6 +64,7 @@ class About extends React.Component {
                                 A senior Computer Science student working towards a B.S. in Computer Science at Penn State Harrisburg.
                                 Interested in Software Engineering, keeping up with latest technology trends, and Finance.
                                 Hobbies include: Working on small side projects, learning new things, sports, and video games.
+                                <br />
                                 <a href = "https://www.linkedin.com/in/stuart-perry/">
                                     <img className={"center col-sm-1"} src = {Linkedin}
                                          alt = "linkedin"/></a>

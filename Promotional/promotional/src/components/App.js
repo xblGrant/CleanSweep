@@ -18,7 +18,7 @@ function App() {
             <div>
                 <NavigationBar />
                 {/*Help Path*/}
-                <Route path={routes.HOME} component={Home}/>
+                <Route exact path={routes.HOME} component={Home}/>
                 {/*Help Path*/}
                 <Route path={routes.ABOUT} component={AboutUs}/>
                 {/*Help Path*/}
