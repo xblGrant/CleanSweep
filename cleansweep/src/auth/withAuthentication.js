@@ -29,7 +29,7 @@ const RoleBasedAuthorization = (allowedRoles) => (WrappedComponent) => {
                 if (this.state.role === null)
                     return null;
                 else {
-                    return <h1>Not Authorized</h1>;
+                    return <h1 className={"text-center"}>Not Authorized</h1>;
                 }
             }
         }
