@@ -1,5 +1,8 @@
 /*LOGIN.js & SIGNUP.js & NEWEMPLOYEE.js & NEWROOM.js & CHANGEPASSWORD*/
 @import url('https://fonts.googleapis.com/css?family=Dosis:400,700');
+body{
+    min-height:100vh;
+}
 nav{
     margin-bottom:2%;
     padding-top: 0;
@@ -22,9 +25,9 @@ th {
 }
 
 .background-to-top{
-    background: #FFFFFF;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #FFFFFF, #73ACC4);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #FFFFFF, #73ACC4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #CCE0E9;  /* fallback for old browsers, used as primary color for navbar currently */
+    /*background: -webkit-linear-gradient(to top, #FFFFFF, #73ACC4);   /*Chrome 10-25, Safari 5.1-6 */
+    /*background: linear-gradient(to top, #FFFFFF, #73ACC4);  /*W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .brand {
     font-family: 'Dosis', sans-serif;
