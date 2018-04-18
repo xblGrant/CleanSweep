@@ -54,7 +54,7 @@ class AddWakeUp extends React.Component {
                     <h6 className={"text-center"}>Search By</h6>
                     <div className={"center"}>
                         <FormGroup row>
-                            <div className={"col-sm-10 center"}>
+                            <div className={"col-sm-4 center"}>
                                 <Label className={"center"}>Employees</Label>
                                 <Input onClick={this.handleEmployeeSelect} id={'employeeSelect'} type="select">
                                     <CreateEmployeeOptions employees={this.state.employees}/>

@@ -129,6 +129,7 @@ class NewEmployee extends React.Component {
                                 </Label>
                             </div>
                         </FormGroup>
+                        <br/>
                         <div className={"row"}>
                             <div className={"col-sm-5 center"}>
                                 <Button className={"col-sm-4 btn"} disabled={isInvalid} onClick={this.handleNewEmployee} color={"primary"}>Add Employee</Button>

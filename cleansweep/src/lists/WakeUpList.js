@@ -61,17 +61,21 @@ class WakeUpList extends React.Component {
 }
 
 const WakeUpComponent = ({rooms}) => (
-    <table className={"container text-center"}>
-        <tbody>
-        <tr>
-            <th>Room</th>
-            <th>Date</th>
-            <th>Time</th>
-        </tr>
-        </tbody>
-        {((rooms === null)) ? null : rooms.map((room) => (
-            <WakeUpElement key={room} room={room}/> ))}
-    </table>
+    <div className={"container"}>
+        <table className={"text-center table table-striped table-hover"}>
+            <thead>
+                <tr>
+                    <th scope={"col"}>Room</th>
+                    <th scope={"col"}>Date</th>
+                    <th scope={"col"}>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+            {((rooms === null)) ? null : rooms.map((room) => (
+                <WakeUpElement key={room} room={room}/> ))}
+            </tbody>
+        </table>
+    </div>
 );
 
 function WakeUpElement(props) {
@@ -80,7 +84,6 @@ function WakeUpElement(props) {
     let date = parts[0], time = parts[1];
 
     return (
-        <tbody>
         <tr>
             <td>
                 <Link to={routes.RESERVABLE_ROOM + room[constant.ROOM]}>
@@ -89,7 +92,6 @@ function WakeUpElement(props) {
             <td>{date}</td>
             <td>{time}</td>
         </tr>
-        </tbody>
     )
 }
 

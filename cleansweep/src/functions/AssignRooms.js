@@ -108,7 +108,7 @@ class AssignRooms extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup row>
-                        <div className={"col-sm-10 center"}>
+                        <div className={"col-sm-4 center"}>
                             <Label className={"center"}>Employees</Label>
                             <Input onClick={this.handleEmployeeSelect} id={'employeeSelect'} type="select">
                                 <CreateEmployeeOptions employees={this.state.employees}/>
@@ -120,7 +120,7 @@ class AssignRooms extends React.Component {
                         <div className={"col-sm-10 center"}>
                             <Button disabled={isDisabled} className={"col-sm-3"} onClick={this.handleAssignRooms}
                                     color={"primary"}>Assign</Button>
-                            <Button className={"col-sm-3"} onClick={this.clearAssignments} color={"secondary"}>Clear
+                            <Button className={"col-sm-3"} onClick={this.clearAssignments} color={"danger"}>Clear
                                 Assignments</Button>
                             <Button className={"col-sm-3"} href={routes.HOME} name={"Cancel"}> Cancel </Button>
                         </div>

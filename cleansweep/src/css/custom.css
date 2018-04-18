@@ -66,7 +66,7 @@ th {
     color: #D8000C;
     background-color: #FFBABA;
     border: 1px solid;
-    padding: 15px 10px 15px 50px;
+    padding: 15px 10px;
     background-position: 10px center;
     border-radius:.5em;
 }
@@ -74,7 +74,7 @@ th {
     color: darkgreen;
     background-color: lightgreen;
     border: 1px solid;
-    padding: 15px 10px 15px 50px;
+    padding: 15px 10px;
     background-position: 10px center;
     border-radius:.5em;
 }
@@ -100,6 +100,17 @@ th {
     margin: 0 0;
     margin-bottom: 1rem;
 }
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid black;
+}
+.table th{
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 2px solid black;
+}
+
 .width-10{
     border-color: white;
     background-color: white;
