@@ -699,7 +699,7 @@ export const getAllUnassignedSelectableRooms = (that) => {
     roomRef.orderByKey().once('value', function (floors) {
         floors.forEach(function (allRooms) {
             allRooms.forEach(function (room) {
-                if (room.val().assignedEmployee === 'none') {
+                if (room.val().assignedEmployee === 'none' && !room.val().inspect) {
                     roomList.push(
                         [room.key,
                             room.val().status,
@@ -747,7 +747,7 @@ export const getAllUnassignedSelectableRoomsByFloor = (that, floor) => {
     let roomRef = firebase.db.ref("/Rooms/NonReservable/" + floor);
     roomRef.orderByKey().once('value', function (allRooms) {
         allRooms.forEach(function (room) {
-            if (room.val().assignedEmployee === 'none') {
+            if (room.val().assignedEmployee === 'none' && !room.val().inspect) {
                 roomList.push(
                     [room.key,
                         room.val().status,
