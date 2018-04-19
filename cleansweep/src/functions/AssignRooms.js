@@ -15,11 +15,9 @@ class AssignRooms extends React.Component {
             employees: [],
             selectedRooms: null,
             selectedEmployee: null,
-            selectedFloor: '000',
-            submitted: false
+            selectedFloor: '000'
         };
 
-        this.isSubmitted = this.isSubmitted.bind(this);
         this.handleSelectionFinish = this.handleSelectionFinish.bind(this);
         this.handleSelectionClear = this.handleSelectionClear.bind(this);
         this.handleFloorSelect = this.handleFloorSelect.bind(this);
@@ -33,10 +31,6 @@ class AssignRooms extends React.Component {
         api.getAllEmployees(this);
     }
 
-    isSubmitted(val) {
-        this.setState({submitted: val});
-    }
-
     handleFloorSelect(e) {
         if (e.target.value === '000')
             api.getAllUnassignedSelectableRooms(this);
@@ -44,7 +38,6 @@ class AssignRooms extends React.Component {
             api.getAllUnassignedSelectableRoomsByFloor(this, e.target.value);
 
         this.setState({ selectedFloor: e.target.value });
-        this.isSubmitted(false);
     }
 
     handleEmployeeSelect(e) {
@@ -53,7 +46,6 @@ class AssignRooms extends React.Component {
         this.setState({
             selectedEmployee: employee
         });
-        this.isSubmitted(false);
     }
 
     handleSelectionFinish = selectedItems => {
@@ -66,24 +58,20 @@ class AssignRooms extends React.Component {
 
         if (selectedRooms === []) selectedRooms = null;
         this.setState({ selectedRooms: selectedRooms });
-        this.isSubmitted(false);
     };
 
     handleSelectionClear() {
         this.setState({ selectedRooms: null });
-        this.isSubmitted(false);
     }
 
     handleAssignRooms() {
         let {selectedRooms, selectedEmployee, selectedFloor} = this.state;
         for (let i = 0; i < selectedRooms.length; i++)
             api.assignRoom(this, selectedRooms[i], selectedEmployee, selectedFloor);
-        this.isSubmitted(true);
     }
 
     clearAssignments() {
         api.clearRoomAssignments(this, this.state.selectedFloor);
-        this.isSubmitted(false);
     }
 
     render() {
@@ -125,8 +113,6 @@ class AssignRooms extends React.Component {
                             <Button className={"col-sm-3"} href={routes.HOME} name={"Cancel"}> Cancel </Button>
                         </div>
                     </div>
-                    {this.state.submitted && <p className={"submission"} id={"submitMessage"}>
-                        {"Rooms assigned successfully"}</p>}
                     <FormGroup row>
                         <div className={"col-sm-10 center"}>
                             <Label className={"center"}>Rooms</Label>

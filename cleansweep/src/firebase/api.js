@@ -1667,7 +1667,8 @@ const declineNonReservableRoomWithFloor = (floor, room) => {
 // check in/out
 export const checkIn = (that, floorNum, roomNum) => {
     firebase.db.ref('/Rooms/Reservable/' + floorNum + '/' + roomNum).update({
-        guest: true
+        guest: true,
+        isReservable: false
     });
 };
 export const checkOut = (that, floorNum, roomNum) => {

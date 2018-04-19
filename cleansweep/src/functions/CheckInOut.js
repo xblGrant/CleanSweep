@@ -14,11 +14,9 @@ class CheckInGuest extends React.Component {
             rooms: [],
             floorNum: '000',
             checkIn: true,
-            selectedRooms: null,
-            submitted: false
+            selectedRooms: null
         };
 
-        this.isSubmitted = this.isSubmitted.bind(this);
         this.handleStatus = this.handleStatus.bind(this);
         this.handleCheckIn = this.handleCheckIn.bind(this);
         this.handleCheckOut = this.handleCheckOut.bind(this);
@@ -33,10 +31,6 @@ class CheckInGuest extends React.Component {
         api.getAvailableRooms(this);
     }
 
-    isSubmitted(val) {
-        this.setState({submitted: val});
-    }
-
     handleSelectionFinish = selectedItems => {
         let selectedRooms = [];
         for (let i = 0; i < selectedItems.length; i++)
@@ -44,12 +38,10 @@ class CheckInGuest extends React.Component {
 
         if (selectedRooms === []) selectedRooms = null;
         this.setState({ selectedRooms: selectedRooms});
-        this.isSubmitted(false);
     };
 
     handleSelectionClear() {
         this.setState({ selectedRooms: null });
-        this.isSubmitted(false);
     }
 
     handleCheckInFloorSelect(e) {
@@ -62,7 +54,6 @@ class CheckInGuest extends React.Component {
             floorNum: e.target.value,
             selectedRooms: null
         });
-        this.isSubmitted(false);
     }
 
     handleCheckOutFloorSelect(e) {
@@ -75,7 +66,6 @@ class CheckInGuest extends React.Component {
             floorNum: e.target.value,
             selectedRooms: null
         });
-        this.isSubmitted(false);
     }
 
     handleStatusChangeRoomDisplay(floor, checkIn) {
@@ -90,7 +80,6 @@ class CheckInGuest extends React.Component {
             else
                 api.getAllReservedRoomsByFloor(this, floor);
         }
-        this.isSubmitted(false);
     }
 
     handleStatus(e) {
@@ -105,7 +94,6 @@ class CheckInGuest extends React.Component {
         });
 
         this.handleStatusChangeRoomDisplay(this.state.floorNum, checkIn);
-        this.isSubmitted(false);
     }
 
     handleCheckIn() {
@@ -113,7 +101,6 @@ class CheckInGuest extends React.Component {
         for (let i = 0; i < selectedRooms.length; i++)
             api.checkIn(this, selectedRooms[i].floor, selectedRooms[i].roomName);
         this.handleStatusChangeRoomDisplay(this.state.floorNum, true);
-        this.isSubmitted(true);
     }
 
     handleCheckOut() {
@@ -121,7 +108,6 @@ class CheckInGuest extends React.Component {
         for (let i = 0; i < selectedRooms.length; i++)
             api.checkOut(this, selectedRooms[i].floor, selectedRooms[i].roomName);
         this.handleStatusChangeRoomDisplay(this.state.floorNum, false);
-        this.isSubmitted(true);
     }
 
     render() {
@@ -136,7 +122,6 @@ class CheckInGuest extends React.Component {
             : <Button disabled={isDisabled} className={"col-sm-4"}
                       onClick={this.handleCheckOut} color={"primary"}>Check-Out</Button>;
         let floorFunction = (checkIn) ? this.handleCheckInFloorSelect : this.handleCheckOutFloorSelect;
-        let submissionMessage = (checkIn) ? "Check-In successful" : "Check-Out successful";
 
         return (
             <div className={"container"}>
@@ -160,10 +145,6 @@ class CheckInGuest extends React.Component {
                                 <option value={"checkOut"}>Check-Out</option>
                             </Input>
                         </div>
-                        
-                        {/*This gets overwritten by the second this.state call*/}
-                        {this.state.submitted && <p className={"submission"} id={"submitMessage"}>
-                            {submissionMessage}</p>}
                         <br/>
                         <div className={"row"}>
                             <div className={"col-sm-5 center"}>
