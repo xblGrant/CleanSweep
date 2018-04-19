@@ -104,6 +104,12 @@ class EmployeeAuth extends React.Component {
                                 <DropDContent title={"Options"}
                                               contents={["Change Password"]}
                                               links={[routes.CHANGE_PW]}/>
+                                <NavItem>
+                                    <NavLink href={routes.HELP} onClick={this.toggle}>Help</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href={routes.GITHUB} onClick={this.toggle}>Github</NavLink>
+                                </NavItem>
                             </Nav>
                         </Collapse>
                         {headerExpanded}
