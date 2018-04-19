@@ -403,7 +403,7 @@ export const getAvailableRooms = (that) => {
     roomRef.orderByKey().once('value', function (floors) {
         floors.forEach(function (allRooms) {
             allRooms.forEach(function (room) {
-                if (room.val().guest === false && room.val().status === 'Clean' && room.val().inspect === false) {
+                if (room.val().isReservable) {
                     let assigned = (room.val().assignedEmployee !== 'none');
                     roomList.push(
                         [room.key,
@@ -431,7 +431,7 @@ export const getAvailableRoomsByFloor = (that, floor) => {
     let roomRef = firebase.db.ref("/Rooms/Reservable/" + floor);
     roomRef.orderByKey().once('value', function (allRooms) {
         allRooms.forEach(function (room) {
-            if (room.val().guest === false && room.val().status === 'Clean' && room.val().inspect === false) {
+            if (room.val().isReservable) {
                 let assigned = (room.val().assignedEmployee !== 'none');
                 roomList.push(
                     [room.key,
@@ -1468,7 +1468,9 @@ export const assignRoom = (that, room, employee, floor) => {
 const assignReservableRoom = (that, room, employee, floor) => {
     firebase.db.ref('/Rooms/Reservable/' + room.floor + '/' + room.roomName).update({
         assignedEmployee: employee,
-        status: 'Dirty'
+        status: 'Dirty',
+        isReservable: false,
+        inspect: false
     }).then(() => {
         if (floor === '000')
             getAllUnassignedSelectableRooms(that);
@@ -1479,7 +1481,8 @@ const assignReservableRoom = (that, room, employee, floor) => {
 const assignNonReservableRoom = (that, room, employee, floor) => {
     firebase.db.ref('/Rooms/NonReservable/' + room.floor + '/' + room.roomName).update({
         assignedEmployee: employee,
-        status: 'Dirty'
+        status: 'Dirty',
+        inspect: false
     }).then(() => {
         if (floor === '000')
             getAllUnassignedSelectableRooms(that);
@@ -1530,14 +1533,10 @@ export const inspectRoom = (floor, room, isReservableRoom) => {
     }
     else {
         if (isReservableRoom) {
-            firebase.db.ref("/Rooms/Reservable/" + floor + "/" + room + "/").update({
-                inspect: false,
-            });
+            inspectReservableRoom(room);
         }
         else {
-            firebase.db.ref("/Rooms/NonReservable/" + floor + "/" + room + "/").update({
-                inspect: false,
-            });
+            inspectNonReservableRoom(room);
         }
     }
 };
