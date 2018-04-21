@@ -83,7 +83,12 @@ class About extends React.Component {
                             </p>
                         <h3>Kyle Weldon</h3>
                             <p>
-
+                                Senior in Computer Science at Penn State Harrisburg.
+                                Interested in: software engineering/development, web development, etc.
+                                Hobbies: learning about new cultures, cooking, and traveling.
+                                <a href={"www.linkedin.com/in/kyle-weldon-6462b480"}>
+                                    <img className={"center col-sm-1"} src = {Linkedin}
+                                         alt = "linkedin"/></a>
                             </p>
                     </div>
                 </div>
