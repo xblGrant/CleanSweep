@@ -23,7 +23,13 @@ class Header extends React.Component {
         // TODO: Check currently signed in user
         // TODO: Add Logout functionality
 
+        let route;
         let authorized = this.props.isAuthUser;
+        if (this.state.currentUser === "Guest"){
+            route = routes.LOGIN;
+        } else {
+            route = routes.ASSIGNED_ROOMS;
+        }
 
         let button;
         if (!authorized) {
@@ -36,7 +42,7 @@ class Header extends React.Component {
             <div className={"ml-auto"}>
                 <Form id={"header"} inline>
                     <Label className={"noMargin"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
-                    <Link to={routes.ASSIGNED_ROOMS}>
+                    <Link to={route}>
                         <Button id={"userLink"} className={"center"} color={"link"}
                                 size={"sm"}>{this.state.currentUser}</Button>
                     </Link>
