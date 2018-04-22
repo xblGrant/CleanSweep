@@ -53,7 +53,8 @@ class About extends React.Component {
                         <h3>Adina Lamboy</h3>
                             <p>
                                 Currently a Senior at Penn State Harrisburg pursuing a
-                                Bachelors Degree in Computer science.
+                                Bachelors Degree in Computer science. Interested in Software Engineering, Web Development,
+                                and Dogs.
                                 <br/>
                                 <a href = "https://www.linkedin.com/in/adina-lamboy-a15a43b4">
                                     <img className={"center col-sm-1"} src = {Linkedin}
@@ -86,6 +87,7 @@ class About extends React.Component {
                                 Senior in Computer Science at Penn State Harrisburg.
                                 Interested in: software engineering/development, web development, etc.
                                 Hobbies: learning about new cultures, cooking, and traveling.
+                                <br/>
                                 <a href={"www.linkedin.com/in/kyle-weldon-6462b480"}>
                                     <img className={"center col-sm-1"} src = {Linkedin}
                                          alt = "linkedin"/></a>
