@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../css/custom.css';
 import * as routes from '../constants/routes';
 import NavigationBar from "./NavigationBar";
+import TryIt from "../pages/TryIt";
 
 function App() {
 
@@ -17,11 +18,13 @@ function App() {
         <Router>
             <div>
                 <NavigationBar />
-                {/*Help Path*/}
+                {/*Try It Path*/}
                 <Route exact path={routes.HOME} component={Home}/>
-                {/*Help Path*/}
+                {/*Home Path*/}
+                <Route exact path={routes.TRYIT} component={TryIt}/>
+                {/*About Path*/}
                 <Route path={routes.ABOUT} component={AboutUs}/>
-                {/*Help Path*/}
+                {/*Doc Path*/}
                 <Route path={routes.DOC} component={Doc}/>
                 {/*Help Path*/}
                 <Route path={routes.HELP} component={Help}/>

@@ -21,7 +21,7 @@ class About extends React.Component {
         return (
             <div>
                 <Helmet>
-                    <title>Home</title>
+                    <title>AboutUs</title>
                 </Helmet>
                 <div className={"container"}>
                     <div className={"col-sm-6  col-md-10 center"}>
