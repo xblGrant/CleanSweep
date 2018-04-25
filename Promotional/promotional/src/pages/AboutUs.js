@@ -88,7 +88,7 @@ class About extends React.Component {
                                 Interested in: software engineering/development, web development, etc.
                                 Hobbies: learning about new cultures, cooking, and traveling.
                                 <br/>
-                                <a href={"www.linkedin.com/in/kyle-weldon-6462b480"}>
+                                <a href="https://www.linkedin.com/in/kyle-weldon-6462b480">
                                     <img className={"center col-sm-1"} src = {Linkedin}
                                          alt = "linkedin"/></a>
                             </p>
