@@ -293,7 +293,7 @@ class NewRoom extends React.Component {
                     </Form>
                     { this.state.submitted && <p className={"submission col-sm-4 center"} id={"submitMessage"}>
                         {"Room added successfully"}</p>}
-                    {error && <p typeof={"error"} className={"error center"} id={"error"}>
+                    { error && <p typeof={"error"} className={"error center"} id={"error"}>
                         {"No more rooms can be added to this floor."}</p>}
                 </div>
             </div>
