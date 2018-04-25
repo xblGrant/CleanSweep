@@ -1143,6 +1143,7 @@ export const getReservableRoomInformation = (that, roomID) => {
         firebase.db.ref("/Employee/" + updates.assignedEmployee).once('value', function (employee) {
             if (updates.assignedEmployee !== "none") {
                 updates.assignedEmployeeName = employee.val().username;
+                updates.isAdmin = employee.val().isAdmin;
             } else {
                 updates.assignedEmployeeName = '';
             }
@@ -1281,7 +1282,8 @@ export const addIncidentFromRoomPage = (that, floor, room, comment, areReservabl
 const addReservableRoomIncidentFromRoomPage = (that, floor, room) => {
     firebase.db.ref('/Rooms/Reservable/' + floor + '/' + room).update({
         incident: true,
-        status: "Dirty"
+        status: "Dirty",
+        inspect: false
     }).then(() => {
         getReservableRoomInformation(that, room);
     })
@@ -1299,7 +1301,8 @@ const addNonReservableRoomIncidentFromRoomPage = (that, room) => {
     }).then(() => {
         firebase.db.ref('/Rooms/NonReservable/' + floor + '/' + room).update({
             incident: true,
-            status: "Dirty"
+            status: "Dirty",
+            inspect: false
         }).then(() => {
             getNonReservableRoomInformation(that, room);
         })

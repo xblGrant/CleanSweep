@@ -13,6 +13,7 @@ class ReservableRoom extends React.Component {
             roomID: null,
             floorNum: null,
             currentUser: null,
+            isAdmin: false,
             assignedEmployee: "none",
             assignedEmployeeName: null,
             guest: null,
@@ -60,9 +61,11 @@ class ReservableRoom extends React.Component {
             inspectMessage = "No Inspection Needed";
         }
 
+        console.log(this.state.isAdmin);
+
         let wakeUpComponent =
             <div>
-                <WakeUpComponent wakeUpCall={info.wakeupCall} room={info.roomID} that={this}/>
+                <WakeUpComponent wakeUpCall={info.wakeupCall} room={info.roomID} isAdmin={info.isAdmin} that={this}/>
                 <hr/>
             </div>;
 
@@ -255,9 +258,8 @@ class WakeUpComponent extends React.Component {
     }
 
     render() {
-        let {wakeUpCall} = this.props;
+        let {wakeUpCall, isAdmin} = this.props;
         let {editWakeUp, error} = this.state;
-        let wakeUpComponent;
 
         let parts = wakeUpCall.split('-');
         let date = parts[0], time = parts[1];
@@ -270,8 +272,8 @@ class WakeUpComponent extends React.Component {
                 <div className={"col-sm-4 center"}>
                     <table className={"text-center table table-striped table-hover whiteBG"}>
                         <thead>
-                            <th>Date</th>
-                            <th>Time</th>
+                        <th>Date</th>
+                        <th>Time</th>
                         </thead>
                         <tbody>
                         <tr>
@@ -285,26 +287,31 @@ class WakeUpComponent extends React.Component {
         }
 
 
-        let buttons = <button className={"btn btn-primary"} onClick={this.handleEditWakeUp}>{buttonName}</button>;
-        if (editWakeUp) {
-            buttons =
-                <div>
-                    <br/>
-                    <button className={"btn btn-primary"} onClick={this.handleUpdateWakeUpCall}>Update</button>
-                    <button className={"btn btn-secondary"} onClick={this.handleClearWakeUpCall}>Clear</button>
-                    <button className={"btn btn-danger"} onClick={this.handleEditWakeUp}>Cancel</button>
-                </div>;
-            wakeUpComponent =
-                <div>
-                    <div className={"col-sm-4 center"}>
-                        <label>Date</label>
-                        <Input onChange={this.handleDate} type="date" id="wakeUpDate" placeholder={"date"}/>
-                    </div>
-                    <div className={"col-sm-4 center"}>
-                        <label>Time</label>
-                        <Input onChange={this.handleTime} type="time" id="wakeUpTime" placeholder={"time"}/>
-                    </div>
-                </div>;
+        let buttons = null;
+        let wakeUpComponent = null;
+        console.log(isAdmin);
+        if (isAdmin) {
+            buttons = <button className={"btn btn-primary"} onClick={this.handleEditWakeUp}>{buttonName}</button>;
+            if (editWakeUp) {
+                buttons =
+                    <div>
+                        <br/>
+                        <button className={"btn btn-primary"} onClick={this.handleUpdateWakeUpCall}>Update</button>
+                        <button className={"btn btn-secondary"} onClick={this.handleClearWakeUpCall}>Clear</button>
+                        <button className={"btn btn-danger"} onClick={this.handleEditWakeUp}>Cancel</button>
+                    </div>;
+                wakeUpComponent =
+                    <div>
+                        <div className={"col-sm-4 center"}>
+                            <label>Date</label>
+                            <Input onChange={this.handleDate} type="date" id="wakeUpDate" placeholder={"date"}/>
+                        </div>
+                        <div className={"col-sm-4 center"}>
+                            <label>Time</label>
+                            <Input onChange={this.handleTime} type="time" id="wakeUpTime" placeholder={"time"}/>
+                        </div>
+                    </div>;
+            }
         }
 
         return (
@@ -370,7 +377,8 @@ class AddIncidentComponent extends React.Component {
                            placeholder={"Enter comment here"}/>
                     <br/>
                     <div className={"col-sm-5 center"}>
-                        <Button disabled={isDisabled} onClick={this.handleIncident} className={"btn btn-primary col-sm-4"}
+                        <Button disabled={isDisabled} onClick={this.handleIncident}
+                                className={"btn btn-primary col-sm-4"}
                                 color={"primary"}>Add Incident</Button>
                         <Button className={" btn btn-primary col-sm-4"} onClick={this.handleAddIncident}>Done</Button>
                     </div>
@@ -455,7 +463,8 @@ class EditIncidentComponent extends React.Component {
             <div>
                 <div>
                     <label>Edit Incidents</label>{' '}
-                    <button className={"btn btn-primary width-10 right-side2"} onClick={this.handleAddIncident}>Add</button>
+                    <button className={"btn btn-primary width-10 right-side2"} onClick={this.handleAddIncident}>Add
+                    </button>
                     <button className={"btn btn-primary width-10"} onClick={editIncidents}>Done</button>
                     {(incidents !== []) ? incidents.map((incident) => (
                         <EditIndividualIncident value={incident}
@@ -508,7 +517,8 @@ class EditIndividualIncident extends React.Component {
                        className={"width-50"}
                        type={"text"} value={info.updatedIncident}/>
                 <br/>
-                <button className={"btn btn-primary"} onClick={this.handleUpdateComment} disabled={isDisabled}>Update</button>
+                <button className={"btn btn-primary"} onClick={this.handleUpdateComment} disabled={isDisabled}>Update
+                </button>
                 <button className={"btn btn-success"} onClick={this.handleResolve}>Resolve</button>
             </div>
         )
