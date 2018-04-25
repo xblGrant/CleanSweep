@@ -509,7 +509,7 @@ class EditIndividualIncident extends React.Component {
                        type={"text"} value={info.updatedIncident}/>
                 <br/>
                 <button className={"btn btn-primary"} onClick={this.handleUpdateComment} disabled={isDisabled}>Update</button>
-                <button className={"btn btn-danger"} onClick={this.handleResolve}>Resolve</button>
+                <button className={"btn btn-success"} onClick={this.handleResolve}>Resolve</button>
             </div>
         )
     }
