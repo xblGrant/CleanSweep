@@ -161,7 +161,7 @@ class StatusComponent extends React.Component {
         if (info.statusChange) {
             statusComponent =
                 <div className={"col-sm-4 center"}>
-                    <label>Status</label>
+                    <h6>Status</h6>
                     <Input onClick={this.handleUpdatedStatus} type="select" id="statusSelect">
                         <option value={"Dirty"}>Dirty</option>
                         <option value={"Clean"}>Clean</option>
@@ -173,7 +173,7 @@ class StatusComponent extends React.Component {
         } else {
             statusComponent =
                 <div className={"center"}>
-                    <button className={"color2"} onClick={this.handleStatusChange}>Update Status</button>
+                    <button className={"btn btn-primary"} onClick={this.handleStatusChange}>Update Status</button>
                 </div>
         }
 
@@ -285,14 +285,14 @@ class WakeUpComponent extends React.Component {
         }
 
 
-        let buttons = <button className={"color2"} onClick={this.handleEditWakeUp}>{buttonName}</button>;
+        let buttons = <button className={"btn btn-primary"} onClick={this.handleEditWakeUp}>{buttonName}</button>;
         if (editWakeUp) {
             buttons =
                 <div>
                     <br/>
-                    <button className={"color2"} onClick={this.handleUpdateWakeUpCall}>Update</button>
-                    <button className={"color2"} onClick={this.handleClearWakeUpCall}>Clear</button>
-                    <button className={"color2"} onClick={this.handleEditWakeUp}>Cancel</button>
+                    <button className={"btn btn-primary"} onClick={this.handleUpdateWakeUpCall}>Update</button>
+                    <button className={"btn btn-secondary"} onClick={this.handleClearWakeUpCall}>Clear</button>
+                    <button className={"btn btn-danger"} onClick={this.handleEditWakeUp}>Cancel</button>
                 </div>;
             wakeUpComponent =
                 <div>
@@ -309,8 +309,7 @@ class WakeUpComponent extends React.Component {
 
         return (
             <div className={"center"}>
-                <label>Wake-Up Call</label>
-                <br/>
+                <h6>Wake-Up Call</h6>
                 {table}
                 {error && <p typeof={"error"} className={"error col-sm-4 center"} id={"error"}>
                     {"Both date and time need to be selected"}</p>}
@@ -359,20 +358,21 @@ class AddIncidentComponent extends React.Component {
         if (!info.add) {
             incidentComponent =
                 <div className={"center"}>
-                    <button className={"color2"} onClick={this.handleAddIncident}>Add Incident</button>
+                    <button className={"btn btn-primary"} onClick={this.handleAddIncident}>Add Incident</button>
                 </div>
         } else {
             let isDisabled = this.state.comment === null;
             incidentComponent =
                 <div className={"center"}>
                     <label>Add Incident</label>{' '}
-                    <Input onChange={this.handleComment} type="textarea" className={"width-30 center"}
+                    <Input onChange={this.handleComment} type="textarea" className={"col-sm-4 center"}
                            id="incidentComment"
                            placeholder={"Enter comment here"}/>
+                    <br/>
                     <div className={"col-sm-5 center"}>
-                        <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-4"}
+                        <Button disabled={isDisabled} onClick={this.handleIncident} className={"btn btn-primary col-sm-4"}
                                 color={"primary"}>Add Incident</Button>
-                        <Button className={"col-sm-4"} onClick={this.handleAddIncident}>Done</Button>
+                        <Button className={" btn btn-primary col-sm-4"} onClick={this.handleAddIncident}>Done</Button>
                     </div>
                 </div>;
         }
@@ -386,7 +386,7 @@ function IncidentComponent(props) {
     return (
         <div>
             <label>Incidents</label>
-            <button className={"width-10 right-side1"} onClick={editIncidents}>Edit</button>
+            <button className={"btn btn-primary width-10 right-side1"} onClick={editIncidents}>Edit</button>
             <ol>
                 {(incidents !== null) ? incidents.map((incident) => (
                     <li key={incident[0]} value={incident[1]}>{incident[1]}</li>
@@ -455,8 +455,8 @@ class EditIncidentComponent extends React.Component {
             <div>
                 <div>
                     <label>Edit Incidents</label>{' '}
-                    <button className={"width-10 right-side2"} onClick={this.handleAddIncident}>Add</button>
-                    <button className={"width-10"} onClick={editIncidents}>Done</button>
+                    <button className={"btn btn-primary width-10 right-side2"} onClick={this.handleAddIncident}>Add</button>
+                    <button className={"btn btn-primary width-10"} onClick={editIncidents}>Done</button>
                     {(incidents !== []) ? incidents.map((incident) => (
                         <EditIndividualIncident value={incident}
                                                 roomInfo={roomInfo}
@@ -507,8 +507,9 @@ class EditIndividualIncident extends React.Component {
                 <Input onChange={e => this.setState(byPropKey('updatedIncident', e.target.value))}
                        className={"width-50"}
                        type={"text"} value={info.updatedIncident}/>
-                <button onClick={this.handleUpdateComment} disabled={isDisabled}>Update</button>
-                <button onClick={this.handleResolve}>Resolve</button>
+                <br/>
+                <button className={"btn btn-primary"} onClick={this.handleUpdateComment} disabled={isDisabled}>Update</button>
+                <button className={"btn btn-success"} onClick={this.handleResolve}>Resolve</button>
             </div>
         )
     }
