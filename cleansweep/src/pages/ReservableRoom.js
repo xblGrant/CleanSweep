@@ -167,8 +167,8 @@ class StatusComponent extends React.Component {
                         <option value={"Dirty"}>Dirty</option>
                         <option value={"Clean"}>Clean</option>
                     </Input>
-                    <button className={"color2"} onClick={this.changeStatus}>Update</button>
-                    <button className={"color2"} onClick={this.handleStatusChange}>Cancel</button>
+                    <button className={"btn btn-primary"} onClick={this.changeStatus}>Update</button>
+                    <button className={"btn btn-danger"} onClick={this.handleStatusChange}>Cancel</button>
                 </div>
 
         } else {
