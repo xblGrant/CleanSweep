@@ -61,8 +61,6 @@ class ReservableRoom extends React.Component {
             inspectMessage = "No Inspection Needed";
         }
 
-        console.log(this.state.isAdmin);
-
         let wakeUpComponent =
             <div>
                 <WakeUpComponent wakeUpCall={info.wakeupCall} room={info.roomID} isAdmin={info.isAdmin} that={this}/>
@@ -289,7 +287,6 @@ class WakeUpComponent extends React.Component {
 
         let buttons = null;
         let wakeUpComponent = null;
-        console.log(isAdmin);
         if (isAdmin) {
             buttons = <button className={"btn btn-primary"} onClick={this.handleEditWakeUp}>{buttonName}</button>;
             if (editWakeUp) {
@@ -448,13 +445,14 @@ class EditIncidentComponent extends React.Component {
             renderedComponent =
                 <div className={"center"}>
                     <label>Add Incident</label>{' '}
-                    <Input onChange={this.handleComment} type="textarea" className={"width-30 center"}
+                    <Input onChange={this.handleComment} type="textarea" className={"col-sm-4 center"}
                            id="incidentComment"
                            placeholder={"Enter comment here"}/>
                     <div className={"col-sm-5 center"}>
-                        <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-4"}
+                        <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-8 margin-5 btn btn-primary"}
                                 color={"primary"}>Add Incident</Button>
-                        <Button className={"col-sm-4"} onClick={this.handleAddIncident}>Done</Button>
+                        <div/>
+                        <Button className={"col-sm-4 margin-5 btn"} onClick={this.handleAddIncident}>Done</Button>
                     </div>
                 </div>;
         }
@@ -514,13 +512,18 @@ class EditIndividualIncident extends React.Component {
         return (
             <div>
                 <Input onChange={e => this.setState(byPropKey('updatedIncident', e.target.value))}
-                       className={"width-50"}
+                       className={"col-sm-8 padding-5"}
                        type={"text"} value={info.updatedIncident}/>
-                <br/>
-                <button className={"btn btn-primary"} onClick={this.handleUpdateComment} disabled={isDisabled}>Update
-                </button>
-                <button className={"btn btn-success"} onClick={this.handleResolve}>Resolve</button>
+                <div className={"row"}>
+                    <button className={"col-sm-4 margin-5 btn btn-primary"} onClick={this.handleUpdateComment}
+                            disabled={isDisabled}>Update
+                    </button>
+                    <div/>
+                    <button className={"col-sm-4 margin-5 btn btn-success"} onClick={this.handleResolve}>Resolve
+                    </button>
+                </div>
             </div>
+
         )
     }
 }
