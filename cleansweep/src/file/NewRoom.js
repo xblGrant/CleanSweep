@@ -272,7 +272,6 @@ class NewRoom extends React.Component {
                                     New Floor
                                 </Label>
                             </div>
-                            <br/>
                             <div className={"col-sm-4 center"}>
                                 <Label check>
                                     <Input onChange={this.handleReservable} type={"checkbox"}
