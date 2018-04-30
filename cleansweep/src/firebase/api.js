@@ -1719,9 +1719,26 @@ export const checkIn = (that, floorNum, roomNum) => {
     });
 };
 export const checkOut = (that, floorNum, roomNum) => {
-    firebase.db.ref('/Rooms/Reservable/' + floorNum + '/' + roomNum).update({
-        guest: false
-    })
+    let status = 'Dirty', inspect = false;
+    firebase.db.ref('/Rooms/Reservable/' + floorNum + '/').once('value', function(allRooms){
+        allRooms.forEach(function(room) {
+            console.log(room.key);
+            if (room.key === roomNum) {
+                status = room.val().status;
+                inspect = room.val().inspect;
+            }
+        })
+    }).then(() => {
+
+        let isReservable = false;
+        if (status === 'Clean' && !inspect)
+            isReservable = true;
+
+        firebase.db.ref('/Rooms/Reservable/' + floorNum + '/' + roomNum).update({
+            guest: false,
+            isReservable: isReservable
+        });
+    });
 };
 
 // change role
