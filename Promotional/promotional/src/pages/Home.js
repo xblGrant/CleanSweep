@@ -24,9 +24,8 @@ class Home extends React.Component {
                 </Helmet>
                 <div className={"container"}>
                     <div>
-                        <h2 className={"col-sm-6  col-md-10 center"}>Clean Sweep</h2>
+                        <h2 className={"col-sm-6  col-md-10 center"}>Overview</h2>
                         <hr />
-                        <h4>Description</h4>
                         <p>
                                 CleanSweep is a room cleaning optimization web application designed for any browser compatible device.
                                 This program will be used by housekeepers and front desk staff to maintain

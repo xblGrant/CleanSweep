@@ -8,7 +8,7 @@ import {
     NavItem,
     NavLink,
     } from 'reactstrap';
-
+import logo from "../pages/spark.png";
 class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
@@ -29,7 +29,8 @@ class NavigationBar extends React.Component {
             <div>
                 <Navbar className={"background-to-top"} color="faded" light expand="md">
                     <NavbarToggler onClick={this.toggle} />
-                    <NavbarBrand href="/">CleanSweep</NavbarBrand>
+                    <NavbarBrand href="/"><img className={"center col-sm-6"} src = {logo}
+                                               alt = "CleanSweep"/></NavbarBrand>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
