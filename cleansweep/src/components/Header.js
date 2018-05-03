@@ -43,8 +43,7 @@ class Header extends React.Component {
                 <Form id={"header"} inline>
                     <Label className={"noMargin"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
                     <Link to={route}>
-                        <Button id={"userLink"} className={"center"} color={"link"}
-                                size={"sm"}>{this.state.currentUser}</Button>
+                        <button id={"userLink"} className={"center btn btn-link btn-sm"} color={"link"}>{this.state.currentUser}</button>
                     </Link>
                     <div>
                         {button}

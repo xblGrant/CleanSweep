@@ -133,3 +133,11 @@ th {
 .whiteBG{
     background-color:white;
 }
+
+#userLink{
+    margin-bottom:0;
+}
+
+#login{
+    margin-bottom:0;
+}
