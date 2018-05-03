@@ -3,6 +3,7 @@ import { SelectableGroup } from 'react-selectable-fast';
 import SelectableList from './SelectableList';
 
 import '../css/selectable.css';
+import '../css/custom.css';
 
 class GroupSelect extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class GroupSelect extends React.Component {
             <div className={"container"}>
                 <SelectableGroup
                     ref={ref => window.selectableGroup = ref}
-                    className="main rounded "
+                    className="main rounded"
                     clickClassName="tick"
                     enableDeselect
                     deselectOnEsc={false}

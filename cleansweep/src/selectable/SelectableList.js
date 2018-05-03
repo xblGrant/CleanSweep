@@ -3,6 +3,7 @@ import SelectableAlbum from './SelectableAlbum';
 import {Link} from 'react-router-dom';
 import * as routes from '../constants/routes';
 import * as constant from '../constants/constants';
+import '../css/custom.css';
 
 const SelectableRooms = ({items}) => (
     items.map((item, i) => (
@@ -96,7 +97,7 @@ class SelectableList extends React.Component {
         }
 
         return (
-            <div className={"container"}>
+            <div className={"container margin-left-08"}>
                 {display}
             </div>
         )
