@@ -390,8 +390,11 @@ function IncidentComponent(props) {
     let {incidents, editIncidents} = props;
     return (
         <div>
-            <label>Incidents</label>
-            <button className={"btn btn-primary width-10 right-side1"} onClick={editIncidents}>Edit</button>
+            <h5 className={"center"}>Incidents</h5>
+            <br/>
+            <div className={"center"}>
+                <button className={"btn btn-primary col-sm-2 center"} onClick={editIncidents}>Edit</button>
+            </div>
             <ol>
                 {(incidents !== null) ? incidents.map((incident) => (
                     <li key={incident[0]} value={incident[1]}>{incident[1]}</li>
@@ -460,10 +463,15 @@ class EditIncidentComponent extends React.Component {
         return (
             <div>
                 <div>
-                    <label>Edit Incidents</label>{' '}
-                    <button className={"btn btn-primary width-10 right-side2"} onClick={this.handleAddIncident}>Add
-                    </button>
-                    <button className={"btn btn-primary width-10"} onClick={editIncidents}>Done</button>
+                    <h5 className={"center"}>Incidents</h5>
+                    <br/>
+                    <div className={"row"}>
+                        <div className={"col-sm-4"}/>
+                        <button className={"btn btn-primary margin-5 col-sm-2"} onClick={this.handleAddIncident}>Add</button>
+                        <div/>
+                        <button className={"btn btn-success margin-5 col-sm-2"} onClick={editIncidents}>Done</button>
+                        <div className={"col-sm-4"}/>
+                    </div>
                     {(incidents !== []) ? incidents.map((incident) => (
                         <EditIndividualIncident value={incident}
                                                 roomInfo={roomInfo}
