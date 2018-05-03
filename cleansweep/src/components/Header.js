@@ -35,7 +35,7 @@ class Header extends React.Component {
         if (!authorized) {
             button = <WrappedButton id={"login"} className={"center"} isOutlined={true} link={"/login"} name={"Login"}/>
         } else {
-            button = <SignOutButton className={"center"}/>
+            button = <SignOutButton id={"login"} className={"center"}/>
         }
 
         return (
@@ -43,7 +43,7 @@ class Header extends React.Component {
                 <Form id={"header"} inline>
                     <Label className={"noMargin"} for={"userLink"} size={"sm"}>Hello,</Label>{' '}
                     <Link to={route}>
-                        <button id={"userLink"} className={"center btn btn-link btn-sm"} color={"link"}>{this.state.currentUser}</button>
+                        <button id={"userLink"} className={"noMargin center btn btn-link btn-sm"} color={"link"}>{this.state.currentUser}</button>
                     </Link>
                     <div>
                         {button}

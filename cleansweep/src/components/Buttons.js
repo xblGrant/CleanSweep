@@ -7,12 +7,12 @@ import * as routes from '../constants/routes';
 
 export function SignOutButton(props) {
     return (
-        <Button id={props.id} outline size={"sm"} className={"noMargin"} onClick={auth.doSignOut}>
+        <button id={props.id} outline size={"sm"} className={"btn btn-outline-secondary btn-sm noMargin"} onClick={auth.doSignOut}>
             <Link style={{
                 textDecoration: 'none',
                 color: 'black'
             }} to={routes.LOGIN}>Log-Out</Link>
-        </Button>
+        </button>
     )
 }
 
