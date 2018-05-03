@@ -8,7 +8,7 @@ import {
     NavItem,
     NavLink,
     } from 'reactstrap';
-import logo from "../pages/spark.png";
+import logo from "../pages/darkerlogo.png";
 class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
