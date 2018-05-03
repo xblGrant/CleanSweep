@@ -448,14 +448,13 @@ class EditIncidentComponent extends React.Component {
             renderedComponent =
                 <div className={"center"}>
                     <label>Add Incident</label>{' '}
-                    <Input onChange={this.handleComment} type="textarea" className={"col-sm-4 center"}
+                    <Input onChange={this.handleComment} type="textarea" className={"col-sm-8 center"}
                            id="incidentComment"
                            placeholder={"Enter comment here"}/>
                     <div className={"col-sm-5 center"}>
-                        <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-8 margin-5 btn btn-primary"}
+                        <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-4 margin-5"}
                                 color={"primary"}>Add Incident</Button>
-                        <div/>
-                        <Button className={"col-sm-4 margin-5 btn"} onClick={this.handleAddIncident}>Done</Button>
+                        <Button className={"col-sm-4 margin-5"} onClick={this.handleAddIncident}>Done</Button>
                     </div>
                 </div>;
         }
