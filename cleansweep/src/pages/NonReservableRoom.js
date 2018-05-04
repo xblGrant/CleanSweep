@@ -220,6 +220,8 @@ class AddIncidentComponent extends React.Component {
                     <Input onChange={this.handleComment} type="textarea" className={"col-sm-4 center"}
                            id="incidentComment"
                            placeholder={"Enter comment here"}/>
+
+                    <br/>
                     <div className={"col-sm-5 center"}>
                         <Button disabled={isDisabled} onClick={this.handleIncident} className={"col-sm-4"}
                                 color={"primary"}>Add Incident</Button>
